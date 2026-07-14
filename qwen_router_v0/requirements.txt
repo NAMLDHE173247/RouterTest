@@ -5,3 +5,7 @@ bitsandbytes>=0.43.0
 pydantic>=2.0.0
 tqdm>=4.66.0
 sentencepiece>=0.2.0
+fastapi>=0.100.0
+uvicorn>=0.23.0
+pyngrok>=7.0.0
+python-dotenv>=1.0.0

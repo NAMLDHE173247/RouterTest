@@ -13,7 +13,7 @@ RUNS_DIR = os.path.join(PROJECT_ROOT, "data/evaluation_runs")
 
 class EvaluationService:
     
-    def run_evaluation(self, router_ids: list[str], dataset_id: str = None) -> EvaluationResponse:
+    def run_evaluation(self, router_ids: list[str], dataset_id: str = None, limit: int = None) -> EvaluationResponse:
         run_id = f"eval_{datetime.now().strftime('%Y%md_%H%M%S')}_{uuid4().hex[:6]}"
         
         # Ensure directories
@@ -42,6 +42,9 @@ class EvaluationService:
                         data = data["data"]
                 records = data
         
+        if limit and limit > 0:
+            records = records[:limit]
+            
         # State
         metrics_dict = {}
         all_errors = []

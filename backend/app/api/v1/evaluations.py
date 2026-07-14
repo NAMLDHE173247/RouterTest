@@ -7,7 +7,7 @@ router = APIRouter()
 @router.post("", response_model=EvaluationResponse)
 def run_evaluation(request: EvaluationRequest):
     try:
-        return evaluation_service.run_evaluation(request.router_ids, request.dataset_id)
+        return evaluation_service.run_evaluation(request.router_ids, request.dataset_id, request.limit)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

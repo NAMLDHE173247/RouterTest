@@ -4,6 +4,7 @@ from typing import List, Dict, Any, Optional
 class EvaluationRequest(BaseModel):
     router_ids: List[str] = ["rule_v0", "rule_v1", "rule_v2"]
     dataset_id: Optional[str] = None
+    limit: Optional[int] = None
 
 class RouterMetrics(BaseModel):
     total_samples: int

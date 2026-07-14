@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+transformers
+bitsandbytes
+accelerate
+pydantic
+pyngrok
+sentencepiece
+tqdm

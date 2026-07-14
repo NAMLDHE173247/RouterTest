@@ -28,7 +28,13 @@ class RuleV2Adapter:
                 need_clarification=prediction.get("need_clarification", False),
                 reason=prediction.get("reason", "")
             )
-            runtime = RouterRuntime(latency_ms=round(latency_ms, 2), success=True)
+            runtime = RouterRuntime(
+                router_type="rule_v2",
+                source="Local Rule-based",
+                latency_ms=round(latency_ms, 2), 
+                parse_success=True,
+                model="Regex/Heuristic"
+            )
             return RouteResponse(
                 router_id=self.ID,
                 router_name=self.NAME,

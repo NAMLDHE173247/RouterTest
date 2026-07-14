@@ -9,9 +9,26 @@ export interface RouterDecision {
 }
 
 export interface RouterRuntime {
+  router_type?: string;
+  source?: string;
   latency_ms: number;
-  success: boolean;
+  input_tokens?: number;
+  output_tokens?: number;
+  parse_success: boolean;
+  model?: string;
 }
+
+export interface RouterError {
+  message: string;
+}
+
+export interface RouterResult {
+  decision: RouterDecision | null;
+  runtime: RouterRuntime | null;
+  error: RouterError | null;
+}
+
+export type RouterType = "rule_v2" | "qwen_v0" | "hybrid";
 
 export interface RouteRequest {
   router_id: string;

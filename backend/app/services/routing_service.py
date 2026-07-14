@@ -1,6 +1,8 @@
 from app.adapters.rule_v0_adapter import RuleV0Adapter
 from app.adapters.rule_v1_adapter import RuleV1Adapter
 from app.adapters.rule_v2_adapter import RuleV2Adapter
+from app.adapters.qwen_v0_adapter import QwenV0Adapter
+from app.adapters.hybrid_v0_adapter import HybridV0Adapter
 from app.schemas.routing import RouteRequest, RouteResponse
 
 class RoutingService:
@@ -8,7 +10,9 @@ class RoutingService:
         self.adapters = {
             "rule_v0": RuleV0Adapter(),
             "rule_v1": RuleV1Adapter(),
-            "rule_v2": RuleV2Adapter()
+            "rule_v2": RuleV2Adapter(),
+            "qwen_v0": QwenV0Adapter(),
+            "hybrid": HybridV0Adapter()
         }
     
     def get_available_routers(self):

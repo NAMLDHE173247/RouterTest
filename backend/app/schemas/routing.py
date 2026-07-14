@@ -11,8 +11,13 @@ class RouterDecision(BaseModel):
     reason: str
 
 class RouterRuntime(BaseModel):
+    router_type: Optional[str] = None
+    source: Optional[str] = None
     latency_ms: float
-    success: bool
+    input_tokens: Optional[int] = 0
+    output_tokens: Optional[int] = 0
+    parse_success: bool = True
+    model: Optional[str] = None
 
 class RouteRequest(BaseModel):
     router_id: str
