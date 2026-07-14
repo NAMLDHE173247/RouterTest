@@ -1,0 +1,8 @@
+__pycache__/
+.venv/
+node_modules/
+.next/
+data/evaluation_runs/*
+!data/evaluation_runs/.gitkeep
+data/uploaded_datasets/*
+!data/uploaded_datasets/.gitkeep

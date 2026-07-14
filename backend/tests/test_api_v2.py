@@ -1,0 +1,18 @@
+import requests
+
+def test_v2_route():
+    url = "http://127.0.0.1:8000/api/v1/route"
+    payload = {
+        "router_id": "rule_v2",
+        "question": "Một vật rơi tự do trong 5 giây, tính vận tốc cuối cùng.",
+        "history": []
+    }
+    
+    response = requests.post(url, json=payload)
+    print("Status Code:", response.status_code)
+    print("Response JSON:")
+    import json
+    print(json.dumps(response.json(), indent=2, ensure_ascii=False))
+
+if __name__ == "__main__":
+    test_v2_route()
