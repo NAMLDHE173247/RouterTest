@@ -1,0 +1,3691 @@
+[
+  {
+    "id": "q002",
+    "question": "Em chưa hiểu vì sao khi chuyển vế thì phải đổi dấu, thầy cô hay nói nhưng em vẫn bị nhầm.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "math_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "confidence": 0.65,
+      "need_clarification": false,
+      "reason": "Detected subject=chemistry, intent=explain_concept using keyword-based rules."
+    }
+  },
+  {
+    "id": "q005",
+    "question": "Làm sao để nhận biết một dãy số là cấp số cộng ạ?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "math_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.3,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q006",
+    "question": "Tính tổng 20 số hạng đầu của cấp số cộng có u1 = 3 và công sai d = 2.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "math_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "physics_slm",
+      "confidence": 0.6,
+      "need_clarification": false,
+      "reason": "Detected subject=physics, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q009",
+    "question": "Tìm giá trị nhỏ nhất của biểu thức A = x^2 - 4x + 7.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "math_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "ask_clarification",
+      "confidence": 0.45,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q011",
+    "question": "Cho hình chóp S.ABCD có đáy là hình vuông, em cần tính thể tích khi biết cạnh đáy 4 cm và chiều cao 6 cm.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "math_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "ask_clarification",
+      "confidence": 0.45,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q014",
+    "question": "Vậy nếu delta bằng 0 thì phương trình có mấy nghiệm và nghiệm đó tính như nào?",
+    "case_type": "multi_turn",
+    "gold": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "ask_follow_up",
+      "target_slm": "math_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "math",
+      "secondary_subjects": [
+        "chemistry"
+      ],
+      "intent": "solve_problem",
+      "target_slm": "math_slm",
+      "confidence": 0.7,
+      "need_clarification": false,
+      "reason": "Detected subject=math, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q017",
+    "question": "Vì sao khi xe phanh gấp thì người ngồi trên xe bị chúi về phía trước?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "confidence": 0.65,
+      "need_clarification": false,
+      "reason": "Detected subject=chemistry, intent=explain_concept using keyword-based rules."
+    }
+  },
+  {
+    "id": "q019",
+    "question": "Em tính công cơ học bằng F chia s, có đúng không hay phải nhân ạ?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "diagnose_error",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry"
+      ],
+      "intent": "check_answer",
+      "target_slm": "physics_slm",
+      "confidence": 0.65,
+      "need_clarification": false,
+      "reason": "Detected subject=physics, intent=check_answer using keyword-based rules."
+    }
+  },
+  {
+    "id": "q024",
+    "question": "Em chưa hiểu sự khác nhau giữa vận tốc trung bình và tốc độ trung bình.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.5,
+      "need_clarification": true,
+      "reason": "Detected subject=physics, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q026",
+    "question": "Vì sao áp suất chất lỏng tăng khi xuống càng sâu?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "ask_clarification",
+      "confidence": 0.5,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=explain_concept using keyword-based rules."
+    }
+  },
+  {
+    "id": "q027",
+    "question": "Em làm bài ném thẳng đứng lên, em lấy gia tốc là +10 m/s^2 nên ra kết quả lạ. Sai ở dấu nào vậy?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "math"
+      ],
+      "intent": "diagnose_error",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.5,
+      "need_clarification": true,
+      "reason": "Detected subject=physics, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q030",
+    "question": "Vậy trong bài vừa rồi, nếu bỏ qua ma sát thì cơ năng có được bảo toàn không?",
+    "case_type": "multi_turn",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "ask_follow_up",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "ask_follow_up",
+      "target_slm": "ask_clarification",
+      "confidence": 0.4,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=ask_follow_up using keyword-based rules."
+    }
+  },
+  {
+    "id": "q032",
+    "question": "Liên kết ion là gì, khác gì với liên kết cộng hóa trị?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "ask_clarification",
+      "confidence": 0.5,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=explain_concept using keyword-based rules."
+    }
+  },
+  {
+    "id": "q036",
+    "question": "Axit mạnh và axit yếu khác nhau như thế nào ạ?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.45,
+      "need_clarification": true,
+      "reason": "Detected subject=chemistry, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q037",
+    "question": "Tính nồng độ mol của dung dịch chứa 0,5 mol NaCl trong 2 lít dung dịch.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "math"
+      ],
+      "intent": "solve_problem",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected out-of-scope keywords, routed to general tutor."
+    }
+  },
+  {
+    "id": "q038",
+    "question": "Cho em gợi ý cách nhận biết dung dịch HCl, NaOH và NaCl bằng quỳ tím.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "give_hint",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected out-of-scope keywords, routed to general tutor."
+    }
+  },
+  {
+    "id": "q042",
+    "question": "Tính pH của dung dịch HCl có nồng độ 0,01 M.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "math"
+      ],
+      "intent": "solve_problem",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected out-of-scope keywords, routed to general tutor."
+    }
+  },
+  {
+    "id": "q043",
+    "question": "Nếu cho Fe vào dung dịch CuSO4 thì có phản ứng không? Giải thích giúp em.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected out-of-scope keywords, routed to general tutor."
+    }
+  },
+  {
+    "id": "q044",
+    "question": "Em cân bằng phương trình Fe + HCl -> FeCl2 + H2 thành 2Fe + 2HCl -> 2FeCl2 + H2, đúng chưa?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "math"
+      ],
+      "intent": "check_answer",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "math"
+      ],
+      "intent": "solve_problem",
+      "target_slm": "chemistry_slm",
+      "confidence": 0.85,
+      "need_clarification": false,
+      "reason": "Detected subject=chemistry, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q045",
+    "question": "Vậy sau khi biết số mol CO2, em tính khối lượng CaCO3 tạo thành như thế nào?",
+    "case_type": "multi_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "math"
+      ],
+      "intent": "ask_follow_up",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "solve_problem",
+      "target_slm": "chemistry_slm",
+      "confidence": 0.75,
+      "need_clarification": false,
+      "reason": "Detected subject=chemistry, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q046",
+    "question": "Một học sinh hòa tan muối vào nước rồi đo nhiệt độ thấy nước lạnh đi. Hiện tượng này liên quan đến năng lượng phản ứng hóa học và nhiệt học như thế nào?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "math"
+      ],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.65,
+      "need_clarification": true,
+      "reason": "Detected subject=chemistry, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q047",
+    "question": "Trong bài điện phân dung dịch CuSO4, em cần hiểu cả phản ứng hóa học ở điện cực và dòng điện chạy qua bình điện phân. Router nên đưa câu này cho môn nào?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected out-of-scope keywords, routed to general tutor."
+    }
+  },
+  {
+    "id": "q048",
+    "question": "Một bình khí CO2 có thể tích 2 lít ở nhiệt độ không đổi, áp suất tăng gấp đôi thì số mol khí thay đổi thế nào theo phương trình khí lí tưởng?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry",
+        "math"
+      ],
+      "intent": "solve_problem",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "math"
+      ],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.65,
+      "need_clarification": true,
+      "reason": "Detected subject=chemistry, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q050",
+    "question": "Tối nay ở Hà Nội có nên đi chơi không hay trời sẽ mưa?",
+    "case_type": "out_of_scope",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.3,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q052",
+    "question": "Em muốn hiểu ý nghĩa của hệ số góc trong hàm số bậc nhất y = ax + b.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "math_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.5,
+      "need_clarification": true,
+      "reason": "Detected subject=math, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q054",
+    "question": "Em rút gọn phân thức (x^2 - 9)/(x - 3) thành x - 3, sai ở đâu vậy?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "diagnose_error",
+      "target_slm": "math_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "math",
+      "secondary_subjects": [
+        "chemistry"
+      ],
+      "intent": "solve_problem",
+      "target_slm": "math_slm",
+      "confidence": 0.7,
+      "need_clarification": false,
+      "reason": "Detected subject=math, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q056",
+    "question": "Cho em gợi ý cách chứng minh hai đường thẳng song song trong hình học phẳng.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "give_hint",
+      "target_slm": "math_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "math",
+      "secondary_subjects": [
+        "chemistry"
+      ],
+      "intent": "solve_problem",
+      "target_slm": "math_slm",
+      "confidence": 0.7,
+      "need_clarification": false,
+      "reason": "Detected subject=math, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q061",
+    "question": "Em chưa hiểu công thức khoảng cách từ một điểm đến một đường thẳng trong mặt phẳng.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "math_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry"
+      ],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.45,
+      "need_clarification": true,
+      "reason": "Detected subject=physics, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q065",
+    "question": "Số phức z = 3 - 4i có môđun bằng bao nhiêu?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "math_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "chemistry_slm",
+      "confidence": 0.65,
+      "need_clarification": false,
+      "reason": "Detected subject=chemistry, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q067",
+    "question": "Quán tính là gì, giải thích bằng ví dụ đời sống giúp em.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "ask_clarification",
+      "confidence": 0.6,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=explain_concept using keyword-based rules."
+    }
+  },
+  {
+    "id": "q069",
+    "question": "Em tính áp suất bằng lực nhân diện tích nên ra rất lớn, công thức đúng là gì ạ?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "math"
+      ],
+      "intent": "diagnose_error",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "confidence": 0.7,
+      "need_clarification": false,
+      "reason": "Detected subject=physics, intent=explain_concept using keyword-based rules."
+    }
+  },
+  {
+    "id": "q072",
+    "question": "Cho em gợi ý cách xác định chiều của lực từ tác dụng lên dây dẫn có dòng điện.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "give_hint",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "physics_slm",
+      "confidence": 0.65,
+      "need_clarification": false,
+      "reason": "Detected subject=physics, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q075",
+    "question": "Em trả lời rằng vật đứng yên thì không có lực nào tác dụng lên nó, như vậy có sai không?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "check_answer",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "ask_follow_up",
+      "target_slm": "physics_slm",
+      "confidence": 0.6,
+      "need_clarification": false,
+      "reason": "Detected subject=physics, intent=ask_follow_up using keyword-based rules."
+    }
+  },
+  {
+    "id": "q076",
+    "question": "Công suất điện của một thiết bị có ý nghĩa gì ạ?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.55,
+      "need_clarification": true,
+      "reason": "Detected subject=physics, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q078",
+    "question": "Vì sao gương phẳng cho ảnh ảo chứ không phải ảnh thật?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "confidence": 0.65,
+      "need_clarification": false,
+      "reason": "Detected subject=chemistry, intent=explain_concept using keyword-based rules."
+    }
+  },
+  {
+    "id": "q082",
+    "question": "Nguyên tử và phân tử khác nhau như thế nào ạ?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.65,
+      "need_clarification": true,
+      "reason": "Detected subject=chemistry, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q086",
+    "question": "Dung dịch bazơ làm quỳ tím đổi sang màu gì và vì sao?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected out-of-scope keywords, routed to general tutor."
+    }
+  },
+  {
+    "id": "q091",
+    "question": "Em chưa hiểu dãy hoạt động hóa học của kim loại dùng để làm gì.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.5,
+      "need_clarification": true,
+      "reason": "Detected subject=chemistry, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q092",
+    "question": "Cho 100 ml dung dịch NaOH 1M, tính số mol NaOH có trong dung dịch.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "math"
+      ],
+      "intent": "solve_problem",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected out-of-scope keywords, routed to general tutor."
+    }
+  },
+  {
+    "id": "q094",
+    "question": "Em cân bằng Mg + HCl -> MgCl2 + H2 thành Mg + HCl -> MgCl2 + H2, đúng chưa?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "math"
+      ],
+      "intent": "check_answer",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "chemistry_slm",
+      "confidence": 0.7,
+      "need_clarification": false,
+      "reason": "Detected subject=chemistry, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q095",
+    "question": "Vậy sau khi tính được số mol HCl, em đổi sang thể tích dung dịch HCl 0,5M như thế nào?",
+    "case_type": "multi_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "math"
+      ],
+      "intent": "ask_follow_up",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected out-of-scope keywords, routed to general tutor."
+    }
+  },
+  {
+    "id": "q097",
+    "question": "Khi đốt cháy xăng trong động cơ xe máy, năng lượng hóa học chuyển hóa thành những dạng năng lượng nào trong Vật lý?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry"
+      ],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.5,
+      "need_clarification": true,
+      "reason": "Detected subject=physics, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q098",
+    "question": "Một dung dịch muối dẫn điện được vì sao? Em muốn hiểu cả phần ion trong Hóa học và dòng điện trong Vật lý.",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected out-of-scope keywords, routed to general tutor."
+    }
+  },
+  {
+    "id": "q100",
+    "question": "Bạn gợi ý cho em vài món ăn sáng dễ làm trước khi đi học được không?",
+    "case_type": "out_of_scope",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "give_hint",
+      "target_slm": "ask_clarification",
+      "confidence": 0.5,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=give_hint using keyword-based rules."
+    }
+  },
+  {
+    "id": "q103",
+    "question": "Cho đường tròn tâm O bán kính 5 cm, tính chu vi đường tròn.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "math_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "ask_clarification",
+      "confidence": 0.45,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q106",
+    "question": "Vì sao hai góc đối đỉnh thì bằng nhau?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "math_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "ask_clarification",
+      "confidence": 0.5,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=explain_concept using keyword-based rules."
+    }
+  },
+  {
+    "id": "q107",
+    "question": "Em tính trung bình cộng của 6, 8, 10, 12 ra 8, đúng không ạ?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "check_answer",
+      "target_slm": "math_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "check_answer",
+      "target_slm": "ask_clarification",
+      "confidence": 0.5,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=check_answer using keyword-based rules."
+    }
+  },
+  {
+    "id": "q110",
+    "question": "Một hình trụ có bán kính đáy 3 cm và chiều cao 10 cm, tính thể tích.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "math_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "ask_clarification",
+      "confidence": 0.45,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q111",
+    "question": "Em nhân phân số 2/3 với 3/5 rồi lấy tử cộng tử, mẫu cộng mẫu, sai ở bước nào vậy?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "diagnose_error",
+      "target_slm": "math_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.45,
+      "need_clarification": true,
+      "reason": "Detected subject=chemistry, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q114",
+    "question": "Vậy muốn tìm cực trị thì sau khi lập bảng biến thiên em phải nhìn dấu đạo hàm như thế nào?",
+    "case_type": "multi_turn",
+    "gold": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "ask_follow_up",
+      "target_slm": "math_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "math",
+      "secondary_subjects": [
+        "chemistry"
+      ],
+      "intent": "solve_problem",
+      "target_slm": "math_slm",
+      "confidence": 0.65,
+      "need_clarification": false,
+      "reason": "Detected subject=math, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q115",
+    "question": "Cho cấp số nhân có u1 = 2 và công bội q = 3, tính u5.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "math_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "physics_slm",
+      "confidence": 0.6,
+      "need_clarification": false,
+      "reason": "Detected subject=physics, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q119",
+    "question": "Em tính trọng lượng bằng khối lượng chia cho g, công thức này sai đúng không ạ?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "math"
+      ],
+      "intent": "diagnose_error",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "check_answer",
+      "target_slm": "physics_slm",
+      "confidence": 0.75,
+      "need_clarification": false,
+      "reason": "Detected subject=physics, intent=check_answer using keyword-based rules."
+    }
+  },
+  {
+    "id": "q121",
+    "question": "Vì sao âm thanh không truyền được trong chân không?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "ask_clarification",
+      "confidence": 0.5,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=explain_concept using keyword-based rules."
+    }
+  },
+  {
+    "id": "q122",
+    "question": "Cho em gợi ý cách làm bài xác định ảnh của vật qua thấu kính hội tụ.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "math"
+      ],
+      "intent": "give_hint",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "physics_slm",
+      "confidence": 0.7,
+      "need_clarification": false,
+      "reason": "Detected subject=physics, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q124",
+    "question": "Hiện tượng cảm ứng điện từ là gì, giải thích dễ hiểu giúp em.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "ask_clarification",
+      "confidence": 0.6,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=explain_concept using keyword-based rules."
+    }
+  },
+  {
+    "id": "q130",
+    "question": "Một tia sáng truyền từ không khí vào nước thì tia khúc xạ lệch về phía pháp tuyến hay ra xa pháp tuyến?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.5,
+      "need_clarification": true,
+      "reason": "Detected subject=chemistry, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q134",
+    "question": "Em tính khối lượng mol của H2SO4 là 97 g/mol, sai ở đâu vậy?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "math"
+      ],
+      "intent": "diagnose_error",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry"
+      ],
+      "intent": "diagnose_error",
+      "target_slm": "physics_slm",
+      "confidence": 0.7,
+      "need_clarification": false,
+      "reason": "Detected subject=physics, intent=diagnose_error using keyword-based rules."
+    }
+  },
+  {
+    "id": "q136",
+    "question": "Vì sao muối ăn NaCl tan được trong nước?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "math",
+      "secondary_subjects": [
+        "chemistry"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "math_slm",
+      "confidence": 0.65,
+      "need_clarification": false,
+      "reason": "Detected subject=math, intent=explain_concept using keyword-based rules."
+    }
+  },
+  {
+    "id": "q137",
+    "question": "Tính nồng độ phần trăm của dung dịch có 10 gam NaCl hòa tan trong 90 gam nước.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "math"
+      ],
+      "intent": "solve_problem",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected out-of-scope keywords, routed to general tutor."
+    }
+  },
+  {
+    "id": "q139",
+    "question": "Phản ứng trung hòa giữa axit và bazơ tạo ra những chất gì?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.65,
+      "need_clarification": true,
+      "reason": "Detected subject=chemistry, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q141",
+    "question": "Em chưa hiểu tại sao dung dịch muối có thể có môi trường axit, bazơ hoặc trung tính.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected out-of-scope keywords, routed to general tutor."
+    }
+  },
+  {
+    "id": "q142",
+    "question": "Tính pH của dung dịch NaOH 0,001 M.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "math"
+      ],
+      "intent": "solve_problem",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected out-of-scope keywords, routed to general tutor."
+    }
+  },
+  {
+    "id": "q143",
+    "question": "Kim loại nào phản ứng được với dung dịch HCl để giải phóng khí hidro?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected out-of-scope keywords, routed to general tutor."
+    }
+  },
+  {
+    "id": "q144",
+    "question": "Em cân bằng N2 + H2 -> NH3 thành N2 + 3H2 -> 2NH3, đúng chưa?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "math"
+      ],
+      "intent": "check_answer",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "chemistry_slm",
+      "confidence": 0.65,
+      "need_clarification": false,
+      "reason": "Detected subject=chemistry, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q145",
+    "question": "Vậy từ số mol chất kết tủa vừa tìm được, em đổi sang khối lượng bằng cách nào?",
+    "case_type": "multi_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "math"
+      ],
+      "intent": "ask_follow_up",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "solve_problem",
+      "target_slm": "chemistry_slm",
+      "confidence": 0.7,
+      "need_clarification": false,
+      "reason": "Detected subject=chemistry, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q147",
+    "question": "Một bình kín chứa khí O2, nếu tăng nhiệt độ thì áp suất tăng. Em muốn hiểu bằng cả chuyển động phân tử và kiến thức khí trong Hóa học.",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.65,
+      "need_clarification": true,
+      "reason": "Detected subject=chemistry, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q148",
+    "question": "Pin điện hóa tạo ra dòng điện như thế nào từ phản ứng oxi hóa khử?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.65,
+      "need_clarification": true,
+      "reason": "Detected subject=chemistry, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q149",
+    "question": "Làm tiếp phần này giúp em với.",
+    "case_type": "ambiguous",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "need_clarification": true
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "ask_follow_up",
+      "target_slm": "chemistry_slm",
+      "confidence": 0.75,
+      "need_clarification": false,
+      "reason": "Detected subject=chemistry, intent=ask_follow_up using keyword-based rules."
+    }
+  },
+  {
+    "id": "q152",
+    "question": "Em chưa hiểu vì sao phân số tối giản là phân số không rút gọn được nữa.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "math_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "math",
+      "secondary_subjects": [
+        "chemistry"
+      ],
+      "intent": "solve_problem",
+      "target_slm": "math_slm",
+      "confidence": 0.7,
+      "need_clarification": false,
+      "reason": "Detected subject=math, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q155",
+    "question": "Cho em gợi ý cách tìm điều kiện xác định của phân thức đại số.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "give_hint",
+      "target_slm": "math_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "chemistry_slm",
+      "confidence": 0.7,
+      "need_clarification": false,
+      "reason": "Detected subject=chemistry, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q156",
+    "question": "Tính giá trị của biểu thức A = 2x^2 - 3x + 1 khi x = -2.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "math_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "ask_clarification",
+      "confidence": 0.45,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q157",
+    "question": "Hàm số chẵn và hàm số lẻ khác nhau như thế nào ạ?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "math_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.5,
+      "need_clarification": true,
+      "reason": "Detected subject=math, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q159",
+    "question": "Em tính căn bậc hai của 49 là chỉ có 7, kết luận như vậy có thiếu không?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "check_answer",
+      "target_slm": "math_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "math_slm",
+      "confidence": 0.65,
+      "need_clarification": false,
+      "reason": "Detected subject=math, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q164",
+    "question": "Vậy nếu hai đường thẳng có hệ số góc bằng nhau thì chúng song song hay trùng nhau luôn?",
+    "case_type": "multi_turn",
+    "gold": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "ask_follow_up",
+      "target_slm": "math_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "ask_follow_up",
+      "target_slm": "ask_clarification",
+      "confidence": 0.4,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=ask_follow_up using keyword-based rules."
+    }
+  },
+  {
+    "id": "q165",
+    "question": "Cho hình cầu bán kính 2 cm, tính thể tích hình cầu.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "math_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "ask_clarification",
+      "confidence": 0.45,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q167",
+    "question": "Tại sao khi đi xe đạp xuống dốc thì xe tự tăng tốc dù mình không đạp?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "ask_clarification",
+      "confidence": 0.5,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=explain_concept using keyword-based rules."
+    }
+  },
+  {
+    "id": "q169",
+    "question": "Em nhầm giữa khối lượng và trọng lượng, hai đại lượng này khác nhau thế nào?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.5,
+      "need_clarification": true,
+      "reason": "Detected subject=physics, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q172",
+    "question": "Vì sao khi chạm tay vào kim loại ta thấy lạnh hơn chạm vào gỗ dù chúng ở cùng nhiệt độ phòng?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "confidence": 0.65,
+      "need_clarification": false,
+      "reason": "Detected subject=chemistry, intent=explain_concept using keyword-based rules."
+    }
+  },
+  {
+    "id": "q176",
+    "question": "Hiện tượng phản xạ toàn phần xảy ra khi nào?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.45,
+      "need_clarification": true,
+      "reason": "Detected subject=chemistry, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q178",
+    "question": "Em lấy công thức P = A/t nhưng lại thay t bằng phút, có cần đổi sang giây không ạ?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "math"
+      ],
+      "intent": "diagnose_error",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry"
+      ],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.45,
+      "need_clarification": true,
+      "reason": "Detected subject=physics, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q179",
+    "question": "Vậy nếu vật chuyển động đều thì hợp lực tác dụng lên vật bằng bao nhiêu?",
+    "case_type": "multi_turn",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "ask_follow_up",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "physics_slm",
+      "confidence": 0.75,
+      "need_clarification": false,
+      "reason": "Detected subject=physics, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q182",
+    "question": "Nguyên tố hóa học và đơn chất khác nhau như thế nào?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.5,
+      "need_clarification": true,
+      "reason": "Detected subject=chemistry, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q186",
+    "question": "Cho em gợi ý cách xác định hóa trị của nguyên tố trong hợp chất.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "give_hint",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "ask_clarification",
+      "confidence": 0.5,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q187",
+    "question": "Vì sao phenolphtalein chuyển màu hồng trong dung dịch bazơ?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected out-of-scope keywords, routed to general tutor."
+    }
+  },
+  {
+    "id": "q188",
+    "question": "Tính khối lượng NaOH cần để pha 500 ml dung dịch NaOH 0,2M.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "math"
+      ],
+      "intent": "solve_problem",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected out-of-scope keywords, routed to general tutor."
+    }
+  },
+  {
+    "id": "q189",
+    "question": "Em tính số mol bằng khối lượng nhân khối lượng mol, sai công thức ở đâu vậy?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "math"
+      ],
+      "intent": "diagnose_error",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry"
+      ],
+      "intent": "solve_problem",
+      "target_slm": "physics_slm",
+      "confidence": 0.7,
+      "need_clarification": false,
+      "reason": "Detected subject=physics, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q190",
+    "question": "Phản ứng giữa kim loại và axit thường tạo ra sản phẩm gì?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.6,
+      "need_clarification": true,
+      "reason": "Detected subject=chemistry, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q193",
+    "question": "Tính nồng độ mol của dung dịch có 0,25 mol HCl trong 500 ml dung dịch.",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "math"
+      ],
+      "intent": "solve_problem",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected out-of-scope keywords, routed to general tutor."
+    }
+  },
+  {
+    "id": "q194",
+    "question": "Em cân bằng P + O2 -> P2O5 thành 4P + 5O2 -> 2P2O5, đúng chưa ạ?",
+    "case_type": "single_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "math"
+      ],
+      "intent": "check_answer",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "chemistry_slm",
+      "confidence": 0.65,
+      "need_clarification": false,
+      "reason": "Detected subject=chemistry, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q195",
+    "question": "Vậy nếu chất tham gia có tỉ lệ mol 1:2 thì em phải so sánh số mol như thế nào để tìm chất dư?",
+    "case_type": "multi_turn",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "math"
+      ],
+      "intent": "ask_follow_up",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "chemistry_slm",
+      "confidence": 0.65,
+      "need_clarification": false,
+      "reason": "Detected subject=chemistry, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q196",
+    "question": "Tại sao khi cho viên C sủi vào nước thì có khí thoát ra và dung dịch có thể lạnh đi một chút? Giải thích cả phần phản ứng hóa học và trao đổi nhiệt.",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected out-of-scope keywords, routed to general tutor."
+    }
+  },
+  {
+    "id": "q199",
+    "question": "Câu này giải sao ạ?",
+    "case_type": "ambiguous",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "need_clarification": true
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "ask_clarification",
+      "confidence": 0.45,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q201",
+    "question": "Một xe ô tô đốt cháy xăng để chuyển động. Em muốn hiểu năng lượng hóa học trong xăng chuyển thành động năng của xe như thế nào.",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry"
+      ],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.6,
+      "need_clarification": true,
+      "reason": "Detected subject=physics, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q202",
+    "question": "Một bình khí có thể tích 5 lít chứa O2 ở áp suất 2 atm. Nếu coi khí lí tưởng thì số mol khí liên quan đến công thức nào?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry",
+        "math"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.55,
+      "need_clarification": true,
+      "reason": "Detected subject=chemistry, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q204",
+    "question": "Khi hòa tan NH4NO3 vào nước, nhiệt độ dung dịch giảm. Giải thích hiện tượng này theo cả hóa học và nhiệt học giúp em.",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected out-of-scope keywords, routed to general tutor."
+    }
+  },
+  {
+    "id": "q206",
+    "question": "Trong pin điện hóa, phản ứng oxi hóa khử tạo ra dòng electron như thế nào?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.65,
+      "need_clarification": true,
+      "reason": "Detected subject=chemistry, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q207",
+    "question": "Khi điện phân dung dịch NaCl, em cần hiểu phản ứng ở điện cực và chiều dòng điện trong mạch ngoài. Giải thích giúp em.",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected out-of-scope keywords, routed to general tutor."
+    }
+  },
+  {
+    "id": "q208",
+    "question": "Một bình kín chứa khí CO2, khi tăng nhiệt độ thì áp suất tăng. Hiện tượng này liên quan đến chuyển động phân tử và lượng chất như thế nào?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.65,
+      "need_clarification": true,
+      "reason": "Detected subject=chemistry, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q209",
+    "question": "Cho 2 mol khí H2 trong bình kín ở nhiệt độ không đổi. Nếu thể tích giảm một nửa thì áp suất thay đổi thế nào theo định luật khí?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry",
+        "math"
+      ],
+      "intent": "solve_problem",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.55,
+      "need_clarification": true,
+      "reason": "Detected subject=chemistry, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q210",
+    "question": "Vì sao dung dịch axit hoặc muối có thể dẫn điện, còn nước cất thì dẫn điện rất kém?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected out-of-scope keywords, routed to general tutor."
+    }
+  },
+  {
+    "id": "q211",
+    "question": "Khi đốt cháy cồn trong đèn cồn, phản ứng hóa học tạo nhiệt làm nước nóng lên. Năng lượng đã chuyển hóa qua những bước nào?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "ask_follow_up",
+      "target_slm": "chemistry_slm",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected subject=chemistry, intent=ask_follow_up using keyword-based rules."
+    }
+  },
+  {
+    "id": "q212",
+    "question": "Một viên than cháy tạo CO2 và tỏa nhiệt. Làm sao liên hệ phương trình hóa học với nhiệt lượng tỏa ra?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics",
+        "math"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "math",
+        "physics"
+      ],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.65,
+      "need_clarification": true,
+      "reason": "Detected subject=chemistry, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q213",
+    "question": "Em muốn tính nhiệt lượng tỏa ra khi đốt cháy 1 mol CH4 nếu biết năng lượng tỏa ra mỗi mol. Bài này dùng Hóa hay Lý?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics",
+        "math"
+      ],
+      "intent": "solve_problem",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry"
+      ],
+      "intent": "solve_problem",
+      "target_slm": "physics_slm",
+      "confidence": 0.65,
+      "need_clarification": false,
+      "reason": "Detected subject=physics, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q216",
+    "question": "Em đang học áp suất khí và số mol. Công thức PV = nRT dùng để giải bài kiểu nào?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry",
+        "math"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "solve_problem",
+      "target_slm": "chemistry_slm",
+      "confidence": 0.65,
+      "need_clarification": false,
+      "reason": "Detected subject=chemistry, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q217",
+    "question": "Tính số mol khí trong bình nếu biết áp suất, thể tích và nhiệt độ. Sau đó giải thích vì sao tăng nhiệt độ làm phân tử va chạm mạnh hơn.",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry",
+        "math"
+      ],
+      "intent": "solve_problem",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "confidence": 0.95,
+      "need_clarification": false,
+      "reason": "Detected subject=chemistry, intent=explain_concept using keyword-based rules."
+    }
+  },
+  {
+    "id": "q218",
+    "question": "Khi cho kim loại kẽm vào axit HCl thấy có bọt khí bay lên. Khí đó là gì và vì sao nó có thể thoát ra khỏi dung dịch?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected out-of-scope keywords, routed to general tutor."
+    }
+  },
+  {
+    "id": "q219",
+    "question": "Một phản ứng tỏa nhiệt làm cốc thủy tinh nóng lên. Em muốn hiểu nhiệt truyền từ dung dịch ra tay mình như thế nào.",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected out-of-scope keywords, routed to general tutor."
+    }
+  },
+  {
+    "id": "q220",
+    "question": "Trong phản ứng giữa NaOH và HCl, nếu nhiệt độ dung dịch tăng thì có phải phản ứng tỏa nhiệt không? Giải thích thêm về nhiệt lượng.",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected out-of-scope keywords, routed to general tutor."
+    }
+  },
+  {
+    "id": "q221",
+    "question": "Khi đun nóng khí trong xi lanh, khí nở ra và đẩy piston. Quá trình này liên quan đến hóa học hay vật lý nhiều hơn?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "ask_follow_up",
+      "target_slm": "chemistry_slm",
+      "confidence": 0.7,
+      "need_clarification": false,
+      "reason": "Detected subject=chemistry, intent=ask_follow_up using keyword-based rules."
+    }
+  },
+  {
+    "id": "q222",
+    "question": "Một bình chứa 0,5 mol khí N2 ở nhiệt độ không đổi. Nếu áp suất tăng gấp 3 lần thì thể tích thay đổi thế nào?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry",
+        "math"
+      ],
+      "intent": "solve_problem",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.5,
+      "need_clarification": true,
+      "reason": "Detected subject=chemistry, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q227",
+    "question": "Một dây dẫn nhúng trong dung dịch điện phân có dòng điện chạy qua. Ion trong dung dịch di chuyển như thế nào?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected out-of-scope keywords, routed to general tutor."
+    }
+  },
+  {
+    "id": "q230",
+    "question": "Trong động cơ nhiệt, nhiên liệu cháy tạo khí nóng giãn nở. Giải thích liên hệ giữa phản ứng cháy và công cơ học.",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected subject=chemistry, intent=explain_concept using keyword-based rules."
+    }
+  },
+  {
+    "id": "q231",
+    "question": "Tại sao nước biển dẫn điện tốt hơn nước máy? Giải thích bằng ion hòa tan và dòng điện.",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "math_slm",
+      "confidence": 0.75,
+      "need_clarification": false,
+      "reason": "Detected subject=math, intent=explain_concept using keyword-based rules."
+    }
+  },
+  {
+    "id": "q232",
+    "question": "Một dung dịch CuSO4 có màu xanh và dẫn điện. Hai tính chất này thuộc phần kiến thức nào trong Hóa và Lý?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected out-of-scope keywords, routed to general tutor."
+    }
+  },
+  {
+    "id": "q235",
+    "question": "Trong bình xịt, khí bị nén có áp suất cao. Nếu khí là CO2 thì kiến thức khí lí tưởng và hóa học liên quan thế nào?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.65,
+      "need_clarification": true,
+      "reason": "Detected subject=chemistry, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q236",
+    "question": "Tại sao khi đá khô CO2 thăng hoa lại tạo sương trắng, hiện tượng này thuộc Hóa hay Lý?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "confidence": 0.7,
+      "need_clarification": false,
+      "reason": "Detected subject=chemistry, intent=explain_concept using keyword-based rules."
+    }
+  },
+  {
+    "id": "q237",
+    "question": "Khi hòa tan đường vào nước thì không dẫn điện, còn muối ăn thì dẫn điện. Giải thích bằng ion và dòng điện giúp em.",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "math",
+      "secondary_subjects": [
+        "chemistry"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "math_slm",
+      "confidence": 0.65,
+      "need_clarification": false,
+      "reason": "Detected subject=math, intent=explain_concept using keyword-based rules."
+    }
+  },
+  {
+    "id": "q238",
+    "question": "Một bình khí có 1 mol O2 và 1 mol H2 ở cùng nhiệt độ. Áp suất riêng phần của mỗi khí được hiểu như thế nào?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry",
+        "math"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "confidence": 0.85,
+      "need_clarification": false,
+      "reason": "Detected subject=chemistry, intent=explain_concept using keyword-based rules."
+    }
+  },
+  {
+    "id": "q240",
+    "question": "Em muốn tính lượng nhiệt cần để làm bay hơi nước sau khi đun bằng bếp gas. Có cần biết phản ứng cháy của gas không?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry",
+        "math"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "chemistry_slm",
+      "confidence": 0.7,
+      "need_clarification": false,
+      "reason": "Detected subject=chemistry, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q241",
+    "question": "Một phản ứng tạo ra khí trong bình kín làm áp suất tăng. Làm sao phân biệt do số mol khí tăng hay do nhiệt độ tăng?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.65,
+      "need_clarification": true,
+      "reason": "Detected subject=chemistry, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q243",
+    "question": "Tại sao kim loại dẫn điện tốt, còn dung dịch muối dẫn điện nhờ ion chứ không phải electron tự do như kim loại?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "confidence": 0.8,
+      "need_clarification": false,
+      "reason": "Detected out-of-scope keywords, routed to general tutor."
+    }
+  },
+  {
+    "id": "q244",
+    "question": "Khi đốt cháy photpho trong oxy, ánh sáng và nhiệt phát ra có liên quan đến biến đổi năng lượng trong phản ứng như thế nào?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.55,
+      "need_clarification": true,
+      "reason": "Detected subject=chemistry, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q245",
+    "question": "Một khối khí methane CH4 trong bình có thể tích cố định. Nếu đốt cháy nó thì vì sao không thể chỉ dùng công thức PV = nRT đơn giản?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "diagnose_error",
+      "target_slm": "chemistry_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "confidence": 0.65,
+      "need_clarification": false,
+      "reason": "Detected subject=physics, intent=explain_concept using keyword-based rules."
+    }
+  },
+  {
+    "id": "q247",
+    "question": "Em đã tính được số mol H2 sinh ra, vậy muốn tính công khí thực hiện khi đẩy piston thì cần thêm dữ kiện vật lý nào?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry",
+        "math"
+      ],
+      "intent": "ask_follow_up",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry",
+        "math"
+      ],
+      "intent": "solve_problem",
+      "target_slm": "physics_slm",
+      "confidence": 0.7,
+      "need_clarification": false,
+      "reason": "Detected subject=physics, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q249",
+    "question": "Một pin có suất điện động do phản ứng hóa học tạo ra. Suất điện động này khác gì với hiệu điện thế giữa hai cực khi pin đang dùng?",
+    "case_type": "interdisciplinary",
+    "gold": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry"
+      ],
+      "intent": "explain_concept",
+      "target_slm": "physics_slm",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [
+        "physics"
+      ],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.65,
+      "need_clarification": true,
+      "reason": "Detected subject=chemistry, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q252",
+    "question": "Em không hiểu đoạn này, giải thích giúp em với.",
+    "case_type": "ambiguous",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "need_clarification": true
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "ask_clarification",
+      "confidence": 0.5,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=explain_concept using keyword-based rules."
+    }
+  },
+  {
+    "id": "q253",
+    "question": "Công thức nào dùng ở đây ạ?",
+    "case_type": "ambiguous",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "need_clarification": true
+    },
+    "prediction": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.45,
+      "need_clarification": true,
+      "reason": "Detected subject=physics, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q254",
+    "question": "Tại sao lại ra đáp án đó?",
+    "case_type": "ambiguous",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "need_clarification": true
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "ask_clarification",
+      "confidence": 0.5,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=explain_concept using keyword-based rules."
+    }
+  },
+  {
+    "id": "q257",
+    "question": "Giúp em giải phần còn lại với.",
+    "case_type": "ambiguous",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "need_clarification": true
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "chemistry_slm",
+      "confidence": 0.6,
+      "need_clarification": false,
+      "reason": "Detected subject=chemistry, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q258",
+    "question": "Cái công thức này áp dụng như nào?",
+    "case_type": "ambiguous",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "ask_clarification",
+      "need_clarification": true
+    },
+    "prediction": {
+      "primary_subject": "physics",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.45,
+      "need_clarification": true,
+      "reason": "Detected subject=physics, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q260",
+    "question": "Làm nhanh giúp em câu này được không?",
+    "case_type": "ambiguous",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "ask_clarification",
+      "need_clarification": true
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.3,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q261",
+    "question": "Em bị kẹt ở bước cuối, chỉ em tiếp đi.",
+    "case_type": "ambiguous",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "give_hint",
+      "target_slm": "ask_clarification",
+      "need_clarification": true
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.3,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q262",
+    "question": "Tại sao phải đổi đơn vị ở đây?",
+    "case_type": "ambiguous",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "ask_clarification",
+      "need_clarification": true
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "confidence": 0.65,
+      "need_clarification": false,
+      "reason": "Detected subject=chemistry, intent=explain_concept using keyword-based rules."
+    }
+  },
+  {
+    "id": "q263",
+    "question": "Thầy cô bảo dùng định luật đó mà em không biết định luật nào.",
+    "case_type": "ambiguous",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "ask_follow_up",
+      "target_slm": "ask_clarification",
+      "need_clarification": true
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.3,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q264",
+    "question": "Em có thiếu dữ kiện gì không?",
+    "case_type": "ambiguous",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "ask_follow_up",
+      "target_slm": "ask_clarification",
+      "need_clarification": true
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.3,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q265",
+    "question": "Phần này thuộc bài nào vậy ạ?",
+    "case_type": "ambiguous",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "need_clarification": true
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "ask_follow_up",
+      "target_slm": "chemistry_slm",
+      "confidence": 0.65,
+      "need_clarification": false,
+      "reason": "Detected subject=chemistry, intent=ask_follow_up using keyword-based rules."
+    }
+  },
+  {
+    "id": "q267",
+    "question": "Kết quả này có hợp lý không ạ?",
+    "case_type": "ambiguous",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "check_answer",
+      "target_slm": "ask_clarification",
+      "need_clarification": true
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.3,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q268",
+    "question": "Câu này có phải dùng công thức vừa học không?",
+    "case_type": "ambiguous",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "ask_follow_up",
+      "target_slm": "ask_clarification",
+      "need_clarification": true
+    },
+    "prediction": {
+      "primary_subject": "physics",
+      "secondary_subjects": [
+        "chemistry"
+      ],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.45,
+      "need_clarification": true,
+      "reason": "Detected subject=physics, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q269",
+    "question": "Em không biết phải thế số vào đâu.",
+    "case_type": "ambiguous",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "give_hint",
+      "target_slm": "ask_clarification",
+      "need_clarification": true
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.45,
+      "need_clarification": true,
+      "reason": "Detected subject=chemistry, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q270",
+    "question": "Giải thích lại phần trên giúp em với.",
+    "case_type": "ambiguous",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "ask_clarification",
+      "need_clarification": true
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "chemistry_slm",
+      "confidence": 0.65,
+      "need_clarification": false,
+      "reason": "Detected subject=chemistry, intent=explain_concept using keyword-based rules."
+    }
+  },
+  {
+    "id": "q271",
+    "question": "Câu này thuộc Toán hay Lý hay Hóa vậy?",
+    "case_type": "ambiguous",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "need_clarification": true
+    },
+    "prediction": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.45,
+      "need_clarification": true,
+      "reason": "Detected subject=math, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q272",
+    "question": "Em thấy đề ghi như vậy thôi, có giải được không?",
+    "case_type": "ambiguous",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "need_clarification": true
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "ask_clarification",
+      "confidence": 0.45,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q273",
+    "question": "Bài này cần vẽ hình không ạ?",
+    "case_type": "ambiguous",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "ask_follow_up",
+      "target_slm": "ask_clarification",
+      "need_clarification": true
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.3,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q274",
+    "question": "Em tính ra số âm, có sai không?",
+    "case_type": "ambiguous",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "check_answer",
+      "target_slm": "ask_clarification",
+      "need_clarification": true
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "ask_clarification",
+      "confidence": 0.45,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q276",
+    "question": "Hôm nay thời tiết ở Đà Nẵng có mưa không?",
+    "case_type": "out_of_scope",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.3,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q277",
+    "question": "Bạn gợi ý cho em một bài nhạc nhẹ để nghe khi học bài được không?",
+    "case_type": "out_of_scope",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "give_hint",
+      "target_slm": "ask_clarification",
+      "confidence": 0.5,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=give_hint using keyword-based rules."
+    }
+  },
+  {
+    "id": "q278",
+    "question": "Cách nấu mì trứng nhanh vào buổi sáng như thế nào?",
+    "case_type": "out_of_scope",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.3,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q281",
+    "question": "Làm sao để chọn balo đi học bền và nhẹ?",
+    "case_type": "out_of_scope",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.3,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q283",
+    "question": "Bạn gợi ý caption đăng ảnh đi chơi với bạn bè giúp em.",
+    "case_type": "out_of_scope",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "give_hint",
+      "target_slm": "ask_clarification",
+      "confidence": 0.5,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=give_hint using keyword-based rules."
+    }
+  },
+  {
+    "id": "q284",
+    "question": "Làm sao để ngủ sớm hơn khi em hay thức khuya xem điện thoại?",
+    "case_type": "out_of_scope",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.3,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q285",
+    "question": "Bạn có thể gợi ý lịch tập thể dục nhẹ cho học sinh không?",
+    "case_type": "out_of_scope",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "give_hint",
+      "target_slm": "math_slm",
+      "confidence": 0.65,
+      "need_clarification": false,
+      "reason": "Detected subject=math, intent=give_hint using keyword-based rules."
+    }
+  },
+  {
+    "id": "q286",
+    "question": "Em nên mặc áo màu gì khi đi chụp ảnh kỷ yếu?",
+    "case_type": "out_of_scope",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.3,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q287",
+    "question": "Cách chăm sóc cây sen đá trong phòng học như thế nào?",
+    "case_type": "out_of_scope",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.45,
+      "need_clarification": true,
+      "reason": "Detected subject=chemistry, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q288",
+    "question": "Bạn gợi ý vài truyện ngắn dễ đọc cho học sinh lớp 10 được không?",
+    "case_type": "out_of_scope",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "give_hint",
+      "target_slm": "math_slm",
+      "confidence": 0.65,
+      "need_clarification": false,
+      "reason": "Detected subject=math, intent=give_hint using keyword-based rules."
+    }
+  },
+  {
+    "id": "q289",
+    "question": "Em muốn viết lời chúc sinh nhật ngắn cho bạn thân.",
+    "case_type": "out_of_scope",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.45,
+      "need_clarification": true,
+      "reason": "Detected subject=math, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q290",
+    "question": "Làm sao để sắp xếp bàn học gọn hơn?",
+    "case_type": "out_of_scope",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.3,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q291",
+    "question": "Bạn tư vấn giúp em cách chọn tai nghe giá rẻ để học online.",
+    "case_type": "out_of_scope",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.3,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q292",
+    "question": "Em nên ăn gì trước khi đi thi để không bị đói?",
+    "case_type": "out_of_scope",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.3,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q293",
+    "question": "Bạn gợi ý một số cách giảm căng thẳng trước ngày kiểm tra.",
+    "case_type": "out_of_scope",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "give_hint",
+      "target_slm": "ask_clarification",
+      "confidence": 0.5,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=give_hint using keyword-based rules."
+    }
+  },
+  {
+    "id": "q294",
+    "question": "Cách tạo mật khẩu mạnh cho tài khoản học tập là gì?",
+    "case_type": "out_of_scope",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "explain_concept",
+      "target_slm": "ask_clarification",
+      "confidence": 0.5,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=explain_concept using keyword-based rules."
+    }
+  },
+  {
+    "id": "q295",
+    "question": "Bạn giúp em đặt tên nhóm học tập nghe vui vui được không?",
+    "case_type": "out_of_scope",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.3,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q296",
+    "question": "Em muốn tìm một app ghi chú dễ dùng cho học sinh.",
+    "case_type": "out_of_scope",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "math",
+      "secondary_subjects": [],
+      "intent": "solve_problem",
+      "target_slm": "math_slm",
+      "confidence": 0.6,
+      "need_clarification": false,
+      "reason": "Detected subject=math, intent=solve_problem using keyword-based rules."
+    }
+  },
+  {
+    "id": "q297",
+    "question": "Cách gấp áo đồng phục cho gọn trong balo như thế nào?",
+    "case_type": "out_of_scope",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "chemistry",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.45,
+      "need_clarification": true,
+      "reason": "Detected subject=chemistry, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q298",
+    "question": "Bạn gợi ý vài câu mở đầu thuyết trình cho tự nhiên được không?",
+    "case_type": "out_of_scope",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "give_hint",
+      "target_slm": "ask_clarification",
+      "confidence": 0.5,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=give_hint using keyword-based rules."
+    }
+  },
+  {
+    "id": "q299",
+    "question": "Làm sao để hết buồn ngủ khi học bài buổi tối?",
+    "case_type": "out_of_scope",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "ask_clarification",
+      "confidence": 0.3,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=unknown using keyword-based rules."
+    }
+  },
+  {
+    "id": "q300",
+    "question": "Bạn gợi ý một lịch ôn thi trong 7 ngày cho em được không?",
+    "case_type": "out_of_scope",
+    "gold": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "unknown",
+      "target_slm": "general_tutor",
+      "need_clarification": false
+    },
+    "prediction": {
+      "primary_subject": "unknown",
+      "secondary_subjects": [],
+      "intent": "give_hint",
+      "target_slm": "ask_clarification",
+      "confidence": 0.5,
+      "need_clarification": true,
+      "reason": "Detected subject=unknown, intent=give_hint using keyword-based rules."
+    }
+  }
+]

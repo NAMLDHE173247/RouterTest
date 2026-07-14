@@ -1,0 +1,7 @@
+torch>=2.0.0
+transformers>=4.40.0
+accelerate>=0.29.0
+bitsandbytes>=0.43.0
+pydantic>=2.0.0
+tqdm>=4.66.0
+sentencepiece>=0.2.0

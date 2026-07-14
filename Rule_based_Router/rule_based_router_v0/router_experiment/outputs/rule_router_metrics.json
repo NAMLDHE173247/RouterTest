@@ -1,0 +1,9 @@
+{
+  "total_samples": 300,
+  "primary_subject_accuracy": 0.68,
+  "intent_accuracy": 0.61,
+  "target_slm_accuracy": 0.5733,
+  "need_clarification_accuracy": 0.7433,
+  "exact_match_accuracy": 0.4467,
+  "total_errors": 166
+}
