@@ -17,7 +17,7 @@ export default function RouterEvaluation({ routers }: { routers: RouterInfo[] })
   const [uploadingDataset, setUploadingDataset] = useState<boolean>(false);
   const [uploadResult, setUploadResult] = useState<DatasetUploadResponse | null>(null);
 
-  const [selectedRouterIds, setSelectedRouterIds] = useState<string[]>(['rule_v2', 'qwen_v0']);
+  const [selectedRouterIds, setSelectedRouterIds] = useState<string[]>([]);
   const [sampleLimit, setSampleLimit] = useState<string>('20');
 
   const [evalFilterRouter, setEvalFilterRouter] = useState<string>('all');

@@ -6,7 +6,7 @@ import { CompareResult, RouterInfo, RouterDecision } from '@/types/router';
 import RouterResultCard from './RouterResultCard';
 
 export default function RouterComparison({ routers }: { routers: RouterInfo[] }) {
-  const [selectedRouterIds, setSelectedRouterIds] = useState<string[]>(['rule_v2', 'qwen_v0']);
+  const [selectedRouterIds, setSelectedRouterIds] = useState<string[]>([]);
   const [question, setQuestion] = useState('');
   const [history, setHistory] = useState('');
   const [loading, setLoading] = useState(false);
