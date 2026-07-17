@@ -1,0 +1,24 @@
+{
+  "development": {
+    "path": "..\\data\\test_router.jsonl",
+    "sha256": "5d25fb93a173733033a632fec3ca7bfc5b29fffb0db2a8b3676ee919301ec5cf",
+    "samples": 300,
+    "provenance": "historical Rule V3 development/regression set; used in Phases 1-4"
+  },
+  "validation": {
+    "path": "..\\data\\phase_5\\validation.jsonl",
+    "sha256": "7c3a10d9ec71292faf571ffe262975c5e2e6ec49b065919ed7cf3b8461a1d118",
+    "samples": 20,
+    "provenance": "new generated split authored before Phase 5 threshold search"
+  },
+  "holdout": {
+    "path": "..\\data\\phase_5\\holdout.jsonl",
+    "sha256": "1c786b2594013c4205c9c2425e6786919471c288158af09c480a3abad173614e",
+    "samples": 20,
+    "provenance": "new generated split frozen before Phase 5 tuning; not read by search"
+  },
+  "exact_duplicate_pairs": [],
+  "near_duplicate_pairs": [],
+  "duplicate_count": 0,
+  "near_duplicate_count": 0
+}

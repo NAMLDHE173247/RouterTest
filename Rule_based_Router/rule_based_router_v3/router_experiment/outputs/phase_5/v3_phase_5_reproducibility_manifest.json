@@ -1,0 +1,23 @@
+{
+  "phase": "phase_5",
+  "baseline_phase": "phase_4",
+  "git_commit_sha": "c8c8d0e02eeac55fdd9c61784757d8e03625617a",
+  "phase4_files": {
+    "outputs/phase_4/v3_phase_4_clarification_error_taxonomy.json": "e8d6e01924306aed45ac33aea45083c1577f1e8d6f661afbafc679efedf82c05",
+    "outputs/phase_4/v3_phase_4_comparison_with_phase_3.json": "33fd91daf82c0c627417c355342281d036ed1a78828d2710d4a836065a056cda",
+    "outputs/phase_4/v3_phase_4_errors.json": "fc62142fa71dcdec529c5ef6b6184278a2f79f9c41742b197c73d54e9e9fa95b",
+    "outputs/phase_4/v3_phase_4_fixed_errors.json": "0abf898b6722c6eb0f95988709a0a1327b24cc5a17cf7d1a5511a5d56a9d297b",
+    "outputs/phase_4/v3_phase_4_intent_confusion.json": "e6bcd59055ae5fef900888209b2cb5fb267ad7fd51932b5a00f5ffa780f50c85",
+    "outputs/phase_4/v3_phase_4_interdisciplinary_error_taxonomy.json": "ac0ee437e39b8d028ea417bfd483d68f20824c33a266060c927ff6ed1b49f532",
+    "outputs/phase_4/v3_phase_4_metrics.json": "d589524525e3e66ccba40e5e868c4b8632a560aaf34746def5eac86742b8ae46",
+    "outputs/phase_4/v3_phase_4_oos_error_taxonomy.json": "46bbcce1c77f71de298dcae98eae2dd0ead46e5ab0b70caf46bfc0eb941e7a2f",
+    "outputs/phase_4/v3_phase_4_predictions.jsonl": "027be7e179f8f944fd1da037cc5c83aee57d1dc193671563edd87bf5328166c5",
+    "outputs/phase_4/v3_phase_4_reason_code_coverage.json": "d350a98cac5c79462edce3ef13e55aef50b083e6b347d9c480d2e75c094844a9",
+    "outputs/phase_4/v3_phase_4_regressions.json": "024992c49879f8a02e770713f4506b67dd92e3e395509d444b3d01868790ddb8",
+    "outputs/phase_4/v3_phase_4_rule_coverage.json": "5111f376f61e1115c5e5a427f98b8c371d381e5d2923fecbc2de38a48b2a281a",
+    "outputs/phase_4/v3_phase_4_secondary_error_taxonomy.json": "4566680f80ed7f35942aa3360e43dffe2639f07c1edba4a23df46c01069ce7eb",
+    "outputs/phase_4/v3_phase_4_secondary_metrics.json": "a07548a96e93fb22cc3000aac83c96abb356325d0859581159d8c0544d6931cf",
+    "outputs/phase_4/v3_phase_4_subject_confusion.json": "2b4850473a848eacf399cc5fa3490787efc050c7db343ebccae451a410835e5a"
+  },
+  "note": "Manifest only; Phase 4 artifacts are referenced by path and SHA256, not copied recursively."
+}

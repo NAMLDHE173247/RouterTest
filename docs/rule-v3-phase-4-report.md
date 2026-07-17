@@ -2,6 +2,8 @@
 
 ## Executive summary
 
+> **Reproducibility note:** Phase 4 is the locked development baseline for Phase 5. Its artifacts are referenced by the Phase 5 manifest using file paths and SHA256 checksums; they are not recursively copied.
+
 Phase 4 đã triển khai ownership theo topic, supporting/tool subject evidence, secondary-subject reasons, ba trạng thái scope và clarification reason codes trong V3 core/evaluation.
 
 Trên 300 mẫu, primary đạt `96.00%`, intent `88.00%`, interdisciplinary primary `85.48%`, secondary micro-F1 `0.7626`, OOS target/clarification `96.55%`, clarification tổng `96.00%`, multi-turn `100%`. Gate **PASSED**; không bắt đầu Phase 5.

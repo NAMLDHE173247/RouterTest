@@ -256,25 +256,10 @@ AMBIGUOUS_RULES = [
 ]
 
 
-THRESHOLDS = {
-    "minimum_subject_score": 2,
+from threshold_config import DEFAULT_THRESHOLDS
 
-    "history_inherit_max_score": 3,
 
-    "secondary_min_score": 2,
-    "secondary_score_ratio": 0.35,
-
-    "domain_owner_min_score": 4,
-    "domain_owner_math_ratio": 0.55,
-
-    "ambiguous_min_score": 4,
-
-    "out_of_scope_min_score": 5,
-    "out_of_scope_max_stem_score": 2,
-
-    "cross_domain_min_score": 4,
-    "cross_domain_max_margin": 1
-}
+THRESHOLDS = dict(DEFAULT_THRESHOLDS)
 
 
 OUT_OF_SCOPE_RULES = [
