@@ -59,9 +59,9 @@ Current focused result: `36 passed`, with 6 existing framework/deprecation warni
 
 Measured by the final 300-sample evaluation run using the bundled Codex Python runtime on the local Windows workspace:
 
-- Mean: `2.6088 ms`
-- Median: `2.2991 ms`
-- P95: `3.9574 ms`
+- Mean: `2.7836 ms`
+- Median: `2.4732 ms`
+- P95: `5.2936 ms`
 
 These values are stored in `v3_phase_1_2_metrics.json`.
 
