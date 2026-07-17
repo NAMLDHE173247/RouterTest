@@ -16,7 +16,7 @@ Toàn bộ Phase 5 artifacts tại `outputs/phase_5/` được xem là frozen. H
 
 ### Validation
 
-Có `6` intent errors:
+Có `7` intent errors:
 
 - `6` lỗi `missing_intent_evidence`: gold chủ yếu là `explain_concept`, prediction là `unknown`, không có matched intent rule, mọi score bằng `0`, không có veto. Đây là paraphrase/concept-explanation coverage gap.
 - `1` lỗi `ambiguous_explain_followup_conflict`: câu `v012` có explain và follow-up evidence; `explain_concept` đạt score `13`, follow-up bị veto do thiếu history, nên prediction không còn là gold `unknown`.
@@ -25,7 +25,7 @@ Chi tiết đầy đủ gồm gold, prediction, matched rules, score, veto, marg
 
 ### Holdout
 
-Có `7` intent errors:
+Có `6` intent errors:
 
 - `5` lỗi `missing_intent_evidence`: các câu explain concept, check answer hoặc solve problem không có intent rule match và trả `unknown`.
 - `1` lỗi `explain_vs_solve_overlap`: `h011` là multi-turn, solve rule đạt score `8` trong khi explain không có evidence, nên current-turn solve thắng.
