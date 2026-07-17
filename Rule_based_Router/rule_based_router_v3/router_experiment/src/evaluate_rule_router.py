@@ -86,6 +86,7 @@ def evaluate(
     output_dir: str = DEFAULT_OUTPUT_DIR,
     phase: str = "phase_0",
     baseline_dir: str | None = None,
+    baseline_phase: str = "phase_0",
     config_paths: list[str] | None = None,
 ) -> dict[str, Any]:
     dataset = load_jsonl(dataset_path)
@@ -270,7 +271,7 @@ def evaluate(
 
     baseline_dir = baseline_dir or os.path.join(EXPERIMENT_DIR, "outputs", "phase_0")
     baseline_records = load_prediction_records(
-        os.path.join(baseline_dir, "v3_phase_0_predictions.jsonl")
+        os.path.join(baseline_dir, f"v3_{baseline_phase}_predictions.jsonl")
     )
     current_records = load_prediction_records(prediction_path)
     fixed_errors = []
@@ -278,6 +279,7 @@ def evaluate(
     comparison = {
         "metadata": metadata,
         "baseline_dir": baseline_dir,
+        "baseline_phase": baseline_phase,
         "baseline_available": bool(baseline_records),
         "fixed_primary_subject_errors": 0,
         "new_primary_subject_regressions": 0,
@@ -331,6 +333,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--dataset", default=DEFAULT_DATASET_PATH)
     parser.add_argument("--output-dir", default=None)
     parser.add_argument("--baseline-dir", default=None)
+    parser.add_argument("--baseline-phase", default="phase_0")
     parser.add_argument("--config", action="append", default=None)
     return parser.parse_args()
 
@@ -339,4 +342,4 @@ if __name__ == "__main__":
     args = parse_args()
     output_dir = args.output_dir or os.path.join(EXPERIMENT_DIR, "outputs", args.phase)
     config_paths = args.config or [os.path.join(SCRIPT_DIR, "rules.py")]
-    evaluate(args.dataset, output_dir, args.phase, args.baseline_dir, config_paths)
+    evaluate(args.dataset, output_dir, args.phase, args.baseline_dir, args.baseline_phase, config_paths)
