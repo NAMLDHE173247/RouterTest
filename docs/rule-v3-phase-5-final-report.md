@@ -86,3 +86,9 @@ Validation và holdout chỉ có 20 mẫu mỗi split và được tạo mới t
 - Validation SHA256: `7c3a10d9ec71292faf571ffe262975c5e2e6ec49b065919ed7cf3b8461a1d118`.
 - Holdout SHA256: `1c786b2594013c4205c9c2425e6786919471c288158af09c480a3abad173614e`.
 - Artifact manifest: `outputs/phase_5/v3_phase_5_reproducibility_manifest.json`.
+
+## Review status
+
+- Phase 5 methodology: **APPROVED**
+- Rule V3 status: **RESEARCH_CANDIDATE**
+- Final production/generalization approval: **NOT APPROVED**

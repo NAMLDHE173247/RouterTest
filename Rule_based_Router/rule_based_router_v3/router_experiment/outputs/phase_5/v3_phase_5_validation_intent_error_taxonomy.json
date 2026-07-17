@@ -1,0 +1,202 @@
+{
+  "split": "validation",
+  "status": "frozen_analysis_only",
+  "intent_error_count": 7,
+  "groups": {
+    "missing_intent_evidence": 6,
+    "ambiguous_explain_followup_conflict": 1
+  },
+  "errors": [
+    {
+      "id": "v002",
+      "question": "Đạo hàm âm trên khoảng thì hàm số tăng hay giảm?",
+      "case_type": "single_turn",
+      "gold": "explain_concept",
+      "prediction": "unknown",
+      "matched_rules": [],
+      "scores": {
+        "diagnose_error": 0,
+        "check_answer": 0,
+        "give_hint": 0,
+        "explain_concept": 0,
+        "solve_problem": 0,
+        "ask_follow_up": 0
+      },
+      "vetoes": [],
+      "top_score": 0,
+      "second_score": 0,
+      "decision_margin": 0,
+      "group": "missing_intent_evidence",
+      "cause": "No intent rule matched; gold intent is not represented by the current lexical/context patterns."
+    },
+    {
+      "id": "v004",
+      "question": "Bình CO2 tuân theo khí lí tưởng PV=nRT; áp suất thay đổi ra sao?",
+      "case_type": "interdisciplinary",
+      "gold": "explain_concept",
+      "prediction": "unknown",
+      "matched_rules": [],
+      "scores": {
+        "diagnose_error": 0,
+        "check_answer": 0,
+        "give_hint": 0,
+        "explain_concept": 0,
+        "solve_problem": 0,
+        "ask_follow_up": 0
+      },
+      "vetoes": [],
+      "top_score": 0,
+      "second_score": 0,
+      "decision_margin": 0,
+      "group": "missing_intent_evidence",
+      "cause": "No intent rule matched; gold intent is not represented by the current lexical/context patterns."
+    },
+    {
+      "id": "v005",
+      "question": "Phản ứng tỏa nhiệt làm nhiệt độ tăng, trọng tâm là phản ứng hóa học.",
+      "case_type": "interdisciplinary",
+      "gold": "explain_concept",
+      "prediction": "unknown",
+      "matched_rules": [],
+      "scores": {
+        "diagnose_error": 0,
+        "check_answer": 0,
+        "give_hint": 0,
+        "explain_concept": 0,
+        "solve_problem": 0,
+        "ask_follow_up": 0
+      },
+      "vetoes": [],
+      "top_score": 0,
+      "second_score": 0,
+      "decision_margin": 0,
+      "group": "missing_intent_evidence",
+      "cause": "No intent rule matched; gold intent is not represented by the current lexical/context patterns."
+    },
+    {
+      "id": "v011",
+      "question": "Lực ma sát tác dụng lên vật thế nào?",
+      "case_type": "multi_turn",
+      "gold": "explain_concept",
+      "prediction": "unknown",
+      "matched_rules": [],
+      "scores": {
+        "diagnose_error": 0,
+        "check_answer": 0,
+        "give_hint": 0,
+        "explain_concept": 0,
+        "solve_problem": 0,
+        "ask_follow_up": 0
+      },
+      "vetoes": [],
+      "top_score": 0,
+      "second_score": 0,
+      "decision_margin": 0,
+      "group": "missing_intent_evidence",
+      "cause": "No intent rule matched; gold intent is not represented by the current lexical/context patterns."
+    },
+    {
+      "id": "v012",
+      "question": "Phần này là gì?",
+      "case_type": "ambiguous",
+      "gold": "unknown",
+      "prediction": "explain_concept",
+      "matched_rules": [
+        {
+          "rule_id": "intent.base.explain_concept.la_gi",
+          "intent": "explain_concept",
+          "source": "base_rule",
+          "score": 5,
+          "matched_text": "là gì"
+        },
+        {
+          "rule_id": "intent.base.ask_follow_up.phan_nay",
+          "intent": "ask_follow_up",
+          "source": "base_rule",
+          "score": 4,
+          "matched_text": "phần này"
+        },
+        {
+          "rule_id": "intent.phase2.explain.strong.difference",
+          "intent": "explain_concept",
+          "source": "context_rule",
+          "score": 8,
+          "matched_text": "là gì"
+        },
+        {
+          "rule_id": "intent.phase2.follow_up.strong.reference",
+          "intent": "ask_follow_up",
+          "source": "context_rule",
+          "score": 9,
+          "matched_text": "phần này"
+        }
+      ],
+      "scores": {
+        "diagnose_error": 0,
+        "check_answer": 0,
+        "give_hint": 0,
+        "explain_concept": 13,
+        "solve_problem": 0
+      },
+      "vetoes": [
+        {
+          "rule_id": "intent.phase2.veto.follow_up.no_history",
+          "intent": "ask_follow_up",
+          "reason": "A follow-up reference without conversation history is not actionable context.",
+          "matched_text": "phần này là gì?",
+          "start": 0,
+          "end": 15
+        }
+      ],
+      "top_score": 13,
+      "second_score": 0,
+      "decision_margin": 13,
+      "group": "ambiguous_explain_followup_conflict",
+      "cause": "Explain and follow-up phrases co-occurred; the no-history veto removed follow-up but did not veto explain."
+    },
+    {
+      "id": "v015",
+      "question": "Điện phân dung dịch tạo electron và dòng điện trong mạch.",
+      "case_type": "interdisciplinary",
+      "gold": "explain_concept",
+      "prediction": "unknown",
+      "matched_rules": [],
+      "scores": {
+        "diagnose_error": 0,
+        "check_answer": 0,
+        "give_hint": 0,
+        "explain_concept": 0,
+        "solve_problem": 0,
+        "ask_follow_up": 0
+      },
+      "vetoes": [],
+      "top_score": 0,
+      "second_score": 0,
+      "decision_margin": 0,
+      "group": "missing_intent_evidence",
+      "cause": "No intent rule matched; gold intent is not represented by the current lexical/context patterns."
+    },
+    {
+      "id": "v019",
+      "question": "Một chất khí có CO2 và áp suất theo PV=nRT.",
+      "case_type": "interdisciplinary",
+      "gold": "explain_concept",
+      "prediction": "unknown",
+      "matched_rules": [],
+      "scores": {
+        "diagnose_error": 0,
+        "check_answer": 0,
+        "give_hint": 0,
+        "explain_concept": 0,
+        "solve_problem": 0,
+        "ask_follow_up": 0
+      },
+      "vetoes": [],
+      "top_score": 0,
+      "second_score": 0,
+      "decision_margin": 0,
+      "group": "missing_intent_evidence",
+      "cause": "No intent rule matched; gold intent is not represented by the current lexical/context patterns."
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "status": "protocol_only; no dataset created in this checkpoint",
+  "reuse_policy": "The current Phase 5 holdout is analysis/regression data only and must never be reused as a final holdout.",
+  "splits": {
+    "intent_development_expansion": {
+      "purpose": "expand intent paraphrases and hard negatives",
+      "target": "at least 50 examples per intent, balanced by subject and case_type"
+    },
+    "validation": {
+      "purpose": "select intent generalization changes",
+      "target": "new samples stratified by intent, subject, case_type and history state"
+    },
+    "final_holdout": {
+      "purpose": "one-time unbiased final evaluation",
+      "target": "new source/templates, frozen before any rule or threshold choice"
+    }
+  },
+  "stratification": [
+    "intent",
+    "subject",
+    "case_type",
+    "single_turn_vs_multi_turn",
+    "history_present_vs_missing",
+    "interdisciplinary",
+    "ambiguous",
+    "out_of_scope"
+  ],
+  "leakage_checks": [
+    "exact question duplicate",
+    "normalized near-duplicate",
+    "template fingerprint overlap",
+    "same stem with entity substitution",
+    "cross-split ID and provenance audit",
+    "SHA256 manifest"
+  ],
+  "acceptance_rules": [
+    "expected labels are reviewed before metrics",
+    "no holdout label/rule/threshold tuning",
+    "report per-intent confusion and confidence",
+    "record dataset provenance and generation timestamp"
+  ]
+}

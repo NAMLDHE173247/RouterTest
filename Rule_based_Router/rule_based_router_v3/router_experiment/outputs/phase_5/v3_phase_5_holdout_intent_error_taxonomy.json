@@ -1,0 +1,151 @@
+{
+  "split": "holdout",
+  "status": "frozen_analysis_only; do not reuse as final holdout",
+  "intent_error_count": 6,
+  "groups": {
+    "missing_intent_evidence": 5,
+    "explain_vs_solve_overlap": 1
+  },
+  "errors": [
+    {
+      "id": "h004",
+      "question": "Khí O2 trong bình kín dùng định luật khí lí tưởng; áp suất phụ thuộc gì?",
+      "case_type": "interdisciplinary",
+      "gold": "explain_concept",
+      "prediction": "unknown",
+      "matched_rules": [],
+      "scores": {
+        "diagnose_error": 0,
+        "check_answer": 0,
+        "give_hint": 0,
+        "explain_concept": 0,
+        "solve_problem": 0,
+        "ask_follow_up": 0
+      },
+      "vetoes": [],
+      "top_score": 0,
+      "second_score": 0,
+      "decision_margin": 0,
+      "group": "missing_intent_evidence",
+      "cause": "No intent rule matched; gold intent is not represented by the current lexical/context patterns."
+    },
+    {
+      "id": "h011",
+      "question": "Cường độ dòng điện thay đổi thế nào khi giảm điện trở?",
+      "case_type": "multi_turn",
+      "gold": "explain_concept",
+      "prediction": "solve_problem",
+      "matched_rules": [
+        {
+          "rule_id": "intent.phase2.solve.strong.calculation",
+          "intent": "solve_problem",
+          "source": "context_rule",
+          "score": 8,
+          "matched_text": "thay đổi thế nào"
+        }
+      ],
+      "scores": {
+        "diagnose_error": 0,
+        "check_answer": 0,
+        "give_hint": 0,
+        "explain_concept": 0,
+        "solve_problem": 8,
+        "ask_follow_up": 0
+      },
+      "vetoes": [],
+      "top_score": 8,
+      "second_score": 0,
+      "decision_margin": 8,
+      "group": "explain_vs_solve_overlap",
+      "cause": "A solve/calculation rule won while no explanatory context had enough score."
+    },
+    {
+      "id": "h014",
+      "question": "Hoàn tất hệ số cho phương trình Na + H2O -> NaOH + H2.",
+      "case_type": "single_turn",
+      "gold": "solve_problem",
+      "prediction": "unknown",
+      "matched_rules": [],
+      "scores": {
+        "diagnose_error": 0,
+        "check_answer": 0,
+        "give_hint": 0,
+        "explain_concept": 0,
+        "solve_problem": 0,
+        "ask_follow_up": 0
+      },
+      "vetoes": [],
+      "top_score": 0,
+      "second_score": 0,
+      "decision_margin": 0,
+      "group": "missing_intent_evidence",
+      "cause": "No intent rule matched; gold intent is not represented by the current lexical/context patterns."
+    },
+    {
+      "id": "h015",
+      "question": "Ion trong dung dịch dẫn điện như thế nào?",
+      "case_type": "interdisciplinary",
+      "gold": "explain_concept",
+      "prediction": "unknown",
+      "matched_rules": [],
+      "scores": {
+        "diagnose_error": 0,
+        "check_answer": 0,
+        "give_hint": 0,
+        "explain_concept": 0,
+        "solve_problem": 0,
+        "ask_follow_up": 0
+      },
+      "vetoes": [],
+      "top_score": 0,
+      "second_score": 0,
+      "decision_margin": 0,
+      "group": "missing_intent_evidence",
+      "cause": "No intent rule matched; gold intent is not represented by the current lexical/context patterns."
+    },
+    {
+      "id": "h016",
+      "question": "Có thể tin cậy đáp số vừa nhận được không?",
+      "case_type": "ambiguous",
+      "gold": "check_answer",
+      "prediction": "unknown",
+      "matched_rules": [],
+      "scores": {
+        "diagnose_error": 0,
+        "check_answer": 0,
+        "give_hint": 0,
+        "explain_concept": 0,
+        "solve_problem": 0,
+        "ask_follow_up": 0
+      },
+      "vetoes": [],
+      "top_score": 0,
+      "second_score": 0,
+      "decision_margin": 0,
+      "group": "missing_intent_evidence",
+      "cause": "No intent rule matched; gold intent is not represented by the current lexical/context patterns."
+    },
+    {
+      "id": "h019",
+      "question": "CO2 trong bình có áp suất thay đổi theo PV=nRT.",
+      "case_type": "interdisciplinary",
+      "gold": "explain_concept",
+      "prediction": "unknown",
+      "matched_rules": [],
+      "scores": {
+        "diagnose_error": 0,
+        "check_answer": 0,
+        "give_hint": 0,
+        "explain_concept": 0,
+        "solve_problem": 0,
+        "ask_follow_up": 0
+      },
+      "vetoes": [],
+      "top_score": 0,
+      "second_score": 0,
+      "decision_margin": 0,
+      "group": "missing_intent_evidence",
+      "cause": "No intent rule matched; gold intent is not represented by the current lexical/context patterns."
+    }
+  ]
+}
