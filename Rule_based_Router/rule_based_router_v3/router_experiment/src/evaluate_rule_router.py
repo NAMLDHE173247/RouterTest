@@ -98,7 +98,7 @@ def evaluate(
     confusion_path = os.path.join(output_dir, f"{prefix}_subject_confusion.json")
     fixed_path = os.path.join(output_dir, f"{prefix}_fixed_errors.json")
     regressions_path = os.path.join(output_dir, f"{prefix}_regressions.json")
-    comparison_path = os.path.join(output_dir, f"{prefix}_comparison_with_phase_0.json")
+    comparison_path = os.path.join(output_dir, f"{prefix}_comparison_with_{baseline_phase}.json")
     coverage_path = os.path.join(output_dir, f"{prefix}_rule_coverage.json")
     os.makedirs(output_dir, exist_ok=True)
 
