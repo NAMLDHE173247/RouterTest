@@ -16,7 +16,7 @@ Non-scope: V0/V1/V2 behavior, contextual intent, dialogue-history redesign, adva
 
 Phase 0 artifacts are frozen under `outputs/phase_0/` and are not overwritten. The baseline has 300 samples, primary accuracy 0.7667, intent accuracy 0.7000, target accuracy 0.6800, clarification accuracy 0.7600, legacy exact accuracy 0.5133 and 146 legacy errors. Full exact accuracy, including secondary subjects, is 0.2400.
 
-The Phase 0 primary-subject error set contains 68 errors. The pre-change taxonomy artifact groups them into weak/missing topic evidence (31), formula/unit coverage gaps (14), wrong topic or subject competition (13), entity dominance over Physics (10), and interdisciplinary competition (2).
+The Phase 0 primary-subject error set contains 70 errors. The pre-change taxonomy artifact groups them into weak/missing topic evidence (31), formula/unit coverage gaps (14), wrong topic or subject competition (13), entity dominance over Physics (10), and interdisciplinary competition (2).
 
 ## Error taxonomy trước khi sửa
 
@@ -49,7 +49,7 @@ There are 26 new primary-subject regressions against Phase 0. Full records are i
 
 ## Net improvement
 
-Primary accuracy improved by +0.1133 absolute, target accuracy by +0.1133, clarification accuracy by +0.0967, legacy exact accuracy by +0.0600 and full exact accuracy by +0.0867. Primary errors fell from 68 to 36. The result is an improvement on the Phase 0 baseline, with a known interdisciplinary regression surface.
+Primary accuracy improved by +0.1133 absolute, target accuracy by +0.1133, clarification accuracy by +0.0967, legacy exact accuracy by +0.0600 and full exact accuracy by +0.0867. Primary errors fell from 70 to 36. The result is an improvement on the Phase 0 baseline, with a known interdisciplinary regression surface.
 
 ## Test results
 

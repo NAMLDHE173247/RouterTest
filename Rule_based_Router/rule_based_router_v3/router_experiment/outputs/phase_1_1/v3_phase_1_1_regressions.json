@@ -1,0 +1,799 @@
+{
+  "metadata": {
+    "git_commit": "e8f0b3356fdd7d07c8f83e2d77e6fd39af9536c5",
+    "dataset_sha256": "5d25fb93a173733033a632fec3ca7bfc5b29fffb0db2a8b3676ee919301ec5cf",
+    "config_sha256": "bbd6383be6977db17e90836cedb62a089db5bd357e08fc96c76cf11f6648c133",
+    "config_files": [
+      "src\\rules.py",
+      "src\\models.py",
+      "src\\topic_ontology.py",
+      "src\\topic_resolver.py"
+    ],
+    "generated_at_utc": "2026-07-17T17:08:16.324199+00:00",
+    "phase": "phase_1_1"
+  },
+  "items": [
+    {
+      "id": "q213",
+      "baseline": {
+        "id": "q213",
+        "question": "Em muốn tính nhiệt lượng tỏa ra khi đốt cháy 1 mol CH4 nếu biết năng lượng tỏa ra mỗi mol. Bài này dùng Hóa hay Lý?",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "solve_problem",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "physics",
+            "math"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "chemistry",
+          "secondary_subjects": [
+            "physics"
+          ],
+          "intent": "solve_problem",
+          "target_slm": "ask_clarification",
+          "confidence": 0.35,
+          "need_clarification": true,
+          "reason": "The subject or conversational reference is not sufficiently clear.",
+          "topic": "chemistry.stoichiometry",
+          "trace": {
+            "topic": "chemistry.stoichiometry",
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "nhiệt lượng",
+                "start": 13,
+                "end": 24,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.strong_term",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "strong_term",
+                "matched_text": "mol",
+                "start": 47,
+                "end": 50,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.strong_term",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "strong_term",
+                "matched_text": "mol",
+                "start": 86,
+                "end": 89,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.organic_chemistry.organic.entity",
+                "label": "chemistry",
+                "topic": "chemistry.organic",
+                "source": "entity",
+                "matched_text": "ch4",
+                "start": 51,
+                "end": 54,
+                "score": 0,
+                "is_entity": true
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 3,
+              "chemistry": 6
+            },
+            "primary_subject": "chemistry",
+            "secondary_subjects": [
+              "physics"
+            ],
+            "inherited_from_history": false
+          }
+        }
+      },
+      "current": {
+        "id": "q213",
+        "question": "Em muốn tính nhiệt lượng tỏa ra khi đốt cháy 1 mol CH4 nếu biết năng lượng tỏa ra mỗi mol. Bài này dùng Hóa hay Lý?",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "solve_problem",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "physics",
+            "math"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "physics",
+          "secondary_subjects": [
+            "chemistry"
+          ],
+          "intent": "solve_problem",
+          "target_slm": "ask_clarification",
+          "confidence": 0.35,
+          "need_clarification": true,
+          "reason": "The subject or conversational reference is not sufficiently clear.",
+          "topic": "physics.thermodynamics.heat_transfer",
+          "trace": {
+            "topic": "physics.thermodynamics.heat_transfer",
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term.01_nhiet_luong",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "nhiệt lượng",
+                "start": 13,
+                "end": 24,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.strong_term.02_mol",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "strong_term",
+                "matched_text": "mol",
+                "start": 47,
+                "end": 50,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.strong_term.02_mol",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "strong_term",
+                "matched_text": "mol",
+                "start": 86,
+                "end": 89,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.organic_chemistry.organic.entity.01_ch4",
+                "label": "chemistry",
+                "topic": "chemistry.organic",
+                "source": "entity",
+                "matched_text": "ch4",
+                "start": 51,
+                "end": 54,
+                "score": 0,
+                "is_entity": true
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 3,
+              "chemistry": 6
+            },
+            "primary_subject": "physics",
+            "secondary_subjects": [
+              "chemistry"
+            ],
+            "inherited_from_history": false
+          }
+        }
+      }
+    },
+    {
+      "id": "q229",
+      "baseline": {
+        "id": "q229",
+        "question": "Nếu đốt cháy 0,5 mol H2 thì tạo ra bao nhiêu mol nước và phản ứng này có tỏa nhiệt không?",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "solve_problem",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "math",
+            "physics"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "chemistry",
+          "secondary_subjects": [
+            "physics"
+          ],
+          "intent": "solve_problem",
+          "target_slm": "chemistry_slm",
+          "confidence": 0.74,
+          "need_clarification": false,
+          "reason": "Interdisciplinary question: primary=chemistry, secondary=physics, intent=solve_problem.",
+          "topic": "chemistry.stoichiometry",
+          "trace": {
+            "topic": "chemistry.stoichiometry",
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.entity",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "entity",
+                "matched_text": "h2",
+                "start": 21,
+                "end": 23,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "tỏa nhiệt",
+                "start": 73,
+                "end": 82,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.support_term",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "support_term",
+                "matched_text": "tỏa nhiệt",
+                "start": 73,
+                "end": 82,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.atomic_structure.atomic_structure.entity",
+                "label": "chemistry",
+                "topic": "chemistry.atomic_structure",
+                "source": "entity",
+                "matched_text": "h2",
+                "start": 21,
+                "end": 23,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.support_term",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "support_term",
+                "matched_text": "phản ứng",
+                "start": 57,
+                "end": 65,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.strong_term",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "strong_term",
+                "matched_text": "mol",
+                "start": 17,
+                "end": 20,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.strong_term",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "strong_term",
+                "matched_text": "mol",
+                "start": 45,
+                "end": 48,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.entity",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "entity",
+                "matched_text": "h2",
+                "start": 21,
+                "end": 23,
+                "score": 0,
+                "is_entity": true
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 4,
+              "chemistry": 6
+            },
+            "primary_subject": "chemistry",
+            "secondary_subjects": [
+              "physics"
+            ],
+            "inherited_from_history": false
+          }
+        }
+      },
+      "current": {
+        "id": "q229",
+        "question": "Nếu đốt cháy 0,5 mol H2 thì tạo ra bao nhiêu mol nước và phản ứng này có tỏa nhiệt không?",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "solve_problem",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "math",
+            "physics"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "physics",
+          "secondary_subjects": [
+            "chemistry"
+          ],
+          "intent": "solve_problem",
+          "target_slm": "physics_slm",
+          "confidence": 0.6,
+          "need_clarification": false,
+          "reason": "Interdisciplinary question: primary=physics, secondary=chemistry, intent=solve_problem.",
+          "topic": "physics.thermodynamics.heat_transfer",
+          "trace": {
+            "topic": "physics.thermodynamics.heat_transfer",
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.entity.03_h2",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "entity",
+                "matched_text": "h2",
+                "start": 21,
+                "end": 23,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term.07_toa_nhiet",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "tỏa nhiệt",
+                "start": 73,
+                "end": 82,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.support_term.03_toa_nhiet",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "support_term",
+                "matched_text": "tỏa nhiệt",
+                "start": 73,
+                "end": 82,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.atomic_structure.atomic_structure.entity.03_h2",
+                "label": "chemistry",
+                "topic": "chemistry.atomic_structure",
+                "source": "entity",
+                "matched_text": "h2",
+                "start": 21,
+                "end": 23,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.support_term.01_phan_ung",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "support_term",
+                "matched_text": "phản ứng",
+                "start": 57,
+                "end": 65,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.strong_term.02_mol",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "strong_term",
+                "matched_text": "mol",
+                "start": 17,
+                "end": 20,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.strong_term.02_mol",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "strong_term",
+                "matched_text": "mol",
+                "start": 45,
+                "end": 48,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.entity.02_h2",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "entity",
+                "matched_text": "h2",
+                "start": 21,
+                "end": 23,
+                "score": 0,
+                "is_entity": true
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 4,
+              "chemistry": 7
+            },
+            "primary_subject": "physics",
+            "secondary_subjects": [
+              "chemistry"
+            ],
+            "inherited_from_history": false
+          }
+        }
+      }
+    },
+    {
+      "id": "q240",
+      "baseline": {
+        "id": "q240",
+        "question": "Em muốn tính lượng nhiệt cần để làm bay hơi nước sau khi đun bằng bếp gas. Có cần biết phản ứng cháy của gas không?",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "physics",
+          "intent": "explain_concept",
+          "target_slm": "physics_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "chemistry",
+            "math"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "physics",
+          "secondary_subjects": [],
+          "intent": "solve_problem",
+          "target_slm": "physics_slm",
+          "confidence": 0.73,
+          "need_clarification": false,
+          "reason": "Weighted FlashText signals indicate subject=physics, intent=solve_problem.",
+          "topic": "physics.thermodynamics.heat_transfer",
+          "trace": {
+            "topic": "physics.thermodynamics.heat_transfer",
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "bay hơi",
+                "start": 36,
+                "end": 43,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.support_term",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "support_term",
+                "matched_text": "phản ứng",
+                "start": 87,
+                "end": 95,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.organic_chemistry.organic.support_term",
+                "label": "chemistry",
+                "topic": "chemistry.organic",
+                "source": "support_term",
+                "matched_text": "phản ứng cháy",
+                "start": 87,
+                "end": 100,
+                "score": 1,
+                "is_entity": false
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 3,
+              "chemistry": 0
+            },
+            "primary_subject": "physics",
+            "secondary_subjects": [],
+            "inherited_from_history": false
+          }
+        }
+      },
+      "current": {
+        "id": "q240",
+        "question": "Em muốn tính lượng nhiệt cần để làm bay hơi nước sau khi đun bằng bếp gas. Có cần biết phản ứng cháy của gas không?",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "physics",
+          "intent": "explain_concept",
+          "target_slm": "physics_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "chemistry",
+            "math"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "chemistry",
+          "secondary_subjects": [
+            "physics"
+          ],
+          "intent": "solve_problem",
+          "target_slm": "chemistry_slm",
+          "confidence": 0.54,
+          "need_clarification": false,
+          "reason": "Interdisciplinary question: primary=chemistry, secondary=physics, intent=solve_problem.",
+          "topic": null,
+          "trace": {
+            "topic": null,
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term.05_bay_hoi",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "bay hơi",
+                "start": 36,
+                "end": 43,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.support_term.01_phan_ung",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "support_term",
+                "matched_text": "phản ứng",
+                "start": 87,
+                "end": 95,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.organic_chemistry.organic.support_term.04_phan_ung_chay",
+                "label": "chemistry",
+                "topic": "chemistry.organic",
+                "source": "support_term",
+                "matched_text": "phản ứng cháy",
+                "start": 87,
+                "end": 100,
+                "score": 1,
+                "is_entity": false
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 3,
+              "chemistry": 2
+            },
+            "primary_subject": "chemistry",
+            "secondary_subjects": [
+              "physics"
+            ],
+            "inherited_from_history": false
+          }
+        }
+      }
+    },
+    {
+      "id": "q249",
+      "baseline": {
+        "id": "q249",
+        "question": "Một pin có suất điện động do phản ứng hóa học tạo ra. Suất điện động này khác gì với hiệu điện thế giữa hai cực khi pin đang dùng?",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "physics",
+          "intent": "explain_concept",
+          "target_slm": "physics_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "chemistry"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "physics",
+          "secondary_subjects": [
+            "chemistry"
+          ],
+          "intent": "unknown",
+          "target_slm": "physics_slm",
+          "confidence": 0.67,
+          "need_clarification": false,
+          "reason": "Interdisciplinary question: primary=physics, secondary=chemistry, intent=unknown.",
+          "topic": "physics.electricity.circuits",
+          "trace": {
+            "topic": "physics.electricity.circuits",
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.electricity.circuits.strong_term",
+                "label": "physics",
+                "topic": "physics.electricity.circuits",
+                "source": "strong_term",
+                "matched_text": "hiệu điện thế",
+                "start": 85,
+                "end": 98,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.electricity.circuits.strong_term",
+                "label": "physics",
+                "topic": "physics.electricity.circuits",
+                "source": "strong_term",
+                "matched_text": "suất điện động",
+                "start": 11,
+                "end": 25,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.electricity.circuits.strong_term",
+                "label": "physics",
+                "topic": "physics.electricity.circuits",
+                "source": "strong_term",
+                "matched_text": "suất điện động",
+                "start": 54,
+                "end": 68,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.strong_term",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "strong_term",
+                "matched_text": "phản ứng hóa học",
+                "start": 29,
+                "end": 45,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.support_term",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "support_term",
+                "matched_text": "phản ứng",
+                "start": 29,
+                "end": 37,
+                "score": 1,
+                "is_entity": false
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 9,
+              "chemistry": 4
+            },
+            "primary_subject": "physics",
+            "secondary_subjects": [
+              "chemistry"
+            ],
+            "inherited_from_history": false
+          }
+        }
+      },
+      "current": {
+        "id": "q249",
+        "question": "Một pin có suất điện động do phản ứng hóa học tạo ra. Suất điện động này khác gì với hiệu điện thế giữa hai cực khi pin đang dùng?",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "physics",
+          "intent": "explain_concept",
+          "target_slm": "physics_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "chemistry"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "chemistry",
+          "secondary_subjects": [
+            "physics"
+          ],
+          "intent": "unknown",
+          "target_slm": "chemistry_slm",
+          "confidence": 0.45,
+          "need_clarification": false,
+          "reason": "Interdisciplinary question: primary=chemistry, secondary=physics, intent=unknown.",
+          "topic": "chemistry.reactions",
+          "trace": {
+            "topic": "chemistry.reactions",
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.electricity.circuits.strong_term.02_hieu_ien_the",
+                "label": "physics",
+                "topic": "physics.electricity.circuits",
+                "source": "strong_term",
+                "matched_text": "hiệu điện thế",
+                "start": 85,
+                "end": 98,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.electricity.circuits.strong_term.07_suat_ien_ong",
+                "label": "physics",
+                "topic": "physics.electricity.circuits",
+                "source": "strong_term",
+                "matched_text": "suất điện động",
+                "start": 11,
+                "end": 25,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.electricity.circuits.strong_term.07_suat_ien_ong",
+                "label": "physics",
+                "topic": "physics.electricity.circuits",
+                "source": "strong_term",
+                "matched_text": "suất điện động",
+                "start": 54,
+                "end": 68,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.strong_term.01_phan_ung_hoa_hoc",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "strong_term",
+                "matched_text": "phản ứng hóa học",
+                "start": 29,
+                "end": 45,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.support_term.01_phan_ung",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "support_term",
+                "matched_text": "phản ứng",
+                "start": 29,
+                "end": 37,
+                "score": 1,
+                "is_entity": false
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 9,
+              "chemistry": 4
+            },
+            "primary_subject": "chemistry",
+            "secondary_subjects": [
+              "physics"
+            ],
+            "inherited_from_history": false
+          }
+        }
+      }
+    }
+  ]
+}
