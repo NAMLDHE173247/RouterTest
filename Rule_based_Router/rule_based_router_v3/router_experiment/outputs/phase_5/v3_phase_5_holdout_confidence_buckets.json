@@ -1,0 +1,67 @@
+{
+  "sample_count": 20,
+  "buckets": [
+    {
+      "bucket": "<0.50",
+      "count": 6,
+      "mean_confidence": 0.3717,
+      "primary_accuracy": 0.6667,
+      "intent_accuracy": 0.6667,
+      "target_accuracy": 0.6667,
+      "clarification_accuracy": 0.6667
+    },
+    {
+      "bucket": "0.50-0.59",
+      "count": 2,
+      "mean_confidence": 0.545,
+      "primary_accuracy": 1.0,
+      "intent_accuracy": 0.5,
+      "target_accuracy": 1.0,
+      "clarification_accuracy": 1.0
+    },
+    {
+      "bucket": "0.60-0.69",
+      "count": 0
+    },
+    {
+      "bucket": "0.70-0.79",
+      "count": 3,
+      "mean_confidence": 0.7533,
+      "primary_accuracy": 1.0,
+      "intent_accuracy": 0.3333,
+      "target_accuracy": 1.0,
+      "clarification_accuracy": 1.0
+    },
+    {
+      "bucket": "0.80-0.89",
+      "count": 2,
+      "mean_confidence": 0.8,
+      "primary_accuracy": 1.0,
+      "intent_accuracy": 1.0,
+      "target_accuracy": 1.0,
+      "clarification_accuracy": 1.0
+    },
+    {
+      "bucket": ">=0.90",
+      "count": 7,
+      "mean_confidence": 0.9214,
+      "primary_accuracy": 1.0,
+      "intent_accuracy": 0.8571,
+      "target_accuracy": 1.0,
+      "clarification_accuracy": 1.0
+    }
+  ],
+  "ece": {
+    "primary": 0.2185,
+    "intent": 0.1985,
+    "target": 0.2185,
+    "clarification": 0.2185
+  },
+  "brier": {
+    "primary_subject": 0.1256,
+    "intent": 0.2316,
+    "target_slm": 0.1256,
+    "need_clarification": 0.1256
+  },
+  "calibration_claim": "not_calibrated; measured only; no post-hoc calibration was applied"
+}
