@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 class RouterDecision(BaseModel):
     primary_subject: str
@@ -9,6 +9,12 @@ class RouterDecision(BaseModel):
     confidence: float
     need_clarification: bool
     reason: str
+    router_id: Optional[str] = None
+    router_family: Optional[str] = None
+    router_version: Optional[str] = None
+    topic: Optional[str] = None
+    reason_code: Optional[str] = None
+    trace: Optional[Dict[str, Any]] = None
 
 class RouterRuntime(BaseModel):
     router_type: Optional[str] = None
@@ -34,6 +40,10 @@ class RouterInfo(BaseModel):
     id: str
     name: str
     status: str
+    family: Optional[str] = None
+    version: Optional[str] = None
+    capabilities: Optional[Dict[str, bool]] = None
+    description: Optional[str] = None
 
 class CompareRequest(BaseModel):
     router_ids: List[str] = ["rule_v0", "rule_v1", "rule_v2"]

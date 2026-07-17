@@ -102,6 +102,7 @@ export default function RouterComparison({ routers }: { routers: RouterInfo[] })
     { id: 'rule_v0', name: 'Rule-based Router V0', enabled: true },
     { id: 'rule_v1', name: 'Rule-based Router V1', enabled: true },
     { id: 'rule_v2', name: 'Rule-based Router V2', enabled: true },
+    { id: 'rule_v3', name: 'Rule-based Router V3 (Phase 0)', enabled: true },
     { id: 'qwen_v0', name: 'Qwen Router V0 (GPU Service)', enabled: true },
     { id: 'hybrid', name: 'Hybrid Router', enabled: false }
   ];

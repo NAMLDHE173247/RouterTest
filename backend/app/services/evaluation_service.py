@@ -49,20 +49,31 @@ class EvaluationService:
         metrics_dict = {}
         all_errors = []
         
-        eval_fields = ["primary_subject", "intent", "target_slm", "need_clarification"]
+        eval_fields = [
+            "primary_subject",
+            "secondary_subjects",
+            "intent",
+            "target_slm",
+            "need_clarification",
+        ]
         
         for rid in router_ids:
             if rid not in routing_service.adapters:
                 continue
                 
-            adapter = routing_service.adapters[rid]
+            service = routing_service._get_service(rid)
             
             correct_ps = 0
             correct_intent = 0
             correct_slm = 0
             correct_nc = 0
             exact_matches = 0
+            secondary_exact_matches = 0
+            secondary_tp = 0
+            secondary_fp = 0
+            secondary_fn = 0
             total_time = 0.0
+            case_stats = {}
             
             for row in records:
                 question = row.get("question", "")
@@ -70,7 +81,7 @@ class EvaluationService:
                 
                 # Evaluate
                 try:
-                    res = adapter.route(question=question, history=history)
+                    res = service.route(question=question, history=history)
                     decision = res.decision.model_dump()
                     latency = res.runtime.latency_ms
                 except Exception as e:
@@ -79,32 +90,59 @@ class EvaluationService:
                     latency = 0.0
                 
                 total_time += latency
+
+                case_type = row.get("case_type", "unknown")
+                case_stat = case_stats.setdefault(case_type, {
+                    "total_samples": 0,
+                    "primary_subject_correct": 0,
+                    "intent_correct": 0,
+                    "target_slm_correct": 0,
+                    "need_clarification_correct": 0,
+                    "full_exact_match_correct": 0,
+                })
+                case_stat["total_samples"] += 1
                 
                 # Compare
                 wrong_fields = []
                 
                 if decision.get("primary_subject") == row.get("primary_subject"):
                     correct_ps += 1
+                    case_stat["primary_subject_correct"] += 1
                 else:
                     wrong_fields.append("primary_subject")
                     
                 if decision.get("intent") == row.get("intent"):
                     correct_intent += 1
+                    case_stat["intent_correct"] += 1
                 else:
                     wrong_fields.append("intent")
                     
                 if decision.get("target_slm") == row.get("target_slm"):
                     correct_slm += 1
+                    case_stat["target_slm_correct"] += 1
                 else:
                     wrong_fields.append("target_slm")
                     
                 if decision.get("need_clarification") == row.get("need_clarification"):
                     correct_nc += 1
+                    case_stat["need_clarification_correct"] += 1
                 else:
                     wrong_fields.append("need_clarification")
                     
+                gold_secondary = set(row.get("secondary_subjects", []))
+                predicted_secondary = set(decision.get("secondary_subjects", []))
+                if gold_secondary == predicted_secondary:
+                    secondary_exact_matches += 1
+                secondary_tp += len(gold_secondary & predicted_secondary)
+                secondary_fp += len(predicted_secondary - gold_secondary)
+                secondary_fn += len(gold_secondary - predicted_secondary)
+
+                if gold_secondary != predicted_secondary:
+                    wrong_fields.append("secondary_subjects")
+
                 if len(wrong_fields) == 0:
                     exact_matches += 1
+                    case_stat["full_exact_match_correct"] += 1
                 else:
                     # Log error
                     all_errors.append(ErrorItem(
@@ -117,6 +155,24 @@ class EvaluationService:
                         prediction={k: decision.get(k) for k in eval_fields},
                         wrong_fields=wrong_fields
                     ))
+
+            def accuracy_for(correct: int, denominator: int) -> float:
+                return correct / denominator if denominator else 0.0
+
+            precision = secondary_tp / (secondary_tp + secondary_fp) if secondary_tp + secondary_fp else 0.0
+            recall = secondary_tp / (secondary_tp + secondary_fn) if secondary_tp + secondary_fn else 0.0
+            f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
+            case_metrics = {
+                case_type: {
+                    "total_samples": values["total_samples"],
+                    "primary_subject_accuracy": accuracy_for(values["primary_subject_correct"], values["total_samples"]),
+                    "intent_accuracy": accuracy_for(values["intent_correct"], values["total_samples"]),
+                    "target_slm_accuracy": accuracy_for(values["target_slm_correct"], values["total_samples"]),
+                    "need_clarification_accuracy": accuracy_for(values["need_clarification_correct"], values["total_samples"]),
+                    "full_exact_match_accuracy": accuracy_for(values["full_exact_match_correct"], values["total_samples"]),
+                }
+                for case_type, values in case_stats.items()
+            }
             
             # Aggregate metrics
             total = len(records)
@@ -128,7 +184,13 @@ class EvaluationService:
                 need_clarification_accuracy=correct_nc / total if total else 0,
                 exact_match_accuracy=exact_matches / total if total else 0,
                 total_errors=total - exact_matches,
-                average_latency_ms=total_time / total if total else 0
+                average_latency_ms=total_time / total if total else 0,
+                secondary_subject_exact_set_accuracy=secondary_exact_matches / total if total else 0,
+                secondary_subject_micro_precision=precision,
+                secondary_subject_micro_recall=recall,
+                secondary_subject_micro_f1=f1,
+                full_exact_match_accuracy=exact_matches / total if total else 0,
+                metrics_by_case_type=case_metrics,
             )
             
         # Save output to disk

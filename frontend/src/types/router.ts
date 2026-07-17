@@ -28,7 +28,7 @@ export interface RouterResult {
   error: RouterError | null;
 }
 
-export type RouterType = "rule_v2" | "qwen_v0" | "hybrid";
+export type RouterType = "rule_v0" | "rule_v1" | "rule_v2" | "rule_v3" | "qwen_v0" | "hybrid";
 
 export interface RouteRequest {
   router_id: string;
@@ -47,6 +47,10 @@ export interface RouterInfo {
   id: string;
   name: string;
   status: string;
+  family?: string;
+  version?: string;
+  capabilities?: Record<string, boolean>;
+  description?: string;
 }
 
 export interface HealthResponse {
@@ -73,6 +77,12 @@ export interface RouterMetrics {
   exact_match_accuracy: number;
   total_errors: number;
   average_latency_ms: number;
+  secondary_subject_exact_set_accuracy?: number;
+  secondary_subject_micro_precision?: number;
+  secondary_subject_micro_recall?: number;
+  secondary_subject_micro_f1?: number;
+  full_exact_match_accuracy?: number;
+  metrics_by_case_type?: Record<string, Record<string, number>>;
 }
 
 export interface ErrorItem {

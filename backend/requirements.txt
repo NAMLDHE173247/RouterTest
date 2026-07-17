@@ -3,3 +3,6 @@ uvicorn
 pydantic
 pydantic-settings
 requests
+flashtext
+python-multipart
+pytest

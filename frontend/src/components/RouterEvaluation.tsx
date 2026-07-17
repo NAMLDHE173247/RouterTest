@@ -117,6 +117,7 @@ export default function RouterEvaluation({ routers }: { routers: RouterInfo[] })
     { id: 'rule_v0', name: 'Rule-based Router V0', status: 'ready' },
     { id: 'rule_v1', name: 'Rule-based Router V1', status: 'ready' },
     { id: 'rule_v2', name: 'Rule-based Router V2', status: 'ready' },
+    { id: 'rule_v3', name: 'Rule-based Router V3 (Phase 0)', status: 'ready' },
     { id: 'qwen_v0', name: 'Qwen Router V0 (GPU Service)', status: 'ready' },
     { id: 'hybrid', name: 'Hybrid Router', status: 'ready' } // Handled manually below
   ];

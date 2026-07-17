@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import List, Dict, Any, Optional
 
 class EvaluationRequest(BaseModel):
@@ -15,6 +15,12 @@ class RouterMetrics(BaseModel):
     exact_match_accuracy: float
     total_errors: int
     average_latency_ms: float
+    secondary_subject_exact_set_accuracy: float = 0.0
+    secondary_subject_micro_precision: float = 0.0
+    secondary_subject_micro_recall: float = 0.0
+    secondary_subject_micro_f1: float = 0.0
+    full_exact_match_accuracy: float = 0.0
+    metrics_by_case_type: Dict[str, Dict[str, Any]] = Field(default_factory=dict)
 
 class EvaluationMetrics(BaseModel):
     run_id: str
