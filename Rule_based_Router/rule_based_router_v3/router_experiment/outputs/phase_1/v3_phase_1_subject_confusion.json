@@ -1,0 +1,42 @@
+{
+  "metadata": {
+    "git_commit": "0e5ad91e843d813136a9a4b8cfaf76ca97d5ea1e",
+    "dataset_sha256": "5d25fb93a173733033a632fec3ca7bfc5b29fffb0db2a8b3676ee919301ec5cf",
+    "config_sha256": "be5256b18aeb58b6d78a1ffe9da28c48d061e618ecf3a9b6c0e8f3840b0e9ea0",
+    "config_files": [
+      "src\\rules.py",
+      "src\\models.py",
+      "src\\topic_ontology.py",
+      "src\\topic_resolver.py"
+    ],
+    "generated_at_utc": "2026-07-17T16:53:24.973985+00:00",
+    "phase": "phase_1"
+  },
+  "items": [
+    {
+      "gold": "chemistry",
+      "predicted": "physics",
+      "count": 12
+    },
+    {
+      "gold": "chemistry",
+      "predicted": "unknown",
+      "count": 11
+    },
+    {
+      "gold": "physics",
+      "predicted": "unknown",
+      "count": 6
+    },
+    {
+      "gold": "physics",
+      "predicted": "chemistry",
+      "count": 6
+    },
+    {
+      "gold": "chemistry",
+      "predicted": "math",
+      "count": 1
+    }
+  ]
+}

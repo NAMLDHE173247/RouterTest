@@ -1,0 +1,347 @@
+{
+  "error_count": 228,
+  "errors_by_case_type": {
+    "single_turn": 116,
+    "multi_turn": 12,
+    "interdisciplinary": 62,
+    "out_of_scope": 24,
+    "ambiguous": 14
+  },
+  "errors_by_field": {
+    "primary_subject": 70,
+    "target_slm": 96,
+    "need_clarification": 72,
+    "intent": 90,
+    "secondary_subjects": 130
+  },
+  "subject_confusion": [
+    {
+      "gold": "math",
+      "predicted": "unknown",
+      "count": 25
+    },
+    {
+      "gold": "physics",
+      "predicted": "chemistry",
+      "count": 20
+    },
+    {
+      "gold": "physics",
+      "predicted": "unknown",
+      "count": 16
+    },
+    {
+      "gold": "chemistry",
+      "predicted": "unknown",
+      "count": 5
+    },
+    {
+      "gold": "chemistry",
+      "predicted": "physics",
+      "count": 2
+    },
+    {
+      "gold": "chemistry",
+      "predicted": "math",
+      "count": 2
+    }
+  ],
+  "intent_confusion": [
+    {
+      "gold": "explain_concept",
+      "predicted": "unknown",
+      "count": 35
+    },
+    {
+      "gold": "ask_follow_up",
+      "predicted": "unknown",
+      "count": 10
+    },
+    {
+      "gold": "ask_follow_up",
+      "predicted": "solve_problem",
+      "count": 8
+    },
+    {
+      "gold": "unknown",
+      "predicted": "give_hint",
+      "count": 8
+    },
+    {
+      "gold": "solve_problem",
+      "predicted": "unknown",
+      "count": 6
+    },
+    {
+      "gold": "explain_concept",
+      "predicted": "solve_problem",
+      "count": 3
+    },
+    {
+      "gold": "unknown",
+      "predicted": "explain_concept",
+      "count": 3
+    },
+    {
+      "gold": "diagnose_error",
+      "predicted": "check_answer",
+      "count": 2
+    },
+    {
+      "gold": "diagnose_error",
+      "predicted": "explain_concept",
+      "count": 2
+    },
+    {
+      "gold": "check_answer",
+      "predicted": "diagnose_error",
+      "count": 2
+    },
+    {
+      "gold": "unknown",
+      "predicted": "ask_follow_up",
+      "count": 2
+    },
+    {
+      "gold": "give_hint",
+      "predicted": "unknown",
+      "count": 2
+    },
+    {
+      "gold": "solve_problem",
+      "predicted": "diagnose_error",
+      "count": 1
+    },
+    {
+      "gold": "give_hint",
+      "predicted": "solve_problem",
+      "count": 1
+    },
+    {
+      "gold": "check_answer",
+      "predicted": "solve_problem",
+      "count": 1
+    },
+    {
+      "gold": "diagnose_error",
+      "predicted": "unknown",
+      "count": 1
+    },
+    {
+      "gold": "solve_problem",
+      "predicted": "explain_concept",
+      "count": 1
+    },
+    {
+      "gold": "check_answer",
+      "predicted": "unknown",
+      "count": 1
+    },
+    {
+      "gold": "unknown",
+      "predicted": "solve_problem",
+      "count": 1
+    }
+  ],
+  "target_confusion": [
+    {
+      "gold": "math_slm",
+      "predicted": "ask_clarification",
+      "count": 25
+    },
+    {
+      "gold": "general_tutor",
+      "predicted": "ask_clarification",
+      "count": 24
+    },
+    {
+      "gold": "physics_slm",
+      "predicted": "chemistry_slm",
+      "count": 20
+    },
+    {
+      "gold": "physics_slm",
+      "predicted": "ask_clarification",
+      "count": 17
+    },
+    {
+      "gold": "chemistry_slm",
+      "predicted": "ask_clarification",
+      "count": 6
+    },
+    {
+      "gold": "chemistry_slm",
+      "predicted": "physics_slm",
+      "count": 2
+    },
+    {
+      "gold": "chemistry_slm",
+      "predicted": "math_slm",
+      "count": 2
+    }
+  ],
+  "primary_error_taxonomy": [
+    {
+      "cause": "weak_or_missing_topic_evidence",
+      "count": 31,
+      "examples": [
+        {
+          "id": "q002",
+          "question": "Em chưa hiểu vì sao khi chuyển vế thì phải đổi dấu, thầy cô hay nói nhưng em vẫn bị nhầm.",
+          "gold": "math",
+          "predicted": "unknown"
+        },
+        {
+          "id": "q005",
+          "question": "Làm sao để nhận biết một dãy số là cấp số cộng ạ?",
+          "gold": "math",
+          "predicted": "unknown"
+        },
+        {
+          "id": "q011",
+          "question": "Cho hình chóp S.ABCD có đáy là hình vuông, em cần tính thể tích khi biết cạnh đáy 4 cm và chiều cao 6 cm.",
+          "gold": "math",
+          "predicted": "unknown"
+        },
+        {
+          "id": "q017",
+          "question": "Vì sao khi xe phanh gấp thì người ngồi trên xe bị chúi về phía trước?",
+          "gold": "physics",
+          "predicted": "unknown"
+        },
+        {
+          "id": "q019",
+          "question": "Em tính công cơ học bằng F chia s, có đúng không hay phải nhân ạ?",
+          "gold": "physics",
+          "predicted": "unknown"
+        }
+      ]
+    },
+    {
+      "cause": "formula_or_unit_not_covered",
+      "count": 14,
+      "examples": [
+        {
+          "id": "q006",
+          "question": "Tính tổng 20 số hạng đầu của cấp số cộng có u1 = 3 và công sai d = 2.",
+          "gold": "math",
+          "predicted": "unknown"
+        },
+        {
+          "id": "q013",
+          "question": "Giải hệ phương trình: x + y = 7 và 2x - y = 5.",
+          "gold": "math",
+          "predicted": "unknown"
+        },
+        {
+          "id": "q051",
+          "question": "Giải phương trình 3x - 7 = 11 giúp em với.",
+          "gold": "math",
+          "predicted": "unknown"
+        },
+        {
+          "id": "q061",
+          "question": "Em chưa hiểu công thức khoảng cách từ một điểm đến một đường thẳng trong mặt phẳng.",
+          "gold": "math",
+          "predicted": "unknown"
+        },
+        {
+          "id": "q065",
+          "question": "Số phức z = 3 - 4i có môđun bằng bao nhiêu?",
+          "gold": "math",
+          "predicted": "unknown"
+        }
+      ]
+    },
+    {
+      "cause": "wrong_topic_or_subject_competition",
+      "count": 13,
+      "examples": [
+        {
+          "id": "q096",
+          "question": "Một quả bóng bay chứa khí hidro bay lên cao. Hãy giải thích hiện tượng này dựa vào lực đẩy Ác-si-mét và khối lượng mol của khí.",
+          "gold": "physics",
+          "predicted": "chemistry"
+        },
+        {
+          "id": "q097",
+          "question": "Khi đốt cháy xăng trong động cơ xe máy, năng lượng hóa học chuyển hóa thành những dạng năng lượng nào trong Vật lý?",
+          "gold": "chemistry",
+          "predicted": "physics"
+        },
+        {
+          "id": "q130",
+          "question": "Một tia sáng truyền từ không khí vào nước thì tia khúc xạ lệch về phía pháp tuyến hay ra xa pháp tuyến?",
+          "gold": "physics",
+          "predicted": "chemistry"
+        },
+        {
+          "id": "q201",
+          "question": "Một xe ô tô đốt cháy xăng để chuyển động. Em muốn hiểu năng lượng hóa học trong xăng chuyển thành động năng của xe như thế nào.",
+          "gold": "chemistry",
+          "predicted": "physics"
+        },
+        {
+          "id": "q215",
+          "question": "Một chất khí có khối lượng mol nhỏ hơn không khí thì có nhất định bay lên không? Giải thích bằng lực nổi và mật độ khí.",
+          "gold": "physics",
+          "predicted": "chemistry"
+        }
+      ]
+    },
+    {
+      "cause": "entity_dominance_over_physics",
+      "count": 10,
+      "examples": [
+        {
+          "id": "q048",
+          "question": "Một bình khí CO2 có thể tích 2 lít ở nhiệt độ không đổi, áp suất tăng gấp đôi thì số mol khí thay đổi thế nào theo phương trình khí lí tưởng?",
+          "gold": "physics",
+          "predicted": "chemistry"
+        },
+        {
+          "id": "q147",
+          "question": "Một bình kín chứa khí O2, nếu tăng nhiệt độ thì áp suất tăng. Em muốn hiểu bằng cả chuyển động phân tử và kiến thức khí trong Hóa học.",
+          "gold": "physics",
+          "predicted": "chemistry"
+        },
+        {
+          "id": "q202",
+          "question": "Một bình khí có thể tích 5 lít chứa O2 ở áp suất 2 atm. Nếu coi khí lí tưởng thì số mol khí liên quan đến công thức nào?",
+          "gold": "physics",
+          "predicted": "chemistry"
+        },
+        {
+          "id": "q208",
+          "question": "Một bình kín chứa khí CO2, khi tăng nhiệt độ thì áp suất tăng. Hiện tượng này liên quan đến chuyển động phân tử và lượng chất như thế nào?",
+          "gold": "physics",
+          "predicted": "chemistry"
+        },
+        {
+          "id": "q209",
+          "question": "Cho 2 mol khí H2 trong bình kín ở nhiệt độ không đổi. Nếu thể tích giảm một nửa thì áp suất thay đổi thế nào theo định luật khí?",
+          "gold": "physics",
+          "predicted": "chemistry"
+        }
+      ]
+    },
+    {
+      "cause": "interdisciplinary_topic_competition",
+      "count": 2,
+      "examples": [
+        {
+          "id": "q124",
+          "question": "Hiện tượng cảm ứng điện từ là gì, giải thích dễ hiểu giúp em.",
+          "gold": "physics",
+          "predicted": "unknown"
+        },
+        {
+          "id": "q205",
+          "question": "Một bóng bay chứa khí heli bay lên. Vì sao khối lượng mol của khí lại liên quan đến lực đẩy Ác-si-mét?",
+          "gold": "physics",
+          "predicted": "chemistry"
+        }
+      ]
+    }
+  ]
+}

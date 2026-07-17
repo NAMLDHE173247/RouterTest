@@ -1,0 +1,77 @@
+{
+  "metadata": {
+    "git_commit": "0e5ad91e843d813136a9a4b8cfaf76ca97d5ea1e",
+    "dataset_sha256": "5d25fb93a173733033a632fec3ca7bfc5b29fffb0db2a8b3676ee919301ec5cf",
+    "config_sha256": "be5256b18aeb58b6d78a1ffe9da28c48d061e618ecf3a9b6c0e8f3840b0e9ea0",
+    "config_files": [
+      "src\\rules.py",
+      "src\\models.py",
+      "src\\topic_ontology.py",
+      "src\\topic_resolver.py"
+    ],
+    "generated_at_utc": "2026-07-17T16:53:24.973985+00:00",
+    "phase": "phase_1"
+  },
+  "phase": "phase_1",
+  "total_samples": 300,
+  "primary_subject_accuracy": 0.88,
+  "intent_accuracy": 0.7,
+  "target_slm_accuracy": 0.7933,
+  "need_clarification_accuracy": 0.8567,
+  "exact_match_accuracy": 0.5733,
+  "full_exact_match_accuracy": 0.3267,
+  "secondary_subject_exact_set_accuracy": 0.5867,
+  "secondary_subject_micro_precision": 0.5806,
+  "secondary_subject_micro_recall": 0.1216,
+  "secondary_subject_micro_f1": 0.2011,
+  "total_errors": 128,
+  "full_total_errors": 202,
+  "average_latency_ms": 2.8101,
+  "metrics_by_case_type": {
+    "single_turn": {
+      "total_samples": 168,
+      "primary_subject_accuracy": 0.9286,
+      "intent_accuracy": 0.8452,
+      "target_slm_accuracy": 0.9286,
+      "need_clarification_accuracy": 0.9405,
+      "exact_match_accuracy": 0.7976,
+      "full_exact_match_accuracy": 0.4524
+    },
+    "multi_turn": {
+      "total_samples": 12,
+      "primary_subject_accuracy": 1.0,
+      "intent_accuracy": 0.0,
+      "target_slm_accuracy": 1.0,
+      "need_clarification_accuracy": 1.0,
+      "exact_match_accuracy": 0.0,
+      "full_exact_match_accuracy": 0.0
+    },
+    "interdisciplinary": {
+      "total_samples": 62,
+      "primary_subject_accuracy": 0.6129,
+      "intent_accuracy": 0.5484,
+      "target_slm_accuracy": 0.5806,
+      "need_clarification_accuracy": 0.8548,
+      "exact_match_accuracy": 0.2903,
+      "full_exact_match_accuracy": 0.0323
+    },
+    "ambiguous": {
+      "total_samples": 29,
+      "primary_subject_accuracy": 1.0,
+      "intent_accuracy": 0.5172,
+      "target_slm_accuracy": 1.0,
+      "need_clarification_accuracy": 1.0,
+      "exact_match_accuracy": 0.5172,
+      "full_exact_match_accuracy": 0.5172
+    },
+    "out_of_scope": {
+      "total_samples": 29,
+      "primary_subject_accuracy": 1.0,
+      "intent_accuracy": 0.6552,
+      "target_slm_accuracy": 0.1724,
+      "need_clarification_accuracy": 0.1724,
+      "exact_match_accuracy": 0.1724,
+      "full_exact_match_accuracy": 0.1724
+    }
+  }
+}
