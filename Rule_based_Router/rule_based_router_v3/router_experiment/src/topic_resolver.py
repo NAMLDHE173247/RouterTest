@@ -18,6 +18,53 @@ SOURCE_WEIGHTS = {
     "entity": 0,
     "entity_context": 4,
 }
+NEAR_TIE_MARGIN = 1
+
+
+OWNERSHIP_OVERRIDES = (
+    {
+        "rule_id": "subject.physics.override.buoyancy_gas_context",
+        "pattern": r"(?:bóng bay|khí hidro|khí heli).{0,100}(?:lực đẩy|lực nổi|ác[- ]si[- ]mét|bay lên)|(?:lực đẩy|lực nổi|ác[- ]si[- ]mét).{0,100}(?:bóng bay|khí hidro|khí heli)",
+        "final_winner": "physics",
+        "reason": "The gas is used in a buoyancy/Archimedes context, so Physics owns the decision.",
+    },
+    {
+        "rule_id": "subject.chemistry.override.fuel_combustion_energy",
+        "pattern": r"xăng.{0,80}(?:năng lượng hóa học|động năng)|(?:năng lượng hóa học|động năng).{0,80}xăng",
+        "final_winner": "chemistry",
+        "reason": "The requested relationship is the chemical energy of fuel combustion; vehicle motion is its consequence.",
+    },
+    {
+        "rule_id": "subject.physics.override.gas_work_piston",
+        "pattern": r"(?:số mol.{0,80}công khí|công khí.{0,80}số mol|đẩy piston).{0,60}(?:h2|khí|mol)?",
+        "final_winner": "physics",
+        "reason": "The question asks for gas work and piston mechanics, so Physics owns the decision.",
+    },
+    {
+        "rule_id": "subject.chemistry.override.chemical_thermal_reaction",
+        "pattern": r"(?:hòa tan muối|năng lượng phản ứng hóa học).{0,100}(?:nước lạnh|nhiệt học|nhiệt độ)",
+        "final_winner": "chemistry",
+        "reason": "The question asks about chemical reaction energy during dissolution; temperature is the observed effect.",
+    },
+    {
+        "rule_id": "subject.chemistry.override.combustion_stoichiometry",
+        "pattern": r"(?:đốt cháy|phản ứng cháy).{0,60}(?:\bmol\b|ch4|h2|nước)",
+        "final_winner": "chemistry",
+        "reason": "Combustion stoichiometry owns the question; heat is a consequence, not the primary subject.",
+    },
+    {
+        "rule_id": "subject.physics.override.thermal_calculation",
+        "pattern": r"lượng nhiệt.{0,80}(?:bay hơi|đun).{0,80}(?:phản ứng cháy|bếp gas|gas)",
+        "final_winner": "physics",
+        "reason": "The requested heat/phase-change calculation owns the question; combustion is contextual input.",
+    },
+    {
+        "rule_id": "subject.physics.override.electrical_potential_comparison",
+        "pattern": r"(?:suất điện động.{0,80}hiệu điện thế|hiệu điện thế.{0,80}suất điện động)",
+        "final_winner": "physics",
+        "reason": "The comparison is between electrical potential quantities, so Physics owns the decision.",
+    },
+)
 
 
 def _slug(value: str) -> str:
@@ -183,8 +230,19 @@ def _rank_subjects(matches: list[RuleMatch]):
     return sorted(ranked, key=lambda item: (item[2], item[0]), reverse=True)
 
 
+def _match_ownership_override(text: str) -> dict | None:
+    candidates = []
+    for override in OWNERSHIP_OVERRIDES:
+        for match in _find_pattern_matches(text, override["pattern"]):
+            candidates.append((len(match.group(0)), override))
+    if not candidates:
+        return None
+    return max(candidates, key=lambda item: (item[0], item[1]["rule_id"]))[1]
+
+
 def resolve_subject(question: str, history_subject: str | None = None) -> TopicResolution:
     matches = extract_topic_matches(question)
+    normalized_question = normalize_text(question)
     subject_scores = {subject: 0 for subject in VALID_SUBJECTS}
     for subject in VALID_SUBJECTS:
         subject_scores[subject] = sum(
@@ -200,20 +258,57 @@ def resolve_subject(question: str, history_subject: str | None = None) -> TopicR
     primary_subject = "unknown"
     top_score = 0
     second_score = 0
+    ownership_override = None
     if ranked_subjects:
-        best = ranked_subjects[0]
-        tied = len(ranked_subjects) > 1 and ranked_subjects[1][2] == best[2]
-        if not tied:
-            primary_subject, top_score = best[0], best[1]
-            second_score = ranked_subjects[1][1] if len(ranked_subjects) > 1 else 0
-        elif history_subject in VALID_SUBJECTS:
+        score_ranked = sorted(ranked_subjects, key=lambda item: (item[1], item[0]), reverse=True)
+        score_winner, score_winner_score = score_ranked[0][0], score_ranked[0][1]
+        second_score = score_ranked[1][1] if len(score_ranked) > 1 else 0
+        score_margin = score_winner_score - second_score
+        # The score winner is the default. Tie-breaks are only consulted for
+        # equal scores; a near tie remains score-owned unless an explicit
+        # ownership rule below overrides it.
+        primary_subject, top_score = score_winner, score_winner_score
+        if score_margin == 0:
+            tied = [item for item in score_ranked if item[1] == score_winner_score]
+            best_signature = max(item[2] for item in tied)
+            signature_winners = [item[0] for item in tied if item[2] == best_signature]
+            if len(signature_winners) == 1:
+                primary_subject = signature_winners[0]
+            else:
+                primary_subject = "unknown"
+                top_score = 0
+        elif score_margin <= NEAR_TIE_MARGIN:
+            # This branch is intentionally observable and configurable, but
+            # does not silently invert the score winner.
+            primary_subject = score_winner
+        if primary_subject == "unknown" and history_subject in VALID_SUBJECTS:
             primary_subject = history_subject
             top_score = subject_scores[history_subject]
-            second_score = max(
-                score for subject, score, _ in ranked_subjects if subject != history_subject
-            )
     elif history_subject in VALID_SUBJECTS:
         primary_subject = history_subject
+
+    override_rule = _match_ownership_override(normalized_question)
+    if override_rule:
+        score_winner = max(
+            VALID_SUBJECTS, key=lambda subject: (subject_scores[subject], subject)
+        )
+        final_winner = override_rule["final_winner"]
+        runner_up_score = max(
+            (subject_scores[subject] for subject in VALID_SUBJECTS if subject != score_winner),
+            default=0,
+        )
+        ownership_override = {
+            "rule_id": override_rule["rule_id"],
+            "reason": override_rule["reason"],
+            "score_winner": score_winner,
+            "score_winner_score": subject_scores[score_winner],
+            "final_winner": final_winner,
+            "final_winner_score": subject_scores[final_winner],
+            "decision_margin": subject_scores[score_winner] - runner_up_score,
+            "override_score_delta": abs(subject_scores[score_winner] - subject_scores[final_winner]),
+        }
+        primary_subject = final_winner
+        top_score = subject_scores[final_winner]
 
     subject_topics = []
     if primary_subject != "unknown":
@@ -252,4 +347,5 @@ def resolve_subject(question: str, history_subject: str | None = None) -> TopicR
         topic=primary_topic,
         matched_terms=[match.matched_text for match in primary_matches],
         matches=matches,
+        ownership_override=ownership_override,
     )

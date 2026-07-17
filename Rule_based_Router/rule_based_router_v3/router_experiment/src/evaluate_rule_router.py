@@ -87,6 +87,8 @@ def evaluate(
     phase: str = "phase_0",
     baseline_dir: str | None = None,
     baseline_phase: str = "phase_0",
+    additional_baseline_dir: str | None = None,
+    additional_baseline_phase: str = "phase_0",
     config_paths: list[str] | None = None,
 ) -> dict[str, Any]:
     dataset = load_jsonl(dataset_path)
@@ -245,6 +247,7 @@ def evaluate(
         "total_errors": total - core_exact,
         "full_total_errors": total - full_exact,
         "average_latency_ms": round(total_latency / total, 4) if total else 0.0,
+        "median_latency_ms": percentile(latencies, 50),
         "p95_latency_ms": percentile(latencies, 95),
         "metrics_by_gold_subject": {
             subject: {
@@ -302,6 +305,40 @@ def evaluate(
     save_json(fixed_path, {"metadata": metadata, "items": fixed_errors})
     save_json(regressions_path, {"metadata": metadata, "items": regressions})
     save_json(comparison_path, comparison)
+    if additional_baseline_dir:
+        additional_records = load_prediction_records(
+            os.path.join(additional_baseline_dir, f"v3_{additional_baseline_phase}_predictions.jsonl")
+        )
+        additional_fixed = []
+        additional_regressions = []
+        for sample_id, current in current_records.items():
+            baseline = additional_records.get(sample_id)
+            if not baseline:
+                continue
+            gold_subject = current["gold"].get("primary_subject")
+            baseline_wrong = baseline["prediction"].get("primary_subject") != gold_subject
+            current_wrong = current["prediction"].get("primary_subject") != gold_subject
+            if baseline_wrong and not current_wrong:
+                additional_fixed.append({"id": sample_id, "baseline": baseline, "current": current})
+            elif not baseline_wrong and current_wrong:
+                additional_regressions.append({"id": sample_id, "baseline": baseline, "current": current})
+        additional_prefix = f"{prefix}_comparison_with_{additional_baseline_phase}"
+        save_json(os.path.join(output_dir, f"{prefix}_fixed_errors_vs_{additional_baseline_phase}.json"), {
+            "metadata": metadata, "baseline_dir": additional_baseline_dir,
+            "baseline_phase": additional_baseline_phase, "items": additional_fixed,
+        })
+        save_json(os.path.join(output_dir, f"{prefix}_regressions_vs_{additional_baseline_phase}.json"), {
+            "metadata": metadata, "baseline_dir": additional_baseline_dir,
+            "baseline_phase": additional_baseline_phase, "items": additional_regressions,
+        })
+        save_json(os.path.join(output_dir, f"{additional_prefix}.json"), {
+            "metadata": metadata,
+            "baseline_dir": additional_baseline_dir,
+            "baseline_phase": additional_baseline_phase,
+            "baseline_available": bool(additional_records),
+            "fixed_primary_subject_errors": len(additional_fixed),
+            "new_primary_subject_regressions": len(additional_regressions),
+        })
     save_json(coverage_path, {
         "metadata": metadata,
         "total_samples": total,
@@ -334,6 +371,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output-dir", default=None)
     parser.add_argument("--baseline-dir", default=None)
     parser.add_argument("--baseline-phase", default="phase_0")
+    parser.add_argument("--additional-baseline-dir", default=None)
+    parser.add_argument("--additional-baseline-phase", default="phase_0")
     parser.add_argument("--config", action="append", default=None)
     return parser.parse_args()
 
@@ -342,4 +381,7 @@ if __name__ == "__main__":
     args = parse_args()
     output_dir = args.output_dir or os.path.join(EXPERIMENT_DIR, "outputs", args.phase)
     config_paths = args.config or [os.path.join(SCRIPT_DIR, "rules.py")]
-    evaluate(args.dataset, output_dir, args.phase, args.baseline_dir, args.baseline_phase, config_paths)
+    evaluate(
+        args.dataset, output_dir, args.phase, args.baseline_dir, args.baseline_phase,
+        args.additional_baseline_dir, args.additional_baseline_phase, config_paths,
+    )

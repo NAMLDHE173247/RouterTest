@@ -79,3 +79,48 @@ def test_rule_ids_are_unique_per_term_and_context_rule_is_explicit():
 
 def test_single_support_term_does_not_own_a_subject():
     assert route("áp suất").primary_subject == "unknown"
+
+
+def test_without_override_primary_is_score_argmax(monkeypatch):
+    matches = [
+        RuleMatch("subject.physics.test.one", "physics", "physics.test", "strong_term", "force", 0, 5, 3),
+        RuleMatch("subject.chemistry.test.one", "chemistry", "chemistry.test", "support_term", "reaction", 6, 14, 1),
+    ]
+    monkeypatch.setattr("topic_resolver.extract_topic_matches", lambda _question: matches)
+    resolution = route("synthetic no override")
+    assert resolution.ownership_override is None
+    assert resolution.primary_subject == max(resolution.subject_scores, key=resolution.subject_scores.get)
+
+
+@pytest.mark.parametrize(
+    ("sample_id", "subject", "rule_id"),
+    [
+        ("q213", "chemistry", "subject.chemistry.override.combustion_stoichiometry"),
+        ("q229", "chemistry", "subject.chemistry.override.combustion_stoichiometry"),
+        ("q240", "physics", "subject.physics.override.thermal_calculation"),
+        ("q249", "physics", "subject.physics.override.electrical_potential_comparison"),
+    ],
+)
+def test_explicit_ownership_override_is_traceable(sample_id, subject, rule_id):
+    rows = [json.loads(line) for line in DATASET_PATH.read_text(encoding="utf-8").splitlines() if line.strip()]
+    row = next(row for row in rows if row["id"] == sample_id)
+    resolution = route(row["question"])
+    override = resolution.trace()["ownership_override"]
+    assert resolution.primary_subject == subject
+    assert override["rule_id"] == rule_id
+    assert override["reason"]
+    assert override["score_winner"] in {"math", "physics", "chemistry"}
+    assert override["final_winner"] == subject
+    assert isinstance(override["decision_margin"], int)
+
+
+def test_no_silent_winner_inversion_across_dataset():
+    rows = [json.loads(line) for line in DATASET_PATH.read_text(encoding="utf-8").splitlines() if line.strip()]
+    for row in rows:
+        resolution = route(row["question"])
+        scores = resolution.subject_scores
+        winner = max(scores, key=scores.get)
+        max_score = scores[winner]
+        tied = [subject for subject, score in scores.items() if score == max_score]
+        if resolution.ownership_override is None and max_score >= 2 and len(tied) == 1:
+            assert resolution.primary_subject == winner, row["id"]

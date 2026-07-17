@@ -57,6 +57,7 @@ class TopicResolution:
     matched_terms: list[str] = field(default_factory=list)
     matches: list[RuleMatch] = field(default_factory=list)
     inherited_from_history: bool = False
+    ownership_override: Optional[dict] = None
 
     @property
     def is_interdisciplinary(self) -> bool:
@@ -70,4 +71,5 @@ class TopicResolution:
             "primary_subject": self.primary_subject,
             "secondary_subjects": self.secondary_subjects,
             "inherited_from_history": self.inherited_from_history,
+            "ownership_override": self.ownership_override,
         }
