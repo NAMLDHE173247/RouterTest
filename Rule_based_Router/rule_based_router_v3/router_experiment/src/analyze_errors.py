@@ -101,7 +101,7 @@ def analyze(error_path: str = DEFAULT_ERROR_PATH):
             for cause, count in primary_error_taxonomy.most_common()
         ],
     }
-    print(json.dumps(result, ensure_ascii=False, indent=2))
+    print(json.dumps(result, ensure_ascii=True, indent=2))
     return result
 
 
