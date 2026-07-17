@@ -1,0 +1,403 @@
+{
+  "error_count": 90,
+  "causes": [
+    {
+      "cause": "missing_strong_intent_phrase",
+      "count": 41,
+      "examples": [
+        {
+          "id": "q005",
+          "question": "Làm sao để nhận biết một dãy số là cấp số cộng ạ?",
+          "gold": "explain_concept",
+          "predicted": "unknown"
+        },
+        {
+          "id": "q013",
+          "question": "Giải hệ phương trình: x + y = 7 và 2x - y = 5.",
+          "gold": "solve_problem",
+          "predicted": "unknown"
+        },
+        {
+          "id": "q024",
+          "question": "Em chưa hiểu sự khác nhau giữa vận tốc trung bình và tốc độ trung bình.",
+          "gold": "explain_concept",
+          "predicted": "unknown"
+        },
+        {
+          "id": "q036",
+          "question": "Axit mạnh và axit yếu khác nhau như thế nào ạ?",
+          "gold": "explain_concept",
+          "predicted": "unknown"
+        },
+        {
+          "id": "q046",
+          "question": "Một học sinh hòa tan muối vào nước rồi đo nhiệt độ thấy nước lạnh đi. Hiện tượng này liên quan đến năng lượng phản ứng hóa học và nhiệt học như thế nào?",
+          "gold": "explain_concept",
+          "predicted": "unknown"
+        }
+      ]
+    },
+    {
+      "cause": "false_positive_intent_or_oos_veto_gap",
+      "count": 14,
+      "examples": [
+        {
+          "id": "q100",
+          "question": "Bạn gợi ý cho em vài món ăn sáng dễ làm trước khi đi học được không?",
+          "gold": "unknown",
+          "predicted": "give_hint"
+        },
+        {
+          "id": "q149",
+          "question": "Làm tiếp phần này giúp em với.",
+          "gold": "unknown",
+          "predicted": "ask_follow_up"
+        },
+        {
+          "id": "q252",
+          "question": "Em không hiểu đoạn này, giải thích giúp em với.",
+          "gold": "unknown",
+          "predicted": "explain_concept"
+        },
+        {
+          "id": "q254",
+          "question": "Tại sao lại ra đáp án đó?",
+          "gold": "unknown",
+          "predicted": "explain_concept"
+        },
+        {
+          "id": "q265",
+          "question": "Phần này thuộc bài nào vậy ạ?",
+          "gold": "unknown",
+          "predicted": "ask_follow_up"
+        }
+      ]
+    },
+    {
+      "cause": "follow_up_context_not_detected",
+      "count": 10,
+      "examples": [
+        {
+          "id": "q030",
+          "question": "Vậy trong bài vừa rồi, nếu bỏ qua ma sát thì cơ năng có được bảo toàn không?",
+          "gold": "ask_follow_up",
+          "predicted": "unknown"
+        },
+        {
+          "id": "q063",
+          "question": "Vậy nếu hàm số có đạo hàm âm trên một khoảng thì hàm số tăng hay giảm?",
+          "gold": "ask_follow_up",
+          "predicted": "unknown"
+        },
+        {
+          "id": "q079",
+          "question": "Vậy nếu tăng khối lượng vật lên gấp đôi mà giữ nguyên vận tốc thì động năng thay đổi thế nào?",
+          "gold": "ask_follow_up",
+          "predicted": "unknown"
+        },
+        {
+          "id": "q129",
+          "question": "Vậy nếu giảm điện trở đi một nửa mà giữ nguyên hiệu điện thế thì cường độ dòng điện thay đổi thế nào?",
+          "gold": "ask_follow_up",
+          "predicted": "unknown"
+        },
+        {
+          "id": "q164",
+          "question": "Vậy nếu hai đường thẳng có hệ số góc bằng nhau thì chúng song song hay trùng nhau luôn?",
+          "gold": "ask_follow_up",
+          "predicted": "unknown"
+        }
+      ]
+    },
+    {
+      "cause": "follow_up_overridden_by_solve",
+      "count": 8,
+      "examples": [
+        {
+          "id": "q014",
+          "question": "Vậy nếu delta bằng 0 thì phương trình có mấy nghiệm và nghiệm đó tính như nào?",
+          "gold": "ask_follow_up",
+          "predicted": "solve_problem"
+        },
+        {
+          "id": "q045",
+          "question": "Vậy sau khi biết số mol CO2, em tính khối lượng CaCO3 tạo thành như thế nào?",
+          "gold": "ask_follow_up",
+          "predicted": "solve_problem"
+        },
+        {
+          "id": "q095",
+          "question": "Vậy sau khi tính được số mol HCl, em đổi sang thể tích dung dịch HCl 0,5M như thế nào?",
+          "gold": "ask_follow_up",
+          "predicted": "solve_problem"
+        },
+        {
+          "id": "q114",
+          "question": "Vậy muốn tìm cực trị thì sau khi lập bảng biến thiên em phải nhìn dấu đạo hàm như thế nào?",
+          "gold": "ask_follow_up",
+          "predicted": "solve_problem"
+        },
+        {
+          "id": "q145",
+          "question": "Vậy từ số mol chất kết tủa vừa tìm được, em đổi sang khối lượng bằng cách nào?",
+          "gold": "ask_follow_up",
+          "predicted": "solve_problem"
+        }
+      ]
+    },
+    {
+      "cause": "diagnose_vs_check_answer_collision",
+      "count": 4,
+      "examples": [
+        {
+          "id": "q019",
+          "question": "Em tính công cơ học bằng F chia s, có đúng không hay phải nhân ạ?",
+          "gold": "diagnose_error",
+          "predicted": "check_answer"
+        },
+        {
+          "id": "q075",
+          "question": "Em trả lời rằng vật đứng yên thì không có lực nào tác dụng lên nó, như vậy có sai không?",
+          "gold": "check_answer",
+          "predicted": "diagnose_error"
+        },
+        {
+          "id": "q119",
+          "question": "Em tính trọng lượng bằng khối lượng chia cho g, công thức này sai đúng không ạ?",
+          "gold": "diagnose_error",
+          "predicted": "check_answer"
+        },
+        {
+          "id": "q274",
+          "question": "Em tính ra số âm, có sai không?",
+          "gold": "check_answer",
+          "predicted": "diagnose_error"
+        }
+      ]
+    },
+    {
+      "cause": "other_context_or_priority_error",
+      "count": 3,
+      "examples": [
+        {
+          "id": "q069",
+          "question": "Em tính áp suất bằng lực nhân diện tích nên ra rất lớn, công thức đúng là gì ạ?",
+          "gold": "diagnose_error",
+          "predicted": "explain_concept"
+        },
+        {
+          "id": "q159",
+          "question": "Em tính căn bậc hai của 49 là chỉ có 7, kết luận như vậy có thiếu không?",
+          "gold": "check_answer",
+          "predicted": "solve_problem"
+        },
+        {
+          "id": "q245",
+          "question": "Một khối khí methane CH4 trong bình có thể tích cố định. Nếu đốt cháy nó thì vì sao không thể chỉ dùng công thức PV = nRT đơn giản?",
+          "gold": "diagnose_error",
+          "predicted": "explain_concept"
+        }
+      ]
+    },
+    {
+      "cause": "hint_phrase_missing_or_solve_not_vetoed",
+      "count": 3,
+      "examples": [
+        {
+          "id": "q155",
+          "question": "Cho em gợi ý cách tìm điều kiện xác định của phân thức đại số.",
+          "gold": "give_hint",
+          "predicted": "solve_problem"
+        },
+        {
+          "id": "q261",
+          "question": "Em bị kẹt ở bước cuối, chỉ em tiếp đi.",
+          "gold": "give_hint",
+          "predicted": "unknown"
+        },
+        {
+          "id": "q269",
+          "question": "Em không biết phải thế số vào đâu.",
+          "gold": "give_hint",
+          "predicted": "unknown"
+        }
+      ]
+    },
+    {
+      "cause": "explain_vs_solve_weak_token_collision",
+      "count": 3,
+      "examples": [
+        {
+          "id": "q216",
+          "question": "Em đang học áp suất khí và số mol. Công thức PV = nRT dùng để giải bài kiểu nào?",
+          "gold": "explain_concept",
+          "predicted": "solve_problem"
+        },
+        {
+          "id": "q232",
+          "question": "Một dung dịch CuSO4 có màu xanh và dẫn điện. Hai tính chất này thuộc phần kiến thức nào trong Hóa và Lý?",
+          "gold": "explain_concept",
+          "predicted": "solve_problem"
+        },
+        {
+          "id": "q240",
+          "question": "Em muốn tính lượng nhiệt cần để làm bay hơi nước sau khi đun bằng bếp gas. Có cần biết phản ứng cháy của gas không?",
+          "gold": "explain_concept",
+          "predicted": "solve_problem"
+        }
+      ]
+    },
+    {
+      "cause": "keyword_sai_collision_in_công_sai",
+      "count": 1,
+      "examples": [
+        {
+          "id": "q006",
+          "question": "Tính tổng 20 số hạng đầu của cấp số cộng có u1 = 3 và công sai d = 2.",
+          "gold": "solve_problem",
+          "predicted": "diagnose_error"
+        }
+      ]
+    },
+    {
+      "cause": "diagnose_phrase_missing",
+      "count": 1,
+      "examples": [
+        {
+          "id": "q178",
+          "question": "Em lấy công thức P = A/t nhưng lại thay t bằng phút, có cần đổi sang giây không ạ?",
+          "gold": "diagnose_error",
+          "predicted": "unknown"
+        }
+      ]
+    },
+    {
+      "cause": "solve_vs_explain_phrase_collision",
+      "count": 1,
+      "examples": [
+        {
+          "id": "q217",
+          "question": "Tính số mol khí trong bình nếu biết áp suất, thể tích và nhiệt độ. Sau đó giải thích vì sao tăng nhiệt độ làm phân tử va chạm mạnh hơn.",
+          "gold": "solve_problem",
+          "predicted": "explain_concept"
+        }
+      ]
+    },
+    {
+      "cause": "check_answer_phrase_missing",
+      "count": 1,
+      "examples": [
+        {
+          "id": "q267",
+          "question": "Kết quả này có hợp lý không ạ?",
+          "gold": "check_answer",
+          "predicted": "unknown"
+        }
+      ]
+    }
+  ],
+  "confusion_pairs": [
+    {
+      "gold": "explain_concept",
+      "predicted": "unknown",
+      "count": 35
+    },
+    {
+      "gold": "ask_follow_up",
+      "predicted": "unknown",
+      "count": 10
+    },
+    {
+      "gold": "ask_follow_up",
+      "predicted": "solve_problem",
+      "count": 8
+    },
+    {
+      "gold": "unknown",
+      "predicted": "give_hint",
+      "count": 8
+    },
+    {
+      "gold": "solve_problem",
+      "predicted": "unknown",
+      "count": 6
+    },
+    {
+      "gold": "explain_concept",
+      "predicted": "solve_problem",
+      "count": 3
+    },
+    {
+      "gold": "unknown",
+      "predicted": "explain_concept",
+      "count": 3
+    },
+    {
+      "gold": "diagnose_error",
+      "predicted": "check_answer",
+      "count": 2
+    },
+    {
+      "gold": "diagnose_error",
+      "predicted": "explain_concept",
+      "count": 2
+    },
+    {
+      "gold": "check_answer",
+      "predicted": "diagnose_error",
+      "count": 2
+    },
+    {
+      "gold": "unknown",
+      "predicted": "ask_follow_up",
+      "count": 2
+    },
+    {
+      "gold": "give_hint",
+      "predicted": "unknown",
+      "count": 2
+    },
+    {
+      "gold": "solve_problem",
+      "predicted": "diagnose_error",
+      "count": 1
+    },
+    {
+      "gold": "give_hint",
+      "predicted": "solve_problem",
+      "count": 1
+    },
+    {
+      "gold": "check_answer",
+      "predicted": "solve_problem",
+      "count": 1
+    },
+    {
+      "gold": "diagnose_error",
+      "predicted": "unknown",
+      "count": 1
+    },
+    {
+      "gold": "solve_problem",
+      "predicted": "explain_concept",
+      "count": 1
+    },
+    {
+      "gold": "check_answer",
+      "predicted": "unknown",
+      "count": 1
+    },
+    {
+      "gold": "unknown",
+      "predicted": "solve_problem",
+      "count": 1
+    }
+  ],
+  "errors_by_case_type": {
+    "single_turn": 26,
+    "multi_turn": 12,
+    "interdisciplinary": 28,
+    "out_of_scope": 10,
+    "ambiguous": 14
+  }
+}

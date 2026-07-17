@@ -14,13 +14,15 @@ Không thay đổi V0/V1/V2, không mở rộng subject taxonomy, không triển
 
 ## Baseline
 
-Baseline là Phase 1.2, 300 mẫu:
+Baseline khóa của Phase 2, 300 mẫu:
 
 - Primary subject: `94.00%`
-- Intent: `70.00%`
+- Intent: `84.33%`
 - Target SLM: `84.33%`
 - Clarification: `88.00%`
-- Intent errors: `90`
+- Legacy exact: `73.67%`
+- Full exact: `44.67%`
+- Intent errors: `47`
 - Dataset SHA256: `5d25fb93a173733033a632fec3ca7bfc5b29fffb0db2a8b3676ee919301ec5cf`
 
 ## Intent error taxonomy trước khi sửa
@@ -111,4 +113,4 @@ Interdisciplinary, ambiguous và OOS vẫn là nhóm yếu nhất về intent. P
 - Dataset SHA256: `5d25fb93a173733033a632fec3ca7bfc5b29fffb0db2a8b3676ee919301ec5cf`
 - Config hash: `8d55b9374414903025fc0edf54dbe36f61d6ba3c1a4810f401e82bb7fdca89c1`
 - Generated at UTC: `2026-07-17T17:43:18.039366+00:00`
-- Report commit: ghi nhận ở commit docs/artifacts sau khi benchmark cuối được lưu.
+- Report commit: `cfae4f2ea2ae67487d21ba86f81c8a7127394306`

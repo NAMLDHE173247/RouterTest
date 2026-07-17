@@ -14,6 +14,7 @@ def _slug(value: str) -> str:
 
 # These are contextual additions. The existing INTENT_RULES remain unchanged.
 CONTEXT_RULES = (
+    ("intent.phase3.solve.negative_hint", "solve_problem", r"(?:không cần gợi ý|đừng chỉ gợi ý).{0,30}(?:giải|lời giải|đầy đủ)", 16, "strong"),
     ("intent.phase2.diagnose.strong.formula_error", "diagnose_error", r"sai.{0,30}th.{0,5}c", 12, "strong"),
     ("intent.phase2.explain.strong.difference", "explain_concept", r"(?:không hiểu|chưa hiểu|khác nhau như thế nào|làm sao để nhận biết|là gì|giải thích|vì sao|tại sao|ý nghĩa|xảy ra khi nào)", 8, "strong"),
     ("intent.phase2.explain.strong.concept", "explain_concept", r"(?:bản chất|nguyên lý|hiểu như thế nào|liên quan đến.{0,40}như thế nào|thuộc phần kiến thức|tạo ra những chất gì)", 8, "strong"),
@@ -33,6 +34,7 @@ CONTEXT_RULES = (
 
 VETO_RULES = (
     ("intent.phase2.veto.diagnose.cong_sai", "diagnose_error", r"công sai", "The phrase means arithmetic progression difference, not an error report."),
+    ("intent.phase3.veto.hint.negative_request", "give_hint", r"(?:không cần gợi ý|đừng chỉ gợi ý)", "A negative hint request asks for a full solution or rejects hint-only output."),
     ("intent.phase2.veto.solve.hint_request", "solve_problem", r"(?:gợi ý|chỉ gợi ý|đừng giải hết|đừng cho đáp án|không cần lời giải|cho em hướng làm|hướng làm|nên bắt đầu từ đâu|bị kẹt|chỉ em tiếp|không biết phải thế số vào đâu)", "A hint request must not be routed as a full solution."),
 )
 
@@ -62,7 +64,7 @@ def _base_trace(signals: dict) -> list[dict]:
     return matches
 
 
-def resolve_intent(question: str, history, intent_matcher, follow_up_matcher) -> dict:
+def resolve_intent(question: str, history, intent_matcher, follow_up_matcher, context=None) -> dict:
     text = normalize_text(question)
     signals = intent_matcher.extract_all(question)
     scores = {intent: signal["score"] for intent, signal in signals.items()}
@@ -88,8 +90,9 @@ def resolve_intent(question: str, history, intent_matcher, follow_up_matcher) ->
     vetoes = []
     vetoed_intents = set()
     follow_up_signal = follow_up_matcher.extract(question)
-    if history and (text.startswith("vậy") or follow_up_signal["score"] > 0):
-        contextual_scores["ask_follow_up"] = contextual_scores.get("ask_follow_up", 0) + 15
+    if history and (re.search(r"\bvậy\b", text) or follow_up_signal["score"] > 0):
+        history_weight = getattr(context, "history_weight", 1.0) or 1.0
+        contextual_scores["ask_follow_up"] = contextual_scores.get("ask_follow_up", 0) + round(22 * history_weight)
         contextual_strength["ask_follow_up"] = contextual_strength.get("ask_follow_up", 0) + 1
         matches.append({
             "rule_id": "intent.phase2.follow_up.context.history",
@@ -98,7 +101,7 @@ def resolve_intent(question: str, history, intent_matcher, follow_up_matcher) ->
             "matched_text": text[: min(len(text), 48)],
             "start": 0,
             "end": min(len(text), 48),
-            "score": 15,
+            "score": round(22 * history_weight),
             "strength": "strong",
         })
 
@@ -127,6 +130,13 @@ def resolve_intent(question: str, history, intent_matcher, follow_up_matcher) ->
                 "start": match.start(),
                 "end": match.end(),
             })
+
+    if any(veto["rule_id"] == "intent.phase3.veto.hint.negative_request" for veto in vetoes):
+        vetoed_intents.discard("solve_problem")
+        vetoes = [
+            veto for veto in vetoes
+            if veto["rule_id"] != "intent.phase2.veto.solve.hint_request"
+        ]
 
     final_scores = {
         intent: score + contextual_scores.get(intent, 0)
@@ -167,5 +177,11 @@ def resolve_intent(question: str, history, intent_matcher, follow_up_matcher) ->
             "top_score": selected_score,
             "second_score": second_score,
             "decision_margin": max(selected_score - second_score, 0),
+            "history_context": {
+                "source_turn": getattr(context, "source_turn", None),
+                "history_weight": round(getattr(context, "history_weight", 0.0), 4),
+                "inherited_fields": list(getattr(context, "inherited_fields", [])),
+                "missing_history": bool(getattr(context, "missing_history", not history)),
+            },
         },
     }

@@ -1,6 +1,7 @@
 from keyword_matcher import (
     SingleLabelFlashTextMatcher,
     WeightedFlashTextMatcher,
+    normalize_text,
 )
 
 from rules import (
@@ -13,6 +14,7 @@ from rules import (
 )
 from topic_resolver import VALID_SUBJECTS, resolve_subject
 from intent_resolver import resolve_intent
+from router_context import build_router_context, history_is_usable
 
 INTENT_MATCHER = WeightedFlashTextMatcher(
     INTENT_RULES
@@ -84,13 +86,15 @@ def get_history_subject(history):
 
 def detect_intent(
     question: str,
-    history=None
+    history=None,
+    context=None,
 ):
     return resolve_intent(
         question=question,
         history=history or [],
         intent_matcher=INTENT_MATCHER,
         follow_up_matcher=FOLLOW_UP_MATCHER,
+        context=context,
     )
 
     # Legacy score path retained below for reference; Phase 2 returns above.
@@ -174,17 +178,40 @@ def detect_subject(
         question
     )["score"]
 
+    context = build_router_context(
+        history=history,
+        current_subject=resolution,
+        current_intent=None,
+        current_topic=resolution.topic,
+    )
+
     # Multi-turn: kế thừa môn học từ history.
-    if (
+    is_follow_up_turn = (
         follow_up_score > 0
+        or normalize_text(question).startswith("vậy")
+        or " vậy " in f" {normalize_text(question)} "
+    )
+
+    if (
+        is_follow_up_turn
         and history_subject
         and top_score
         <= THRESHOLDS["history_inherit_max_score"]
+        and history_is_usable(context)
     ):
         resolution.primary_subject = history_subject
         resolution.secondary_subjects = []
         resolution.inherited_from_history = True
         resolution.top_score = max(top_score, 3)
+        context.inherited_fields.append("primary_subject")
+        if not resolution.topic:
+            resolution.topic = context.last_topic
+            if context.last_topic:
+                context.inherited_fields.append("topic")
+
+    if is_follow_up_turn and not history:
+        context.missing_history = True
+        context.reset_reason = "missing_history"
 
     primary_subject = resolution.primary_subject
 
@@ -198,7 +225,11 @@ def detect_subject(
         "inherited_from_history": resolution.inherited_from_history,
         "matched_terms": resolution.matched_terms,
         "topic": resolution.topic,
-        "trace": resolution.trace(),
+        "trace": {
+            **resolution.trace(),
+            "router_context": context.as_dict(),
+        },
+        "router_context": context,
     }
 
 
@@ -486,9 +517,11 @@ def route_question(
             )
         }
 
+    router_context = subject_result.get("router_context")
     intent_result = detect_intent(
         question,
-        history
+        history,
+        router_context,
     )
 
     need_clarification = (
