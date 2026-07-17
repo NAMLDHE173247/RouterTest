@@ -67,7 +67,7 @@ Command:
 python -m pytest backend/tests/test_phase0_hardening.py backend/tests/test_rule_v3_phase1_subject_resolution.py -q
 ```
 
-Result: `30 passed` (6 framework/deprecation warnings). V3 source compilation also passed. The 300-sample evaluator completed and wrote all Phase 1.1 artifacts.
+Result: `30 passed` (6 framework/deprecation warnings). This is the historical Phase 1.1 count before the five Phase 1.2 invariant tests were added. The current focused command and `python -m pytest backend/tests -q` both report `35 passed`.
 
 ## Artifacts
 

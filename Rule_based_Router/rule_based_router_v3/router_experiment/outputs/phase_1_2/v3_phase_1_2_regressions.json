@@ -1,0 +1,16 @@
+{
+  "metadata": {
+    "git_commit": "7fb5bbc48d932ef1b4537efeffec29a2c5284e80",
+    "dataset_sha256": "5d25fb93a173733033a632fec3ca7bfc5b29fffb0db2a8b3676ee919301ec5cf",
+    "config_sha256": "3d6b58852b827b3769ef295c5da65942351db70e30d733922017c9a7a2120f4e",
+    "config_files": [
+      "src\\rules.py",
+      "src\\models.py",
+      "src\\topic_ontology.py",
+      "src\\topic_resolver.py"
+    ],
+    "generated_at_utc": "2026-07-17T17:22:04.306495+00:00",
+    "phase": "phase_1_2"
+  },
+  "items": []
+}
