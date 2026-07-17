@@ -1,0 +1,29 @@
+{
+  "baseline_phase": "phase_2",
+  "current_phase": "phase_3",
+  "history_rows": 14,
+  "multi_turn_rows": 12,
+  "fixed_history_errors": [
+    {
+      "id": "q247",
+      "field": "intent",
+      "baseline": "solve_problem",
+      "current": "ask_follow_up",
+      "gold": "ask_follow_up",
+      "reason": "History-aware follow-up context now outweighs the current calculation token."
+    }
+  ],
+  "new_history_regressions": [],
+  "unchanged_history_errors": [
+    {
+      "id": "q246",
+      "field": "primary_subject",
+      "baseline": "physics",
+      "current": "physics",
+      "gold": "chemistry",
+      "reason": "Current gas-law evidence correctly remains stronger than history; this is retained as a dataset labeling/context limitation."
+    }
+  ],
+  "multi_turn_accuracy_before": 1.0,
+  "multi_turn_accuracy_after": 1.0
+}

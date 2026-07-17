@@ -1,0 +1,17 @@
+{
+  "phase": "phase_2",
+  "frozen_at": "2026-07-18",
+  "source": "outputs/phase_2",
+  "files": {
+    "v3_phase_1_2_intent_error_taxonomy.json": "e42d7538ec7138f1ea573f7a455631d932e4b1e105ff27780f9d95cc4b4ee267",
+    "v3_phase_2_comparison_with_phase_1_2.json": "162cdaa1e2c047504ed031390cd873032a2ad262fd4e90776cd324924fdd157f",
+    "v3_phase_2_errors.json": "0334b3bd85b415c443ee5c1ebaede7a5529689284b10ec135b54a4d62bccf5b0",
+    "v3_phase_2_fixed_errors.json": "8b2f3f509a22210db4b0fbc4a8002e4c75f689523788276ad11c793fa9cb8893",
+    "v3_phase_2_intent_confusion.json": "6bb7cd478f4a8fd36eaf9e76d8e160af282f6222b25400378b3db6ae10b5c460",
+    "v3_phase_2_metrics.json": "ab0f561b48722461dcffe9b633d4e9db9bcbe11b7eb66cfd36079615d54063e2",
+    "v3_phase_2_predictions.jsonl": "3d714f9ef6405261dc239d29faa10049a264fdfc619b9a446e3a9aab0a2ad735",
+    "v3_phase_2_regressions.json": "7f776362d609944aa2e55278362e61d9ef9c7c5528e91aea8de196ca634a9c8f",
+    "v3_phase_2_rule_coverage.json": "da9f7934c90a244413626bf6c1e0f284b8166875f034b0fd6868b55728d03d6b",
+    "v3_phase_2_subject_confusion.json": "0225f73d556ab0e1efc0e7edf52ed5089aa80ff50fa7600c3d5247780dda8501"
+  }
+}

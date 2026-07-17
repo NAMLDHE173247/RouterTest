@@ -1,0 +1,1335 @@
+{
+  "phase": "phase_4",
+  "baseline_phase": "phase_3",
+  "items": [
+    {
+      "cause": "oos_target_misclassification",
+      "count": 24,
+      "examples": [
+        {
+          "id": "q050",
+          "question": "Tối nay ở Hà Nội có nên đi chơi không hay trời sẽ mưa?",
+          "gold": {
+            "primary_subject": "unknown",
+            "intent": "unknown",
+            "target_slm": "general_tutor",
+            "need_clarification": false,
+            "secondary_subjects": []
+          },
+          "predicted": {
+            "primary_subject": "unknown",
+            "secondary_subjects": [],
+            "intent": "unknown",
+            "target_slm": "ask_clarification",
+            "confidence": 0.35,
+            "need_clarification": true,
+            "reason": "The subject or conversational reference is not sufficiently clear.",
+            "topic": null,
+            "trace": {
+              "topic": null,
+              "rule_matches": [],
+              "subject_scores": {
+                "math": 0,
+                "physics": 0,
+                "chemistry": 0
+              },
+              "primary_subject": "unknown",
+              "secondary_subjects": [],
+              "inherited_from_history": false,
+              "ownership_override": null,
+              "router_context": {
+                "last_explicit_subject": null,
+                "last_topic": null,
+                "last_intent": null,
+                "active_entities": [],
+                "turns_since_explicit_subject": null,
+                "pending_clarification": false,
+                "context_confidence": 0.0,
+                "history_weight": 0.0,
+                "source_turn": null,
+                "inherited_fields": [],
+                "reset_reason": "missing_history",
+                "missing_history": true
+              },
+              "intent": {
+                "rule_matches": [],
+                "vetoes": [],
+                "scores": {
+                  "diagnose_error": 0,
+                  "check_answer": 0,
+                  "give_hint": 0,
+                  "explain_concept": 0,
+                  "solve_problem": 0,
+                  "ask_follow_up": 0
+                },
+                "selected_intent": "unknown",
+                "top_score": 0,
+                "second_score": 0,
+                "decision_margin": 0,
+                "history_context": {
+                  "source_turn": null,
+                  "history_weight": 0.0,
+                  "inherited_fields": [],
+                  "missing_history": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "q100",
+          "question": "Bạn gợi ý cho em vài món ăn sáng dễ làm trước khi đi học được không?",
+          "gold": {
+            "primary_subject": "unknown",
+            "intent": "unknown",
+            "target_slm": "general_tutor",
+            "need_clarification": false,
+            "secondary_subjects": []
+          },
+          "predicted": {
+            "primary_subject": "unknown",
+            "secondary_subjects": [],
+            "intent": "give_hint",
+            "target_slm": "ask_clarification",
+            "confidence": 0.35,
+            "need_clarification": true,
+            "reason": "The subject or conversational reference is not sufficiently clear.",
+            "topic": null,
+            "trace": {
+              "topic": null,
+              "rule_matches": [],
+              "subject_scores": {
+                "math": 0,
+                "physics": 0,
+                "chemistry": 0
+              },
+              "primary_subject": "unknown",
+              "secondary_subjects": [],
+              "inherited_from_history": false,
+              "ownership_override": null,
+              "router_context": {
+                "last_explicit_subject": null,
+                "last_topic": null,
+                "last_intent": null,
+                "active_entities": [],
+                "turns_since_explicit_subject": null,
+                "pending_clarification": false,
+                "context_confidence": 0.0,
+                "history_weight": 0.0,
+                "source_turn": null,
+                "inherited_fields": [],
+                "reset_reason": "missing_history",
+                "missing_history": true
+              },
+              "intent": {
+                "rule_matches": [
+                  {
+                    "rule_id": "intent.base.give_hint.goi_y",
+                    "intent": "give_hint",
+                    "source": "base_rule",
+                    "matched_text": "gợi ý",
+                    "start": 4,
+                    "end": 9,
+                    "score": 5,
+                    "strength": "general"
+                  },
+                  {
+                    "rule_id": "intent.phase2.hint.strong.guidance",
+                    "intent": "give_hint",
+                    "source": "context_rule",
+                    "matched_text": "gợi ý",
+                    "start": 4,
+                    "end": 9,
+                    "score": 9,
+                    "strength": "strong"
+                  }
+                ],
+                "vetoes": [
+                  {
+                    "rule_id": "intent.phase2.veto.solve.hint_request",
+                    "intent": "solve_problem",
+                    "reason": "A hint request must not be routed as a full solution.",
+                    "matched_text": "gợi ý",
+                    "start": 4,
+                    "end": 9
+                  }
+                ],
+                "scores": {
+                  "diagnose_error": 0,
+                  "check_answer": 0,
+                  "give_hint": 14,
+                  "explain_concept": 0,
+                  "ask_follow_up": 0
+                },
+                "selected_intent": "give_hint",
+                "top_score": 14,
+                "second_score": 0,
+                "decision_margin": 14,
+                "history_context": {
+                  "source_turn": null,
+                  "history_weight": 0.0,
+                  "inherited_fields": [],
+                  "missing_history": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "q276",
+          "question": "Hôm nay thời tiết ở Đà Nẵng có mưa không?",
+          "gold": {
+            "primary_subject": "unknown",
+            "intent": "unknown",
+            "target_slm": "general_tutor",
+            "need_clarification": false,
+            "secondary_subjects": []
+          },
+          "predicted": {
+            "primary_subject": "unknown",
+            "secondary_subjects": [],
+            "intent": "unknown",
+            "target_slm": "ask_clarification",
+            "confidence": 0.35,
+            "need_clarification": true,
+            "reason": "The subject or conversational reference is not sufficiently clear.",
+            "topic": null,
+            "trace": {
+              "topic": null,
+              "rule_matches": [],
+              "subject_scores": {
+                "math": 0,
+                "physics": 0,
+                "chemistry": 0
+              },
+              "primary_subject": "unknown",
+              "secondary_subjects": [],
+              "inherited_from_history": false,
+              "ownership_override": null,
+              "router_context": {
+                "last_explicit_subject": null,
+                "last_topic": null,
+                "last_intent": null,
+                "active_entities": [],
+                "turns_since_explicit_subject": null,
+                "pending_clarification": false,
+                "context_confidence": 0.0,
+                "history_weight": 0.0,
+                "source_turn": null,
+                "inherited_fields": [],
+                "reset_reason": "missing_history",
+                "missing_history": true
+              },
+              "intent": {
+                "rule_matches": [],
+                "vetoes": [],
+                "scores": {
+                  "diagnose_error": 0,
+                  "check_answer": 0,
+                  "give_hint": 0,
+                  "explain_concept": 0,
+                  "solve_problem": 0,
+                  "ask_follow_up": 0
+                },
+                "selected_intent": "unknown",
+                "top_score": 0,
+                "second_score": 0,
+                "decision_margin": 0,
+                "history_context": {
+                  "source_turn": null,
+                  "history_weight": 0.0,
+                  "inherited_fields": [],
+                  "missing_history": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "q277",
+          "question": "Bạn gợi ý cho em một bài nhạc nhẹ để nghe khi học bài được không?",
+          "gold": {
+            "primary_subject": "unknown",
+            "intent": "unknown",
+            "target_slm": "general_tutor",
+            "need_clarification": false,
+            "secondary_subjects": []
+          },
+          "predicted": {
+            "primary_subject": "unknown",
+            "secondary_subjects": [],
+            "intent": "give_hint",
+            "target_slm": "ask_clarification",
+            "confidence": 0.35,
+            "need_clarification": true,
+            "reason": "The subject or conversational reference is not sufficiently clear.",
+            "topic": null,
+            "trace": {
+              "topic": null,
+              "rule_matches": [],
+              "subject_scores": {
+                "math": 0,
+                "physics": 0,
+                "chemistry": 0
+              },
+              "primary_subject": "unknown",
+              "secondary_subjects": [],
+              "inherited_from_history": false,
+              "ownership_override": null,
+              "router_context": {
+                "last_explicit_subject": null,
+                "last_topic": null,
+                "last_intent": null,
+                "active_entities": [],
+                "turns_since_explicit_subject": null,
+                "pending_clarification": false,
+                "context_confidence": 0.0,
+                "history_weight": 0.0,
+                "source_turn": null,
+                "inherited_fields": [],
+                "reset_reason": "missing_history",
+                "missing_history": true
+              },
+              "intent": {
+                "rule_matches": [
+                  {
+                    "rule_id": "intent.base.give_hint.goi_y",
+                    "intent": "give_hint",
+                    "source": "base_rule",
+                    "matched_text": "gợi ý",
+                    "start": 4,
+                    "end": 9,
+                    "score": 5,
+                    "strength": "general"
+                  },
+                  {
+                    "rule_id": "intent.phase2.hint.strong.guidance",
+                    "intent": "give_hint",
+                    "source": "context_rule",
+                    "matched_text": "gợi ý",
+                    "start": 4,
+                    "end": 9,
+                    "score": 9,
+                    "strength": "strong"
+                  }
+                ],
+                "vetoes": [
+                  {
+                    "rule_id": "intent.phase2.veto.solve.hint_request",
+                    "intent": "solve_problem",
+                    "reason": "A hint request must not be routed as a full solution.",
+                    "matched_text": "gợi ý",
+                    "start": 4,
+                    "end": 9
+                  }
+                ],
+                "scores": {
+                  "diagnose_error": 0,
+                  "check_answer": 0,
+                  "give_hint": 14,
+                  "explain_concept": 0,
+                  "ask_follow_up": 0
+                },
+                "selected_intent": "give_hint",
+                "top_score": 14,
+                "second_score": 0,
+                "decision_margin": 14,
+                "history_context": {
+                  "source_turn": null,
+                  "history_weight": 0.0,
+                  "inherited_fields": [],
+                  "missing_history": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "q278",
+          "question": "Cách nấu mì trứng nhanh vào buổi sáng như thế nào?",
+          "gold": {
+            "primary_subject": "unknown",
+            "intent": "unknown",
+            "target_slm": "general_tutor",
+            "need_clarification": false,
+            "secondary_subjects": []
+          },
+          "predicted": {
+            "primary_subject": "unknown",
+            "secondary_subjects": [],
+            "intent": "unknown",
+            "target_slm": "ask_clarification",
+            "confidence": 0.35,
+            "need_clarification": true,
+            "reason": "The subject or conversational reference is not sufficiently clear.",
+            "topic": null,
+            "trace": {
+              "topic": null,
+              "rule_matches": [],
+              "subject_scores": {
+                "math": 0,
+                "physics": 0,
+                "chemistry": 0
+              },
+              "primary_subject": "unknown",
+              "secondary_subjects": [],
+              "inherited_from_history": false,
+              "ownership_override": null,
+              "router_context": {
+                "last_explicit_subject": null,
+                "last_topic": null,
+                "last_intent": null,
+                "active_entities": [],
+                "turns_since_explicit_subject": null,
+                "pending_clarification": false,
+                "context_confidence": 0.0,
+                "history_weight": 0.0,
+                "source_turn": null,
+                "inherited_fields": [],
+                "reset_reason": "missing_history",
+                "missing_history": true
+              },
+              "intent": {
+                "rule_matches": [],
+                "vetoes": [],
+                "scores": {
+                  "diagnose_error": 0,
+                  "check_answer": 0,
+                  "give_hint": 0,
+                  "explain_concept": 0,
+                  "solve_problem": 0,
+                  "ask_follow_up": 0
+                },
+                "selected_intent": "unknown",
+                "top_score": 0,
+                "second_score": 0,
+                "decision_margin": 0,
+                "history_context": {
+                  "source_turn": null,
+                  "history_weight": 0.0,
+                  "inherited_fields": [],
+                  "missing_history": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "cause": "oos_clarification_misclassification",
+      "count": 24,
+      "examples": [
+        {
+          "id": "q050",
+          "question": "Tối nay ở Hà Nội có nên đi chơi không hay trời sẽ mưa?",
+          "gold": {
+            "primary_subject": "unknown",
+            "intent": "unknown",
+            "target_slm": "general_tutor",
+            "need_clarification": false,
+            "secondary_subjects": []
+          },
+          "predicted": {
+            "primary_subject": "unknown",
+            "secondary_subjects": [],
+            "intent": "unknown",
+            "target_slm": "ask_clarification",
+            "confidence": 0.35,
+            "need_clarification": true,
+            "reason": "The subject or conversational reference is not sufficiently clear.",
+            "topic": null,
+            "trace": {
+              "topic": null,
+              "rule_matches": [],
+              "subject_scores": {
+                "math": 0,
+                "physics": 0,
+                "chemistry": 0
+              },
+              "primary_subject": "unknown",
+              "secondary_subjects": [],
+              "inherited_from_history": false,
+              "ownership_override": null,
+              "router_context": {
+                "last_explicit_subject": null,
+                "last_topic": null,
+                "last_intent": null,
+                "active_entities": [],
+                "turns_since_explicit_subject": null,
+                "pending_clarification": false,
+                "context_confidence": 0.0,
+                "history_weight": 0.0,
+                "source_turn": null,
+                "inherited_fields": [],
+                "reset_reason": "missing_history",
+                "missing_history": true
+              },
+              "intent": {
+                "rule_matches": [],
+                "vetoes": [],
+                "scores": {
+                  "diagnose_error": 0,
+                  "check_answer": 0,
+                  "give_hint": 0,
+                  "explain_concept": 0,
+                  "solve_problem": 0,
+                  "ask_follow_up": 0
+                },
+                "selected_intent": "unknown",
+                "top_score": 0,
+                "second_score": 0,
+                "decision_margin": 0,
+                "history_context": {
+                  "source_turn": null,
+                  "history_weight": 0.0,
+                  "inherited_fields": [],
+                  "missing_history": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "q100",
+          "question": "Bạn gợi ý cho em vài món ăn sáng dễ làm trước khi đi học được không?",
+          "gold": {
+            "primary_subject": "unknown",
+            "intent": "unknown",
+            "target_slm": "general_tutor",
+            "need_clarification": false,
+            "secondary_subjects": []
+          },
+          "predicted": {
+            "primary_subject": "unknown",
+            "secondary_subjects": [],
+            "intent": "give_hint",
+            "target_slm": "ask_clarification",
+            "confidence": 0.35,
+            "need_clarification": true,
+            "reason": "The subject or conversational reference is not sufficiently clear.",
+            "topic": null,
+            "trace": {
+              "topic": null,
+              "rule_matches": [],
+              "subject_scores": {
+                "math": 0,
+                "physics": 0,
+                "chemistry": 0
+              },
+              "primary_subject": "unknown",
+              "secondary_subjects": [],
+              "inherited_from_history": false,
+              "ownership_override": null,
+              "router_context": {
+                "last_explicit_subject": null,
+                "last_topic": null,
+                "last_intent": null,
+                "active_entities": [],
+                "turns_since_explicit_subject": null,
+                "pending_clarification": false,
+                "context_confidence": 0.0,
+                "history_weight": 0.0,
+                "source_turn": null,
+                "inherited_fields": [],
+                "reset_reason": "missing_history",
+                "missing_history": true
+              },
+              "intent": {
+                "rule_matches": [
+                  {
+                    "rule_id": "intent.base.give_hint.goi_y",
+                    "intent": "give_hint",
+                    "source": "base_rule",
+                    "matched_text": "gợi ý",
+                    "start": 4,
+                    "end": 9,
+                    "score": 5,
+                    "strength": "general"
+                  },
+                  {
+                    "rule_id": "intent.phase2.hint.strong.guidance",
+                    "intent": "give_hint",
+                    "source": "context_rule",
+                    "matched_text": "gợi ý",
+                    "start": 4,
+                    "end": 9,
+                    "score": 9,
+                    "strength": "strong"
+                  }
+                ],
+                "vetoes": [
+                  {
+                    "rule_id": "intent.phase2.veto.solve.hint_request",
+                    "intent": "solve_problem",
+                    "reason": "A hint request must not be routed as a full solution.",
+                    "matched_text": "gợi ý",
+                    "start": 4,
+                    "end": 9
+                  }
+                ],
+                "scores": {
+                  "diagnose_error": 0,
+                  "check_answer": 0,
+                  "give_hint": 14,
+                  "explain_concept": 0,
+                  "ask_follow_up": 0
+                },
+                "selected_intent": "give_hint",
+                "top_score": 14,
+                "second_score": 0,
+                "decision_margin": 14,
+                "history_context": {
+                  "source_turn": null,
+                  "history_weight": 0.0,
+                  "inherited_fields": [],
+                  "missing_history": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "q276",
+          "question": "Hôm nay thời tiết ở Đà Nẵng có mưa không?",
+          "gold": {
+            "primary_subject": "unknown",
+            "intent": "unknown",
+            "target_slm": "general_tutor",
+            "need_clarification": false,
+            "secondary_subjects": []
+          },
+          "predicted": {
+            "primary_subject": "unknown",
+            "secondary_subjects": [],
+            "intent": "unknown",
+            "target_slm": "ask_clarification",
+            "confidence": 0.35,
+            "need_clarification": true,
+            "reason": "The subject or conversational reference is not sufficiently clear.",
+            "topic": null,
+            "trace": {
+              "topic": null,
+              "rule_matches": [],
+              "subject_scores": {
+                "math": 0,
+                "physics": 0,
+                "chemistry": 0
+              },
+              "primary_subject": "unknown",
+              "secondary_subjects": [],
+              "inherited_from_history": false,
+              "ownership_override": null,
+              "router_context": {
+                "last_explicit_subject": null,
+                "last_topic": null,
+                "last_intent": null,
+                "active_entities": [],
+                "turns_since_explicit_subject": null,
+                "pending_clarification": false,
+                "context_confidence": 0.0,
+                "history_weight": 0.0,
+                "source_turn": null,
+                "inherited_fields": [],
+                "reset_reason": "missing_history",
+                "missing_history": true
+              },
+              "intent": {
+                "rule_matches": [],
+                "vetoes": [],
+                "scores": {
+                  "diagnose_error": 0,
+                  "check_answer": 0,
+                  "give_hint": 0,
+                  "explain_concept": 0,
+                  "solve_problem": 0,
+                  "ask_follow_up": 0
+                },
+                "selected_intent": "unknown",
+                "top_score": 0,
+                "second_score": 0,
+                "decision_margin": 0,
+                "history_context": {
+                  "source_turn": null,
+                  "history_weight": 0.0,
+                  "inherited_fields": [],
+                  "missing_history": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "q277",
+          "question": "Bạn gợi ý cho em một bài nhạc nhẹ để nghe khi học bài được không?",
+          "gold": {
+            "primary_subject": "unknown",
+            "intent": "unknown",
+            "target_slm": "general_tutor",
+            "need_clarification": false,
+            "secondary_subjects": []
+          },
+          "predicted": {
+            "primary_subject": "unknown",
+            "secondary_subjects": [],
+            "intent": "give_hint",
+            "target_slm": "ask_clarification",
+            "confidence": 0.35,
+            "need_clarification": true,
+            "reason": "The subject or conversational reference is not sufficiently clear.",
+            "topic": null,
+            "trace": {
+              "topic": null,
+              "rule_matches": [],
+              "subject_scores": {
+                "math": 0,
+                "physics": 0,
+                "chemistry": 0
+              },
+              "primary_subject": "unknown",
+              "secondary_subjects": [],
+              "inherited_from_history": false,
+              "ownership_override": null,
+              "router_context": {
+                "last_explicit_subject": null,
+                "last_topic": null,
+                "last_intent": null,
+                "active_entities": [],
+                "turns_since_explicit_subject": null,
+                "pending_clarification": false,
+                "context_confidence": 0.0,
+                "history_weight": 0.0,
+                "source_turn": null,
+                "inherited_fields": [],
+                "reset_reason": "missing_history",
+                "missing_history": true
+              },
+              "intent": {
+                "rule_matches": [
+                  {
+                    "rule_id": "intent.base.give_hint.goi_y",
+                    "intent": "give_hint",
+                    "source": "base_rule",
+                    "matched_text": "gợi ý",
+                    "start": 4,
+                    "end": 9,
+                    "score": 5,
+                    "strength": "general"
+                  },
+                  {
+                    "rule_id": "intent.phase2.hint.strong.guidance",
+                    "intent": "give_hint",
+                    "source": "context_rule",
+                    "matched_text": "gợi ý",
+                    "start": 4,
+                    "end": 9,
+                    "score": 9,
+                    "strength": "strong"
+                  }
+                ],
+                "vetoes": [
+                  {
+                    "rule_id": "intent.phase2.veto.solve.hint_request",
+                    "intent": "solve_problem",
+                    "reason": "A hint request must not be routed as a full solution.",
+                    "matched_text": "gợi ý",
+                    "start": 4,
+                    "end": 9
+                  }
+                ],
+                "scores": {
+                  "diagnose_error": 0,
+                  "check_answer": 0,
+                  "give_hint": 14,
+                  "explain_concept": 0,
+                  "ask_follow_up": 0
+                },
+                "selected_intent": "give_hint",
+                "top_score": 14,
+                "second_score": 0,
+                "decision_margin": 14,
+                "history_context": {
+                  "source_turn": null,
+                  "history_weight": 0.0,
+                  "inherited_fields": [],
+                  "missing_history": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "q278",
+          "question": "Cách nấu mì trứng nhanh vào buổi sáng như thế nào?",
+          "gold": {
+            "primary_subject": "unknown",
+            "intent": "unknown",
+            "target_slm": "general_tutor",
+            "need_clarification": false,
+            "secondary_subjects": []
+          },
+          "predicted": {
+            "primary_subject": "unknown",
+            "secondary_subjects": [],
+            "intent": "unknown",
+            "target_slm": "ask_clarification",
+            "confidence": 0.35,
+            "need_clarification": true,
+            "reason": "The subject or conversational reference is not sufficiently clear.",
+            "topic": null,
+            "trace": {
+              "topic": null,
+              "rule_matches": [],
+              "subject_scores": {
+                "math": 0,
+                "physics": 0,
+                "chemistry": 0
+              },
+              "primary_subject": "unknown",
+              "secondary_subjects": [],
+              "inherited_from_history": false,
+              "ownership_override": null,
+              "router_context": {
+                "last_explicit_subject": null,
+                "last_topic": null,
+                "last_intent": null,
+                "active_entities": [],
+                "turns_since_explicit_subject": null,
+                "pending_clarification": false,
+                "context_confidence": 0.0,
+                "history_weight": 0.0,
+                "source_turn": null,
+                "inherited_fields": [],
+                "reset_reason": "missing_history",
+                "missing_history": true
+              },
+              "intent": {
+                "rule_matches": [],
+                "vetoes": [],
+                "scores": {
+                  "diagnose_error": 0,
+                  "check_answer": 0,
+                  "give_hint": 0,
+                  "explain_concept": 0,
+                  "solve_problem": 0,
+                  "ask_follow_up": 0
+                },
+                "selected_intent": "unknown",
+                "top_score": 0,
+                "second_score": 0,
+                "decision_margin": 0,
+                "history_context": {
+                  "source_turn": null,
+                  "history_weight": 0.0,
+                  "inherited_fields": [],
+                  "missing_history": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "cause": "oos_intent_misclassification",
+      "count": 10,
+      "examples": [
+        {
+          "id": "q100",
+          "question": "Bạn gợi ý cho em vài món ăn sáng dễ làm trước khi đi học được không?",
+          "gold": {
+            "primary_subject": "unknown",
+            "intent": "unknown",
+            "target_slm": "general_tutor",
+            "need_clarification": false,
+            "secondary_subjects": []
+          },
+          "predicted": {
+            "primary_subject": "unknown",
+            "secondary_subjects": [],
+            "intent": "give_hint",
+            "target_slm": "ask_clarification",
+            "confidence": 0.35,
+            "need_clarification": true,
+            "reason": "The subject or conversational reference is not sufficiently clear.",
+            "topic": null,
+            "trace": {
+              "topic": null,
+              "rule_matches": [],
+              "subject_scores": {
+                "math": 0,
+                "physics": 0,
+                "chemistry": 0
+              },
+              "primary_subject": "unknown",
+              "secondary_subjects": [],
+              "inherited_from_history": false,
+              "ownership_override": null,
+              "router_context": {
+                "last_explicit_subject": null,
+                "last_topic": null,
+                "last_intent": null,
+                "active_entities": [],
+                "turns_since_explicit_subject": null,
+                "pending_clarification": false,
+                "context_confidence": 0.0,
+                "history_weight": 0.0,
+                "source_turn": null,
+                "inherited_fields": [],
+                "reset_reason": "missing_history",
+                "missing_history": true
+              },
+              "intent": {
+                "rule_matches": [
+                  {
+                    "rule_id": "intent.base.give_hint.goi_y",
+                    "intent": "give_hint",
+                    "source": "base_rule",
+                    "matched_text": "gợi ý",
+                    "start": 4,
+                    "end": 9,
+                    "score": 5,
+                    "strength": "general"
+                  },
+                  {
+                    "rule_id": "intent.phase2.hint.strong.guidance",
+                    "intent": "give_hint",
+                    "source": "context_rule",
+                    "matched_text": "gợi ý",
+                    "start": 4,
+                    "end": 9,
+                    "score": 9,
+                    "strength": "strong"
+                  }
+                ],
+                "vetoes": [
+                  {
+                    "rule_id": "intent.phase2.veto.solve.hint_request",
+                    "intent": "solve_problem",
+                    "reason": "A hint request must not be routed as a full solution.",
+                    "matched_text": "gợi ý",
+                    "start": 4,
+                    "end": 9
+                  }
+                ],
+                "scores": {
+                  "diagnose_error": 0,
+                  "check_answer": 0,
+                  "give_hint": 14,
+                  "explain_concept": 0,
+                  "ask_follow_up": 0
+                },
+                "selected_intent": "give_hint",
+                "top_score": 14,
+                "second_score": 0,
+                "decision_margin": 14,
+                "history_context": {
+                  "source_turn": null,
+                  "history_weight": 0.0,
+                  "inherited_fields": [],
+                  "missing_history": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "q277",
+          "question": "Bạn gợi ý cho em một bài nhạc nhẹ để nghe khi học bài được không?",
+          "gold": {
+            "primary_subject": "unknown",
+            "intent": "unknown",
+            "target_slm": "general_tutor",
+            "need_clarification": false,
+            "secondary_subjects": []
+          },
+          "predicted": {
+            "primary_subject": "unknown",
+            "secondary_subjects": [],
+            "intent": "give_hint",
+            "target_slm": "ask_clarification",
+            "confidence": 0.35,
+            "need_clarification": true,
+            "reason": "The subject or conversational reference is not sufficiently clear.",
+            "topic": null,
+            "trace": {
+              "topic": null,
+              "rule_matches": [],
+              "subject_scores": {
+                "math": 0,
+                "physics": 0,
+                "chemistry": 0
+              },
+              "primary_subject": "unknown",
+              "secondary_subjects": [],
+              "inherited_from_history": false,
+              "ownership_override": null,
+              "router_context": {
+                "last_explicit_subject": null,
+                "last_topic": null,
+                "last_intent": null,
+                "active_entities": [],
+                "turns_since_explicit_subject": null,
+                "pending_clarification": false,
+                "context_confidence": 0.0,
+                "history_weight": 0.0,
+                "source_turn": null,
+                "inherited_fields": [],
+                "reset_reason": "missing_history",
+                "missing_history": true
+              },
+              "intent": {
+                "rule_matches": [
+                  {
+                    "rule_id": "intent.base.give_hint.goi_y",
+                    "intent": "give_hint",
+                    "source": "base_rule",
+                    "matched_text": "gợi ý",
+                    "start": 4,
+                    "end": 9,
+                    "score": 5,
+                    "strength": "general"
+                  },
+                  {
+                    "rule_id": "intent.phase2.hint.strong.guidance",
+                    "intent": "give_hint",
+                    "source": "context_rule",
+                    "matched_text": "gợi ý",
+                    "start": 4,
+                    "end": 9,
+                    "score": 9,
+                    "strength": "strong"
+                  }
+                ],
+                "vetoes": [
+                  {
+                    "rule_id": "intent.phase2.veto.solve.hint_request",
+                    "intent": "solve_problem",
+                    "reason": "A hint request must not be routed as a full solution.",
+                    "matched_text": "gợi ý",
+                    "start": 4,
+                    "end": 9
+                  }
+                ],
+                "scores": {
+                  "diagnose_error": 0,
+                  "check_answer": 0,
+                  "give_hint": 14,
+                  "explain_concept": 0,
+                  "ask_follow_up": 0
+                },
+                "selected_intent": "give_hint",
+                "top_score": 14,
+                "second_score": 0,
+                "decision_margin": 14,
+                "history_context": {
+                  "source_turn": null,
+                  "history_weight": 0.0,
+                  "inherited_fields": [],
+                  "missing_history": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "q283",
+          "question": "Bạn gợi ý caption đăng ảnh đi chơi với bạn bè giúp em.",
+          "gold": {
+            "primary_subject": "unknown",
+            "intent": "unknown",
+            "target_slm": "general_tutor",
+            "need_clarification": false,
+            "secondary_subjects": []
+          },
+          "predicted": {
+            "primary_subject": "unknown",
+            "secondary_subjects": [],
+            "intent": "give_hint",
+            "target_slm": "ask_clarification",
+            "confidence": 0.35,
+            "need_clarification": true,
+            "reason": "The subject or conversational reference is not sufficiently clear.",
+            "topic": null,
+            "trace": {
+              "topic": null,
+              "rule_matches": [],
+              "subject_scores": {
+                "math": 0,
+                "physics": 0,
+                "chemistry": 0
+              },
+              "primary_subject": "unknown",
+              "secondary_subjects": [],
+              "inherited_from_history": false,
+              "ownership_override": null,
+              "router_context": {
+                "last_explicit_subject": null,
+                "last_topic": null,
+                "last_intent": null,
+                "active_entities": [],
+                "turns_since_explicit_subject": null,
+                "pending_clarification": false,
+                "context_confidence": 0.0,
+                "history_weight": 0.0,
+                "source_turn": null,
+                "inherited_fields": [],
+                "reset_reason": "missing_history",
+                "missing_history": true
+              },
+              "intent": {
+                "rule_matches": [
+                  {
+                    "rule_id": "intent.base.give_hint.goi_y",
+                    "intent": "give_hint",
+                    "source": "base_rule",
+                    "matched_text": "gợi ý",
+                    "start": 4,
+                    "end": 9,
+                    "score": 5,
+                    "strength": "general"
+                  },
+                  {
+                    "rule_id": "intent.phase2.hint.strong.guidance",
+                    "intent": "give_hint",
+                    "source": "context_rule",
+                    "matched_text": "gợi ý",
+                    "start": 4,
+                    "end": 9,
+                    "score": 9,
+                    "strength": "strong"
+                  }
+                ],
+                "vetoes": [
+                  {
+                    "rule_id": "intent.phase2.veto.solve.hint_request",
+                    "intent": "solve_problem",
+                    "reason": "A hint request must not be routed as a full solution.",
+                    "matched_text": "gợi ý",
+                    "start": 4,
+                    "end": 9
+                  }
+                ],
+                "scores": {
+                  "diagnose_error": 0,
+                  "check_answer": 0,
+                  "give_hint": 14,
+                  "explain_concept": 0,
+                  "ask_follow_up": 0
+                },
+                "selected_intent": "give_hint",
+                "top_score": 14,
+                "second_score": 0,
+                "decision_margin": 14,
+                "history_context": {
+                  "source_turn": null,
+                  "history_weight": 0.0,
+                  "inherited_fields": [],
+                  "missing_history": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "q285",
+          "question": "Bạn có thể gợi ý lịch tập thể dục nhẹ cho học sinh không?",
+          "gold": {
+            "primary_subject": "unknown",
+            "intent": "unknown",
+            "target_slm": "general_tutor",
+            "need_clarification": false,
+            "secondary_subjects": []
+          },
+          "predicted": {
+            "primary_subject": "unknown",
+            "secondary_subjects": [],
+            "intent": "give_hint",
+            "target_slm": "ask_clarification",
+            "confidence": 0.35,
+            "need_clarification": true,
+            "reason": "The subject or conversational reference is not sufficiently clear.",
+            "topic": null,
+            "trace": {
+              "topic": null,
+              "rule_matches": [],
+              "subject_scores": {
+                "math": 0,
+                "physics": 0,
+                "chemistry": 0
+              },
+              "primary_subject": "unknown",
+              "secondary_subjects": [],
+              "inherited_from_history": false,
+              "ownership_override": null,
+              "router_context": {
+                "last_explicit_subject": null,
+                "last_topic": null,
+                "last_intent": null,
+                "active_entities": [],
+                "turns_since_explicit_subject": null,
+                "pending_clarification": false,
+                "context_confidence": 0.0,
+                "history_weight": 0.0,
+                "source_turn": null,
+                "inherited_fields": [],
+                "reset_reason": "missing_history",
+                "missing_history": true
+              },
+              "intent": {
+                "rule_matches": [
+                  {
+                    "rule_id": "intent.base.give_hint.goi_y",
+                    "intent": "give_hint",
+                    "source": "base_rule",
+                    "matched_text": "gợi ý",
+                    "start": 11,
+                    "end": 16,
+                    "score": 5,
+                    "strength": "general"
+                  },
+                  {
+                    "rule_id": "intent.phase2.hint.strong.guidance",
+                    "intent": "give_hint",
+                    "source": "context_rule",
+                    "matched_text": "gợi ý",
+                    "start": 11,
+                    "end": 16,
+                    "score": 9,
+                    "strength": "strong"
+                  }
+                ],
+                "vetoes": [
+                  {
+                    "rule_id": "intent.phase2.veto.solve.hint_request",
+                    "intent": "solve_problem",
+                    "reason": "A hint request must not be routed as a full solution.",
+                    "matched_text": "gợi ý",
+                    "start": 11,
+                    "end": 16
+                  }
+                ],
+                "scores": {
+                  "diagnose_error": 0,
+                  "check_answer": 0,
+                  "give_hint": 14,
+                  "explain_concept": 0,
+                  "ask_follow_up": 0
+                },
+                "selected_intent": "give_hint",
+                "top_score": 14,
+                "second_score": 0,
+                "decision_margin": 14,
+                "history_context": {
+                  "source_turn": null,
+                  "history_weight": 0.0,
+                  "inherited_fields": [],
+                  "missing_history": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "q288",
+          "question": "Bạn gợi ý vài truyện ngắn dễ đọc cho học sinh lớp 10 được không?",
+          "gold": {
+            "primary_subject": "unknown",
+            "intent": "unknown",
+            "target_slm": "general_tutor",
+            "need_clarification": false,
+            "secondary_subjects": []
+          },
+          "predicted": {
+            "primary_subject": "unknown",
+            "secondary_subjects": [],
+            "intent": "give_hint",
+            "target_slm": "ask_clarification",
+            "confidence": 0.35,
+            "need_clarification": true,
+            "reason": "The subject or conversational reference is not sufficiently clear.",
+            "topic": null,
+            "trace": {
+              "topic": null,
+              "rule_matches": [],
+              "subject_scores": {
+                "math": 0,
+                "physics": 0,
+                "chemistry": 0
+              },
+              "primary_subject": "unknown",
+              "secondary_subjects": [],
+              "inherited_from_history": false,
+              "ownership_override": null,
+              "router_context": {
+                "last_explicit_subject": null,
+                "last_topic": null,
+                "last_intent": null,
+                "active_entities": [],
+                "turns_since_explicit_subject": null,
+                "pending_clarification": false,
+                "context_confidence": 0.0,
+                "history_weight": 0.0,
+                "source_turn": null,
+                "inherited_fields": [],
+                "reset_reason": "missing_history",
+                "missing_history": true
+              },
+              "intent": {
+                "rule_matches": [
+                  {
+                    "rule_id": "intent.base.give_hint.goi_y",
+                    "intent": "give_hint",
+                    "source": "base_rule",
+                    "matched_text": "gợi ý",
+                    "start": 4,
+                    "end": 9,
+                    "score": 5,
+                    "strength": "general"
+                  },
+                  {
+                    "rule_id": "intent.phase2.hint.strong.guidance",
+                    "intent": "give_hint",
+                    "source": "context_rule",
+                    "matched_text": "gợi ý",
+                    "start": 4,
+                    "end": 9,
+                    "score": 9,
+                    "strength": "strong"
+                  }
+                ],
+                "vetoes": [
+                  {
+                    "rule_id": "intent.phase2.veto.solve.hint_request",
+                    "intent": "solve_problem",
+                    "reason": "A hint request must not be routed as a full solution.",
+                    "matched_text": "gợi ý",
+                    "start": 4,
+                    "end": 9
+                  }
+                ],
+                "scores": {
+                  "diagnose_error": 0,
+                  "check_answer": 0,
+                  "give_hint": 14,
+                  "explain_concept": 0,
+                  "ask_follow_up": 0
+                },
+                "selected_intent": "give_hint",
+                "top_score": 14,
+                "second_score": 0,
+                "decision_margin": 14,
+                "history_context": {
+                  "source_turn": null,
+                  "history_weight": 0.0,
+                  "inherited_fields": [],
+                  "missing_history": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

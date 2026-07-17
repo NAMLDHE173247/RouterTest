@@ -1,0 +1,18 @@
+{
+  "phase": "phase_3",
+  "baseline_phase": "phase_2",
+  "history_rows": 14,
+  "multi_turn_rows": 12,
+  "history_errors": 2,
+  "causes": [
+    {"cause": "current_topic_or_subject_evidence_overrides_history", "count": 1, "examples": ["q246"]},
+    {"cause": "current_calculation_token_overrides_follow_up_context", "count": 1, "examples": ["q247"]}
+  ],
+  "verified_correct_multi_turn_rows": 12,
+  "notes": [
+    "Phase 2 had no RouterContext object or configurable history decay.",
+    "History subject was scanned as the most recent valid subject without source turn, topic, entity, confidence, or reset trace.",
+    "Follow-up without history was not exposed as a structured missing-context state.",
+    "Adversarial negative hint requests are protected separately from history resolution."
+  ]
+}

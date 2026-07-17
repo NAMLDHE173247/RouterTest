@@ -1,3 +1,5 @@
+import re
+
 from keyword_matcher import (
     SingleLabelFlashTextMatcher,
     WeightedFlashTextMatcher,
@@ -33,6 +35,17 @@ AMBIGUOUS_MATCHER = SingleLabelFlashTextMatcher(
 OUT_OF_SCOPE_MATCHER = SingleLabelFlashTextMatcher(
     OUT_OF_SCOPE_RULES,
     "out_of_scope"
+)
+
+
+SCOPE_CONTEXT_RULES = (
+    ("scope.oos.weather", r"(?:thời tiết|trời sẽ mưa|có mưa không)"),
+    ("scope.oos.food", r"(?:món ăn|nấu mì|ăn gì|cách nấu)"),
+    ("scope.oos.shopping", r"(?:mua điện thoại|chọn tai nghe|giá rẻ|chọn balo)"),
+    ("scope.oos.entertainment", r"(?:chơi game|xem phim|bài nhạc|truyện ngắn)"),
+    ("scope.oos.lifestyle", r"(?:ngủ sớm|tập thể dục|giảm căng thẳng|mặc áo|chăm sóc cây)"),
+    ("scope.oos.writing", r"(?:caption|lời chúc sinh nhật|đặt tên nhóm|mở đầu thuyết trình)"),
+    ("scope.oos.study_lifestyle", r"(?:sắp xếp bàn học|mật khẩu mạnh|app ghi chú|gấp áo đồng phục|lịch ôn thi)"),
 )
 
 
@@ -235,27 +248,35 @@ def detect_subject(
 
 def detect_out_of_scope(
     question: str,
-    top_stem_score: int
+    top_stem_score: int,
+    primary_subject: str = "unknown",
 ):
     result = OUT_OF_SCOPE_MATCHER.extract(
         question
     )
 
-    is_out_of_scope = (
-        result["score"]
-        >= THRESHOLDS[
-            "out_of_scope_min_score"
-        ]
-        and top_stem_score
-        <= THRESHOLDS[
-            "out_of_scope_max_stem_score"
-        ]
-    )
+    context_matches = []
+    normalized_question = normalize_text(question)
+    for rule_id, pattern in SCOPE_CONTEXT_RULES:
+        if re.search(pattern, normalized_question, flags=re.IGNORECASE):
+            context_matches.append(rule_id)
+
+    if primary_subject in VALID_SUBJECTS and top_stem_score >= THRESHOLDS["minimum_subject_score"]:
+        scope_state = "CONFIRMED_STEM"
+    elif (
+        result["score"] >= THRESHOLDS["out_of_scope_min_score"]
+        or context_matches
+    ):
+        scope_state = "CONFIRMED_OUT_OF_SCOPE"
+    else:
+        scope_state = "UNKNOWN_SCOPE"
 
     return {
-        "is_out_of_scope": is_out_of_scope,
+        "is_out_of_scope": scope_state == "CONFIRMED_OUT_OF_SCOPE",
+        "scope_state": scope_state,
         "score": result["score"],
-        "matched_terms": result["matched_terms"]
+        "matched_terms": result["matched_terms"],
+        "context_rule_ids": context_matches,
     }
 
 
@@ -480,6 +501,35 @@ def build_reason(
     )
 
 
+def clarification_reason(
+    question: str,
+    history: list,
+    subject_result: dict,
+    intent_result: dict,
+    scope_state: str,
+) -> str:
+    if scope_state == "CONFIRMED_OUT_OF_SCOPE":
+        return "OUT_OF_SCOPE_CONFIRMED"
+    if subject_result["primary_subject"] == "unknown":
+        normalized = normalize_text(question)
+        if (normalized.startswith("vậy") or " vậy " in f" {normalized} ") and not history:
+            return "MISSING_HISTORY_FOR_FOLLOW_UP"
+        scores = subject_result.get("subject_scores", {})
+        top = max(scores.values(), default=0)
+        if top > 0 and list(scores.values()).count(top) > 1:
+            return "SUBJECT_SCORE_TIE"
+        if AMBIGUOUS_MATCHER.extract(question)["score"] >= THRESHOLDS["ambiguous_min_score"]:
+            return "INCOMPLETE_REFERENCE"
+        return "NO_SUBJECT_EVIDENCE"
+    if intent_result.get("intent") == "unknown":
+        return "UNKNOWN_INTENT"
+    scores = subject_result.get("subject_scores", {})
+    if abs(scores.get("physics", 0) - scores.get("chemistry", 0)) <= THRESHOLDS["cross_domain_max_margin"]:
+        if scores.get("physics", 0) >= THRESHOLDS["cross_domain_min_score"] and scores.get("chemistry", 0) >= THRESHOLDS["cross_domain_min_score"]:
+            return "CROSS_DOMAIN_CONFLICT"
+    return "LOW_CONFIDENCE"
+
+
 def route_question(
     question: str,
     history=None
@@ -493,7 +543,8 @@ def route_question(
 
     out_of_scope_result = detect_out_of_scope(
         question,
-        subject_result["top_score"]
+        subject_result["top_score"],
+        subject_result["primary_subject"],
     )
 
     if out_of_scope_result[
@@ -509,7 +560,7 @@ def route_question(
             "topic": None,
             "trace": {
                 **subject_result.get("trace", {}),
-                "scope": "out_of_scope",
+                "scope": out_of_scope_result,
             },
             "reason": (
                 "Strong out-of-scope signal "
@@ -531,6 +582,14 @@ def route_question(
             subject_result=subject_result
         )
     )
+
+    clarification_reason_code = clarification_reason(
+        question=question,
+        history=history,
+        subject_result=subject_result,
+        intent_result=intent_result,
+        scope_state=out_of_scope_result["scope_state"],
+    ) if need_clarification else None
 
     target_slm = decide_target_slm(
         primary_subject=subject_result[
@@ -571,7 +630,10 @@ def route_question(
         "trace": {
             **subject_result.get("trace", {}),
             "intent": intent_result.get("trace", {}),
+            "scope": out_of_scope_result,
+            "clarification_reason_code": clarification_reason_code,
         },
+        "clarification_reason_code": clarification_reason_code,
     }
 
 

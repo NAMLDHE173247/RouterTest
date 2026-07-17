@@ -64,6 +64,29 @@ OWNERSHIP_OVERRIDES = (
         "final_winner": "physics",
         "reason": "The comparison is between electrical potential quantities, so Physics owns the decision.",
     },
+    {
+        "rule_id": "subject.chemistry.override.reaction_thermal_focus",
+        "pattern": r"(?:phản ứng|phản ứng hóa học).{0,80}(?:tỏa nhiệt|nhiệt|áp suất)|(?:tỏa nhiệt|nhiệt|áp suất).{0,80}(?:phản ứng|phản ứng hóa học)",
+        "final_winner": "chemistry",
+        "reason": "Reaction context is the requested subject; thermal or pressure language is a supporting condition.",
+    },
+    {
+        "rule_id": "subject.physics.override.kinematics_equation_focus",
+        "pattern": r"(?:rơi tự do|chuyển động|vận tốc|gia tốc).{0,80}(?:phương trình|v\s*=\s*g\s*t|a\s*=\s*)",
+        "final_winner": "physics",
+        "reason": "The equation is used as a kinematics model, so Physics owns the decision and Math is only a tool subject.",
+    },
+)
+
+
+SUPPORTING_SUBJECT_RULES = (
+    {
+        "rule_id": "subject.chemistry.supporting.ideal_gas_entity_context",
+        "pattern": r"(?:\bco2\b|khí co2).{0,80}(?:khí lí tưởng|phương trình khí|pv\s*=\s*n\s*r\s*t)|(?:khí lí tưởng|phương trình khí|pv\s*=\s*n\s*r\s*t).{0,80}(?:\bco2\b|khí co2)",
+        "subject": "chemistry",
+        "topic": "physics.thermodynamics.ideal_gas",
+        "reason": "CO2 has Chemistry as a supporting subject inside an ideal-gas problem; the gas law remains Physics-owned.",
+    },
 )
 
 
@@ -184,9 +207,28 @@ def _contextual_entity_matches(text: str) -> list[RuleMatch]:
     return matches
 
 
+def _supporting_subject_matches(text: str) -> list[RuleMatch]:
+    matches = []
+    for rule in SUPPORTING_SUBJECT_RULES:
+        for match in _find_pattern_matches(text, rule["pattern"]):
+            matches.append(RuleMatch(
+                rule_id=rule["rule_id"],
+                label=rule["subject"],
+                topic=rule["topic"],
+                source="supporting_subject",
+                matched_text=match.group(0),
+                start=match.start(),
+                end=match.end(),
+                score=2,
+                is_entity=False,
+            ))
+    return matches
+
+
 def extract_topic_matches(question: str) -> list[RuleMatch]:
     text = normalize_text(question)
     matches = _contextual_entity_matches(text)
+    matches.extend(_supporting_subject_matches(text))
     for topic in TOPIC_DEFINITIONS:
         matches.extend(_match_topic(text, topic))
     unique = {}
@@ -233,6 +275,10 @@ def _rank_subjects(matches: list[RuleMatch]):
 def _match_ownership_override(text: str) -> dict | None:
     candidates = []
     for override in OWNERSHIP_OVERRIDES:
+        if override["rule_id"] == "subject.chemistry.override.reaction_thermal_focus" and any(
+            marker in text for marker in ("cốc thủy tinh", "truyền nhiệt", "công cơ học", "động cơ nhiệt")
+        ):
+            continue
         for match in _find_pattern_matches(text, override["pattern"]):
             candidates.append((len(match.group(0)), override))
     if not candidates:
@@ -331,12 +377,62 @@ def resolve_subject(question: str, history_subject: str | None = None) -> TopicR
 
     primary_matches = [match for match in matches if match.topic == primary_topic]
     secondary_subjects = []
+    secondary_reasons = {}
     primary_score = subject_scores.get(primary_subject, 0)
     for subject, score, _ in ranked_subjects:
         if subject == primary_subject or score < 2:
             continue
-        if primary_score and score / primary_score >= 0.35:
+        evidence = [
+            match for match in matches
+            if match.label == subject and not match.is_entity
+        ]
+        if primary_score and score / primary_score >= 0.35 and evidence:
             secondary_subjects.append(subject)
+            secondary_reasons[subject] = "independent_evidence_score_ratio"
+
+    for match in matches:
+        if match.source != "supporting_subject" or match.label == primary_subject:
+            continue
+        if match.label not in secondary_subjects:
+            secondary_subjects.append(match.label)
+        secondary_reasons[match.label] = match.rule_id
+
+    has_calculation_tool_evidence = bool(
+        re.search(
+            r"(?:tính|công thức|phương trình|bao nhiêu|số mol|khối lượng|thể tích).{0,100}\d|(?:\d\s*[=+\-*/]\s*\d)|(?:\d+\s*(?:m/s|kg|n|v|pa|atm|mol|lít|l))|(?:pv\s*=|v\s*=|i\s*=)",
+            normalized_question,
+            flags=re.IGNORECASE,
+        )
+    )
+    if "theo phương trình khí lí tưởng" in normalized_question:
+        has_calculation_tool_evidence = False
+    if primary_subject in {"physics", "chemistry"} and has_calculation_tool_evidence:
+        if "math" not in secondary_subjects:
+            secondary_subjects.append("math")
+        secondary_reasons["math"] = "tool_subject.formula_or_calculation"
+
+    chemistry_context = bool(
+        re.search(
+            r"(?:phản ứng|hóa học|dung dịch|điện phân|đốt cháy|chất tan|kết tủa)",
+            normalized_question,
+            flags=re.IGNORECASE,
+        )
+    )
+    physics_context = bool(
+        re.search(
+            r"(?:nhiệt|áp suất|dòng điện|ánh sáng|khí lí tưởng|năng lượng|công cơ học|piston|lực)",
+            normalized_question,
+            flags=re.IGNORECASE,
+        )
+    )
+    if primary_subject == "physics" and chemistry_context:
+        if "chemistry" not in secondary_subjects:
+            secondary_subjects.append("chemistry")
+        secondary_reasons["chemistry"] = "supporting_subject.chemistry_context"
+    if primary_subject == "chemistry" and physics_context:
+        if "physics" not in secondary_subjects:
+            secondary_subjects.append("physics")
+        secondary_reasons["physics"] = "supporting_subject.physics_context"
 
     return TopicResolution(
         primary_subject=primary_subject,
@@ -348,4 +444,5 @@ def resolve_subject(question: str, history_subject: str | None = None) -> TopicR
         matched_terms=[match.matched_text for match in primary_matches],
         matches=matches,
         ownership_override=ownership_override,
+        secondary_reasons=secondary_reasons,
     )

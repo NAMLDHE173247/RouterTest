@@ -28,7 +28,7 @@ Baseline có 14 mẫu chứa history, gồm 12 multi-turn. 12 multi-turn đạt 
 - `q246`: current gas/physics evidence giữ physics, trong khi gold là chemistry.
 - `q247`: intent `solve_problem` lấn át `ask_follow_up` do current calculation token.
 
-Artifact: `outputs/phase_3/v3_phase_2_history_error_taxonomy.json`.
+Artifact: `outputs/phase_3/v3_phase_3_history_error_taxonomy.json`.
 
 ## RouterContext và policy
 
@@ -108,4 +108,3 @@ Kết quả: `49 passed`.
 ## Artifacts
 
 `outputs/phase_3/` gồm predictions, errors, metrics, subject/intent confusion, fixed/regressions, comparison với Phase 2, rule coverage, history taxonomy, history comparison và frozen Phase 2 artifacts.
-
