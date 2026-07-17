@@ -1,0 +1,44 @@
+{
+  "primary_subject": {
+    "fixed": [],
+    "regressions": [],
+    "fixed_count": 0,
+    "regression_count": 0
+  },
+  "intent": {
+    "fixed": [],
+    "regressions": [],
+    "fixed_count": 0,
+    "regression_count": 0
+  },
+  "target_slm": {
+    "fixed": [],
+    "regressions": [],
+    "fixed_count": 0,
+    "regression_count": 0
+  },
+  "need_clarification": {
+    "fixed": [],
+    "regressions": [],
+    "fixed_count": 0,
+    "regression_count": 0
+  },
+  "secondary_subjects": {
+    "fixed": [],
+    "regressions": [],
+    "fixed_count": 0,
+    "regression_count": 0
+  },
+  "legacy_exact": {
+    "fixed": [],
+    "regressions": [],
+    "fixed_count": 0,
+    "regression_count": 0
+  },
+  "full_exact": {
+    "fixed": [],
+    "regressions": [],
+    "fixed_count": 0,
+    "regression_count": 0
+  }
+}

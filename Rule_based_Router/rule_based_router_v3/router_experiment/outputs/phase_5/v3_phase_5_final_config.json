@@ -1,0 +1,18 @@
+{
+  "selected": {
+    "secondary_score_ratio": 0.3,
+    "ambiguous_min_score": 4,
+    "out_of_scope_min_score": 5,
+    "out_of_scope_max_stem_score": 2,
+    "cross_domain_max_margin": 1
+  },
+  "semantic_fixed": {
+    "minimum_subject_score": 2,
+    "history_inherit_max_score": 3,
+    "domain_owner_min_score": 4,
+    "domain_owner_math_ratio": 0.55
+  },
+  "selection_reason": "All three bounded feasible configurations had identical development and validation metrics; selected the lowest secondary ratio as the least restrictive valid candidate.",
+  "holdout_policy": "Lock before one final holdout run; no tuning or rule changes after holdout.",
+  "config_sha256": "413780f8d68676017a41c8abc37efd0f5035aa60e160baf3908ef05f71a189be"
+}

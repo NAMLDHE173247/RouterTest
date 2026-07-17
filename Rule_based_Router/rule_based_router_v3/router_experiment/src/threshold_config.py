@@ -13,7 +13,7 @@ SEMANTIC_THRESHOLDS = {
 
 TUNABLE_THRESHOLDS = {
     "secondary_min_score": 2,
-    "secondary_score_ratio": 0.35,
+    "secondary_score_ratio": 0.30,
     "ambiguous_min_score": 4,
     "out_of_scope_min_score": 5,
     "out_of_scope_max_stem_score": 2,
