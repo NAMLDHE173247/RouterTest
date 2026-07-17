@@ -24,7 +24,7 @@ NEAR_TIE_MARGIN = 1
 OWNERSHIP_OVERRIDES = (
     {
         "rule_id": "subject.physics.override.buoyancy_gas_context",
-        "pattern": r"(?:bóng bay|khí hidro|khí heli).{0,100}(?:lực đẩy|lực nổi|ác[- ]si[- ]mét|bay lên)|(?:lực đẩy|lực nổi|ác[- ]si[- ]mét).{0,100}(?:bóng bay|khí hidro|khí heli)",
+        "pattern": r"(?:bóng bay|khí hidro|khí heli).{0,100}(?:lực đẩy|lực nổi|ác[- ]si[- ]mét)|(?:lực đẩy|lực nổi|ác[- ]si[- ]mét).{0,100}(?:bóng bay|khí hidro|khí heli)",
         "final_winner": "physics",
         "reason": "The gas is used in a buoyancy/Archimedes context, so Physics owns the decision.",
     },
