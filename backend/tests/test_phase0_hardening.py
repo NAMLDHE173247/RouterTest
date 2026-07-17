@@ -20,7 +20,7 @@ from app.adapters.base import load_isolated_router
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DATASET_PATH = REPO_ROOT / "Rule_based_Router" / "rule_based_router_v2" / "router_experiment" / "data" / "test_router.jsonl"
 V2_CORE_PATH = REPO_ROOT / "Rule_based_Router" / "rule_based_router_v2" / "router_experiment" / "src"
-V3_CORE_PATH = REPO_ROOT / "Rule_based_Router" / "rule_based_router_v3" / "router_experiment" / "src"
+PHASE0_PREDICTIONS_PATH = REPO_ROOT / "Rule_based_Router" / "rule_based_router_v3" / "router_experiment" / "outputs" / "phase_0" / "v3_phase_0_predictions.jsonl"
 
 
 class DummyService(RouterVersionService):
@@ -55,9 +55,8 @@ def test_registry_rejects_duplicate_id_and_invalid_family():
         registry.register(DummyService(router_id="slm", family="slm"))
 
 
-def test_phase0_v3_matches_v2_per_sample():
+def test_frozen_phase0_artifact_matches_v2_per_sample():
     v2_route = load_isolated_router(str(V2_CORE_PATH))
-    v3_route = load_isolated_router(str(V3_CORE_PATH))
     fields = (
         "primary_subject",
         "secondary_subjects",
@@ -68,14 +67,20 @@ def test_phase0_v3_matches_v2_per_sample():
 
     with DATASET_PATH.open(encoding="utf-8") as file:
         rows = [json.loads(line) for line in file if line.strip()]
+    with PHASE0_PREDICTIONS_PATH.open(encoding="utf-8") as file:
+        snapshot = {
+            record["id"]: record
+            for record in (json.loads(line) for line in file if line.strip())
+        }
 
     assert len(rows) == 300
+    assert len(snapshot) == 300
     for row in rows:
         v2 = v2_route(question=row["question"], history=row.get("history", []))
-        v3 = v3_route(question=row["question"], history=row.get("history", []))
-        assert {field: v3.get(field) for field in fields} == {
+        frozen_v3 = snapshot[row["id"]]["prediction"]
+        assert {field: frozen_v3.get(field) for field in fields} == {
             field: v2.get(field) for field in fields
-        }, f"Phase 0 mismatch at sample {row.get('id')}"
+        }, f"Frozen Phase 0 mismatch at sample {row.get('id')}"
 
 
 def test_v3_evaluator_writes_phase_specific_outputs(tmp_path):
@@ -87,7 +92,7 @@ def test_v3_evaluator_writes_phase_specific_outputs(tmp_path):
             sys.executable,
             str(script),
             "--phase",
-            "phase_0",
+            "phase_1",
             "--dataset",
             str(DATASET_PATH),
             "--output-dir",
@@ -99,13 +104,12 @@ def test_v3_evaluator_writes_phase_specific_outputs(tmp_path):
         text=True,
     )
 
-    assert (output_dir / "v3_phase_0_predictions.jsonl").exists()
-    assert (output_dir / "v3_phase_0_errors.json").exists()
-    metrics = json.loads((output_dir / "v3_phase_0_metrics.json").read_text(encoding="utf-8"))
-    assert metrics["exact_match_accuracy"] == 0.5133
-    assert metrics["full_exact_match_accuracy"] == 0.24
-    assert metrics["secondary_subject_exact_set_accuracy"] == 0.5667
-    assert metrics["secondary_subject_micro_f1"] == 0.0255
+    assert (output_dir / "v3_phase_1_predictions.jsonl").exists()
+    assert (output_dir / "v3_phase_1_errors.json").exists()
+    metrics = json.loads((output_dir / "v3_phase_1_metrics.json").read_text(encoding="utf-8"))
+    assert metrics["metadata"]["dataset_sha256"]
+    assert metrics["metadata"]["config_sha256"]
+    assert metrics["metadata"]["generated_at_utc"]
     assert not list(output_dir.glob("v2_*.json*"))
 
 

@@ -1,0 +1,15 @@
+{
+  "metadata": {
+    "git_commit": "254c4837f11efa4468de5cd85b74b1fef51de1fb",
+    "dataset_sha256": "5d25fb93a173733033a632fec3ca7bfc5b29fffb0db2a8b3676ee919301ec5cf",
+    "config_sha256": "e32cf410a311d8475010a4f4bd9cef207a3f08ab90b0a26ebc7241e261d21c99",
+    "config_files": [
+      "src\\rules.py"
+    ],
+    "generated_at_utc": "2026-07-17T16:40:46.175110+00:00",
+    "phase": "phase_0"
+  },
+  "total_samples": 300,
+  "matched_rule_count": 0,
+  "rules": {}
+}

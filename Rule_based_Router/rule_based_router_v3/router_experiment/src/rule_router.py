@@ -1,13 +1,9 @@
-import re
-
 from keyword_matcher import (
     SingleLabelFlashTextMatcher,
     WeightedFlashTextMatcher,
-    normalize_text
 )
 
 from rules import (
-    SUBJECT_RULES,
     INTENT_RULES,
     INTENT_PRIORITY,
     FOLLOW_UP_RULES,
@@ -15,18 +11,7 @@ from rules import (
     OUT_OF_SCOPE_RULES,
     THRESHOLDS
 )
-
-
-VALID_SUBJECTS = [
-    "math",
-    "physics",
-    "chemistry"
-]
-
-
-SUBJECT_MATCHER = WeightedFlashTextMatcher(
-    SUBJECT_RULES
-)
+from topic_resolver import VALID_SUBJECTS, resolve_subject
 
 INTENT_MATCHER = WeightedFlashTextMatcher(
     INTENT_RULES
@@ -46,117 +31,6 @@ OUT_OF_SCOPE_MATCHER = SingleLabelFlashTextMatcher(
     OUT_OF_SCOPE_RULES,
     "out_of_scope"
 )
-
-
-def add_signal(
-    signal: dict,
-    term: str,
-    score: int,
-    strong: bool = True
-):
-    if term in signal["matched_terms"]:
-        return
-
-    signal["score"] += score
-    signal["matched_terms"].append(term)
-
-    if strong:
-        signal["strong_count"] += 1
-
-
-def apply_regex_subject_boosts(
-    question: str,
-    signals: dict
-):
-    """
-    FlashText xử lý keyword cố định.
-    Regex vẫn được giữ để nhận diện công thức, ký hiệu và đơn vị.
-    """
-
-    text = normalize_text(question)
-    raw_text = str(question or "")
-
-    # Math formula.
-    if (
-        re.search(r"\bf\s*\(\s*x\s*\)", text)
-        or re.search(r"\bx\s*(?:\^|²)\s*2\b", text)
-    ):
-        add_signal(
-            signals["math"],
-            "math_formula",
-            3
-        )
-
-    if any(
-        symbol in raw_text
-        for symbol in ["√", "∫", "≤", "≥", "Δ"]
-    ):
-        add_signal(
-            signals["math"],
-            "math_symbol",
-            3
-        )
-
-    # Physics units only count when physical context exists.
-    physics_context = [
-        "vận tốc",
-        "gia tốc",
-        "lực",
-        "điện",
-        "sóng",
-        "vật",
-        "chuyển động",
-        "công suất",
-        "nhiệt lượng"
-    ]
-
-    physics_unit_pattern = (
-        r"(?<!\w)"
-        r"(?:m/s(?:\^?2|²)?|km/h|hz|kg|newton|joule|watt)"
-        r"(?!\w)"
-    )
-
-    if (
-        re.search(physics_unit_pattern, text)
-        and any(term in text for term in physics_context)
-    ):
-        add_signal(
-            signals["physics"],
-            "physics_unit",
-            3
-        )
-
-    # Chemical formula.
-    chemical_pattern = (
-        r"(?<![a-z0-9])"
-        r"(?:caco3|naoh|nacl|hcl|h2o|co2|h2|o2)"
-        r"(?![a-z0-9])"
-    )
-
-    if re.search(chemical_pattern, text):
-        add_signal(
-            signals["chemistry"],
-            "chemical_formula",
-            4
-        )
-
-    if "->" in text or "→" in raw_text:
-        add_signal(
-            signals["chemistry"],
-            "reaction_arrow",
-            3
-        )
-
-    return signals
-
-
-def get_subject_signals(question: str) -> dict:
-    signals = SUBJECT_MATCHER.extract_all(question)
-
-    return apply_regex_subject_boosts(
-        question,
-        signals
-    )
 
 
 def get_history_text(item) -> str:
@@ -200,24 +74,9 @@ def get_history_subject(history):
         if not history_text:
             continue
 
-        signals = get_subject_signals(history_text)
-
-        ranked = sorted(
-            [
-                (
-                    subject,
-                    signals[subject]["score"]
-                )
-                for subject in VALID_SUBJECTS
-            ],
-            key=lambda item: item[1],
-            reverse=True
-        )
-
-        best_subject, best_score = ranked[0]
-
-        if best_score >= 3:
-            return best_subject
+        resolved = resolve_subject(history_text)
+        if resolved.primary_subject in VALID_SUBJECTS and resolved.top_score >= 2:
+            return resolved.primary_subject
 
     return None
 
@@ -296,28 +155,15 @@ def detect_subject(
     history=None
 ):
     history = history or []
-
-    signals = get_subject_signals(question)
-
-    scores = {
-        subject: signals[subject]["score"]
-        for subject in VALID_SUBJECTS
-    }
-
-    ranked = sorted(
-        scores.items(),
-        key=lambda item: item[1],
-        reverse=True
-    )
-
-    top_subject, top_score = ranked[0]
-    second_subject, second_score = ranked[1]
+    history_subject = get_history_subject(history)
+    resolution = resolve_subject(question)
+    scores = resolution.subject_scores
+    top_score = resolution.top_score
+    second_score = resolution.second_score
 
     follow_up_score = FOLLOW_UP_MATCHER.extract(
         question
     )["score"]
-
-    history_subject = get_history_subject(history)
 
     # Multi-turn: kế thừa môn học từ history.
     if (
@@ -326,136 +172,24 @@ def detect_subject(
         and top_score
         <= THRESHOLDS["history_inherit_max_score"]
     ):
-        return {
-            "primary_subject": history_subject,
-            "secondary_subjects": [],
-            "subject_scores": scores,
-            "top_score": max(top_score, 3),
-            "second_score": second_score,
-            "is_interdisciplinary": False,
-            "inherited_from_history": True,
-            "matched_terms": signals[
-                history_subject
-            ]["matched_terms"]
-        }
+        resolution.primary_subject = history_subject
+        resolution.secondary_subjects = []
+        resolution.inherited_from_history = True
+        resolution.top_score = max(top_score, 3)
 
-    if (
-        top_score
-        < THRESHOLDS["minimum_subject_score"]
-    ):
-        return {
-            "primary_subject": "unknown",
-            "secondary_subjects": [],
-            "subject_scores": scores,
-            "top_score": top_score,
-            "second_score": second_score,
-            "is_interdisciplinary": False,
-            "inherited_from_history": False,
-            "matched_terms": []
-        }
-
-    primary_subject = top_subject
-
-    # Domain-owner:
-    # Math có thể chỉ là công cụ trong bài Physics/Chemistry.
-    if top_subject == "math":
-        domain_candidates = []
-
-        for subject in [
-            "physics",
-            "chemistry"
-        ]:
-            subject_score = scores[subject]
-
-            if (
-                signals[subject]["strong_count"] > 0
-                and subject_score
-                >= THRESHOLDS[
-                    "domain_owner_min_score"
-                ]
-                and subject_score
-                >= top_score
-                * THRESHOLDS[
-                    "domain_owner_math_ratio"
-                ]
-            ):
-                domain_candidates.append(
-                    (
-                        subject,
-                        subject_score
-                    )
-                )
-
-        if domain_candidates:
-            primary_subject = max(
-                domain_candidates,
-                key=lambda item: item[1]
-            )[0]
-
-    primary_score = scores[primary_subject]
-
-    other_scores = [
-        score
-        for subject, score in scores.items()
-        if subject != primary_subject
-    ]
-
-    second_score = max(
-        other_scores,
-        default=0
-    )
-
-    secondary_subjects = []
-
-    for subject, score in sorted(
-        scores.items(),
-        key=lambda item: item[1],
-        reverse=True
-    ):
-        if subject == primary_subject:
-            continue
-
-        score_ratio = (
-            score / primary_score
-            if primary_score > 0
-            else 0
-        )
-
-        has_strong_signal = (
-            signals[subject]["strong_count"] > 0
-        )
-
-        if (
-            score
-            >= THRESHOLDS[
-                "secondary_min_score"
-            ]
-            and score_ratio
-            >= THRESHOLDS[
-                "secondary_score_ratio"
-            ]
-            and (
-                has_strong_signal
-                or score >= 4
-            )
-        ):
-            secondary_subjects.append(
-                subject
-            )
+    primary_subject = resolution.primary_subject
 
     return {
         "primary_subject": primary_subject,
-        "secondary_subjects": secondary_subjects,
+        "secondary_subjects": resolution.secondary_subjects,
         "subject_scores": scores,
-        "top_score": primary_score,
-        "second_score": second_score,
-        "is_interdisciplinary": bool(
-            secondary_subjects
-        ),
-        "inherited_from_history": False,
-        "matched_terms": signals[
-            primary_subject
-        ]["matched_terms"]
+        "top_score": resolution.top_score,
+        "second_score": resolution.second_score,
+        "is_interdisciplinary": resolution.is_interdisciplinary,
+        "inherited_from_history": resolution.inherited_from_history,
+        "matched_terms": resolution.matched_terms,
+        "topic": resolution.topic,
+        "trace": resolution.trace(),
     }
 
 
@@ -732,6 +466,11 @@ def route_question(
             "target_slm": "general_tutor",
             "confidence": 0.80,
             "need_clarification": False,
+            "topic": None,
+            "trace": {
+                **subject_result.get("trace", {}),
+                "scope": "out_of_scope",
+            },
             "reason": (
                 "Strong out-of-scope signal "
                 "with no reliable STEM signal."
@@ -785,7 +524,9 @@ def route_question(
         "target_slm": target_slm,
         "confidence": confidence,
         "need_clarification": need_clarification,
-        "reason": reason
+        "reason": reason,
+        "topic": subject_result.get("topic"),
+        "trace": subject_result.get("trace"),
     }
 
 

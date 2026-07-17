@@ -1,10 +1,13 @@
 """Evaluate Rule-based Router V3 and write phase-specific artifacts."""
 
 import argparse
+import hashlib
 import json
 import os
+import subprocess
 import time
-from collections import defaultdict
+from collections import Counter, defaultdict
+from datetime import datetime, timezone
 from typing import Any
 
 from rule_router import route_question
@@ -27,6 +30,45 @@ def save_json(path: str, data: Any) -> None:
         json.dump(data, file, ensure_ascii=False, indent=2)
 
 
+def sha256_file(path: str) -> str:
+    digest = hashlib.sha256()
+    with open(path, "rb") as file:
+        for chunk in iter(lambda: file.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def sha256_files(paths: list[str]) -> str:
+    digest = hashlib.sha256()
+    for path in sorted(paths):
+        digest.update(os.path.basename(path).encode("utf-8"))
+        with open(path, "rb") as file:
+            digest.update(file.read())
+    return digest.hexdigest()
+
+
+def current_git_commit() -> str | None:
+    try:
+        return subprocess.check_output(
+            ["git", "rev-parse", "HEAD"],
+            cwd=EXPERIMENT_DIR,
+            text=True,
+            stderr=subprocess.DEVNULL,
+        ).strip()
+    except (OSError, subprocess.CalledProcessError):
+        return None
+
+
+def load_prediction_records(path: str) -> dict[str, dict[str, Any]]:
+    if not path or not os.path.exists(path):
+        return {}
+    with open(path, "r", encoding="utf-8") as file:
+        return {
+            record["id"]: record
+            for record in (json.loads(line) for line in file if line.strip())
+        }
+
+
 def accuracy(correct: int, total: int) -> float:
     return round(correct / total, 4) if total else 0.0
 
@@ -35,6 +77,8 @@ def evaluate(
     dataset_path: str = DEFAULT_DATASET_PATH,
     output_dir: str = DEFAULT_OUTPUT_DIR,
     phase: str = "phase_0",
+    baseline_dir: str | None = None,
+    config_paths: list[str] | None = None,
 ) -> dict[str, Any]:
     dataset = load_jsonl(dataset_path)
     total = len(dataset)
@@ -42,7 +86,22 @@ def evaluate(
     prediction_path = os.path.join(output_dir, f"{prefix}_predictions.jsonl")
     error_path = os.path.join(output_dir, f"{prefix}_errors.json")
     metrics_path = os.path.join(output_dir, f"{prefix}_metrics.json")
+    confusion_path = os.path.join(output_dir, f"{prefix}_subject_confusion.json")
+    fixed_path = os.path.join(output_dir, f"{prefix}_fixed_errors.json")
+    regressions_path = os.path.join(output_dir, f"{prefix}_regressions.json")
+    comparison_path = os.path.join(output_dir, f"{prefix}_comparison_with_phase_0.json")
+    coverage_path = os.path.join(output_dir, f"{prefix}_rule_coverage.json")
     os.makedirs(output_dir, exist_ok=True)
+
+    config_paths = config_paths or [os.path.join(SCRIPT_DIR, "rules.py")]
+    metadata = {
+        "git_commit": current_git_commit(),
+        "dataset_sha256": sha256_file(dataset_path),
+        "config_sha256": sha256_files(config_paths),
+        "config_files": [os.path.relpath(path, EXPERIMENT_DIR) for path in config_paths],
+        "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+        "phase": phase,
+    }
 
     field_names = (
         "primary_subject",
@@ -59,6 +118,8 @@ def evaluate(
     secondary_fn = 0
     total_latency = 0.0
     errors = []
+    subject_confusion = Counter()
+    rule_coverage = Counter()
     case_stats: dict[str, dict[str, int]] = defaultdict(lambda: {
         "total_samples": 0,
         "primary_subject_correct": 0,
@@ -117,10 +178,18 @@ def evaluate(
                 "gold": {field: item.get(field) for field in (*field_names, "secondary_subjects")},
                 "prediction": prediction,
             }
+            for match in prediction.get("trace", {}).get("rule_matches", []):
+                rule_id = match.get("rule_id")
+                if rule_id:
+                    rule_coverage[rule_id] += 1
             pred_file.write(json.dumps(record, ensure_ascii=False) + "\n")
 
             if wrong_fields:
                 errors.append({**record, "wrong_fields": wrong_fields})
+            if prediction.get("primary_subject") != item.get("primary_subject"):
+                subject_confusion[
+                    (item.get("primary_subject"), prediction.get("primary_subject"))
+                ] += 1
 
     precision = secondary_tp / (secondary_tp + secondary_fp) if secondary_tp + secondary_fp else 0.0
     recall = secondary_tp / (secondary_tp + secondary_fn) if secondary_tp + secondary_fn else 0.0
@@ -139,6 +208,7 @@ def evaluate(
         }
 
     metrics = {
+        "metadata": metadata,
         "phase": phase,
         "total_samples": total,
         "primary_subject_accuracy": accuracy(correct["primary_subject"], total),
@@ -160,6 +230,53 @@ def evaluate(
 
     save_json(error_path, errors)
     save_json(metrics_path, metrics)
+
+    save_json(confusion_path, {
+        "metadata": metadata,
+        "items": [
+            {"gold": gold, "predicted": predicted, "count": count}
+            for (gold, predicted), count in subject_confusion.most_common()
+        ],
+    })
+
+    baseline_dir = baseline_dir or os.path.join(EXPERIMENT_DIR, "outputs", "phase_0")
+    baseline_records = load_prediction_records(
+        os.path.join(baseline_dir, "v3_phase_0_predictions.jsonl")
+    )
+    current_records = load_prediction_records(prediction_path)
+    fixed_errors = []
+    regressions = []
+    comparison = {
+        "metadata": metadata,
+        "baseline_dir": baseline_dir,
+        "baseline_available": bool(baseline_records),
+        "fixed_primary_subject_errors": 0,
+        "new_primary_subject_regressions": 0,
+    }
+    for sample_id, current in current_records.items():
+        baseline = baseline_records.get(sample_id)
+        if not baseline:
+            continue
+        gold_subject = current["gold"].get("primary_subject")
+        baseline_subject = baseline["prediction"].get("primary_subject")
+        current_subject = current["prediction"].get("primary_subject")
+        baseline_wrong = baseline_subject != gold_subject
+        current_wrong = current_subject != gold_subject
+        if baseline_wrong and not current_wrong:
+            fixed_errors.append({"id": sample_id, "baseline": baseline, "current": current})
+        elif not baseline_wrong and current_wrong:
+            regressions.append({"id": sample_id, "baseline": baseline, "current": current})
+    comparison["fixed_primary_subject_errors"] = len(fixed_errors)
+    comparison["new_primary_subject_regressions"] = len(regressions)
+    save_json(fixed_path, {"metadata": metadata, "items": fixed_errors})
+    save_json(regressions_path, {"metadata": metadata, "items": regressions})
+    save_json(comparison_path, comparison)
+    save_json(coverage_path, {
+        "metadata": metadata,
+        "total_samples": total,
+        "matched_rule_count": sum(rule_coverage.values()),
+        "rules": dict(rule_coverage.most_common()),
+    })
 
     print("===== RULE-BASED ROUTER V3 EVALUATION =====")
     for key in (
@@ -184,10 +301,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--phase", default="phase_0")
     parser.add_argument("--dataset", default=DEFAULT_DATASET_PATH)
     parser.add_argument("--output-dir", default=None)
+    parser.add_argument("--baseline-dir", default=None)
+    parser.add_argument("--config", action="append", default=None)
     return parser.parse_args()
 
 
 if __name__ == "__main__":
     args = parse_args()
     output_dir = args.output_dir or os.path.join(EXPERIMENT_DIR, "outputs", args.phase)
-    evaluate(args.dataset, output_dir, args.phase)
+    config_paths = args.config or [os.path.join(SCRIPT_DIR, "rules.py")]
+    evaluate(args.dataset, output_dir, args.phase, args.baseline_dir, config_paths)
