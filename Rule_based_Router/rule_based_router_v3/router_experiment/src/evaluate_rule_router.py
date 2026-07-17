@@ -89,6 +89,7 @@ def evaluate(
     baseline_phase: str = "phase_0",
     additional_baseline_dir: str | None = None,
     additional_baseline_phase: str = "phase_0",
+    comparison_field: str = "primary_subject",
     config_paths: list[str] | None = None,
 ) -> dict[str, Any]:
     dataset = load_jsonl(dataset_path)
@@ -98,6 +99,7 @@ def evaluate(
     error_path = os.path.join(output_dir, f"{prefix}_errors.json")
     metrics_path = os.path.join(output_dir, f"{prefix}_metrics.json")
     confusion_path = os.path.join(output_dir, f"{prefix}_subject_confusion.json")
+    intent_confusion_path = os.path.join(output_dir, f"{prefix}_intent_confusion.json")
     fixed_path = os.path.join(output_dir, f"{prefix}_fixed_errors.json")
     regressions_path = os.path.join(output_dir, f"{prefix}_regressions.json")
     comparison_path = os.path.join(output_dir, f"{prefix}_comparison_with_{baseline_phase}.json")
@@ -131,10 +133,15 @@ def evaluate(
     latencies = []
     errors = []
     subject_confusion = Counter()
+    intent_confusion = Counter()
     rule_coverage = Counter()
     subject_stats: dict[str, dict[str, int]] = defaultdict(lambda: {
         "total_samples": 0,
         "primary_subject_correct": 0,
+    })
+    intent_stats: dict[str, dict[str, int]] = defaultdict(lambda: {
+        "total_samples": 0,
+        "intent_correct": 0,
     })
     case_stats: dict[str, dict[str, int]] = defaultdict(lambda: {
         "total_samples": 0,
@@ -162,6 +169,8 @@ def evaluate(
             stats["total_samples"] += 1
             gold_subject = item.get("primary_subject", "unknown")
             subject_stats[gold_subject]["total_samples"] += 1
+            gold_intent = item.get("intent", "unknown")
+            intent_stats[gold_intent]["total_samples"] += 1
             wrong_fields = []
 
             for field in field_names:
@@ -170,6 +179,8 @@ def evaluate(
                     stats[f"{field}_correct"] += 1
                     if field == "primary_subject":
                         subject_stats[gold_subject]["primary_subject_correct"] += 1
+                    if field == "intent":
+                        intent_stats[gold_intent]["intent_correct"] += 1
                 else:
                     wrong_fields.append(field)
 
@@ -200,7 +211,9 @@ def evaluate(
                 "gold": {field: item.get(field) for field in (*field_names, "secondary_subjects")},
                 "prediction": prediction,
             }
-            for match in prediction.get("trace", {}).get("rule_matches", []):
+            trace_matches = list(prediction.get("trace", {}).get("rule_matches", []))
+            trace_matches.extend(prediction.get("trace", {}).get("intent", {}).get("rule_matches", []))
+            for match in trace_matches:
                 rule_id = match.get("rule_id")
                 if rule_id:
                     rule_coverage[rule_id] += 1
@@ -211,6 +224,10 @@ def evaluate(
             if prediction.get("primary_subject") != item.get("primary_subject"):
                 subject_confusion[
                     (item.get("primary_subject"), prediction.get("primary_subject"))
+                ] += 1
+            if prediction.get("intent") != item.get("intent"):
+                intent_confusion[
+                    (item.get("intent"), prediction.get("intent"))
                 ] += 1
 
     precision = secondary_tp / (secondary_tp + secondary_fp) if secondary_tp + secondary_fp else 0.0
@@ -258,6 +275,13 @@ def evaluate(
             }
             for subject, stats in sorted(subject_stats.items())
         },
+        "metrics_by_gold_intent": {
+            intent: {
+                "total_samples": stats["total_samples"],
+                "intent_accuracy": accuracy(stats["intent_correct"], stats["total_samples"]),
+            }
+            for intent, stats in sorted(intent_stats.items())
+        },
         "metrics_by_case_type": metrics_by_case_type,
     }
 
@@ -269,6 +293,13 @@ def evaluate(
         "items": [
             {"gold": gold, "predicted": predicted, "count": count}
             for (gold, predicted), count in subject_confusion.most_common()
+        ],
+    })
+    save_json(intent_confusion_path, {
+        "metadata": metadata,
+        "items": [
+            {"gold": gold, "predicted": predicted, "count": count}
+            for (gold, predicted), count in intent_confusion.most_common()
         ],
     })
 
@@ -284,24 +315,25 @@ def evaluate(
         "baseline_dir": baseline_dir,
         "baseline_phase": baseline_phase,
         "baseline_available": bool(baseline_records),
-        "fixed_primary_subject_errors": 0,
-        "new_primary_subject_regressions": 0,
+        f"fixed_{comparison_field}_errors": 0,
+        f"new_{comparison_field}_regressions": 0,
+        "comparison_field": comparison_field,
     }
     for sample_id, current in current_records.items():
         baseline = baseline_records.get(sample_id)
         if not baseline:
             continue
-        gold_subject = current["gold"].get("primary_subject")
-        baseline_subject = baseline["prediction"].get("primary_subject")
-        current_subject = current["prediction"].get("primary_subject")
-        baseline_wrong = baseline_subject != gold_subject
-        current_wrong = current_subject != gold_subject
+        gold_value = current["gold"].get(comparison_field)
+        baseline_value = baseline["prediction"].get(comparison_field)
+        current_value = current["prediction"].get(comparison_field)
+        baseline_wrong = baseline_value != gold_value
+        current_wrong = current_value != gold_value
         if baseline_wrong and not current_wrong:
             fixed_errors.append({"id": sample_id, "baseline": baseline, "current": current})
         elif not baseline_wrong and current_wrong:
             regressions.append({"id": sample_id, "baseline": baseline, "current": current})
-    comparison["fixed_primary_subject_errors"] = len(fixed_errors)
-    comparison["new_primary_subject_regressions"] = len(regressions)
+    comparison[f"fixed_{comparison_field}_errors"] = len(fixed_errors)
+    comparison[f"new_{comparison_field}_regressions"] = len(regressions)
     save_json(fixed_path, {"metadata": metadata, "items": fixed_errors})
     save_json(regressions_path, {"metadata": metadata, "items": regressions})
     save_json(comparison_path, comparison)
@@ -315,9 +347,9 @@ def evaluate(
             baseline = additional_records.get(sample_id)
             if not baseline:
                 continue
-            gold_subject = current["gold"].get("primary_subject")
-            baseline_wrong = baseline["prediction"].get("primary_subject") != gold_subject
-            current_wrong = current["prediction"].get("primary_subject") != gold_subject
+            gold_value = current["gold"].get(comparison_field)
+            baseline_wrong = baseline["prediction"].get(comparison_field) != gold_value
+            current_wrong = current["prediction"].get(comparison_field) != gold_value
             if baseline_wrong and not current_wrong:
                 additional_fixed.append({"id": sample_id, "baseline": baseline, "current": current})
             elif not baseline_wrong and current_wrong:
@@ -336,8 +368,9 @@ def evaluate(
             "baseline_dir": additional_baseline_dir,
             "baseline_phase": additional_baseline_phase,
             "baseline_available": bool(additional_records),
-            "fixed_primary_subject_errors": len(additional_fixed),
-            "new_primary_subject_regressions": len(additional_regressions),
+            f"fixed_{comparison_field}_errors": len(additional_fixed),
+            f"new_{comparison_field}_regressions": len(additional_regressions),
+            "comparison_field": comparison_field,
         })
     save_json(coverage_path, {
         "metadata": metadata,
@@ -373,6 +406,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--baseline-phase", default="phase_0")
     parser.add_argument("--additional-baseline-dir", default=None)
     parser.add_argument("--additional-baseline-phase", default="phase_0")
+    parser.add_argument("--comparison-field", default="primary_subject")
     parser.add_argument("--config", action="append", default=None)
     return parser.parse_args()
 
@@ -383,5 +417,5 @@ if __name__ == "__main__":
     config_paths = args.config or [os.path.join(SCRIPT_DIR, "rules.py")]
     evaluate(
         args.dataset, output_dir, args.phase, args.baseline_dir, args.baseline_phase,
-        args.additional_baseline_dir, args.additional_baseline_phase, config_paths,
+        args.additional_baseline_dir, args.additional_baseline_phase, args.comparison_field, config_paths,
     )

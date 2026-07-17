@@ -12,6 +12,7 @@ from rules import (
     THRESHOLDS
 )
 from topic_resolver import VALID_SUBJECTS, resolve_subject
+from intent_resolver import resolve_intent
 
 INTENT_MATCHER = WeightedFlashTextMatcher(
     INTENT_RULES
@@ -85,6 +86,14 @@ def detect_intent(
     question: str,
     history=None
 ):
+    return resolve_intent(
+        question=question,
+        history=history or [],
+        intent_matcher=INTENT_MATCHER,
+        follow_up_matcher=FOLLOW_UP_MATCHER,
+    )
+
+    # Legacy score path retained below for reference; Phase 2 returns above.
     history = history or []
 
     signals = INTENT_MATCHER.extract_all(question)
@@ -526,7 +535,10 @@ def route_question(
         "need_clarification": need_clarification,
         "reason": reason,
         "topic": subject_result.get("topic"),
-        "trace": subject_result.get("trace"),
+        "trace": {
+            **subject_result.get("trace", {}),
+            "intent": intent_result.get("trace", {}),
+        },
     }
 
 
