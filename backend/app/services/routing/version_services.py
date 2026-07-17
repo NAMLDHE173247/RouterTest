@@ -6,6 +6,7 @@ from app.adapters.rule_v1_adapter import RuleV1Adapter
 from app.adapters.rule_v2_adapter import RuleV2Adapter
 from app.adapters.hybrid_v0_adapter import HybridV0Adapter
 from app.schemas.routing import RouteResponse
+from app.settings_store import SettingsStore
 from app.services.routing.base import RouterVersionService
 
 
@@ -18,6 +19,7 @@ class AdapterBackedRouterService(RouterVersionService):
         self.router_name = adapter.NAME
         self.family = family
         self.version = version
+        self.capabilities = dict(self.capabilities)
 
     def route(self, question: str, history: list[str] | None = None) -> RouteResponse:
         return self.adapter.route(question=question, history=history or [])
@@ -50,11 +52,11 @@ class RuleV3Service(AdapterBackedRouterService):
 class QwenV0Service(AdapterBackedRouterService):
     def __init__(self):
         super().__init__(QwenV0Adapter(), "slm", "v0")
+        self.capabilities["requires_external_service"] = True
 
-    def get_metadata(self):
-        metadata = super().get_metadata()
-        metadata["capabilities"]["requires_external_service"] = True
-        return metadata
+    def is_available(self) -> bool:
+        """Use cached health state; listing routers must not make network calls."""
+        return SettingsStore.get_qwen_health() is True
 
 
 class HybridV0Service(AdapterBackedRouterService):

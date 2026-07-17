@@ -12,12 +12,22 @@ DATASET_PATH = os.path.join(PROJECT_ROOT, "Rule_based_Router/rule_based_router_v
 RUNS_DIR = os.path.join(PROJECT_ROOT, "data/evaluation_runs")
 
 class EvaluationService:
+    RUNS_DIR = RUNS_DIR
     
     def run_evaluation(self, router_ids: list[str], dataset_id: str = None, limit: int = None) -> EvaluationResponse:
+        unknown_router_ids = [
+            router_id for router_id in router_ids
+            if not routing_service.has_router(router_id)
+        ]
+        if unknown_router_ids:
+            raise ValueError(
+                "Unknown router IDs: " + ", ".join(unknown_router_ids)
+            )
+
         run_id = f"eval_{datetime.now().strftime('%Y%md_%H%M%S')}_{uuid4().hex[:6]}"
         
         # Ensure directories
-        run_dir = os.path.join(RUNS_DIR, run_id)
+        run_dir = os.path.join(self.RUNS_DIR, run_id)
         os.makedirs(run_dir, exist_ok=True)
         
         from app.services.dataset_service import dataset_service
@@ -58,16 +68,14 @@ class EvaluationService:
         ]
         
         for rid in router_ids:
-            if rid not in routing_service.adapters:
-                continue
-                
-            service = routing_service._get_service(rid)
+            service = routing_service.get_service(rid)
             
             correct_ps = 0
             correct_intent = 0
             correct_slm = 0
             correct_nc = 0
-            exact_matches = 0
+            core_exact_matches = 0
+            full_exact_matches = 0
             secondary_exact_matches = 0
             secondary_tp = 0
             secondary_fp = 0
@@ -98,6 +106,7 @@ class EvaluationService:
                     "intent_correct": 0,
                     "target_slm_correct": 0,
                     "need_clarification_correct": 0,
+                    "core_exact_match_correct": 0,
                     "full_exact_match_correct": 0,
                 })
                 case_stat["total_samples"] += 1
@@ -128,6 +137,10 @@ class EvaluationService:
                     case_stat["need_clarification_correct"] += 1
                 else:
                     wrong_fields.append("need_clarification")
+
+                if not wrong_fields:
+                    core_exact_matches += 1
+                    case_stat["core_exact_match_correct"] += 1
                     
                 gold_secondary = set(row.get("secondary_subjects", []))
                 predicted_secondary = set(decision.get("secondary_subjects", []))
@@ -141,7 +154,7 @@ class EvaluationService:
                     wrong_fields.append("secondary_subjects")
 
                 if len(wrong_fields) == 0:
-                    exact_matches += 1
+                    full_exact_matches += 1
                     case_stat["full_exact_match_correct"] += 1
                 else:
                     # Log error
@@ -169,6 +182,7 @@ class EvaluationService:
                     "intent_accuracy": accuracy_for(values["intent_correct"], values["total_samples"]),
                     "target_slm_accuracy": accuracy_for(values["target_slm_correct"], values["total_samples"]),
                     "need_clarification_accuracy": accuracy_for(values["need_clarification_correct"], values["total_samples"]),
+                    "exact_match_accuracy": accuracy_for(values["core_exact_match_correct"], values["total_samples"]),
                     "full_exact_match_accuracy": accuracy_for(values["full_exact_match_correct"], values["total_samples"]),
                 }
                 for case_type, values in case_stats.items()
@@ -182,14 +196,15 @@ class EvaluationService:
                 intent_accuracy=correct_intent / total if total else 0,
                 target_slm_accuracy=correct_slm / total if total else 0,
                 need_clarification_accuracy=correct_nc / total if total else 0,
-                exact_match_accuracy=exact_matches / total if total else 0,
-                total_errors=total - exact_matches,
+                exact_match_accuracy=core_exact_matches / total if total else 0,
+                total_errors=total - core_exact_matches,
                 average_latency_ms=total_time / total if total else 0,
+                full_total_errors=total - full_exact_matches,
                 secondary_subject_exact_set_accuracy=secondary_exact_matches / total if total else 0,
                 secondary_subject_micro_precision=precision,
                 secondary_subject_micro_recall=recall,
                 secondary_subject_micro_f1=f1,
-                full_exact_match_accuracy=exact_matches / total if total else 0,
+                full_exact_match_accuracy=full_exact_matches / total if total else 0,
                 metrics_by_case_type=case_metrics,
             )
             
@@ -226,21 +241,21 @@ class EvaluationService:
         )
 
     def get_metrics(self, run_id: str) -> dict:
-        path = os.path.join(RUNS_DIR, run_id, "metrics.json")
+        path = os.path.join(self.RUNS_DIR, run_id, "metrics.json")
         if not os.path.exists(path):
             raise FileNotFoundError("Metrics not found")
         with open(path, "r", encoding="utf-8") as f:
             return json.load(f)
 
     def get_errors(self, run_id: str) -> dict:
-        path = os.path.join(RUNS_DIR, run_id, "errors.json")
+        path = os.path.join(self.RUNS_DIR, run_id, "errors.json")
         if not os.path.exists(path):
             raise FileNotFoundError("Errors not found")
         with open(path, "r", encoding="utf-8") as f:
             return json.load(f)
             
     def get_summary(self, run_id: str) -> dict:
-        path = os.path.join(RUNS_DIR, run_id, "summary.json")
+        path = os.path.join(self.RUNS_DIR, run_id, "summary.json")
         if not os.path.exists(path):
             raise FileNotFoundError("Summary not found")
         with open(path, "r", encoding="utf-8") as f:

@@ -22,8 +22,11 @@ def set_qwen_url(req: QwenUrlRequest):
 def test_qwen_connection():
     try:
         res = qwen_client.health_check()
+        SettingsStore.set_qwen_health(True)
         return res
     except QwenServiceClientError as e:
+        SettingsStore.set_qwen_health(False)
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
+        SettingsStore.set_qwen_health(False)
         raise HTTPException(status_code=500, detail=str(e))

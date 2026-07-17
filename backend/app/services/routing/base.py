@@ -13,6 +13,12 @@ class RouterVersionService(ABC):
     router_name: str
     family: str
     version: str
+    capabilities: Dict[str, bool] = {
+        "supports_history": True,
+        "supports_debug_trace": False,
+        "requires_external_service": False,
+    }
+    description: str = ""
 
     @abstractmethod
     def route(self, question: str, history: list[str] | None = None) -> RouteResponse:
@@ -31,11 +37,8 @@ class RouterVersionService(ABC):
             "family": self.family,
             "version": self.version,
             "status": "ready" if self.is_available() else "unavailable",
-            "capabilities": {
-                "supports_history": True,
-                "supports_debug_trace": False,
-                "requires_external_service": False,
-            },
+            "capabilities": dict(self.capabilities),
+            "description": self.description,
         }
 
     def is_available(self) -> bool:

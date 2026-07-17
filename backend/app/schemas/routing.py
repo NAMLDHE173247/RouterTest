@@ -3,7 +3,7 @@ from typing import Any, Dict, List, Optional
 
 class RouterDecision(BaseModel):
     primary_subject: str
-    secondary_subjects: List[str] = []
+    secondary_subjects: List[str] = Field(default_factory=list)
     intent: str
     target_slm: str
     confidence: float
@@ -28,7 +28,7 @@ class RouterRuntime(BaseModel):
 class RouteRequest(BaseModel):
     router_id: str
     question: str
-    history: List[str] = []
+    history: List[str] = Field(default_factory=list)
 
 class RouteResponse(BaseModel):
     router_id: str
@@ -46,9 +46,9 @@ class RouterInfo(BaseModel):
     description: Optional[str] = None
 
 class CompareRequest(BaseModel):
-    router_ids: List[str] = ["rule_v0", "rule_v1", "rule_v2"]
+    router_ids: List[str] = Field(default_factory=lambda: ["rule_v0", "rule_v1", "rule_v2"])
     question: str
-    history: List[str] = []
+    history: List[str] = Field(default_factory=list)
 
 class CompareResult(BaseModel):
     router_id: str

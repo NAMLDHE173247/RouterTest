@@ -8,6 +8,8 @@ router = APIRouter()
 def run_evaluation(request: EvaluationRequest):
     try:
         return evaluation_service.run_evaluation(request.router_ids, request.dataset_id, request.limit)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

@@ -1,7 +1,9 @@
 import os
+from typing import Optional
 
 class SettingsStore:
     _qwen_url: str = None
+    _qwen_health: Optional[bool] = None
     
     @classmethod
     def get_qwen_url(cls) -> str:
@@ -23,7 +25,16 @@ class SettingsStore:
     @classmethod
     def set_qwen_url(cls, url: str):
         """Lưu trữ cấu hình URL runtime."""
+        cls._qwen_health = None
         if url:
             cls._qwen_url = url.rstrip('/')
         else:
             cls._qwen_url = None
+
+    @classmethod
+    def get_qwen_health(cls) -> Optional[bool]:
+        return cls._qwen_health
+
+    @classmethod
+    def set_qwen_health(cls, is_healthy: bool):
+        cls._qwen_health = is_healthy

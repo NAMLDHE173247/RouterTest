@@ -3,4 +3,4 @@ from typing import List, Optional, Any, Dict
 
 class HealthResponse(BaseModel):
     status: str = "ok"
-    available_routers: List[str] = []
+    available_routers: List[str] = Field(default_factory=list)

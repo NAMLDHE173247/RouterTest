@@ -65,3 +65,23 @@ Truy cập `http://localhost:3000`.
 - **Synchronous Evaluation**: Hệ thống eval đang chạy đồng bộ (Synchronous). Dù đủ cho Rule-based Router (do tốc độ rất cao ~0.2ms/sample), nhưng khi mở rộng sang Qwen Router hay LLM-based, cần chuyển sang Message Queue (Celery/RabbitMQ) hoặc Background Tasks bất đồng bộ.
 - **Dataset Storage**: File dataset upload và output đang lưu vào Local Disk Storage (FileSystem). Trong production cần chuyển lên S3 / GCS hoặc lưu database (PostgreSQL/MongoDB).
 - **Hỗ trợ thêm định dạng**: Tạm thời MVP chỉ hỗ trợ `.json` và `.jsonl`. Sẽ cần mở rộng sang `.csv` sau.
+
+## Trạng thái V3 và kiến trúc service
+
+Rule-based Router V3 hiện đã hoàn thành Phase 0.1 Hardening. V3 có core và
+adapter riêng, giữ baseline hành vi của V2 trên các field legacy và đã có
+evaluation đầy đủ cho `secondary_subjects`.
+
+Backend hiện tổ chức theo facade và family registry:
+
+- `RoutingService` điều phối router ID.
+- `RuleBasedRouterService` quản lý V0, V1, V2, V3.
+- `SLMRouterService` quản lý Qwen V0.
+- Version service gọi adapter tương ứng, không chứa core rule của version khác.
+
+Chi tiết xem tại:
+
+- `docs/router-service-architecture.md`
+- `docs/rule-v3-architecture.md`
+- `docs/rule-v3-benchmark.md`
+- `docs/router-v3-implementation-plan.md`

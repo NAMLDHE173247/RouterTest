@@ -77,6 +77,7 @@ export interface RouterMetrics {
   exact_match_accuracy: number;
   total_errors: number;
   average_latency_ms: number;
+  full_total_errors?: number;
   secondary_subject_exact_set_accuracy?: number;
   secondary_subject_micro_precision?: number;
   secondary_subject_micro_recall?: number;

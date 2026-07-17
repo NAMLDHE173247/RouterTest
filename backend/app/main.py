@@ -19,7 +19,12 @@ app.add_middleware(
 app.include_router(health.router, tags=["Health"])
 app.include_router(routing.router, prefix="/api/v1/router", tags=["Routing"])
 # Legacy aliases retained for existing scripts and older clients.
-app.include_router(routing.router, prefix="/api/v1", tags=["Routing Legacy"])
+app.include_router(
+    routing.router,
+    prefix="/api/v1",
+    tags=["Routing Legacy"],
+    include_in_schema=False,
+)
 app.include_router(evaluations.router, prefix="/api/v1/evaluations", tags=["Evaluations"])
 app.include_router(datasets.router, prefix="/api/v1/datasets", tags=["Datasets"])
 app.include_router(settings.router, prefix="/api/v1/settings", tags=["Settings"])

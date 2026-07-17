@@ -2,7 +2,7 @@ from pydantic import BaseModel, Field
 from typing import List, Dict, Any, Optional
 
 class EvaluationRequest(BaseModel):
-    router_ids: List[str] = ["rule_v0", "rule_v1", "rule_v2"]
+    router_ids: List[str] = Field(default_factory=lambda: ["rule_v0", "rule_v1", "rule_v2"])
     dataset_id: Optional[str] = None
     limit: Optional[int] = None
 
@@ -15,6 +15,7 @@ class RouterMetrics(BaseModel):
     exact_match_accuracy: float
     total_errors: int
     average_latency_ms: float
+    full_total_errors: int = 0
     secondary_subject_exact_set_accuracy: float = 0.0
     secondary_subject_micro_precision: float = 0.0
     secondary_subject_micro_recall: float = 0.0

@@ -2,10 +2,11 @@
 
 ## Phase status
 
-V3 hiện hoàn thành Phase 0: core nằm tại
+V3 hiện hoàn thành Phase 0.1 Hardening: core nằm tại
 `Rule_based_Router/rule_based_router_v3/router_experiment/src/` và có output
-chuẩn giống V2. Phase 0 chưa thay đổi thuật toán; mục đích là tạo baseline
-độc lập và kiểm tra tích hợp service/evaluation.
+chuẩn giống V2 trên các field legacy. Phase 0.1 chưa thay đổi thuật toán;
+mục đích là tạo baseline độc lập, kiểm tra per-sample và làm rõ evaluation
+contract.
 
 Các phase cải tiến tiếp theo sẽ tách riêng:
 
