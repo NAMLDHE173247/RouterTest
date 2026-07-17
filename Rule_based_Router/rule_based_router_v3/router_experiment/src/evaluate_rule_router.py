@@ -73,6 +73,14 @@ def accuracy(correct: int, total: int) -> float:
     return round(correct / total, 4) if total else 0.0
 
 
+def percentile(values: list[float], percentile_rank: float) -> float:
+    if not values:
+        return 0.0
+    ordered = sorted(values)
+    index = min(int(round((percentile_rank / 100) * (len(ordered) - 1))), len(ordered) - 1)
+    return round(ordered[index], 4)
+
+
 def evaluate(
     dataset_path: str = DEFAULT_DATASET_PATH,
     output_dir: str = DEFAULT_OUTPUT_DIR,
@@ -117,9 +125,14 @@ def evaluate(
     secondary_fp = 0
     secondary_fn = 0
     total_latency = 0.0
+    latencies = []
     errors = []
     subject_confusion = Counter()
     rule_coverage = Counter()
+    subject_stats: dict[str, dict[str, int]] = defaultdict(lambda: {
+        "total_samples": 0,
+        "primary_subject_correct": 0,
+    })
     case_stats: dict[str, dict[str, int]] = defaultdict(lambda: {
         "total_samples": 0,
         "primary_subject_correct": 0,
@@ -137,17 +150,23 @@ def evaluate(
                 question=item["question"],
                 history=item.get("history", []),
             )
-            total_latency += (time.perf_counter() - started) * 1000
+            latency_ms = (time.perf_counter() - started) * 1000
+            total_latency += latency_ms
+            latencies.append(latency_ms)
 
             case_type = item.get("case_type", "unknown")
             stats = case_stats[case_type]
             stats["total_samples"] += 1
+            gold_subject = item.get("primary_subject", "unknown")
+            subject_stats[gold_subject]["total_samples"] += 1
             wrong_fields = []
 
             for field in field_names:
                 if prediction.get(field) == item.get(field):
                     correct[field] += 1
                     stats[f"{field}_correct"] += 1
+                    if field == "primary_subject":
+                        subject_stats[gold_subject]["primary_subject_correct"] += 1
                 else:
                     wrong_fields.append(field)
 
@@ -225,6 +244,16 @@ def evaluate(
         "total_errors": total - core_exact,
         "full_total_errors": total - full_exact,
         "average_latency_ms": round(total_latency / total, 4) if total else 0.0,
+        "p95_latency_ms": percentile(latencies, 95),
+        "metrics_by_gold_subject": {
+            subject: {
+                "total_samples": stats["total_samples"],
+                "primary_subject_accuracy": accuracy(
+                    stats["primary_subject_correct"], stats["total_samples"]
+                ),
+            }
+            for subject, stats in sorted(subject_stats.items())
+        },
         "metrics_by_case_type": metrics_by_case_type,
     }
 

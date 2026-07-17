@@ -55,7 +55,7 @@ def test_registry_rejects_duplicate_id_and_invalid_family():
         registry.register(DummyService(router_id="slm", family="slm"))
 
 
-def test_frozen_phase0_artifact_matches_v2_per_sample():
+def assert_frozen_phase0_matches_v2(snapshot_path=PHASE0_PREDICTIONS_PATH):
     v2_route = load_isolated_router(str(V2_CORE_PATH))
     fields = (
         "primary_subject",
@@ -67,7 +67,7 @@ def test_frozen_phase0_artifact_matches_v2_per_sample():
 
     with DATASET_PATH.open(encoding="utf-8") as file:
         rows = [json.loads(line) for line in file if line.strip()]
-    with PHASE0_PREDICTIONS_PATH.open(encoding="utf-8") as file:
+    with Path(snapshot_path).open(encoding="utf-8") as file:
         snapshot = {
             record["id"]: record
             for record in (json.loads(line) for line in file if line.strip())
@@ -81,6 +81,30 @@ def test_frozen_phase0_artifact_matches_v2_per_sample():
         assert {field: frozen_v3.get(field) for field in fields} == {
             field: v2.get(field) for field in fields
         }, f"Frozen Phase 0 mismatch at sample {row.get('id')}"
+
+
+def test_frozen_phase0_artifact_matches_v2_per_sample():
+    assert_frozen_phase0_matches_v2()
+
+
+def test_frozen_phase0_artifact_change_is_detected(tmp_path):
+    records = [
+        json.loads(line)
+        for line in PHASE0_PREDICTIONS_PATH.read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    ]
+    original = records[0]["prediction"]["primary_subject"]
+    records[0]["prediction"]["primary_subject"] = (
+        "physics" if original != "physics" else "math"
+    )
+    changed_snapshot = tmp_path / "changed_phase_0_predictions.jsonl"
+    changed_snapshot.write_text(
+        "".join(json.dumps(record, ensure_ascii=False) + "\n" for record in records),
+        encoding="utf-8",
+    )
+
+    with pytest.raises(AssertionError, match="Frozen Phase 0 mismatch"):
+        assert_frozen_phase0_matches_v2(changed_snapshot)
 
 
 def test_v3_evaluator_writes_phase_specific_outputs(tmp_path):

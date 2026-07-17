@@ -16,6 +16,7 @@ TOPIC_DEFINITIONS = (
         strong_terms=("hệ phương trình", "giải phương trình", "phương trình bậc nhất", "chuyển vế", "phương trình tuyến tính"),
         support_terms=("phương trình", "nghiệm", "ẩn số", "thế vào"),
         formula_patterns=(r"\b[xyz]\s*[=+\-]\s*\d", r"\b\d*[xyz]\s*[+\-]\s*\d+"),
+        negative_terms=("thí nghiệm", "thực nghiệm"),
         description="Linear equations and systems.",
     ),
     TopicDefinition(
@@ -23,6 +24,7 @@ TOPIC_DEFINITIONS = (
         strong_terms=("phương trình bậc hai", "nghiệm kép", "delta", "biệt thức"),
         support_terms=("parabol", "tam thức bậc hai", "nghiệm"),
         formula_patterns=(r"\bx\s*\^\s*2\b", r"\bx²\b"),
+        negative_terms=("thí nghiệm", "thực nghiệm"),
         description="Quadratic equations and functions.",
     ),
     TopicDefinition(
@@ -93,6 +95,7 @@ TOPIC_DEFINITIONS = (
         "math.trigonometry", "math", "algebra",
         strong_terms=("lượng giác", "sin", "cos", "tan"),
         support_terms=("góc", "đẳng thức"),
+        negative_terms=("hòa tan", "tan trong nước", "tan được trong nước", "chất tan", "dung dịch"),
         description="Trigonometry.",
     ),
     TopicDefinition(
@@ -247,16 +250,21 @@ _ERROR_SET_EVIDENCE = {
     "math.sequences.arithmetic": ("dãy số",),
     "math.algebra.linear_equation": ("giải phương trình",),
     "math.calculus.derivative": ("hàm số chẵn", "hàm số lẻ"),
-    "physics.mechanics.force": ("lực đẩy archimedes", "lực nổi", "archimedes"),
-    "physics.energy.work": ("công khí thực hiện",),
-    "physics.thermodynamics.ideal_gas": (
-        "khí hidro", "khí heli", "lực nổi", "áp suất riêng phần", "động cơ nhiệt",
+    "physics.mechanics.force": (
+        "lực đẩy archimedes", "lực nổi", "archimedes", "áp suất chất lỏng", "càng sâu",
     ),
+    "physics.energy.work": ("công khí thực hiện",),
+    "physics.thermodynamics.ideal_gas": ("áp suất riêng phần", "động cơ nhiệt"),
     "physics.thermodynamics.heat_transfer": ("tỏa nhiệt", "phản ứng tỏa nhiệt"),
     "physics.electricity.circuits": ("suất điện động",),
     "chemistry.atomic_structure": ("muối ăn", "tan trong nước", "ion hòa tan"),
-    "chemistry.reactions": ("oxi hóa - khử", "dãy hoạt động hóa học"),
-    "chemistry.stoichiometry": ("nồng độ phần trăm", "phần trăm dung dịch"),
+    "chemistry.reactions": (
+        "oxi hóa - khử", "dãy hoạt động hóa học", "điều chế", "nhận biết khí",
+        "phản ứng cần đun nóng",
+    ),
+    "chemistry.stoichiometry": (
+        "nồng độ phần trăm", "phần trăm dung dịch", "dung dịch",
+    ),
     "chemistry.organic": ("năng lượng phản ứng cháy",),
     "chemistry.electrochemistry": ("dung dịch muối dẫn điện", "ion trong dung dịch"),
 }
