@@ -1,0 +1,19 @@
+{
+  "phase": "phase_4",
+  "secondary_micro_precision": 0.8991,
+  "secondary_micro_recall": 0.6622,
+  "secondary_micro_f1": 0.7626,
+  "true_positive": 98,
+  "false_positive": 11,
+  "false_negative": 50,
+  "gold_counts": {
+    "math": 86,
+    "physics": 40,
+    "chemistry": 22
+  },
+  "prediction_counts": {
+    "math": 65,
+    "physics": 24,
+    "chemistry": 20
+  }
+}

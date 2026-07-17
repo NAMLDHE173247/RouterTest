@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "git_commit": "162549e234925b910396871e80334c228ae4315c",
+    "dataset_sha256": "5d25fb93a173733033a632fec3ca7bfc5b29fffb0db2a8b3676ee919301ec5cf",
+    "config_sha256": "1ca032b379b937f0d0540337c5e1c7d4d327e82b75cd49538eea35926ec9be4c",
+    "config_files": [
+      "src\\rules.py",
+      "src\\models.py",
+      "src\\topic_ontology.py",
+      "src\\topic_resolver.py",
+      "src\\intent_resolver.py",
+      "src\\router_context.py"
+    ],
+    "generated_at_utc": "2026-07-17T18:13:47.549857+00:00",
+    "phase": "phase_4"
+  },
+  "baseline_dir": "../outputs/phase_3",
+  "baseline_phase": "phase_3",
+  "baseline_available": true,
+  "fixed_primary_subject_errors": 6,
+  "new_primary_subject_regressions": 0,
+  "comparison_field": "primary_subject"
+}

@@ -1,0 +1,14 @@
+{
+  "phase": "phase_4",
+  "clarifying_predictions": 41,
+  "reason_codes": {
+    "SUBJECT_SCORE_TIE": 1,
+    "INCOMPLETE_REFERENCE": 6,
+    "NO_SUBJECT_EVIDENCE": 27,
+    "UNKNOWN_INTENT": 2,
+    "LOW_CONFIDENCE": 1,
+    "CROSS_DOMAIN_CONFLICT": 2,
+    "MISSING_HISTORY_FOR_FOLLOW_UP": 2
+  },
+  "missing_reason_code_count": 0
+}
