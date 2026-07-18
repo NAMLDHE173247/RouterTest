@@ -1,11 +1,14 @@
 import os
 import json
 import time
+import hashlib
+import statistics
 from uuid import uuid4
 from datetime import datetime
 from app.schemas.evaluation import EvaluationResponse, RouterMetrics, ErrorItem
 from app.services.routing_service import routing_service
-from app.schemas.routing import RouteRequest
+from app.schemas.routing import HybridConfig, RouteRequest
+from app.llm_router_prompt import MAX_OUTPUT_TOKENS, PROMPT_VERSION, TEMPERATURE
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../"))
 DATASET_PATH = os.path.join(PROJECT_ROOT, "Rule_based_Router/rule_based_router_v2/router_experiment/data/test_router.jsonl")
@@ -14,7 +17,13 @@ RUNS_DIR = os.path.join(PROJECT_ROOT, "data/evaluation_runs")
 class EvaluationService:
     RUNS_DIR = RUNS_DIR
     
-    def run_evaluation(self, router_ids: list[str], dataset_id: str = None, limit: int = None) -> EvaluationResponse:
+    def run_evaluation(
+        self,
+        router_ids: list[str],
+        dataset_id: str = None,
+        limit: int = None,
+        hybrid_config: HybridConfig | None = None,
+    ) -> EvaluationResponse:
         unknown_router_ids = [
             router_id for router_id in router_ids
             if not routing_service.has_router(router_id)
@@ -32,6 +41,8 @@ class EvaluationService:
         
         from app.services.dataset_service import dataset_service
         dataset_path = dataset_service.get_dataset_path(dataset_id)
+        with open(dataset_path, "rb") as dataset_file:
+            dataset_hash = hashlib.sha256(dataset_file.read()).hexdigest()
         
         # Load dataset
         records = []
@@ -58,6 +69,8 @@ class EvaluationService:
         # State
         metrics_dict = {}
         all_errors = []
+        run_configs = {}
+        prediction_artifacts = []
         
         eval_fields = [
             "primary_subject",
@@ -69,6 +82,27 @@ class EvaluationService:
         
         for rid in router_ids:
             service = routing_service.get_service(rid)
+            adapter = getattr(service, "adapter", None)
+            model = getattr(service, "model", None) or getattr(adapter, "model", None)
+            is_llm_router = bool(model)
+            client = getattr(adapter, "client", None)
+            run_configs[rid] = {
+                "router_id": rid,
+                "display_name": getattr(service, "router_name", rid),
+                "model_slug": model,
+                "prompt_version": PROMPT_VERSION if model else None,
+                "temperature": TEMPERATURE if model else None,
+                "max_output_tokens": MAX_OUTPUT_TOKENS if model else None,
+                "timeout_seconds": getattr(client, "timeout", None),
+                "max_retries": 1 if model else 0,
+                "structured_output_requested": bool(model),
+                "dataset_id": dataset_id or "default_v2_test_router",
+                "dataset_hash": dataset_hash,
+                "sample_count": len(records),
+                "concurrency": 1,
+                "started_at": datetime.now().isoformat(),
+                "hybrid_config": hybrid_config.model_dump() if rid == "hybrid" and hybrid_config else None,
+            }
             
             correct_ps = 0
             correct_intent = 0
@@ -81,23 +115,89 @@ class EvaluationService:
             secondary_fp = 0
             secondary_fn = 0
             total_time = 0.0
+            latencies = []
+            total_input_tokens = 0
+            total_output_tokens = 0
+            total_tokens = 0
+            total_cost = 0.0
+            cost_count = 0
+            valid_json_count = 0
+            schema_success_count = 0
+            failed_prediction_count = 0
+            retry_count_total = 0
+            hybrid_rule_only_count = 0
+            hybrid_llm_called_count = 0
+            hybrid_llm_success_count = 0
+            hybrid_llm_failure_count = 0
+            hybrid_degraded_count = 0
+            hybrid_rule_selected_correct = 0
+            hybrid_rule_selected_total = 0
+            hybrid_llm_selected_correct = 0
+            hybrid_llm_selected_total = 0
+            hybrid_rule_latency_total = 0.0
+            hybrid_llm_latency_total = 0.0
+            hybrid_trigger_distribution = {}
             case_stats = {}
             
             for row in records:
                 question = row.get("question", "")
                 history = row.get("history", [])
+                res = None
+                hybrid_runtime = None
                 
                 # Evaluate
                 try:
-                    res = service.route(question=question, history=history)
+                    if rid == "hybrid":
+                        res = service.route(question=question, history=history, config=hybrid_config)
+                    else:
+                        res = service.route(question=question, history=history)
                     decision = res.decision.model_dump()
                     latency = res.runtime.latency_ms
+                    runtime = res.runtime.model_dump()
+                    valid_json_count += 1 if is_llm_router and res.runtime.parse_success else 0
+                    schema_success_count += 1 if is_llm_router and res.runtime.schema_success else 0
+                    total_input_tokens += res.runtime.input_tokens or 0
+                    total_output_tokens += res.runtime.output_tokens or 0
+                    total_tokens += res.runtime.total_tokens or 0
+                    if res.runtime.cost is not None:
+                        total_cost += res.runtime.cost
+                        cost_count += 1
+                    retry_count_total += res.runtime.retry_count
+                    hybrid_runtime = res.runtime.hybrid
+                    if hybrid_runtime:
+                        if hybrid_runtime.selected_source == "rule":
+                            hybrid_rule_only_count += 1
+                        if hybrid_runtime.llm_called:
+                            hybrid_llm_called_count += 1
+                        if hybrid_runtime.selected_source == "llm":
+                            hybrid_llm_success_count += 1
+                        if hybrid_runtime.selected_source == "rule_after_llm_failure":
+                            hybrid_llm_failure_count += 1
+                        if hybrid_runtime.degraded_mode:
+                            hybrid_degraded_count += 1
+                        hybrid_rule_latency_total += hybrid_runtime.rule_latency_ms
+                        hybrid_llm_latency_total += hybrid_runtime.llm_latency_ms
+                        for trigger in hybrid_runtime.fallback_triggers:
+                            hybrid_trigger_distribution[trigger] = hybrid_trigger_distribution.get(trigger, 0) + 1
+                    failure_code = None
                 except Exception as e:
                     # Fallback to empty for scoring on failure
                     decision = {"primary_subject": "error", "intent": "error", "target_slm": "error", "need_clarification": False}
                     latency = 0.0
-                
+                    runtime = None
+                    failure_code = getattr(e, "code", "router_error")
+                    failed_prediction_count += 1
+
                 total_time += latency
+                latencies.append(latency)
+                prediction_artifacts.append({
+                    "router_id": rid,
+                    "sample_id": row.get("id", ""),
+                    "gold": {k: row.get(k) for k in eval_fields},
+                    "prediction": {k: decision.get(k) for k in eval_fields},
+                    "execution_metadata": runtime,
+                    "error_code": failure_code,
+                })
 
                 case_type = row.get("case_type", "unknown")
                 case_stat = case_stats.setdefault(case_type, {
@@ -169,6 +269,15 @@ class EvaluationService:
                         wrong_fields=wrong_fields
                     ))
 
+                if hybrid_runtime:
+                    selected_source = hybrid_runtime.selected_source
+                    if selected_source == "rule":
+                        hybrid_rule_selected_total += 1
+                        hybrid_rule_selected_correct += 1 if not wrong_fields else 0
+                    elif selected_source == "llm":
+                        hybrid_llm_selected_total += 1
+                        hybrid_llm_selected_correct += 1 if not wrong_fields else 0
+
             def accuracy_for(correct: int, denominator: int) -> float:
                 return correct / denominator if denominator else 0.0
 
@@ -190,6 +299,9 @@ class EvaluationService:
             
             # Aggregate metrics
             total = len(records)
+            is_hybrid_router = rid == "hybrid"
+            sorted_latencies = sorted(latencies)
+            p95_index = min(len(sorted_latencies) - 1, max(0, int(len(sorted_latencies) * 0.95) - 1)) if sorted_latencies else 0
             metrics_dict[rid] = RouterMetrics(
                 total_samples=total,
                 primary_subject_accuracy=correct_ps / total if total else 0,
@@ -206,6 +318,36 @@ class EvaluationService:
                 secondary_subject_micro_f1=f1,
                 full_exact_match_accuracy=full_exact_matches / total if total else 0,
                 metrics_by_case_type=case_metrics,
+                median_latency_ms=statistics.median(latencies) if latencies else 0.0,
+                p95_latency_ms=sorted_latencies[p95_index] if sorted_latencies else 0.0,
+                total_input_tokens=total_input_tokens,
+                total_output_tokens=total_output_tokens,
+                total_tokens=total_tokens,
+                average_tokens_per_sample=total_tokens / total if total else 0.0,
+                total_cost=total_cost if cost_count else None,
+                average_cost_per_sample=total_cost / total if cost_count and total else None,
+                cost_coverage_rate=cost_count / total if total else 0.0,
+                valid_json_rate=valid_json_count / total if is_llm_router and total else 0.0,
+                schema_success_rate=schema_success_count / total if is_llm_router and total else 0.0,
+                failed_prediction_rate=failed_prediction_count / total if is_llm_router and total else 0.0,
+                retry_count=retry_count_total,
+                rule_only_usage_rate=hybrid_rule_only_count / total if is_hybrid_router and total else 0.0,
+                llm_fallback_rate=hybrid_llm_called_count / total if is_hybrid_router and total else 0.0,
+                llm_success_rate=(hybrid_llm_success_count / hybrid_llm_called_count) if is_hybrid_router and hybrid_llm_called_count else 0.0,
+                llm_failure_rate=(hybrid_llm_failure_count / hybrid_llm_called_count) if is_hybrid_router and hybrid_llm_called_count else 0.0,
+                degraded_mode_rate=hybrid_degraded_count / total if is_hybrid_router and total else 0.0,
+                rule_selected_accuracy=(hybrid_rule_selected_correct / hybrid_rule_selected_total) if is_hybrid_router and hybrid_rule_selected_total else None,
+                llm_selected_accuracy=(hybrid_llm_selected_correct / hybrid_llm_selected_total) if is_hybrid_router and hybrid_llm_selected_total else None,
+                accuracy_by_selected_source={
+                    "rule": hybrid_rule_selected_correct / hybrid_rule_selected_total
+                    if hybrid_rule_selected_total else 0.0,
+                    "llm": hybrid_llm_selected_correct / hybrid_llm_selected_total
+                    if hybrid_llm_selected_total else 0.0,
+                } if is_hybrid_router else {},
+                rule_latency_ms=hybrid_rule_latency_total / total if is_hybrid_router and total else 0.0,
+                llm_latency_ms=hybrid_llm_latency_total / hybrid_llm_called_count if is_hybrid_router and hybrid_llm_called_count else 0.0,
+                degraded_mode_count=hybrid_degraded_count if is_hybrid_router else 0,
+                fallback_trigger_distribution=hybrid_trigger_distribution if is_hybrid_router else {},
             )
             
         # Save output to disk
@@ -222,13 +364,22 @@ class EvaluationService:
         }
         with open(os.path.join(run_dir, "errors.json"), "w", encoding="utf-8") as f:
             json.dump(errors_json, f, indent=2, ensure_ascii=False)
+
+        with open(os.path.join(run_dir, "run_config.json"), "w", encoding="utf-8") as f:
+            json.dump({"router_configs": run_configs}, f, indent=2, ensure_ascii=False)
+
+        with open(os.path.join(run_dir, "predictions.jsonl"), "w", encoding="utf-8") as f:
+            for prediction in prediction_artifacts:
+                f.write(json.dumps(prediction, ensure_ascii=False) + "\n")
             
         summary_json = {
             "run_id": run_id,
             "timestamp": datetime.now().isoformat(),
             "status": "completed",
             "total_errors": len(all_errors),
-            "routers": router_ids
+            "routers": router_ids,
+            "run_config_file": "run_config.json",
+            "predictions_file": "predictions.jsonl",
         }
         with open(os.path.join(run_dir, "summary.json"), "w", encoding="utf-8") as f:
             json.dump(summary_json, f, indent=2, ensure_ascii=False)

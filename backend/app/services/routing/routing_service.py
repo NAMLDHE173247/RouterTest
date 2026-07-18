@@ -4,6 +4,9 @@ from app.schemas.routing import RouteRequest, RouteResponse
 from app.services.routing.rule_based_router_service import RuleBasedRouterService
 from app.services.routing.slm_router_service import SLMRouterService
 from app.services.routing.version_services import HybridV0Service
+from app.services.routing.llm_router_service import OpenRouterLLMRouterService
+from app.openrouter_service_client import OpenRouterServiceError
+from app.adapters.hybrid_v0_adapter import HybridRouterError
 
 
 class RoutingService:
@@ -12,10 +15,12 @@ class RoutingService:
     def __init__(self):
         self.rule_based = RuleBasedRouterService()
         self.slm = SLMRouterService()
-        self.hybrid = HybridV0Service()
+        self.llm = OpenRouterLLMRouterService()
+        self.hybrid = HybridV0Service(self.rule_based, self.llm)
         self.services = {
             **self.rule_based.services,
             **self.slm.services,
+            **self.llm.services,
             self.hybrid.router_id: self.hybrid,
         }
 
@@ -28,6 +33,7 @@ class RoutingService:
         return (
             self.rule_based.get_available_routers()
             + self.slm.get_available_routers()
+            + self.llm.get_available_routers()
             + [self.hybrid.get_metadata()]
         )
 
@@ -48,20 +54,31 @@ class RoutingService:
         return self.get_service(router_id)
 
     def route(self, req: RouteRequest) -> RouteResponse:
-        return self.get_service(req.router_id).route(req.question, req.history)
+        service = self.get_service(req.router_id)
+        if req.router_id == "hybrid":
+            return service.route(req.question, req.history, config=req.hybrid_config)
+        return service.route(req.question, req.history)
 
-    def compare_routers(self, router_ids: list[str], question: str, history: list[str] | None = None):
+    def compare_routers(self, router_ids: list[str], question: str, history: list[str] | None = None, hybrid_config=None):
         results = []
         for router_id in router_ids:
             try:
                 results.append({
                     "router_id": router_id,
-                    "response": self.get_service(router_id).route(question, history),
+                    "response": (
+                        self.get_service(router_id).route(question, history, config=hybrid_config)
+                        if router_id == "hybrid"
+                        else self.get_service(router_id).route(question, history)
+                    ),
                 })
             except NotImplementedError as exc:
                 results.append({"router_id": router_id, "error": str(exc)})
             except Exception as exc:
-                results.append({"router_id": router_id, "error": str(exc)})
+                if isinstance(exc, (OpenRouterServiceError, HybridRouterError)):
+                    error = {"code": exc.code, "message": str(exc)}
+                else:
+                    error = {"code": "router_error", "message": "Router failed"}
+                results.append({"router_id": router_id, "error": error})
         return results
 
 

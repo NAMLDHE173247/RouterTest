@@ -2,10 +2,17 @@
 
 import React, { useState } from 'react';
 import { compareRouters, getQwenServiceUrl } from '@/lib/api';
-import { CompareResult, RouterInfo, RouterDecision } from '@/types/router';
+import { CompareResult, HybridConfig, RouterInfo, RouterDecision } from '@/types/router';
 import RouterResultCard from './RouterResultCard';
+import HybridConfigPanel from './HybridConfigPanel';
 
-export default function RouterComparison({ routers }: { routers: RouterInfo[] }) {
+interface Props {
+  routers: RouterInfo[];
+  hybridConfig: HybridConfig;
+  onHybridConfigChange: (config: HybridConfig) => void;
+}
+
+export default function RouterComparison({ routers, hybridConfig, onHybridConfigChange }: Props) {
   const [selectedRouterIds, setSelectedRouterIds] = useState<string[]>([]);
   const [question, setQuestion] = useState('');
   const [history, setHistory] = useState('');
@@ -53,7 +60,8 @@ export default function RouterComparison({ routers }: { routers: RouterInfo[] })
       const res = await compareRouters({
         question: question,
         history: historyArray,
-        router_ids: selectedRouterIds
+        router_ids: selectedRouterIds,
+        hybrid_config: selectedRouterIds.includes('hybrid') ? hybridConfig : undefined,
       });
       setResults(res.comparisons || []);
     } catch (e: any) {
@@ -104,7 +112,10 @@ export default function RouterComparison({ routers }: { routers: RouterInfo[] })
     { id: 'rule_v2', name: 'Rule-based Router V2', status: 'ready', enabled: true },
     { id: 'rule_v3', name: 'Rule-based Router V3 (Phase 0)', status: 'ready', enabled: true },
     { id: 'qwen_v0', name: 'Qwen Router V0 (GPU Service)', status: 'ready', enabled: true },
-    { id: 'hybrid', name: 'Hybrid Router', status: 'ready', enabled: false }
+    { id: 'llm_deepseek_v0', name: 'LLM Router DeepSeek V0', status: 'unavailable', enabled: true },
+    { id: 'llm_gemini_v0', name: 'LLM Router Gemini V0', status: 'unavailable', enabled: true },
+    { id: 'llm_openai_v0', name: 'LLM Router OpenAI V0', status: 'unavailable', enabled: true },
+    { id: 'hybrid', name: 'Hybrid Router V0', status: 'ready', enabled: true }
   ];
 
   return (
@@ -117,7 +128,8 @@ export default function RouterComparison({ routers }: { routers: RouterInfo[] })
             <label className="block text-sm font-semibold mb-2 text-gray-700">Select Routers to Compare</label>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
               {availableRouters.map(r => {
-                const isDisabled = (r.status && r.status !== 'ready') || (r as any).enabled === false || r.id === 'hybrid';
+                const isLLM = r.id.startsWith('llm_');
+                const isDisabled = (!isLLM && r.status && r.status !== 'ready') || (r as any).enabled === false;
                 return (
                   <label 
                     key={r.id} 
@@ -155,6 +167,10 @@ export default function RouterComparison({ routers }: { routers: RouterInfo[] })
               onChange={(e) => setQuestion(e.target.value)}
             />
           </div>
+
+          {selectedRouterIds.includes('hybrid') && (
+            <HybridConfigPanel routers={routers} config={hybridConfig} onChange={onHybridConfigChange} />
+          )}
 
           <div>
             <label className="block text-sm font-semibold mb-1 text-gray-700">History (Optional)</label>

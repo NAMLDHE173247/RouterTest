@@ -6,3 +6,4 @@ requests
 flashtext
 python-multipart
 pytest
+httpx2

@@ -7,7 +7,12 @@ router = APIRouter()
 @router.post("", response_model=EvaluationResponse)
 def run_evaluation(request: EvaluationRequest):
     try:
-        return evaluation_service.run_evaluation(request.router_ids, request.dataset_id, request.limit)
+        return evaluation_service.run_evaluation(
+            request.router_ids,
+            request.dataset_id,
+            request.limit,
+            request.hybrid_config,
+        )
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:

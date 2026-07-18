@@ -2,10 +2,17 @@
 
 import React, { useState } from 'react';
 import { routeQuestion, getQwenServiceUrl } from '@/lib/api';
-import { RouterInfo, RouteResponse } from '@/types/router';
+import { HybridConfig, RouterInfo, RouteResponse } from '@/types/router';
 import RouterResultCard from './RouterResultCard';
+import HybridConfigPanel from './HybridConfigPanel';
 
-export default function RouterPlayground({ routers }: { routers: RouterInfo[] }) {
+interface Props {
+  routers: RouterInfo[];
+  hybridConfig: HybridConfig;
+  onHybridConfigChange: (config: HybridConfig) => void;
+}
+
+export default function RouterPlayground({ routers, hybridConfig, onHybridConfigChange }: Props) {
   const [selectedRouter, setSelectedRouter] = useState<string>('rule_v2');
   const [question, setQuestion] = useState('');
   const [history, setHistory] = useState('');
@@ -41,7 +48,8 @@ export default function RouterPlayground({ routers }: { routers: RouterInfo[] })
       const res = await routeQuestion({
         router_id: selectedRouter,
         question: question,
-        history: historyArray
+        history: historyArray,
+        hybrid_config: selectedRouter === 'hybrid' ? hybridConfig : undefined,
       });
       setResult(res);
     } catch (e: any) {
@@ -69,7 +77,7 @@ export default function RouterPlayground({ routers }: { routers: RouterInfo[] })
               <option 
                 key={r.id} 
                 value={r.id} 
-                disabled={r.id === 'hybrid'}
+                disabled={false}
               >
                 {r.name}
               </option>
@@ -77,11 +85,18 @@ export default function RouterPlayground({ routers }: { routers: RouterInfo[] })
               <>
                  <option value="rule_v2">Rule-based Router V2</option>
                  <option value="qwen_v0">Qwen Router V0 (GPU Service)</option>
-                 <option value="hybrid" disabled>Hybrid Router — Coming soon</option>
+                 <option value="llm_deepseek_v0">LLM Router DeepSeek V0</option>
+                 <option value="llm_gemini_v0">LLM Router Gemini V0</option>
+                 <option value="llm_openai_v0">LLM Router OpenAI V0</option>
+                 <option value="hybrid">Hybrid Router V0</option>
               </>
             )}
           </select>
         </div>
+
+        {selectedRouter === 'hybrid' && (
+          <HybridConfigPanel routers={routers} config={hybridConfig} onChange={onHybridConfigChange} />
+        )}
 
         <div>
           <label className="block text-sm font-semibold mb-2 text-gray-700">Question</label>

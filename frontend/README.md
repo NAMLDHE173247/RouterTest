@@ -1,5 +1,11 @@
 # Router Test Frontend
 
+Tab `Hybrid Config` cho phép chọn Rule Router, LLM Router, confidence threshold và các fallback policy. Cùng một cấu hình được dùng trong Playground, Compare và Evaluation; frontend không hiển thị API key.
+
+## OpenRouter Configuration
+
+Tab OpenRouter Config cho phép verify, lưu runtime key trong memory backend và xóa runtime key. Frontend không lưu API key vào localStorage/sessionStorage. Ba LLM Router xuất hiện trong Playground, Compare và Evaluation; chỉ router được chọn mới được gọi.
+
 Web UI cho Router Test Project, được xây dựng bằng Next.js (App Router), TypeScript, và TailwindCSS. 
 Thiết kế tập trung vào sự gọn nhẹ, tối ưu UI MVP, không dùng quá nhiều thư viện cấu trúc phức tạp.
 

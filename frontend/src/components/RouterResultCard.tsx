@@ -77,10 +77,23 @@ export default function RouterResultCard({ title = "Result", decision, runtime, 
             {runtime.input_tokens !== undefined && runtime.input_tokens > 0 && <span className="flex items-center gap-1">📥 In: {runtime.input_tokens}</span>}
             {runtime.output_tokens !== undefined && runtime.output_tokens > 0 && <span className="flex items-center gap-1">📤 Out: {runtime.output_tokens}</span>}
             <span className="flex items-center gap-1">{runtime.parse_success ? '✅ Success' : '❌ Parse Failed'}</span>
+            {runtime.total_tokens !== undefined && runtime.total_tokens > 0 && <span>Total: {runtime.total_tokens}</span>}
             {runtime.model && <span className="bg-gray-100 px-2 py-0.5 rounded">🤖 {runtime.model}</span>}
+            {runtime.structured_output_mode && <span>JSON: {runtime.structured_output_mode}</span>}
+            {runtime.retry_count !== undefined && runtime.retry_count > 0 && <span>Retries: {runtime.retry_count}</span>}
+            {runtime.cost !== undefined && runtime.cost !== null && <span>Cost: {runtime.cost}</span>}
           </>
         )}
       </div>
+
+      {runtime?.hybrid && (
+        <div className="text-xs bg-blue-50 border border-blue-100 rounded p-3 space-y-1">
+          <p><span className="font-semibold">Hybrid source:</span> {runtime.hybrid.selected_source}</p>
+          <p><span className="font-semibold">Fallback triggers:</span> {runtime.hybrid.fallback_triggers.length ? runtime.hybrid.fallback_triggers.join(', ') : 'none'}</p>
+          <p><span className="font-semibold">LLM called:</span> {runtime.hybrid.llm_called ? 'yes' : 'no'}</p>
+          {runtime.hybrid.degraded_mode && <p className="text-amber-700 font-semibold">Degraded mode: Rule fallback after LLM failure</p>}
+        </div>
+      )}
     </div>
   );
 }

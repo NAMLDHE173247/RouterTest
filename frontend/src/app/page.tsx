@@ -2,17 +2,29 @@
 
 import { useEffect, useState } from 'react';
 import { getHealth, getRouters } from '@/lib/api';
-import { RouterInfo } from '@/types/router';
+import { HybridConfig, RouterInfo } from '@/types/router';
 
 import QwenServiceConfigCard from '@/components/QwenServiceConfigCard';
+import OpenRouterConfigCard from '@/components/OpenRouterConfigCard';
 import RouterPlayground from '@/components/RouterPlayground';
 import RouterComparison from '@/components/RouterComparison';
 import RouterEvaluation from '@/components/RouterEvaluation';
+import HybridConfigPanel from '@/components/HybridConfigPanel';
 
 export default function Home() {
   const [healthStatus, setHealthStatus] = useState<string>('checking...');
   const [routers, setRouters] = useState<RouterInfo[]>([]);
-  const [activeTab, setActiveTab] = useState<'qwen' | 'playground' | 'compare' | 'evaluation'>('qwen');
+  const [activeTab, setActiveTab] = useState<'qwen' | 'openrouter' | 'hybrid' | 'playground' | 'compare' | 'evaluation'>('qwen');
+  const [hybridConfig, setHybridConfig] = useState<HybridConfig>({
+    rule_router_id: 'rule_v3',
+    llm_router_id: 'llm_gemini_v0',
+    rule_confidence_threshold: 0.8,
+    fallback_on_low_confidence: true,
+    fallback_on_unknown_subject: true,
+    fallback_on_need_clarification: true,
+    fallback_on_rule_error: true,
+    llm_failure_policy: 'use_rule',
+  });
 
   useEffect(() => {
     async function init() {
@@ -49,6 +61,18 @@ export default function Home() {
             className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-colors ${activeTab === 'qwen' ? 'bg-blue-50 text-blue-700' : 'text-gray-600 hover:bg-gray-100'}`}
           >
             Qwen Service Config
+          </button>
+          <button
+            onClick={() => setActiveTab('openrouter')}
+            className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-colors ${activeTab === 'openrouter' ? 'bg-blue-50 text-blue-700' : 'text-gray-600 hover:bg-gray-100'}`}
+          >
+            OpenRouter Config
+          </button>
+          <button
+            onClick={() => setActiveTab('hybrid')}
+            className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-colors ${activeTab === 'hybrid' ? 'bg-blue-50 text-blue-700' : 'text-gray-600 hover:bg-gray-100'}`}
+          >
+            Hybrid Config
           </button>
           <button 
             onClick={() => setActiveTab('playground')}
@@ -91,20 +115,32 @@ export default function Home() {
           
           {activeTab === 'playground' && (
             <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
-               <RouterPlayground routers={routers} />
+               <RouterPlayground routers={routers} hybridConfig={hybridConfig} onHybridConfigChange={setHybridConfig} />
+            </div>
+          )}
+
+          {activeTab === 'hybrid' && (
+            <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
+              <HybridConfigPanel routers={routers} config={hybridConfig} onChange={setHybridConfig} />
+            </div>
+          )}
+
+          {activeTab === 'openrouter' && (
+            <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
+              <OpenRouterConfigCard />
             </div>
           )}
           
           {activeTab === 'compare' && (
             <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
-               <RouterComparison routers={routers} />
+               <RouterComparison routers={routers} hybridConfig={hybridConfig} onHybridConfigChange={setHybridConfig} />
             </div>
           )}
 
           {activeTab === 'evaluation' && (
             <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
                <h2 className="text-2xl font-bold mb-6 text-gray-800">Dataset Evaluation</h2>
-               <RouterEvaluation routers={routers} />
+               <RouterEvaluation routers={routers} hybridConfig={hybridConfig} onHybridConfigChange={setHybridConfig} />
             </div>
           )}
         </div>

@@ -2,9 +2,16 @@
 
 import React, { useState, useEffect } from 'react';
 import { runEvaluation, getEvaluationErrors, getEvaluationAnalysis, listDatasets, uploadDataset, getQwenServiceUrl } from '@/lib/api';
-import { EvaluationResponse, EvaluationErrorsResponse, ErrorAnalysisResponse, DatasetListItem, DatasetUploadResponse, RouterInfo } from '@/types/router';
+import { EvaluationResponse, EvaluationErrorsResponse, ErrorAnalysisResponse, DatasetListItem, DatasetUploadResponse, HybridConfig, RouterInfo } from '@/types/router';
+import HybridConfigPanel from './HybridConfigPanel';
 
-export default function RouterEvaluation({ routers }: { routers: RouterInfo[] }) {
+interface Props {
+  routers: RouterInfo[];
+  hybridConfig: HybridConfig;
+  onHybridConfigChange: (config: HybridConfig) => void;
+}
+
+export default function RouterEvaluation({ routers, hybridConfig, onHybridConfigChange }: Props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
@@ -73,7 +80,7 @@ export default function RouterEvaluation({ routers }: { routers: RouterInfo[] })
     
     try {
       const limitVal = sampleLimit === 'full' ? undefined : parseInt(sampleLimit);
-      const resEval = await runEvaluation(selectedRouterIds, selectedDatasetId, limitVal);
+      const resEval = await runEvaluation(selectedRouterIds, selectedDatasetId, limitVal, selectedRouterIds.includes('hybrid') ? hybridConfig : undefined);
       setEvaluationResponse(resEval);
       
       if (resEval.run_id) {
@@ -119,7 +126,10 @@ export default function RouterEvaluation({ routers }: { routers: RouterInfo[] })
     { id: 'rule_v2', name: 'Rule-based Router V2', status: 'ready' },
     { id: 'rule_v3', name: 'Rule-based Router V3 (Phase 0)', status: 'ready' },
     { id: 'qwen_v0', name: 'Qwen Router V0 (GPU Service)', status: 'ready' },
-    { id: 'hybrid', name: 'Hybrid Router', status: 'ready' } // Handled manually below
+    { id: 'llm_deepseek_v0', name: 'LLM Router DeepSeek V0', status: 'unavailable' },
+    { id: 'llm_gemini_v0', name: 'LLM Router Gemini V0', status: 'unavailable' },
+    { id: 'llm_openai_v0', name: 'LLM Router OpenAI V0', status: 'unavailable' },
+    { id: 'hybrid', name: 'Hybrid Router V0', status: 'ready' }
   ];
 
   const hasQwen = selectedRouterIds.includes('qwen_v0');
@@ -336,6 +346,34 @@ export default function RouterEvaluation({ routers }: { routers: RouterInfo[] })
                   </td>
                 ))}
               </tr>
+              <tr>
+                <td className="px-4 py-2 text-gray-700">P95 Latency (ms)</td>
+                {rids.map(rid => <td key={rid} className="px-4 py-2">{(m[rid].p95_latency_ms ?? 0).toFixed(2)} ms</td>)}
+              </tr>
+              <tr>
+                <td className="px-4 py-2 text-gray-700">Schema Success Rate</td>
+                {rids.map(rid => <td key={rid} className="px-4 py-2">{((m[rid].schema_success_rate ?? 0) * 100).toFixed(1)}%</td>)}
+              </tr>
+              <tr>
+                <td className="px-4 py-2 text-gray-700">Failed Prediction Rate</td>
+                {rids.map(rid => <td key={rid} className="px-4 py-2">{((m[rid].failed_prediction_rate ?? 0) * 100).toFixed(1)}%</td>)}
+              </tr>
+              <tr>
+                <td className="px-4 py-2 text-gray-700">Total Tokens</td>
+                {rids.map(rid => <td key={rid} className="px-4 py-2">{m[rid].total_tokens ?? 0}</td>)}
+              </tr>
+              <tr>
+                <td className="px-4 py-2 text-gray-700">Total Cost</td>
+                {rids.map(rid => <td key={rid} className="px-4 py-2">{m[rid].total_cost ?? 'N/A'}</td>)}
+              </tr>
+              <tr>
+                <td className="px-4 py-2 text-gray-700">Hybrid LLM Fallback Rate</td>
+                {rids.map(rid => <td key={rid} className="px-4 py-2">{((m[rid].llm_fallback_rate ?? 0) * 100).toFixed(1)}%</td>)}
+              </tr>
+              <tr>
+                <td className="px-4 py-2 text-gray-700">Hybrid Degraded Count</td>
+                {rids.map(rid => <td key={rid} className="px-4 py-2">{m[rid].degraded_mode_count ?? 0}</td>)}
+              </tr>
             </tbody>
           </table>
         </div>
@@ -482,7 +520,8 @@ export default function RouterEvaluation({ routers }: { routers: RouterInfo[] })
               <p className="text-sm text-gray-600 mb-2 font-medium">Select Routers:</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                 {availableRouters.map(r => {
-                  const isDisabled = (r.status && r.status !== 'ready') || (r as any).enabled === false || r.id === 'hybrid';
+                  const isLLM = r.id.startsWith('llm_');
+                  const isDisabled = (!isLLM && r.status && r.status !== 'ready') || (r as any).enabled === false;
                   return (
                     <label 
                       key={r.id} 
@@ -497,13 +536,17 @@ export default function RouterEvaluation({ routers }: { routers: RouterInfo[] })
                       />
                       <div className="flex flex-col">
                         <span className="text-sm font-medium text-gray-800">{r.name}</span>
-                        {r.id === 'hybrid' && <span className="text-xs text-amber-600 font-semibold">Coming soon</span>}
+                        {r.id === 'hybrid' && <span className="text-xs text-blue-600 font-semibold">Rule-first with LLM fallback</span>}
                       </div>
                     </label>
                   );
                 })}
               </div>
             </div>
+
+            {selectedRouterIds.includes('hybrid') && (
+              <HybridConfigPanel routers={routers} config={hybridConfig} onChange={onHybridConfigChange} />
+            )}
             
             <div className="pt-2">
               <p className="text-sm text-gray-600 mb-2 font-medium">Sample Limit:</p>

@@ -1,4 +1,4 @@
-import { HealthResponse, RouteRequest, RouteResponse, RouterInfo } from '../types/router';
+import { HealthResponse, HybridConfig, RouteRequest, RouteResponse, RouterInfo } from '../types/router';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://127.0.0.1:8000';
 
@@ -28,12 +28,13 @@ export async function routeQuestion(payload: RouteRequest): Promise<RouteRespons
   });
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
-    throw new Error(err.detail || `Routing failed: ${res.statusText}`);
+    const detail = err.detail;
+    throw new Error(typeof detail === 'object' ? (detail.message || detail.code || 'Routing failed') : (detail || `Routing failed: ${res.statusText}`));
   }
   return res.json();
 }
 
-export async function compareRouters(payload: { question: string; history: string[]; router_ids?: string[] }): Promise<any> {
+export async function compareRouters(payload: { question: string; history: string[]; router_ids?: string[]; hybrid_config?: HybridConfig }): Promise<any> {
   const res = await fetch(`${API_BASE_URL}/api/v1/router/compare`, {
     method: 'POST',
     headers: {
@@ -43,15 +44,17 @@ export async function compareRouters(payload: { question: string; history: strin
   });
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
-    throw new Error(err.detail || `Compare failed: ${res.statusText}`);
+    const detail = err.detail;
+    throw new Error(typeof detail === 'object' ? (detail.message || detail.code || 'Compare failed') : (detail || `Compare failed: ${res.statusText}`));
   }
   return res.json();
 }
 
-export async function runEvaluation(router_ids: string[], dataset_id?: string, limit?: number) {
+export async function runEvaluation(router_ids: string[], dataset_id?: string, limit?: number, hybrid_config?: HybridConfig) {
   const payload: any = { router_ids };
   if (dataset_id) payload.dataset_id = dataset_id;
   if (limit) payload.limit = limit;
+  if (hybrid_config) payload.hybrid_config = hybrid_config;
   const res = await fetch(`${API_BASE_URL}/api/v1/evaluations`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -126,4 +129,41 @@ export async function testQwenServiceConnection(): Promise<any> {
     throw new Error(data.detail || 'Test connection failed');
   }
   return data;
+}
+
+export interface OpenRouterStatus {
+  configured: boolean;
+  source: 'runtime' | 'environment' | null;
+  connection_status: string;
+}
+
+export async function getOpenRouterStatus(): Promise<OpenRouterStatus> {
+  const res = await fetch(`${API_BASE_URL}/api/v1/settings/openrouter/status`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch OpenRouter status');
+  return res.json();
+}
+
+async function postOpenRouterKey(path: string, api_key: string): Promise<OpenRouterStatus> {
+  const res = await fetch(`${API_BASE_URL}/api/v1/settings/openrouter${path}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ api_key }),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.detail?.message || data.detail || 'OpenRouter request failed');
+  return data;
+}
+
+export function verifyOpenRouterKey(api_key: string): Promise<OpenRouterStatus> {
+  return postOpenRouterKey('/verify', api_key);
+}
+
+export function setOpenRouterKey(api_key: string): Promise<OpenRouterStatus> {
+  return postOpenRouterKey('', api_key);
+}
+
+export async function deleteOpenRouterRuntimeKey(): Promise<OpenRouterStatus> {
+  const res = await fetch(`${API_BASE_URL}/api/v1/settings/openrouter`, { method: 'DELETE' });
+  if (!res.ok) throw new Error('Failed to delete runtime OpenRouter key');
+  return res.json();
 }

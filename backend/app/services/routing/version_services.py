@@ -5,7 +5,7 @@ from app.adapters.rule_v0_adapter import RuleV0Adapter
 from app.adapters.rule_v1_adapter import RuleV1Adapter
 from app.adapters.rule_v2_adapter import RuleV2Adapter
 from app.adapters.hybrid_v0_adapter import HybridV0Adapter
-from app.schemas.routing import RouteResponse
+from app.schemas.routing import HybridConfig, RouteResponse
 from app.settings_store import SettingsStore
 from app.services.routing.base import RouterVersionService
 
@@ -59,6 +59,33 @@ class QwenV0Service(AdapterBackedRouterService):
         return SettingsStore.get_qwen_health() is True
 
 
-class HybridV0Service(AdapterBackedRouterService):
-    def __init__(self):
-        super().__init__(HybridV0Adapter(), "hybrid", "v0")
+class HybridV0Service(RouterVersionService):
+    def __init__(self, rule_service, llm_service):
+        self.adapter = HybridV0Adapter(rule_service, llm_service)
+        self.router_id = self.adapter.ID
+        self.router_name = self.adapter.NAME
+        self.family = "hybrid"
+        self.version = "v0"
+        self.capabilities = {
+            **self.capabilities,
+            "requires_configuration": True,
+            "supports_rule_first": True,
+            "supports_llm_fallback": True,
+        }
+
+    def route(
+        self,
+        question: str,
+        history: list[str] | None = None,
+        config: HybridConfig | None = None,
+    ) -> RouteResponse:
+        return self.adapter.route(question=question, history=history or [], config=config)
+
+    def get_metadata(self):
+        metadata = super().get_metadata()
+        metadata.update({
+            "available": True,
+            "unavailable_reason": None,
+            "description": "Rule-first Hybrid Router with configurable LLM fallback",
+        })
+        return metadata

@@ -8,18 +8,63 @@ export interface RouterDecision {
   reason: string;
 }
 
+export interface HybridConfig {
+  rule_router_id: string;
+  llm_router_id: string;
+  rule_confidence_threshold: number;
+  fallback_on_low_confidence: boolean;
+  fallback_on_unknown_subject: boolean;
+  fallback_on_need_clarification: boolean;
+  fallback_on_rule_error: boolean;
+  llm_failure_policy: 'use_rule';
+}
+
+export interface HybridRuntime {
+  hybrid_version: string;
+  rule_router_id: string;
+  llm_router_id: string;
+  rule_called: boolean;
+  llm_called: boolean;
+  selected_source: 'rule' | 'llm' | 'rule_after_llm_failure';
+  fallback_triggers: string[];
+  primary_fallback_trigger?: string | null;
+  rule_confidence?: number | null;
+  rule_latency_ms: number;
+  llm_latency_ms: number;
+  total_latency_ms: number;
+  degraded_mode: boolean;
+  llm_error_code?: string | null;
+  config_snapshot: HybridConfig;
+  rule_decision?: RouterDecision | null;
+  llm_decision?: RouterDecision | null;
+}
+
 export interface RouterRuntime {
   router_type?: string;
   source?: string;
   latency_ms: number;
   input_tokens?: number;
   output_tokens?: number;
+  total_tokens?: number;
+  cost?: number | null;
   parse_success: boolean;
+  schema_success?: boolean;
   model?: string;
+  requested_model?: string;
+  resolved_model?: string;
+  provider?: string;
+  prompt_version?: string;
+  structured_output_mode?: string;
+  retry_count?: number;
+  attempt_count?: number;
+  retry_reason?: string;
+  finish_reason?: string;
+  hybrid?: HybridRuntime;
 }
 
 export interface RouterError {
   message: string;
+  code?: string;
 }
 
 export interface RouterResult {
@@ -28,12 +73,13 @@ export interface RouterResult {
   error: RouterError | null;
 }
 
-export type RouterType = "rule_v0" | "rule_v1" | "rule_v2" | "rule_v3" | "qwen_v0" | "hybrid";
+export type RouterType = "rule_v0" | "rule_v1" | "rule_v2" | "rule_v3" | "qwen_v0" | "hybrid" | "llm_deepseek_v0" | "llm_gemini_v0" | "llm_openai_v0";
 
 export interface RouteRequest {
   router_id: string;
   question: string;
   history: string[];
+  hybrid_config?: HybridConfig;
 }
 
 export interface RouteResponse {
@@ -51,6 +97,9 @@ export interface RouterInfo {
   version?: string;
   capabilities?: Record<string, boolean>;
   description?: string;
+  model?: string;
+  available?: boolean;
+  unavailable_reason?: string;
 }
 
 export interface HealthResponse {
@@ -61,7 +110,7 @@ export interface HealthResponse {
 export interface CompareResult {
   router_id: string;
   response?: RouteResponse;
-  error?: string;
+  error?: RouterError | string;
 }
 
 export interface CompareResponse {
@@ -84,6 +133,31 @@ export interface RouterMetrics {
   secondary_subject_micro_f1?: number;
   full_exact_match_accuracy?: number;
   metrics_by_case_type?: Record<string, Record<string, number>>;
+  median_latency_ms?: number;
+  p95_latency_ms?: number;
+  total_input_tokens?: number;
+  total_output_tokens?: number;
+  total_tokens?: number;
+  average_tokens_per_sample?: number;
+  total_cost?: number | null;
+  average_cost_per_sample?: number | null;
+  cost_coverage_rate?: number;
+  valid_json_rate?: number;
+  schema_success_rate?: number;
+  failed_prediction_rate?: number;
+  retry_count?: number;
+  rule_only_usage_rate?: number;
+  llm_fallback_rate?: number;
+  llm_success_rate?: number;
+  llm_failure_rate?: number;
+  degraded_mode_rate?: number;
+  rule_selected_accuracy?: number | null;
+  llm_selected_accuracy?: number | null;
+  accuracy_by_selected_source?: Record<string, number>;
+  rule_latency_ms?: number;
+  llm_latency_ms?: number;
+  degraded_mode_count?: number;
+  fallback_trigger_distribution?: Record<string, number>;
 }
 
 export interface ErrorItem {

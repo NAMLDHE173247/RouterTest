@@ -31,12 +31,13 @@ class RouterVersionService(ABC):
         return self.family
 
     def get_metadata(self) -> Dict[str, Any]:
+        available = self.is_available()
         return {
             "id": self.router_id,
             "name": self.router_name,
             "family": self.family,
             "version": self.version,
-            "status": "ready" if self.is_available() else "unavailable",
+            "status": "ready" if available else "unavailable",
             "capabilities": dict(self.capabilities),
             "description": self.description,
         }
