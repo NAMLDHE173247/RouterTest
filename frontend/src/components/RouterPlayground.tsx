@@ -77,9 +77,9 @@ export default function RouterPlayground({ routers, hybridConfig, onHybridConfig
               <option 
                 key={r.id} 
                 value={r.id} 
-                disabled={false}
+                disabled={r.available === false || r.status === 'unavailable'}
               >
-                {r.name}
+                {r.name}{r.available === false || r.status === 'unavailable' ? ` (${r.unavailable_reason ?? 'unavailable'})` : ''}
               </option>
             )) : (
               <>

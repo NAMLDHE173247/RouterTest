@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "git_commit": "7e938b3d7c8cad01f163add5e712024742c8cc17",
+    "dataset_sha256": "1c786b2594013c4205c9c2425e6786919471c288158af09c480a3abad173614e",
+    "config_sha256": "87a20a22a084b7cc83112e64bf055f0edc5b8e4c9cb08751938fd63e46f1b944",
+    "config_files": [
+      "src\\rules.py",
+      "src\\threshold_config.py",
+      "src\\models.py",
+      "src\\topic_ontology.py",
+      "src\\topic_resolver.py",
+      "src\\intent_resolver.py",
+      "src\\router_context.py"
+    ],
+    "generated_at_utc": "2026-07-17T18:33:33.822913+00:00",
+    "phase": "phase_5_holdout"
+  },
+  "items": [
+    {
+      "gold": "explain_concept",
+      "predicted": "unknown",
+      "count": 3
+    },
+    {
+      "gold": "explain_concept",
+      "predicted": "solve_problem",
+      "count": 1
+    },
+    {
+      "gold": "solve_problem",
+      "predicted": "unknown",
+      "count": 1
+    },
+    {
+      "gold": "check_answer",
+      "predicted": "unknown",
+      "count": 1
+    }
+  ]
+}

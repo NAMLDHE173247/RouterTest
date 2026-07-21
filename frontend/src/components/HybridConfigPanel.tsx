@@ -10,8 +10,8 @@ interface Props {
 
 export default function HybridConfigPanel({ routers, config, onChange }: Props) {
   const ruleRouters = routers.filter((router) => router.family === 'rule_based' || router.id.startsWith('rule_'));
-  const llmRouters = routers.filter((router) => router.family === 'openrouter_llm' || router.id.startsWith('llm_'));
-  const availableLlmCount = llmRouters.filter((router) => router.available !== false && router.status !== 'unavailable').length;
+  const fallbackRouters = routers.filter((router) => router.capabilities?.can_be_hybrid_fallback === true);
+  const availableFallbackCount = fallbackRouters.filter((router) => router.available !== false && router.status !== 'unavailable').length;
 
   const update = (patch: Partial<HybridConfig>) => onChange({ ...config, ...patch });
 
@@ -19,7 +19,7 @@ export default function HybridConfigPanel({ routers, config, onChange }: Props) 
     <section className="bg-blue-50 border border-blue-200 rounded-lg p-4 space-y-4">
       <div>
         <h3 className="font-bold text-blue-900">Hybrid Router V0 Configuration</h3>
-        <p className="text-xs text-blue-800 mt-1">Rule chạy trước; LLM chỉ được gọi khi policy kích hoạt fallback.</p>
+        <p className="text-xs text-blue-800 mt-1">Rule chạy trước; fallback Router chỉ được gọi khi policy kích hoạt.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -30,14 +30,16 @@ export default function HybridConfigPanel({ routers, config, onChange }: Props) 
           </select>
         </label>
         <label className="text-sm font-semibold text-gray-700">
-          LLM Router
-          <select value={config.llm_router_id} onChange={(event) => update({ llm_router_id: event.target.value })} className="mt-1 w-full border rounded p-2 bg-white font-normal" disabled={llmRouters.length === 0}>
-            {llmRouters.map((router) => {
+          Fallback Router
+          <select value={config.fallback_router_id ?? ''} onChange={(event) => update({ fallback_router_id: event.target.value })} className="mt-1 w-full border rounded p-2 bg-white font-normal" disabled={fallbackRouters.length === 0}>
+            <option value="" disabled>Chọn fallback Router</option>
+            {fallbackRouters.map((router) => {
               const unavailable = router.available === false || router.status === 'unavailable';
-              return <option key={router.id} value={router.id} disabled={unavailable}>{router.name}{unavailable ? ' (unavailable)' : ''}</option>;
+              const source = router.family === 'slm' ? 'GPU' : 'OpenRouter';
+              return <option key={router.id} value={router.id} disabled={unavailable}>{router.name} [{source}]{unavailable ? ` (${router.unavailable_reason ?? 'unavailable'})` : ''}</option>;
             })}
           </select>
-          {availableLlmCount === 0 && <span className="block mt-1 text-xs text-amber-700">Cấu hình OpenRouter key để chọn LLM Router.</span>}
+          {availableFallbackCount === 0 && <span className="block mt-1 text-xs text-amber-700">Không có fallback Router đang available.</span>}
         </label>
       </div>
 
@@ -53,7 +55,7 @@ export default function HybridConfigPanel({ routers, config, onChange }: Props) 
         <label><input type="checkbox" checked={config.fallback_on_rule_error} onChange={(event) => update({ fallback_on_rule_error: event.target.checked })} className="mr-2" />Fallback khi Rule lỗi</label>
       </div>
 
-      <p className="text-xs text-gray-600">LLM failure policy của V0: dùng lại Rule prediction nếu Rule đã tạo decision hợp lệ.</p>
+      <p className="text-xs text-gray-600">Fallback failure policy của V0: dùng lại Rule prediction nếu Rule đã tạo decision hợp lệ.</p>
     </section>
   );
 }

@@ -1,0 +1,575 @@
+{
+  "phase": "phase_5",
+  "search_space": {
+    "secondary_score_ratio": [
+      0.25,
+      0.35,
+      0.45,
+      0.55
+    ],
+    "ambiguous_min_score": [
+      3,
+      4,
+      5
+    ],
+    "out_of_scope_min_score": [
+      4,
+      5,
+      6
+    ],
+    "out_of_scope_max_stem_score": [
+      1,
+      2,
+      3
+    ],
+    "cross_domain_max_margin": [
+      0,
+      1,
+      2
+    ]
+  },
+  "trials": 324,
+  "selection_policy": "highest constrained objective; holdout not loaded",
+  "top_configurations": [
+    {
+      "config": {
+        "secondary_score_ratio": 0.25,
+        "ambiguous_min_score": 4,
+        "out_of_scope_min_score": 4,
+        "out_of_scope_max_stem_score": 1,
+        "cross_domain_max_margin": 0
+      },
+      "development": {
+        "samples": 300,
+        "primary": 0.96,
+        "intent": 0.88,
+        "target": 0.9533,
+        "clarification": 0.9733,
+        "secondary_precision": 0.8991,
+        "secondary_recall": 0.6622,
+        "secondary_f1": 0.7626,
+        "full_exact": 0.72,
+        "by_case_primary": {
+          "single_turn": 0.9821,
+          "multi_turn": 1.0,
+          "interdisciplinary": 0.8548,
+          "ambiguous": 1.0,
+          "out_of_scope": 1.0
+        }
+      },
+      "validation": {
+        "samples": 20,
+        "primary": 0.9,
+        "intent": 0.65,
+        "target": 0.9,
+        "clarification": 0.9,
+        "secondary_precision": 0.7778,
+        "secondary_recall": 0.6364,
+        "secondary_f1": 0.7,
+        "full_exact": 0.4,
+        "by_case_primary": {
+          "single_turn": 0.7778,
+          "interdisciplinary": 1.0,
+          "ambiguous": 1.0,
+          "out_of_scope": 1.0,
+          "multi_turn": 1.0
+        }
+      },
+      "objective": 0.88454,
+      "constraints": {
+        "development_primary": true,
+        "development_intent": true,
+        "development_target": true,
+        "development_clarification": true,
+        "development_secondary_f1": true
+      },
+      "feasible": true
+    },
+    {
+      "config": {
+        "secondary_score_ratio": 0.25,
+        "ambiguous_min_score": 4,
+        "out_of_scope_min_score": 4,
+        "out_of_scope_max_stem_score": 2,
+        "cross_domain_max_margin": 0
+      },
+      "development": {
+        "samples": 300,
+        "primary": 0.96,
+        "intent": 0.88,
+        "target": 0.9533,
+        "clarification": 0.9733,
+        "secondary_precision": 0.8991,
+        "secondary_recall": 0.6622,
+        "secondary_f1": 0.7626,
+        "full_exact": 0.72,
+        "by_case_primary": {
+          "single_turn": 0.9821,
+          "multi_turn": 1.0,
+          "interdisciplinary": 0.8548,
+          "ambiguous": 1.0,
+          "out_of_scope": 1.0
+        }
+      },
+      "validation": {
+        "samples": 20,
+        "primary": 0.9,
+        "intent": 0.65,
+        "target": 0.9,
+        "clarification": 0.9,
+        "secondary_precision": 0.7778,
+        "secondary_recall": 0.6364,
+        "secondary_f1": 0.7,
+        "full_exact": 0.4,
+        "by_case_primary": {
+          "single_turn": 0.7778,
+          "interdisciplinary": 1.0,
+          "ambiguous": 1.0,
+          "out_of_scope": 1.0,
+          "multi_turn": 1.0
+        }
+      },
+      "objective": 0.88454,
+      "constraints": {
+        "development_primary": true,
+        "development_intent": true,
+        "development_target": true,
+        "development_clarification": true,
+        "development_secondary_f1": true
+      },
+      "feasible": true
+    },
+    {
+      "config": {
+        "secondary_score_ratio": 0.25,
+        "ambiguous_min_score": 4,
+        "out_of_scope_min_score": 4,
+        "out_of_scope_max_stem_score": 3,
+        "cross_domain_max_margin": 0
+      },
+      "development": {
+        "samples": 300,
+        "primary": 0.96,
+        "intent": 0.88,
+        "target": 0.9533,
+        "clarification": 0.9733,
+        "secondary_precision": 0.8991,
+        "secondary_recall": 0.6622,
+        "secondary_f1": 0.7626,
+        "full_exact": 0.72,
+        "by_case_primary": {
+          "single_turn": 0.9821,
+          "multi_turn": 1.0,
+          "interdisciplinary": 0.8548,
+          "ambiguous": 1.0,
+          "out_of_scope": 1.0
+        }
+      },
+      "validation": {
+        "samples": 20,
+        "primary": 0.9,
+        "intent": 0.65,
+        "target": 0.9,
+        "clarification": 0.9,
+        "secondary_precision": 0.7778,
+        "secondary_recall": 0.6364,
+        "secondary_f1": 0.7,
+        "full_exact": 0.4,
+        "by_case_primary": {
+          "single_turn": 0.7778,
+          "interdisciplinary": 1.0,
+          "ambiguous": 1.0,
+          "out_of_scope": 1.0,
+          "multi_turn": 1.0
+        }
+      },
+      "objective": 0.88454,
+      "constraints": {
+        "development_primary": true,
+        "development_intent": true,
+        "development_target": true,
+        "development_clarification": true,
+        "development_secondary_f1": true
+      },
+      "feasible": true
+    },
+    {
+      "config": {
+        "secondary_score_ratio": 0.25,
+        "ambiguous_min_score": 4,
+        "out_of_scope_min_score": 5,
+        "out_of_scope_max_stem_score": 1,
+        "cross_domain_max_margin": 0
+      },
+      "development": {
+        "samples": 300,
+        "primary": 0.96,
+        "intent": 0.88,
+        "target": 0.9533,
+        "clarification": 0.9733,
+        "secondary_precision": 0.8991,
+        "secondary_recall": 0.6622,
+        "secondary_f1": 0.7626,
+        "full_exact": 0.72,
+        "by_case_primary": {
+          "single_turn": 0.9821,
+          "multi_turn": 1.0,
+          "interdisciplinary": 0.8548,
+          "ambiguous": 1.0,
+          "out_of_scope": 1.0
+        }
+      },
+      "validation": {
+        "samples": 20,
+        "primary": 0.9,
+        "intent": 0.65,
+        "target": 0.9,
+        "clarification": 0.9,
+        "secondary_precision": 0.7778,
+        "secondary_recall": 0.6364,
+        "secondary_f1": 0.7,
+        "full_exact": 0.4,
+        "by_case_primary": {
+          "single_turn": 0.7778,
+          "interdisciplinary": 1.0,
+          "ambiguous": 1.0,
+          "out_of_scope": 1.0,
+          "multi_turn": 1.0
+        }
+      },
+      "objective": 0.88454,
+      "constraints": {
+        "development_primary": true,
+        "development_intent": true,
+        "development_target": true,
+        "development_clarification": true,
+        "development_secondary_f1": true
+      },
+      "feasible": true
+    },
+    {
+      "config": {
+        "secondary_score_ratio": 0.25,
+        "ambiguous_min_score": 4,
+        "out_of_scope_min_score": 5,
+        "out_of_scope_max_stem_score": 2,
+        "cross_domain_max_margin": 0
+      },
+      "development": {
+        "samples": 300,
+        "primary": 0.96,
+        "intent": 0.88,
+        "target": 0.9533,
+        "clarification": 0.9733,
+        "secondary_precision": 0.8991,
+        "secondary_recall": 0.6622,
+        "secondary_f1": 0.7626,
+        "full_exact": 0.72,
+        "by_case_primary": {
+          "single_turn": 0.9821,
+          "multi_turn": 1.0,
+          "interdisciplinary": 0.8548,
+          "ambiguous": 1.0,
+          "out_of_scope": 1.0
+        }
+      },
+      "validation": {
+        "samples": 20,
+        "primary": 0.9,
+        "intent": 0.65,
+        "target": 0.9,
+        "clarification": 0.9,
+        "secondary_precision": 0.7778,
+        "secondary_recall": 0.6364,
+        "secondary_f1": 0.7,
+        "full_exact": 0.4,
+        "by_case_primary": {
+          "single_turn": 0.7778,
+          "interdisciplinary": 1.0,
+          "ambiguous": 1.0,
+          "out_of_scope": 1.0,
+          "multi_turn": 1.0
+        }
+      },
+      "objective": 0.88454,
+      "constraints": {
+        "development_primary": true,
+        "development_intent": true,
+        "development_target": true,
+        "development_clarification": true,
+        "development_secondary_f1": true
+      },
+      "feasible": true
+    },
+    {
+      "config": {
+        "secondary_score_ratio": 0.25,
+        "ambiguous_min_score": 4,
+        "out_of_scope_min_score": 5,
+        "out_of_scope_max_stem_score": 3,
+        "cross_domain_max_margin": 0
+      },
+      "development": {
+        "samples": 300,
+        "primary": 0.96,
+        "intent": 0.88,
+        "target": 0.9533,
+        "clarification": 0.9733,
+        "secondary_precision": 0.8991,
+        "secondary_recall": 0.6622,
+        "secondary_f1": 0.7626,
+        "full_exact": 0.72,
+        "by_case_primary": {
+          "single_turn": 0.9821,
+          "multi_turn": 1.0,
+          "interdisciplinary": 0.8548,
+          "ambiguous": 1.0,
+          "out_of_scope": 1.0
+        }
+      },
+      "validation": {
+        "samples": 20,
+        "primary": 0.9,
+        "intent": 0.65,
+        "target": 0.9,
+        "clarification": 0.9,
+        "secondary_precision": 0.7778,
+        "secondary_recall": 0.6364,
+        "secondary_f1": 0.7,
+        "full_exact": 0.4,
+        "by_case_primary": {
+          "single_turn": 0.7778,
+          "interdisciplinary": 1.0,
+          "ambiguous": 1.0,
+          "out_of_scope": 1.0,
+          "multi_turn": 1.0
+        }
+      },
+      "objective": 0.88454,
+      "constraints": {
+        "development_primary": true,
+        "development_intent": true,
+        "development_target": true,
+        "development_clarification": true,
+        "development_secondary_f1": true
+      },
+      "feasible": true
+    },
+    {
+      "config": {
+        "secondary_score_ratio": 0.25,
+        "ambiguous_min_score": 5,
+        "out_of_scope_min_score": 4,
+        "out_of_scope_max_stem_score": 1,
+        "cross_domain_max_margin": 0
+      },
+      "development": {
+        "samples": 300,
+        "primary": 0.96,
+        "intent": 0.88,
+        "target": 0.9533,
+        "clarification": 0.9733,
+        "secondary_precision": 0.8991,
+        "secondary_recall": 0.6622,
+        "secondary_f1": 0.7626,
+        "full_exact": 0.72,
+        "by_case_primary": {
+          "single_turn": 0.9821,
+          "multi_turn": 1.0,
+          "interdisciplinary": 0.8548,
+          "ambiguous": 1.0,
+          "out_of_scope": 1.0
+        }
+      },
+      "validation": {
+        "samples": 20,
+        "primary": 0.9,
+        "intent": 0.65,
+        "target": 0.9,
+        "clarification": 0.9,
+        "secondary_precision": 0.7778,
+        "secondary_recall": 0.6364,
+        "secondary_f1": 0.7,
+        "full_exact": 0.4,
+        "by_case_primary": {
+          "single_turn": 0.7778,
+          "interdisciplinary": 1.0,
+          "ambiguous": 1.0,
+          "out_of_scope": 1.0,
+          "multi_turn": 1.0
+        }
+      },
+      "objective": 0.88454,
+      "constraints": {
+        "development_primary": true,
+        "development_intent": true,
+        "development_target": true,
+        "development_clarification": true,
+        "development_secondary_f1": true
+      },
+      "feasible": true
+    },
+    {
+      "config": {
+        "secondary_score_ratio": 0.25,
+        "ambiguous_min_score": 5,
+        "out_of_scope_min_score": 4,
+        "out_of_scope_max_stem_score": 2,
+        "cross_domain_max_margin": 0
+      },
+      "development": {
+        "samples": 300,
+        "primary": 0.96,
+        "intent": 0.88,
+        "target": 0.9533,
+        "clarification": 0.9733,
+        "secondary_precision": 0.8991,
+        "secondary_recall": 0.6622,
+        "secondary_f1": 0.7626,
+        "full_exact": 0.72,
+        "by_case_primary": {
+          "single_turn": 0.9821,
+          "multi_turn": 1.0,
+          "interdisciplinary": 0.8548,
+          "ambiguous": 1.0,
+          "out_of_scope": 1.0
+        }
+      },
+      "validation": {
+        "samples": 20,
+        "primary": 0.9,
+        "intent": 0.65,
+        "target": 0.9,
+        "clarification": 0.9,
+        "secondary_precision": 0.7778,
+        "secondary_recall": 0.6364,
+        "secondary_f1": 0.7,
+        "full_exact": 0.4,
+        "by_case_primary": {
+          "single_turn": 0.7778,
+          "interdisciplinary": 1.0,
+          "ambiguous": 1.0,
+          "out_of_scope": 1.0,
+          "multi_turn": 1.0
+        }
+      },
+      "objective": 0.88454,
+      "constraints": {
+        "development_primary": true,
+        "development_intent": true,
+        "development_target": true,
+        "development_clarification": true,
+        "development_secondary_f1": true
+      },
+      "feasible": true
+    },
+    {
+      "config": {
+        "secondary_score_ratio": 0.25,
+        "ambiguous_min_score": 5,
+        "out_of_scope_min_score": 4,
+        "out_of_scope_max_stem_score": 3,
+        "cross_domain_max_margin": 0
+      },
+      "development": {
+        "samples": 300,
+        "primary": 0.96,
+        "intent": 0.88,
+        "target": 0.9533,
+        "clarification": 0.9733,
+        "secondary_precision": 0.8991,
+        "secondary_recall": 0.6622,
+        "secondary_f1": 0.7626,
+        "full_exact": 0.72,
+        "by_case_primary": {
+          "single_turn": 0.9821,
+          "multi_turn": 1.0,
+          "interdisciplinary": 0.8548,
+          "ambiguous": 1.0,
+          "out_of_scope": 1.0
+        }
+      },
+      "validation": {
+        "samples": 20,
+        "primary": 0.9,
+        "intent": 0.65,
+        "target": 0.9,
+        "clarification": 0.9,
+        "secondary_precision": 0.7778,
+        "secondary_recall": 0.6364,
+        "secondary_f1": 0.7,
+        "full_exact": 0.4,
+        "by_case_primary": {
+          "single_turn": 0.7778,
+          "interdisciplinary": 1.0,
+          "ambiguous": 1.0,
+          "out_of_scope": 1.0,
+          "multi_turn": 1.0
+        }
+      },
+      "objective": 0.88454,
+      "constraints": {
+        "development_primary": true,
+        "development_intent": true,
+        "development_target": true,
+        "development_clarification": true,
+        "development_secondary_f1": true
+      },
+      "feasible": true
+    },
+    {
+      "config": {
+        "secondary_score_ratio": 0.25,
+        "ambiguous_min_score": 5,
+        "out_of_scope_min_score": 5,
+        "out_of_scope_max_stem_score": 1,
+        "cross_domain_max_margin": 0
+      },
+      "development": {
+        "samples": 300,
+        "primary": 0.96,
+        "intent": 0.88,
+        "target": 0.9533,
+        "clarification": 0.9733,
+        "secondary_precision": 0.8991,
+        "secondary_recall": 0.6622,
+        "secondary_f1": 0.7626,
+        "full_exact": 0.72,
+        "by_case_primary": {
+          "single_turn": 0.9821,
+          "multi_turn": 1.0,
+          "interdisciplinary": 0.8548,
+          "ambiguous": 1.0,
+          "out_of_scope": 1.0
+        }
+      },
+      "validation": {
+        "samples": 20,
+        "primary": 0.9,
+        "intent": 0.65,
+        "target": 0.9,
+        "clarification": 0.9,
+        "secondary_precision": 0.7778,
+        "secondary_recall": 0.6364,
+        "secondary_f1": 0.7,
+        "full_exact": 0.4,
+        "by_case_primary": {
+          "single_turn": 0.7778,
+          "interdisciplinary": 1.0,
+          "ambiguous": 1.0,
+          "out_of_scope": 1.0,
+          "multi_turn": 1.0
+        }
+      },
+      "objective": 0.88454,
+      "constraints": {
+        "development_primary": true,
+        "development_intent": true,
+        "development_target": true,
+        "development_clarification": true,
+        "development_secondary_f1": true
+      },
+      "feasible": true
+    }
+  ]
+}

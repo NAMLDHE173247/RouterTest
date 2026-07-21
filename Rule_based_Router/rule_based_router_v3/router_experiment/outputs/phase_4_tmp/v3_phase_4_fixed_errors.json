@@ -1,0 +1,2237 @@
+{
+  "metadata": {
+    "git_commit": "71e6a31e568384f9267e5c7741e07ea868ab7a59",
+    "dataset_sha256": "5d25fb93a173733033a632fec3ca7bfc5b29fffb0db2a8b3676ee919301ec5cf",
+    "config_sha256": "c9b09d804ca80f5469d18778caaff5ddd2fad9ca6e0b52a5df2e708042e9abfb",
+    "config_files": [
+      "src\\rules.py",
+      "src\\models.py",
+      "src\\topic_ontology.py",
+      "src\\topic_resolver.py",
+      "src\\intent_resolver.py",
+      "src\\router_context.py"
+    ],
+    "generated_at_utc": "2026-07-17T18:10:34.742315+00:00",
+    "phase": "phase_4"
+  },
+  "items": [
+    {
+      "id": "q220",
+      "baseline": {
+        "id": "q220",
+        "question": "Trong phản ứng giữa NaOH và HCl, nếu nhiệt độ dung dịch tăng thì có phải phản ứng tỏa nhiệt không? Giải thích thêm về nhiệt lượng.",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "physics"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "physics",
+          "secondary_subjects": [
+            "chemistry"
+          ],
+          "intent": "explain_concept",
+          "target_slm": "physics_slm",
+          "confidence": 0.9,
+          "need_clarification": false,
+          "reason": "Interdisciplinary question: primary=physics, secondary=chemistry, intent=explain_concept.",
+          "topic": "physics.thermodynamics.heat_transfer",
+          "trace": {
+            "topic": "physics.thermodynamics.heat_transfer",
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.support_term.04_nhiet_o",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "support_term",
+                "matched_text": "nhiệt độ",
+                "start": 37,
+                "end": 45,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term.01_nhiet_luong",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "nhiệt lượng",
+                "start": 118,
+                "end": 129,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term.04_nhiet_o",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "nhiệt độ",
+                "start": 37,
+                "end": 45,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term.07_toa_nhiet",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "tỏa nhiệt",
+                "start": 82,
+                "end": 91,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term.08_phan_ung_toa_nhiet",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "phản ứng tỏa nhiệt",
+                "start": 73,
+                "end": 91,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.support_term.03_toa_nhiet",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "support_term",
+                "matched_text": "tỏa nhiệt",
+                "start": 82,
+                "end": 91,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.atomic_structure.atomic_structure.entity.07_naoh",
+                "label": "chemistry",
+                "topic": "chemistry.atomic_structure",
+                "source": "entity",
+                "matched_text": "naoh",
+                "start": 20,
+                "end": 24,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.support_term.01_phan_ung",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "support_term",
+                "matched_text": "phản ứng",
+                "start": 6,
+                "end": 14,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.support_term.01_phan_ung",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "support_term",
+                "matched_text": "phản ứng",
+                "start": 73,
+                "end": 81,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.strong_term.09_dung_dich",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "strong_term",
+                "matched_text": "dung dịch",
+                "start": 46,
+                "end": 55,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.support_term.03_dung_dich",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "support_term",
+                "matched_text": "dung dịch",
+                "start": 46,
+                "end": 55,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.entity.07_hcl",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "entity",
+                "matched_text": "hcl",
+                "start": 28,
+                "end": 31,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.entity.08_naoh",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "entity",
+                "matched_text": "naoh",
+                "start": 20,
+                "end": 24,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.acids_bases.acids_bases.support_term.03_dung_dich",
+                "label": "chemistry",
+                "topic": "chemistry.acids_bases",
+                "source": "support_term",
+                "matched_text": "dung dịch",
+                "start": 46,
+                "end": 55,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.acids_bases.acids_bases.entity.01_hcl",
+                "label": "chemistry",
+                "topic": "chemistry.acids_bases",
+                "source": "entity",
+                "matched_text": "hcl",
+                "start": 28,
+                "end": 31,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.acids_bases.acids_bases.entity.02_naoh",
+                "label": "chemistry",
+                "topic": "chemistry.acids_bases",
+                "source": "entity",
+                "matched_text": "naoh",
+                "start": 20,
+                "end": 24,
+                "score": 0,
+                "is_entity": true
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 14,
+              "chemistry": 7
+            },
+            "primary_subject": "physics",
+            "secondary_subjects": [
+              "chemistry"
+            ],
+            "inherited_from_history": false,
+            "ownership_override": null,
+            "router_context": {
+              "last_explicit_subject": null,
+              "last_topic": null,
+              "last_intent": null,
+              "active_entities": [],
+              "turns_since_explicit_subject": null,
+              "pending_clarification": false,
+              "context_confidence": 0.0,
+              "history_weight": 0.0,
+              "source_turn": null,
+              "inherited_fields": [],
+              "reset_reason": "missing_history",
+              "missing_history": true
+            },
+            "intent": {
+              "rule_matches": [
+                {
+                  "rule_id": "intent.base.explain_concept.giai_thich",
+                  "intent": "explain_concept",
+                  "source": "base_rule",
+                  "matched_text": "giải thích",
+                  "start": 99,
+                  "end": 109,
+                  "score": 4,
+                  "strength": "general"
+                },
+                {
+                  "rule_id": "intent.phase2.explain.strong.difference",
+                  "intent": "explain_concept",
+                  "source": "context_rule",
+                  "matched_text": "giải thích",
+                  "start": 99,
+                  "end": 109,
+                  "score": 8,
+                  "strength": "strong"
+                }
+              ],
+              "vetoes": [],
+              "scores": {
+                "diagnose_error": 0,
+                "check_answer": 0,
+                "give_hint": 0,
+                "explain_concept": 12,
+                "solve_problem": 0,
+                "ask_follow_up": 0
+              },
+              "selected_intent": "explain_concept",
+              "top_score": 12,
+              "second_score": 0,
+              "decision_margin": 12,
+              "history_context": {
+                "source_turn": null,
+                "history_weight": 0.0,
+                "inherited_fields": [],
+                "missing_history": true
+              }
+            }
+          }
+        }
+      },
+      "current": {
+        "id": "q220",
+        "question": "Trong phản ứng giữa NaOH và HCl, nếu nhiệt độ dung dịch tăng thì có phải phản ứng tỏa nhiệt không? Giải thích thêm về nhiệt lượng.",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "physics"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "chemistry",
+          "secondary_subjects": [
+            "physics"
+          ],
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "confidence": 0.8,
+          "need_clarification": false,
+          "reason": "Interdisciplinary question: primary=chemistry, secondary=physics, intent=explain_concept.",
+          "topic": "chemistry.stoichiometry",
+          "trace": {
+            "topic": "chemistry.stoichiometry",
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.support_term.04_nhiet_o",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "support_term",
+                "matched_text": "nhiệt độ",
+                "start": 37,
+                "end": 45,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term.01_nhiet_luong",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "nhiệt lượng",
+                "start": 118,
+                "end": 129,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term.04_nhiet_o",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "nhiệt độ",
+                "start": 37,
+                "end": 45,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term.07_toa_nhiet",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "tỏa nhiệt",
+                "start": 82,
+                "end": 91,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term.08_phan_ung_toa_nhiet",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "phản ứng tỏa nhiệt",
+                "start": 73,
+                "end": 91,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.support_term.03_toa_nhiet",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "support_term",
+                "matched_text": "tỏa nhiệt",
+                "start": 82,
+                "end": 91,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.atomic_structure.atomic_structure.entity.07_naoh",
+                "label": "chemistry",
+                "topic": "chemistry.atomic_structure",
+                "source": "entity",
+                "matched_text": "naoh",
+                "start": 20,
+                "end": 24,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.support_term.01_phan_ung",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "support_term",
+                "matched_text": "phản ứng",
+                "start": 6,
+                "end": 14,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.support_term.01_phan_ung",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "support_term",
+                "matched_text": "phản ứng",
+                "start": 73,
+                "end": 81,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.strong_term.09_dung_dich",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "strong_term",
+                "matched_text": "dung dịch",
+                "start": 46,
+                "end": 55,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.support_term.03_dung_dich",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "support_term",
+                "matched_text": "dung dịch",
+                "start": 46,
+                "end": 55,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.entity.07_hcl",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "entity",
+                "matched_text": "hcl",
+                "start": 28,
+                "end": 31,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.entity.08_naoh",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "entity",
+                "matched_text": "naoh",
+                "start": 20,
+                "end": 24,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.acids_bases.acids_bases.support_term.03_dung_dich",
+                "label": "chemistry",
+                "topic": "chemistry.acids_bases",
+                "source": "support_term",
+                "matched_text": "dung dịch",
+                "start": 46,
+                "end": 55,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.acids_bases.acids_bases.entity.01_hcl",
+                "label": "chemistry",
+                "topic": "chemistry.acids_bases",
+                "source": "entity",
+                "matched_text": "hcl",
+                "start": 28,
+                "end": 31,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.acids_bases.acids_bases.entity.02_naoh",
+                "label": "chemistry",
+                "topic": "chemistry.acids_bases",
+                "source": "entity",
+                "matched_text": "naoh",
+                "start": 20,
+                "end": 24,
+                "score": 0,
+                "is_entity": true
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 14,
+              "chemistry": 7
+            },
+            "primary_subject": "chemistry",
+            "secondary_subjects": [
+              "physics"
+            ],
+            "inherited_from_history": false,
+            "ownership_override": {
+              "rule_id": "subject.chemistry.override.reaction_thermal_focus",
+              "reason": "Reaction context is the requested subject; thermal or pressure language is a supporting condition.",
+              "score_winner": "physics",
+              "score_winner_score": 14,
+              "final_winner": "chemistry",
+              "final_winner_score": 7,
+              "decision_margin": 7,
+              "override_score_delta": 7
+            },
+            "secondary_reasons": {
+              "physics": "independent_evidence_score_ratio"
+            },
+            "router_context": {
+              "last_explicit_subject": null,
+              "last_topic": null,
+              "last_intent": null,
+              "active_entities": [],
+              "turns_since_explicit_subject": null,
+              "pending_clarification": false,
+              "context_confidence": 0.0,
+              "history_weight": 0.0,
+              "source_turn": null,
+              "inherited_fields": [],
+              "reset_reason": "missing_history",
+              "missing_history": true
+            },
+            "intent": {
+              "rule_matches": [
+                {
+                  "rule_id": "intent.base.explain_concept.giai_thich",
+                  "intent": "explain_concept",
+                  "source": "base_rule",
+                  "matched_text": "giải thích",
+                  "start": 99,
+                  "end": 109,
+                  "score": 4,
+                  "strength": "general"
+                },
+                {
+                  "rule_id": "intent.phase2.explain.strong.difference",
+                  "intent": "explain_concept",
+                  "source": "context_rule",
+                  "matched_text": "giải thích",
+                  "start": 99,
+                  "end": 109,
+                  "score": 8,
+                  "strength": "strong"
+                }
+              ],
+              "vetoes": [],
+              "scores": {
+                "diagnose_error": 0,
+                "check_answer": 0,
+                "give_hint": 0,
+                "explain_concept": 12,
+                "solve_problem": 0,
+                "ask_follow_up": 0
+              },
+              "selected_intent": "explain_concept",
+              "top_score": 12,
+              "second_score": 0,
+              "decision_margin": 12,
+              "history_context": {
+                "source_turn": null,
+                "history_weight": 0.0,
+                "inherited_fields": [],
+                "missing_history": true
+              }
+            },
+            "scope": {
+              "is_out_of_scope": false,
+              "scope_state": "CONFIRMED_STEM",
+              "score": 0,
+              "matched_terms": [],
+              "context_rule_ids": []
+            },
+            "clarification_reason_code": null
+          },
+          "clarification_reason_code": null
+        }
+      }
+    },
+    {
+      "id": "q239",
+      "baseline": {
+        "id": "q239",
+        "question": "Khi cho vôi sống CaO vào nước, nước nóng lên và tạo Ca(OH)2. Giải thích phản ứng và sự tăng nhiệt độ.",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "physics"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "physics",
+          "secondary_subjects": [],
+          "intent": "explain_concept",
+          "target_slm": "physics_slm",
+          "confidence": 0.9,
+          "need_clarification": false,
+          "reason": "Weighted FlashText signals indicate subject=physics, intent=explain_concept.",
+          "topic": "physics.thermodynamics.heat_transfer",
+          "trace": {
+            "topic": "physics.thermodynamics.heat_transfer",
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.support_term.04_nhiet_o",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "support_term",
+                "matched_text": "nhiệt độ",
+                "start": 92,
+                "end": 100,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term.04_nhiet_o",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "nhiệt độ",
+                "start": 92,
+                "end": 100,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.support_term.06_nuoc_nong",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "support_term",
+                "matched_text": "nước nóng",
+                "start": 31,
+                "end": 40,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.support_term.01_phan_ung",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "support_term",
+                "matched_text": "phản ứng",
+                "start": 72,
+                "end": 80,
+                "score": 1,
+                "is_entity": false
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 5,
+              "chemistry": 1
+            },
+            "primary_subject": "physics",
+            "secondary_subjects": [],
+            "inherited_from_history": false,
+            "ownership_override": null,
+            "router_context": {
+              "last_explicit_subject": null,
+              "last_topic": null,
+              "last_intent": null,
+              "active_entities": [],
+              "turns_since_explicit_subject": null,
+              "pending_clarification": false,
+              "context_confidence": 0.0,
+              "history_weight": 0.0,
+              "source_turn": null,
+              "inherited_fields": [],
+              "reset_reason": "missing_history",
+              "missing_history": true
+            },
+            "intent": {
+              "rule_matches": [
+                {
+                  "rule_id": "intent.base.explain_concept.giai_thich",
+                  "intent": "explain_concept",
+                  "source": "base_rule",
+                  "matched_text": "giải thích",
+                  "start": 61,
+                  "end": 71,
+                  "score": 4,
+                  "strength": "general"
+                },
+                {
+                  "rule_id": "intent.phase2.explain.strong.difference",
+                  "intent": "explain_concept",
+                  "source": "context_rule",
+                  "matched_text": "giải thích",
+                  "start": 61,
+                  "end": 71,
+                  "score": 8,
+                  "strength": "strong"
+                }
+              ],
+              "vetoes": [],
+              "scores": {
+                "diagnose_error": 0,
+                "check_answer": 0,
+                "give_hint": 0,
+                "explain_concept": 12,
+                "solve_problem": 0,
+                "ask_follow_up": 0
+              },
+              "selected_intent": "explain_concept",
+              "top_score": 12,
+              "second_score": 0,
+              "decision_margin": 12,
+              "history_context": {
+                "source_turn": null,
+                "history_weight": 0.0,
+                "inherited_fields": [],
+                "missing_history": true
+              }
+            }
+          }
+        }
+      },
+      "current": {
+        "id": "q239",
+        "question": "Khi cho vôi sống CaO vào nước, nước nóng lên và tạo Ca(OH)2. Giải thích phản ứng và sự tăng nhiệt độ.",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "physics"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "chemistry",
+          "secondary_subjects": [
+            "physics"
+          ],
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "confidence": 0.57,
+          "need_clarification": false,
+          "reason": "Interdisciplinary question: primary=chemistry, secondary=physics, intent=explain_concept.",
+          "topic": null,
+          "trace": {
+            "topic": null,
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.support_term.04_nhiet_o",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "support_term",
+                "matched_text": "nhiệt độ",
+                "start": 92,
+                "end": 100,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term.04_nhiet_o",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "nhiệt độ",
+                "start": 92,
+                "end": 100,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.support_term.06_nuoc_nong",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "support_term",
+                "matched_text": "nước nóng",
+                "start": 31,
+                "end": 40,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.support_term.01_phan_ung",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "support_term",
+                "matched_text": "phản ứng",
+                "start": 72,
+                "end": 80,
+                "score": 1,
+                "is_entity": false
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 5,
+              "chemistry": 1
+            },
+            "primary_subject": "chemistry",
+            "secondary_subjects": [
+              "physics"
+            ],
+            "inherited_from_history": false,
+            "ownership_override": {
+              "rule_id": "subject.chemistry.override.reaction_thermal_focus",
+              "reason": "Reaction context is the requested subject; thermal or pressure language is a supporting condition.",
+              "score_winner": "physics",
+              "score_winner_score": 5,
+              "final_winner": "chemistry",
+              "final_winner_score": 1,
+              "decision_margin": 4,
+              "override_score_delta": 4
+            },
+            "secondary_reasons": {
+              "physics": "independent_evidence_score_ratio"
+            },
+            "router_context": {
+              "last_explicit_subject": null,
+              "last_topic": null,
+              "last_intent": null,
+              "active_entities": [],
+              "turns_since_explicit_subject": null,
+              "pending_clarification": false,
+              "context_confidence": 0.0,
+              "history_weight": 0.0,
+              "source_turn": null,
+              "inherited_fields": [],
+              "reset_reason": "missing_history",
+              "missing_history": true
+            },
+            "intent": {
+              "rule_matches": [
+                {
+                  "rule_id": "intent.base.explain_concept.giai_thich",
+                  "intent": "explain_concept",
+                  "source": "base_rule",
+                  "matched_text": "giải thích",
+                  "start": 61,
+                  "end": 71,
+                  "score": 4,
+                  "strength": "general"
+                },
+                {
+                  "rule_id": "intent.phase2.explain.strong.difference",
+                  "intent": "explain_concept",
+                  "source": "context_rule",
+                  "matched_text": "giải thích",
+                  "start": 61,
+                  "end": 71,
+                  "score": 8,
+                  "strength": "strong"
+                }
+              ],
+              "vetoes": [],
+              "scores": {
+                "diagnose_error": 0,
+                "check_answer": 0,
+                "give_hint": 0,
+                "explain_concept": 12,
+                "solve_problem": 0,
+                "ask_follow_up": 0
+              },
+              "selected_intent": "explain_concept",
+              "top_score": 12,
+              "second_score": 0,
+              "decision_margin": 12,
+              "history_context": {
+                "source_turn": null,
+                "history_weight": 0.0,
+                "inherited_fields": [],
+                "missing_history": true
+              }
+            },
+            "scope": {
+              "is_out_of_scope": false,
+              "scope_state": "UNKNOWN_SCOPE",
+              "score": 0,
+              "matched_terms": [],
+              "context_rule_ids": []
+            },
+            "clarification_reason_code": null
+          },
+          "clarification_reason_code": null
+        }
+      }
+    },
+    {
+      "id": "q241",
+      "baseline": {
+        "id": "q241",
+        "question": "Một phản ứng tạo ra khí trong bình kín làm áp suất tăng. Làm sao phân biệt do số mol khí tăng hay do nhiệt độ tăng?",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "physics"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "physics",
+          "secondary_subjects": [
+            "chemistry"
+          ],
+          "intent": "unknown",
+          "target_slm": "physics_slm",
+          "confidence": 0.62,
+          "need_clarification": false,
+          "reason": "Interdisciplinary question: primary=physics, secondary=chemistry, intent=unknown.",
+          "topic": "physics.thermodynamics.ideal_gas",
+          "trace": {
+            "topic": "physics.thermodynamics.ideal_gas",
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.strong_term.04_so_mol_khi",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "strong_term",
+                "matched_text": "số mol khí",
+                "start": 78,
+                "end": 88,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.support_term.01_binh_kin",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "support_term",
+                "matched_text": "bình kín",
+                "start": 30,
+                "end": 38,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.support_term.03_ap_suat",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "support_term",
+                "matched_text": "áp suất",
+                "start": 43,
+                "end": 50,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.support_term.04_nhiet_o",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "support_term",
+                "matched_text": "nhiệt độ",
+                "start": 101,
+                "end": 109,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term.04_nhiet_o",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "nhiệt độ",
+                "start": 101,
+                "end": 109,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.support_term.01_phan_ung",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "support_term",
+                "matched_text": "phản ứng",
+                "start": 4,
+                "end": 12,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.strong_term.01_so_mol",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "strong_term",
+                "matched_text": "số mol",
+                "start": 78,
+                "end": 84,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.strong_term.02_mol",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "strong_term",
+                "matched_text": "mol",
+                "start": 81,
+                "end": 84,
+                "score": 3,
+                "is_entity": false
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 9,
+              "chemistry": 7
+            },
+            "primary_subject": "physics",
+            "secondary_subjects": [
+              "chemistry"
+            ],
+            "inherited_from_history": false,
+            "ownership_override": null,
+            "router_context": {
+              "last_explicit_subject": null,
+              "last_topic": null,
+              "last_intent": null,
+              "active_entities": [],
+              "turns_since_explicit_subject": null,
+              "pending_clarification": false,
+              "context_confidence": 0.0,
+              "history_weight": 0.0,
+              "source_turn": null,
+              "inherited_fields": [],
+              "reset_reason": "missing_history",
+              "missing_history": true
+            },
+            "intent": {
+              "rule_matches": [],
+              "vetoes": [],
+              "scores": {
+                "diagnose_error": 0,
+                "check_answer": 0,
+                "give_hint": 0,
+                "explain_concept": 0,
+                "solve_problem": 0,
+                "ask_follow_up": 0
+              },
+              "selected_intent": "unknown",
+              "top_score": 0,
+              "second_score": 0,
+              "decision_margin": 0,
+              "history_context": {
+                "source_turn": null,
+                "history_weight": 0.0,
+                "inherited_fields": [],
+                "missing_history": true
+              }
+            }
+          }
+        }
+      },
+      "current": {
+        "id": "q241",
+        "question": "Một phản ứng tạo ra khí trong bình kín làm áp suất tăng. Làm sao phân biệt do số mol khí tăng hay do nhiệt độ tăng?",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "physics"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "chemistry",
+          "secondary_subjects": [
+            "physics"
+          ],
+          "intent": "unknown",
+          "target_slm": "chemistry_slm",
+          "confidence": 0.57,
+          "need_clarification": false,
+          "reason": "Interdisciplinary question: primary=chemistry, secondary=physics, intent=unknown.",
+          "topic": "chemistry.stoichiometry",
+          "trace": {
+            "topic": "chemistry.stoichiometry",
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.strong_term.04_so_mol_khi",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "strong_term",
+                "matched_text": "số mol khí",
+                "start": 78,
+                "end": 88,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.support_term.01_binh_kin",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "support_term",
+                "matched_text": "bình kín",
+                "start": 30,
+                "end": 38,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.support_term.03_ap_suat",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "support_term",
+                "matched_text": "áp suất",
+                "start": 43,
+                "end": 50,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.support_term.04_nhiet_o",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "support_term",
+                "matched_text": "nhiệt độ",
+                "start": 101,
+                "end": 109,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term.04_nhiet_o",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "nhiệt độ",
+                "start": 101,
+                "end": 109,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.support_term.01_phan_ung",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "support_term",
+                "matched_text": "phản ứng",
+                "start": 4,
+                "end": 12,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.strong_term.01_so_mol",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "strong_term",
+                "matched_text": "số mol",
+                "start": 78,
+                "end": 84,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.strong_term.02_mol",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "strong_term",
+                "matched_text": "mol",
+                "start": 81,
+                "end": 84,
+                "score": 3,
+                "is_entity": false
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 9,
+              "chemistry": 7
+            },
+            "primary_subject": "chemistry",
+            "secondary_subjects": [
+              "physics"
+            ],
+            "inherited_from_history": false,
+            "ownership_override": {
+              "rule_id": "subject.chemistry.override.reaction_thermal_focus",
+              "reason": "Reaction context is the requested subject; thermal or pressure language is a supporting condition.",
+              "score_winner": "physics",
+              "score_winner_score": 9,
+              "final_winner": "chemistry",
+              "final_winner_score": 7,
+              "decision_margin": 2,
+              "override_score_delta": 2
+            },
+            "secondary_reasons": {
+              "physics": "independent_evidence_score_ratio"
+            },
+            "router_context": {
+              "last_explicit_subject": null,
+              "last_topic": null,
+              "last_intent": null,
+              "active_entities": [],
+              "turns_since_explicit_subject": null,
+              "pending_clarification": false,
+              "context_confidence": 0.0,
+              "history_weight": 0.0,
+              "source_turn": null,
+              "inherited_fields": [],
+              "reset_reason": "missing_history",
+              "missing_history": true
+            },
+            "intent": {
+              "rule_matches": [],
+              "vetoes": [],
+              "scores": {
+                "diagnose_error": 0,
+                "check_answer": 0,
+                "give_hint": 0,
+                "explain_concept": 0,
+                "solve_problem": 0,
+                "ask_follow_up": 0
+              },
+              "selected_intent": "unknown",
+              "top_score": 0,
+              "second_score": 0,
+              "decision_margin": 0,
+              "history_context": {
+                "source_turn": null,
+                "history_weight": 0.0,
+                "inherited_fields": [],
+                "missing_history": true
+              }
+            },
+            "scope": {
+              "is_out_of_scope": false,
+              "scope_state": "CONFIRMED_STEM",
+              "score": 0,
+              "matched_terms": [],
+              "context_rule_ids": []
+            },
+            "clarification_reason_code": null
+          },
+          "clarification_reason_code": null
+        }
+      }
+    },
+    {
+      "id": "q242",
+      "baseline": {
+        "id": "q242",
+        "question": "Nếu cho Mg tác dụng với HCl trong bình kín, khí H2 sinh ra làm áp suất tăng. Giải thích bằng phương trình phản ứng và khí lí tưởng.",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "physics",
+            "math"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "physics",
+          "secondary_subjects": [],
+          "intent": "explain_concept",
+          "target_slm": "physics_slm",
+          "confidence": 0.9,
+          "need_clarification": false,
+          "reason": "Weighted FlashText signals indicate subject=physics, intent=explain_concept.",
+          "topic": "physics.thermodynamics.ideal_gas",
+          "trace": {
+            "topic": "physics.thermodynamics.ideal_gas",
+            "rule_matches": [
+              {
+                "rule_id": "subject.math.algebra.linear_equation.support_term.01_phuong_trinh",
+                "label": "math",
+                "topic": "math.algebra.linear_equation",
+                "source": "support_term",
+                "matched_text": "phương trình",
+                "start": 93,
+                "end": 105,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.strong_term.01_khi_li_tuong",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "strong_term",
+                "matched_text": "khí lí tưởng",
+                "start": 118,
+                "end": 130,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.support_term.01_binh_kin",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "support_term",
+                "matched_text": "bình kín",
+                "start": 34,
+                "end": 42,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.support_term.03_ap_suat",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "support_term",
+                "matched_text": "áp suất",
+                "start": 63,
+                "end": 70,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.entity.03_h2",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "entity",
+                "matched_text": "h2",
+                "start": 48,
+                "end": 50,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.atomic_structure.atomic_structure.entity.03_h2",
+                "label": "chemistry",
+                "topic": "chemistry.atomic_structure",
+                "source": "entity",
+                "matched_text": "h2",
+                "start": 48,
+                "end": 50,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.support_term.01_phan_ung",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "support_term",
+                "matched_text": "phản ứng",
+                "start": 106,
+                "end": 114,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.entity.02_h2",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "entity",
+                "matched_text": "h2",
+                "start": 48,
+                "end": 50,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.entity.07_hcl",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "entity",
+                "matched_text": "hcl",
+                "start": 24,
+                "end": 27,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.acids_bases.acids_bases.entity.01_hcl",
+                "label": "chemistry",
+                "topic": "chemistry.acids_bases",
+                "source": "entity",
+                "matched_text": "hcl",
+                "start": 24,
+                "end": 27,
+                "score": 0,
+                "is_entity": true
+              }
+            ],
+            "subject_scores": {
+              "math": 1,
+              "physics": 5,
+              "chemistry": 1
+            },
+            "primary_subject": "physics",
+            "secondary_subjects": [],
+            "inherited_from_history": false,
+            "ownership_override": null,
+            "router_context": {
+              "last_explicit_subject": null,
+              "last_topic": null,
+              "last_intent": null,
+              "active_entities": [],
+              "turns_since_explicit_subject": null,
+              "pending_clarification": false,
+              "context_confidence": 0.0,
+              "history_weight": 0.0,
+              "source_turn": null,
+              "inherited_fields": [],
+              "reset_reason": "missing_history",
+              "missing_history": true
+            },
+            "intent": {
+              "rule_matches": [
+                {
+                  "rule_id": "intent.base.explain_concept.giai_thich",
+                  "intent": "explain_concept",
+                  "source": "base_rule",
+                  "matched_text": "giải thích",
+                  "start": 77,
+                  "end": 87,
+                  "score": 4,
+                  "strength": "general"
+                },
+                {
+                  "rule_id": "intent.phase2.explain.strong.difference",
+                  "intent": "explain_concept",
+                  "source": "context_rule",
+                  "matched_text": "giải thích",
+                  "start": 77,
+                  "end": 87,
+                  "score": 8,
+                  "strength": "strong"
+                }
+              ],
+              "vetoes": [],
+              "scores": {
+                "diagnose_error": 0,
+                "check_answer": 0,
+                "give_hint": 0,
+                "explain_concept": 12,
+                "solve_problem": 0,
+                "ask_follow_up": 0
+              },
+              "selected_intent": "explain_concept",
+              "top_score": 12,
+              "second_score": 0,
+              "decision_margin": 12,
+              "history_context": {
+                "source_turn": null,
+                "history_weight": 0.0,
+                "inherited_fields": [],
+                "missing_history": true
+              }
+            }
+          }
+        }
+      },
+      "current": {
+        "id": "q242",
+        "question": "Nếu cho Mg tác dụng với HCl trong bình kín, khí H2 sinh ra làm áp suất tăng. Giải thích bằng phương trình phản ứng và khí lí tưởng.",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "physics",
+            "math"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "chemistry",
+          "secondary_subjects": [
+            "physics"
+          ],
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "confidence": 0.57,
+          "need_clarification": false,
+          "reason": "Interdisciplinary question: primary=chemistry, secondary=physics, intent=explain_concept.",
+          "topic": null,
+          "trace": {
+            "topic": null,
+            "rule_matches": [
+              {
+                "rule_id": "subject.math.algebra.linear_equation.support_term.01_phuong_trinh",
+                "label": "math",
+                "topic": "math.algebra.linear_equation",
+                "source": "support_term",
+                "matched_text": "phương trình",
+                "start": 93,
+                "end": 105,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.strong_term.01_khi_li_tuong",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "strong_term",
+                "matched_text": "khí lí tưởng",
+                "start": 118,
+                "end": 130,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.support_term.01_binh_kin",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "support_term",
+                "matched_text": "bình kín",
+                "start": 34,
+                "end": 42,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.support_term.03_ap_suat",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "support_term",
+                "matched_text": "áp suất",
+                "start": 63,
+                "end": 70,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.entity.03_h2",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "entity",
+                "matched_text": "h2",
+                "start": 48,
+                "end": 50,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.atomic_structure.atomic_structure.entity.03_h2",
+                "label": "chemistry",
+                "topic": "chemistry.atomic_structure",
+                "source": "entity",
+                "matched_text": "h2",
+                "start": 48,
+                "end": 50,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.support_term.01_phan_ung",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "support_term",
+                "matched_text": "phản ứng",
+                "start": 106,
+                "end": 114,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.entity.02_h2",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "entity",
+                "matched_text": "h2",
+                "start": 48,
+                "end": 50,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.entity.07_hcl",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "entity",
+                "matched_text": "hcl",
+                "start": 24,
+                "end": 27,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.acids_bases.acids_bases.entity.01_hcl",
+                "label": "chemistry",
+                "topic": "chemistry.acids_bases",
+                "source": "entity",
+                "matched_text": "hcl",
+                "start": 24,
+                "end": 27,
+                "score": 0,
+                "is_entity": true
+              }
+            ],
+            "subject_scores": {
+              "math": 1,
+              "physics": 5,
+              "chemistry": 1
+            },
+            "primary_subject": "chemistry",
+            "secondary_subjects": [
+              "physics"
+            ],
+            "inherited_from_history": false,
+            "ownership_override": {
+              "rule_id": "subject.chemistry.override.reaction_thermal_focus",
+              "reason": "Reaction context is the requested subject; thermal or pressure language is a supporting condition.",
+              "score_winner": "physics",
+              "score_winner_score": 5,
+              "final_winner": "chemistry",
+              "final_winner_score": 1,
+              "decision_margin": 4,
+              "override_score_delta": 4
+            },
+            "secondary_reasons": {
+              "physics": "independent_evidence_score_ratio"
+            },
+            "router_context": {
+              "last_explicit_subject": null,
+              "last_topic": null,
+              "last_intent": null,
+              "active_entities": [],
+              "turns_since_explicit_subject": null,
+              "pending_clarification": false,
+              "context_confidence": 0.0,
+              "history_weight": 0.0,
+              "source_turn": null,
+              "inherited_fields": [],
+              "reset_reason": "missing_history",
+              "missing_history": true
+            },
+            "intent": {
+              "rule_matches": [
+                {
+                  "rule_id": "intent.base.explain_concept.giai_thich",
+                  "intent": "explain_concept",
+                  "source": "base_rule",
+                  "matched_text": "giải thích",
+                  "start": 77,
+                  "end": 87,
+                  "score": 4,
+                  "strength": "general"
+                },
+                {
+                  "rule_id": "intent.phase2.explain.strong.difference",
+                  "intent": "explain_concept",
+                  "source": "context_rule",
+                  "matched_text": "giải thích",
+                  "start": 77,
+                  "end": 87,
+                  "score": 8,
+                  "strength": "strong"
+                }
+              ],
+              "vetoes": [],
+              "scores": {
+                "diagnose_error": 0,
+                "check_answer": 0,
+                "give_hint": 0,
+                "explain_concept": 12,
+                "solve_problem": 0,
+                "ask_follow_up": 0
+              },
+              "selected_intent": "explain_concept",
+              "top_score": 12,
+              "second_score": 0,
+              "decision_margin": 12,
+              "history_context": {
+                "source_turn": null,
+                "history_weight": 0.0,
+                "inherited_fields": [],
+                "missing_history": true
+              }
+            },
+            "scope": {
+              "is_out_of_scope": false,
+              "scope_state": "UNKNOWN_SCOPE",
+              "score": 0,
+              "matched_terms": [],
+              "context_rule_ids": []
+            },
+            "clarification_reason_code": null
+          },
+          "clarification_reason_code": null
+        }
+      }
+    },
+    {
+      "id": "q244",
+      "baseline": {
+        "id": "q244",
+        "question": "Khi đốt cháy photpho trong oxy, ánh sáng và nhiệt phát ra có liên quan đến biến đổi năng lượng trong phản ứng như thế nào?",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "physics"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "unknown",
+          "secondary_subjects": [],
+          "intent": "explain_concept",
+          "target_slm": "ask_clarification",
+          "confidence": 0.35,
+          "need_clarification": true,
+          "reason": "The subject or conversational reference is not sufficiently clear.",
+          "topic": null,
+          "trace": {
+            "topic": null,
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.optics.optics.support_term.02_anh_sang",
+                "label": "physics",
+                "topic": "physics.optics",
+                "source": "support_term",
+                "matched_text": "ánh sáng",
+                "start": 32,
+                "end": 40,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.support_term.01_phan_ung",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "support_term",
+                "matched_text": "phản ứng",
+                "start": 101,
+                "end": 109,
+                "score": 1,
+                "is_entity": false
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 1,
+              "chemistry": 1
+            },
+            "primary_subject": "unknown",
+            "secondary_subjects": [],
+            "inherited_from_history": false,
+            "ownership_override": null,
+            "router_context": {
+              "last_explicit_subject": null,
+              "last_topic": null,
+              "last_intent": null,
+              "active_entities": [],
+              "turns_since_explicit_subject": null,
+              "pending_clarification": false,
+              "context_confidence": 0.0,
+              "history_weight": 0.0,
+              "source_turn": null,
+              "inherited_fields": [],
+              "reset_reason": "missing_history",
+              "missing_history": true
+            },
+            "intent": {
+              "rule_matches": [
+                {
+                  "rule_id": "intent.phase2.explain.strong.concept",
+                  "intent": "explain_concept",
+                  "source": "context_rule",
+                  "matched_text": "liên quan đến biến đổi năng lượng trong phản ứng như thế nào",
+                  "start": 61,
+                  "end": 121,
+                  "score": 8,
+                  "strength": "strong"
+                }
+              ],
+              "vetoes": [],
+              "scores": {
+                "diagnose_error": 0,
+                "check_answer": 0,
+                "give_hint": 0,
+                "explain_concept": 8,
+                "solve_problem": 0,
+                "ask_follow_up": 0
+              },
+              "selected_intent": "explain_concept",
+              "top_score": 8,
+              "second_score": 0,
+              "decision_margin": 8,
+              "history_context": {
+                "source_turn": null,
+                "history_weight": 0.0,
+                "inherited_fields": [],
+                "missing_history": true
+              }
+            }
+          }
+        }
+      },
+      "current": {
+        "id": "q244",
+        "question": "Khi đốt cháy photpho trong oxy, ánh sáng và nhiệt phát ra có liên quan đến biến đổi năng lượng trong phản ứng như thế nào?",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "physics"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "chemistry",
+          "secondary_subjects": [],
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "confidence": 0.64,
+          "need_clarification": false,
+          "reason": "Weighted FlashText signals indicate subject=chemistry, intent=explain_concept.",
+          "topic": null,
+          "trace": {
+            "topic": null,
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.optics.optics.support_term.02_anh_sang",
+                "label": "physics",
+                "topic": "physics.optics",
+                "source": "support_term",
+                "matched_text": "ánh sáng",
+                "start": 32,
+                "end": 40,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.support_term.01_phan_ung",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "support_term",
+                "matched_text": "phản ứng",
+                "start": 101,
+                "end": 109,
+                "score": 1,
+                "is_entity": false
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 1,
+              "chemistry": 1
+            },
+            "primary_subject": "chemistry",
+            "secondary_subjects": [],
+            "inherited_from_history": false,
+            "ownership_override": {
+              "rule_id": "subject.chemistry.override.reaction_thermal_focus",
+              "reason": "Reaction context is the requested subject; thermal or pressure language is a supporting condition.",
+              "score_winner": "physics",
+              "score_winner_score": 1,
+              "final_winner": "chemistry",
+              "final_winner_score": 1,
+              "decision_margin": 0,
+              "override_score_delta": 0
+            },
+            "secondary_reasons": {},
+            "router_context": {
+              "last_explicit_subject": null,
+              "last_topic": null,
+              "last_intent": null,
+              "active_entities": [],
+              "turns_since_explicit_subject": null,
+              "pending_clarification": false,
+              "context_confidence": 0.0,
+              "history_weight": 0.0,
+              "source_turn": null,
+              "inherited_fields": [],
+              "reset_reason": "missing_history",
+              "missing_history": true
+            },
+            "intent": {
+              "rule_matches": [
+                {
+                  "rule_id": "intent.phase2.explain.strong.concept",
+                  "intent": "explain_concept",
+                  "source": "context_rule",
+                  "matched_text": "liên quan đến biến đổi năng lượng trong phản ứng như thế nào",
+                  "start": 61,
+                  "end": 121,
+                  "score": 8,
+                  "strength": "strong"
+                }
+              ],
+              "vetoes": [],
+              "scores": {
+                "diagnose_error": 0,
+                "check_answer": 0,
+                "give_hint": 0,
+                "explain_concept": 8,
+                "solve_problem": 0,
+                "ask_follow_up": 0
+              },
+              "selected_intent": "explain_concept",
+              "top_score": 8,
+              "second_score": 0,
+              "decision_margin": 8,
+              "history_context": {
+                "source_turn": null,
+                "history_weight": 0.0,
+                "inherited_fields": [],
+                "missing_history": true
+              }
+            },
+            "scope": {
+              "is_out_of_scope": false,
+              "scope_state": "UNKNOWN_SCOPE",
+              "score": 0,
+              "matched_terms": [],
+              "context_rule_ids": []
+            },
+            "clarification_reason_code": null
+          },
+          "clarification_reason_code": null
+        }
+      }
+    },
+    {
+      "id": "q246",
+      "baseline": {
+        "id": "q246",
+        "question": "Vậy nếu phản ứng tạo thêm khí thì áp suất tăng có phải lúc nào cũng do nhiệt độ tăng không?",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "ask_follow_up",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "physics"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "physics",
+          "secondary_subjects": [],
+          "intent": "ask_follow_up",
+          "target_slm": "physics_slm",
+          "confidence": 0.9,
+          "need_clarification": false,
+          "reason": "Weighted FlashText signals indicate subject=physics, intent=ask_follow_up.",
+          "topic": "physics.thermodynamics.heat_transfer",
+          "trace": {
+            "topic": "physics.thermodynamics.heat_transfer",
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.support_term.03_ap_suat",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "support_term",
+                "matched_text": "áp suất",
+                "start": 34,
+                "end": 41,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.support_term.04_nhiet_o",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "support_term",
+                "matched_text": "nhiệt độ",
+                "start": 71,
+                "end": 79,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term.04_nhiet_o",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "nhiệt độ",
+                "start": 71,
+                "end": 79,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.support_term.01_phan_ung",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "support_term",
+                "matched_text": "phản ứng",
+                "start": 8,
+                "end": 16,
+                "score": 1,
+                "is_entity": false
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 5,
+              "chemistry": 1
+            },
+            "primary_subject": "physics",
+            "secondary_subjects": [],
+            "inherited_from_history": false,
+            "ownership_override": null,
+            "router_context": {
+              "last_explicit_subject": "physics",
+              "last_topic": "physics.thermodynamics.ideal_gas",
+              "last_intent": null,
+              "active_entities": [],
+              "turns_since_explicit_subject": 0,
+              "pending_clarification": false,
+              "context_confidence": 1.0,
+              "history_weight": 1.0,
+              "source_turn": 1,
+              "inherited_fields": [],
+              "reset_reason": "current_topic_switch",
+              "missing_history": false
+            },
+            "intent": {
+              "rule_matches": [
+                {
+                  "rule_id": "intent.phase2.follow_up.strong.reference",
+                  "intent": "ask_follow_up",
+                  "source": "context_rule",
+                  "matched_text": "vậy",
+                  "start": 0,
+                  "end": 3,
+                  "score": 9,
+                  "strength": "strong"
+                },
+                {
+                  "rule_id": "intent.phase2.follow_up.context.history",
+                  "intent": "ask_follow_up",
+                  "source": "history_context",
+                  "matched_text": "vậy nếu phản ứng tạo thêm khí thì áp suất tăng c",
+                  "start": 0,
+                  "end": 48,
+                  "score": 22,
+                  "strength": "strong"
+                }
+              ],
+              "vetoes": [],
+              "scores": {
+                "diagnose_error": 0,
+                "check_answer": 0,
+                "give_hint": 0,
+                "explain_concept": 0,
+                "solve_problem": 0,
+                "ask_follow_up": 31
+              },
+              "selected_intent": "ask_follow_up",
+              "top_score": 31,
+              "second_score": 0,
+              "decision_margin": 31,
+              "history_context": {
+                "source_turn": 1,
+                "history_weight": 1.0,
+                "inherited_fields": [],
+                "missing_history": false
+              }
+            }
+          }
+        }
+      },
+      "current": {
+        "id": "q246",
+        "question": "Vậy nếu phản ứng tạo thêm khí thì áp suất tăng có phải lúc nào cũng do nhiệt độ tăng không?",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "ask_follow_up",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "physics"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "chemistry",
+          "secondary_subjects": [
+            "physics"
+          ],
+          "intent": "ask_follow_up",
+          "target_slm": "chemistry_slm",
+          "confidence": 0.57,
+          "need_clarification": false,
+          "reason": "Interdisciplinary question: primary=chemistry, secondary=physics, intent=ask_follow_up.",
+          "topic": null,
+          "trace": {
+            "topic": null,
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.support_term.03_ap_suat",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "support_term",
+                "matched_text": "áp suất",
+                "start": 34,
+                "end": 41,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.support_term.04_nhiet_o",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "support_term",
+                "matched_text": "nhiệt độ",
+                "start": 71,
+                "end": 79,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term.04_nhiet_o",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "nhiệt độ",
+                "start": 71,
+                "end": 79,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.support_term.01_phan_ung",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "support_term",
+                "matched_text": "phản ứng",
+                "start": 8,
+                "end": 16,
+                "score": 1,
+                "is_entity": false
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 5,
+              "chemistry": 1
+            },
+            "primary_subject": "chemistry",
+            "secondary_subjects": [
+              "physics"
+            ],
+            "inherited_from_history": false,
+            "ownership_override": {
+              "rule_id": "subject.chemistry.override.reaction_thermal_focus",
+              "reason": "Reaction context is the requested subject; thermal or pressure language is a supporting condition.",
+              "score_winner": "physics",
+              "score_winner_score": 5,
+              "final_winner": "chemistry",
+              "final_winner_score": 1,
+              "decision_margin": 4,
+              "override_score_delta": 4
+            },
+            "secondary_reasons": {
+              "physics": "independent_evidence_score_ratio"
+            },
+            "router_context": {
+              "last_explicit_subject": "physics",
+              "last_topic": "physics.thermodynamics.ideal_gas",
+              "last_intent": null,
+              "active_entities": [],
+              "turns_since_explicit_subject": 0,
+              "pending_clarification": false,
+              "context_confidence": 0.5,
+              "history_weight": 1.0,
+              "source_turn": 1,
+              "inherited_fields": [],
+              "reset_reason": "current_subject_switch",
+              "missing_history": false
+            },
+            "intent": {
+              "rule_matches": [
+                {
+                  "rule_id": "intent.phase2.follow_up.strong.reference",
+                  "intent": "ask_follow_up",
+                  "source": "context_rule",
+                  "matched_text": "vậy",
+                  "start": 0,
+                  "end": 3,
+                  "score": 9,
+                  "strength": "strong"
+                },
+                {
+                  "rule_id": "intent.phase2.follow_up.context.history",
+                  "intent": "ask_follow_up",
+                  "source": "history_context",
+                  "matched_text": "vậy nếu phản ứng tạo thêm khí thì áp suất tăng c",
+                  "start": 0,
+                  "end": 48,
+                  "score": 22,
+                  "strength": "strong"
+                }
+              ],
+              "vetoes": [],
+              "scores": {
+                "diagnose_error": 0,
+                "check_answer": 0,
+                "give_hint": 0,
+                "explain_concept": 0,
+                "solve_problem": 0,
+                "ask_follow_up": 31
+              },
+              "selected_intent": "ask_follow_up",
+              "top_score": 31,
+              "second_score": 0,
+              "decision_margin": 31,
+              "history_context": {
+                "source_turn": 1,
+                "history_weight": 1.0,
+                "inherited_fields": [],
+                "missing_history": false
+              }
+            },
+            "scope": {
+              "is_out_of_scope": false,
+              "scope_state": "UNKNOWN_SCOPE",
+              "score": 0,
+              "matched_terms": [],
+              "context_rule_ids": []
+            },
+            "clarification_reason_code": null
+          },
+          "clarification_reason_code": null
+        }
+      }
+    }
+  ]
+}

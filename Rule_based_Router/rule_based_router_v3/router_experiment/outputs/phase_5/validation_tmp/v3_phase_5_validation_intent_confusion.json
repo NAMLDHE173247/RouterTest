@@ -1,0 +1,29 @@
+{
+  "metadata": {
+    "git_commit": "c8c8d0e02eeac55fdd9c61784757d8e03625617a",
+    "dataset_sha256": "7c3a10d9ec71292faf571ffe262975c5e2e6ec49b065919ed7cf3b8461a1d118",
+    "config_sha256": "9325b0b2c2784f90d5e1bdb93e07379e960bd738cb07c5acad01d79e910d9da3",
+    "config_files": [
+      "src\\rules.py",
+      "src\\models.py",
+      "src\\topic_ontology.py",
+      "src\\topic_resolver.py",
+      "src\\intent_resolver.py",
+      "src\\router_context.py"
+    ],
+    "generated_at_utc": "2026-07-17T18:28:21.673665+00:00",
+    "phase": "phase_5_validation"
+  },
+  "items": [
+    {
+      "gold": "explain_concept",
+      "predicted": "unknown",
+      "count": 6
+    },
+    {
+      "gold": "unknown",
+      "predicted": "explain_concept",
+      "count": 1
+    }
+  ]
+}

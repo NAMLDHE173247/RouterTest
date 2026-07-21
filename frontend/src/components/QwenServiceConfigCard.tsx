@@ -1,9 +1,13 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { getQwenServiceUrl, setQwenServiceUrl, testQwenServiceConnection } from '@/lib/api';
+import { getQwenServiceStatus, getQwenServiceUrl, setQwenServiceUrl, testQwenServiceConnection } from '@/lib/api';
 
-export default function QwenServiceConfigCard() {
+interface Props {
+  onRoutersRefresh?: () => Promise<void> | void;
+}
+
+export default function QwenServiceConfigCard({ onRoutersRefresh }: Props) {
   const [url, setUrl] = useState('');
   const [status, setStatus] = useState<'Not configured' | 'Connected' | 'Failed' | 'Model not loaded'>('Not configured');
   const [info, setInfo] = useState<any>(null);
@@ -11,14 +15,25 @@ export default function QwenServiceConfigCard() {
 
   useEffect(() => {
     // Backend is source of truth
-    getQwenServiceUrl()
-      .then(data => {
+    Promise.all([getQwenServiceUrl(), getQwenServiceStatus()])
+      .then(([data, serviceStatus]) => {
         if (data.url) {
           setUrl(data.url);
           localStorage.setItem('qwen_url', data.url);
         } else {
           const cached = localStorage.getItem('qwen_url');
           if (cached) setUrl(cached);
+        }
+        if (serviceStatus.connection_status === 'connected' || serviceStatus.connection_status === 'stale') {
+          setStatus('Connected');
+          const suffix = serviceStatus.connection_status === 'stale' ? ' (last health check cached)' : '';
+          setInfo(`Device: ${serviceStatus.device || 'N/A'}, Model: ${serviceStatus.model_name || 'N/A'}${suffix}`);
+        } else if (serviceStatus.connection_status === 'model_not_loaded') {
+          setStatus('Model not loaded');
+          setInfo(serviceStatus.startup_error || 'Service reachable but model not loaded');
+        } else if (serviceStatus.connection_status === 'unreachable') {
+          setStatus('Failed');
+          setInfo('Qwen GPU Service is not reachable');
         }
       })
       .catch(err => console.warn("Could not fetch qwen url settings:", err.message || err));
@@ -35,6 +50,7 @@ export default function QwenServiceConfigCard() {
       console.error(e);
       alert("Failed to save URL.");
     } finally {
+      await onRoutersRefresh?.();
       setLoading(false);
     }
   };
@@ -68,6 +84,7 @@ export default function QwenServiceConfigCard() {
       }
       setInfo(errStr);
     } finally {
+      await onRoutersRefresh?.();
       setLoading(false);
     }
   };
@@ -82,6 +99,7 @@ export default function QwenServiceConfigCard() {
     } catch (e) {
       console.error(e);
     }
+    await onRoutersRefresh?.();
   };
 
   return (

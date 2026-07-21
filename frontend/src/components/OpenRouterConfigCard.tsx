@@ -9,7 +9,11 @@ import {
   OpenRouterStatus,
 } from '@/lib/api';
 
-export default function OpenRouterConfigCard() {
+interface Props {
+  onRoutersRefresh?: () => Promise<void> | void;
+}
+
+export default function OpenRouterConfigCard({ onRoutersRefresh }: Props) {
   const [apiKey, setApiKey] = useState('');
   const [status, setStatus] = useState<OpenRouterStatus | null>(null);
   const [busy, setBusy] = useState(false);
@@ -39,6 +43,8 @@ export default function OpenRouterConfigCard() {
     } catch (error) {
       setMessage(error instanceof Error ? error.message : 'Verify thất bại');
     } finally {
+      await refresh();
+      await onRoutersRefresh?.();
       setApiKey('');
       setBusy(false);
     }
@@ -54,6 +60,8 @@ export default function OpenRouterConfigCard() {
     } catch (error) {
       setMessage(error instanceof Error ? error.message : 'Không thể lưu runtime key');
     } finally {
+      await refresh();
+      await onRoutersRefresh?.();
       setApiKey('');
       setBusy(false);
     }
@@ -68,6 +76,8 @@ export default function OpenRouterConfigCard() {
     } catch (error) {
       setMessage(error instanceof Error ? error.message : 'Không thể xóa runtime key');
     } finally {
+      await refresh();
+      await onRoutersRefresh?.();
       setBusy(false);
     }
   };
@@ -83,6 +93,20 @@ export default function OpenRouterConfigCard() {
         <div><span className="font-semibold">Trạng thái:</span> {status?.connection_status || 'Đang kiểm tra...'}</div>
         <div><span className="font-semibold">Nguồn:</span> {status?.source || 'Chưa cấu hình'}</div>
       </div>
+
+      {status?.last_checked_at && (
+        <div className="text-xs text-gray-500">
+          Last checked: {new Date(status.last_checked_at).toLocaleString('vi-VN')}
+        </div>
+      )}
+
+      {status?.error_code && (
+        <div className="rounded border border-red-200 bg-red-50 p-3 text-sm text-red-800" role="alert">
+          <div className="font-semibold">Connection error</div>
+          <div>Code: {status.error_code}</div>
+          {status.error_message && <div>{status.error_message}</div>}
+        </div>
+      )}
 
       <label className="block text-sm font-semibold text-gray-700">
         OpenRouter API key

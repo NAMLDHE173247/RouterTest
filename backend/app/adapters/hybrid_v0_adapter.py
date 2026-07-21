@@ -1,9 +1,10 @@
-"""Rule-first/LLM-fallback decision policy for Hybrid Router V0."""
+"""Rule-first policy with a configurable Router fallback."""
 
 import time
 from typing import Any, List
 
 from app.schemas.routing import HybridConfig, HybridRuntime, RouteResponse, RouterRuntime
+from app.fallback_router_executor import FallbackRouterError
 
 
 class HybridRouterError(Exception):
@@ -18,18 +19,17 @@ class HybridV0Adapter:
     FAMILY = "hybrid"
     VERSION = "v0"
 
-    def __init__(self, rule_service: Any, llm_service: Any):
+    def __init__(self, rule_service: Any, fallback_executor: Any):
         self.rule_service = rule_service
-        self.llm_service = llm_service
+        self.fallback_executor = fallback_executor
 
-    def route(
-        self,
-        question: str,
-        history: List[str] | None = None,
-        config: HybridConfig | None = None,
-    ) -> RouteResponse:
-        config = config or HybridConfig()
-        self._validate_config(config)
+    def route(self, question: str, history: List[str] | None = None, config: HybridConfig | None = None) -> RouteResponse:
+        if config is None:
+            raise HybridRouterError("hybrid_invalid_config", "Hybrid requires an explicit fallback_router_id")
+        fallback_router_id = config.resolved_fallback_router_id()
+        if not fallback_router_id:
+            raise HybridRouterError("hybrid_invalid_config", "Hybrid requires an explicit fallback_router_id")
+        self._validate_config(config, fallback_router_id)
         history = history or []
         started = time.perf_counter()
 
@@ -42,121 +42,91 @@ class HybridV0Adapter:
             if not config.fallback_on_rule_error:
                 raise HybridRouterError(rule_error_code, "Selected Rule Router failed") from exc
 
-        if rule_response is not None:
-            triggers = self._fallback_triggers(rule_response, config)
-        else:
-            triggers = ["rule_error"]
-
+        triggers = self._fallback_triggers(rule_response, config) if rule_response else ["rule_error"]
         if not triggers:
-            return self._build_response(
-                config=config,
-                selected=rule_response,
-                rule_response=rule_response,
-                llm_response=None,
-                selected_source="rule",
-                fallback_triggers=[],
-                rule_error_code=None,
-                started=started,
-            )
+            return self._build_response(config, fallback_router_id, rule_response, None, "rule", [], None, started)
 
         try:
-            llm_response = self.llm_service.get(config.llm_router_id).route(question, history)
-            return self._build_response(
-                config=config,
-                selected=llm_response,
-                rule_response=rule_response,
-                llm_response=llm_response,
-                selected_source="llm",
-                fallback_triggers=triggers,
-                rule_error_code=rule_error_code,
-                started=started,
-            )
+            fallback_response = self.fallback_executor.execute(fallback_router_id, question, history)
+            return self._build_response(config, fallback_router_id, rule_response, fallback_response, "fallback", triggers, rule_error_code, started)
+        except FallbackRouterError as exc:
+            if rule_response is not None and config.fallback_failure_policy == "use_rule":
+                return self._build_response(config, fallback_router_id, rule_response, None, "rule_after_fallback_failure", triggers, exc.code, started)
+            raise HybridRouterError("hybrid_both_failed", "Both selected Rule and fallback Routers failed") from exc
         except Exception as exc:
-            error_code = getattr(exc, "code", "hybrid_llm_failed")
-            if rule_response is not None and config.llm_failure_policy == "use_rule":
-                return self._build_response(
-                    config=config,
-                    selected=rule_response,
-                    rule_response=rule_response,
-                    llm_response=None,
-                    selected_source="rule_after_llm_failure",
-                    fallback_triggers=triggers,
-                    rule_error_code=error_code,
-                    started=started,
-                )
-            raise HybridRouterError("hybrid_both_failed", "Both selected Rule and LLM Routers failed") from exc
+            if rule_response is not None and config.fallback_failure_policy == "use_rule":
+                return self._build_response(config, fallback_router_id, rule_response, None, "rule_after_fallback_failure", triggers, "hybrid_fallback_failed", started)
+            raise HybridRouterError("hybrid_both_failed", "Both selected Rule and fallback Routers failed") from exc
 
-    def _validate_config(self, config: HybridConfig) -> None:
-        if config.rule_router_id == self.ID or config.llm_router_id == self.ID:
+    def _validate_config(self, config: HybridConfig, fallback_router_id: str) -> None:
+        if config.rule_router_id == self.ID or fallback_router_id == self.ID:
             raise HybridRouterError("hybrid_invalid_config", "Hybrid cannot use itself as a child Router")
         try:
             rule = self.rule_service.get(config.rule_router_id)
         except Exception as exc:
             raise HybridRouterError("hybrid_rule_not_found", "Selected Rule Router was not found") from exc
-        try:
-            llm = self.llm_service.get(config.llm_router_id)
-        except Exception as exc:
-            raise HybridRouterError("hybrid_llm_not_found", "Selected LLM Router was not found") from exc
         if rule.family != "rule_based":
             raise HybridRouterError("hybrid_unsupported_rule_router", "Hybrid requires a rule_based child Router")
-        if llm.family != "openrouter_llm":
-            raise HybridRouterError("hybrid_unsupported_llm_router", "Hybrid requires an openrouter_llm child Router")
+        try:
+            self.fallback_executor.get(fallback_router_id, require_available=False)
+        except FallbackRouterError as exc:
+            raise HybridRouterError(exc.code, str(exc)) from exc
 
     @staticmethod
-    def _fallback_triggers(response: RouteResponse, config: HybridConfig) -> list[str]:
+    def _fallback_triggers(response: RouteResponse | None, config: HybridConfig) -> list[str]:
+        if response is None:
+            return ["rule_error"]
         decision = response.decision
         triggers: list[str] = []
         if config.fallback_on_low_confidence and decision.confidence < config.rule_confidence_threshold:
             triggers.append("low_confidence")
         if config.fallback_on_unknown_subject and decision.primary_subject == "unknown":
             triggers.append("unknown_subject")
-        if config.fallback_on_need_clarification and (
-            decision.need_clarification or decision.target_slm == "ask_clarification"
-        ):
+        if config.fallback_on_need_clarification and (decision.need_clarification or decision.target_slm == "ask_clarification"):
             triggers.append("need_clarification")
         return triggers
 
-    def _build_response(
-        self,
-        config: HybridConfig,
-        selected: RouteResponse,
-        rule_response: RouteResponse | None,
-        llm_response: RouteResponse | None,
-        selected_source: str,
-        fallback_triggers: list[str],
-        rule_error_code: str | None,
-        started: float,
-    ) -> RouteResponse:
+    def _build_response(self, config, fallback_router_id, rule_response, fallback_response, selected_source, fallback_triggers, fallback_error_code, started):
         total_latency = round((time.perf_counter() - started) * 1000, 2)
         rule_runtime = rule_response.runtime if rule_response else None
-        llm_runtime = llm_response.runtime if llm_response else None
-        llm_error_code = rule_error_code if selected_source == "rule_after_llm_failure" else None
+        fallback_runtime = fallback_response.runtime if fallback_response else None
+        fallback_service = self.fallback_executor.services.get(fallback_router_id)
+        fallback_family = getattr(fallback_service, "family", None)
         hybrid_runtime = HybridRuntime(
             rule_router_id=config.rule_router_id,
-            llm_router_id=config.llm_router_id,
+            fallback_router_id=fallback_router_id,
+            fallback_family=fallback_family,
             rule_called=rule_response is not None,
-            llm_called=llm_response is not None or selected_source == "rule_after_llm_failure",
+            fallback_called=fallback_response is not None or selected_source == "rule_after_fallback_failure",
             selected_source=selected_source,
             fallback_triggers=fallback_triggers,
             primary_fallback_trigger=fallback_triggers[0] if fallback_triggers else None,
             rule_confidence=rule_response.decision.confidence if rule_response else None,
             rule_latency_ms=rule_runtime.latency_ms if rule_runtime else 0.0,
-            llm_latency_ms=llm_runtime.latency_ms if llm_runtime else 0.0,
+            fallback_latency_ms=fallback_runtime.latency_ms if fallback_runtime else 0.0,
             total_latency_ms=total_latency,
-            degraded_mode=selected_source == "rule_after_llm_failure",
-            llm_error_code=llm_error_code,
+            degraded_mode=selected_source == "rule_after_fallback_failure",
+            fallback_error_code=fallback_error_code if selected_source == "rule_after_fallback_failure" else None,
             config_snapshot=config,
             rule_decision=rule_response.decision if rule_response else None,
-            llm_decision=llm_response.decision if llm_response else None,
+            fallback_decision=fallback_response.decision if fallback_response else None,
+            llm_router_id=fallback_router_id if fallback_family == "openrouter_llm" else None,
+            llm_called=fallback_response is not None or selected_source == "rule_after_fallback_failure",
+            llm_latency_ms=fallback_runtime.latency_ms if fallback_runtime and fallback_family == "openrouter_llm" else 0.0,
+            llm_error_code=fallback_error_code if fallback_family == "openrouter_llm" and selected_source == "rule_after_fallback_failure" else None,
+            llm_decision=fallback_response.decision if fallback_response and fallback_family == "openrouter_llm" else None,
         )
+        selected = fallback_response or rule_response
+        if selected is None:
+            raise HybridRouterError("hybrid_both_failed", "Both selected Rule and fallback Routers failed")
         runtime = RouterRuntime(
             router_type=self.ID,
             source=selected_source,
             latency_ms=total_latency,
-            input_tokens=llm_runtime.input_tokens if llm_runtime else 0,
-            output_tokens=llm_runtime.output_tokens if llm_runtime else 0,
-            total_tokens=llm_runtime.total_tokens if llm_runtime else 0,
-            cost=llm_runtime.cost if llm_runtime else None,
+            input_tokens=fallback_runtime.input_tokens if fallback_runtime else 0,
+            output_tokens=fallback_runtime.output_tokens if fallback_runtime else 0,
+            total_tokens=fallback_runtime.total_tokens if fallback_runtime else 0,
+            cost=fallback_runtime.cost if fallback_runtime else None,
             parse_success=selected.runtime.parse_success,
             schema_success=selected.runtime.schema_success,
             model=selected.runtime.model,
@@ -171,9 +141,4 @@ class HybridV0Adapter:
             finish_reason=selected.runtime.finish_reason,
             hybrid=hybrid_runtime,
         )
-        return RouteResponse(
-            router_id=self.ID,
-            router_name=self.NAME,
-            decision=selected.decision,
-            runtime=runtime,
-        )
+        return RouteResponse(router_id=self.ID, router_name=self.NAME, decision=selected.decision, runtime=runtime)

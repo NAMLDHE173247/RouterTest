@@ -1,0 +1,685 @@
+{
+  "metadata": {
+    "git_commit": "71e6a31e568384f9267e5c7741e07ea868ab7a59",
+    "dataset_sha256": "5d25fb93a173733033a632fec3ca7bfc5b29fffb0db2a8b3676ee919301ec5cf",
+    "config_sha256": "4b3ff4f30d60db5a6282cf61ec1357c6df5a41ab3bc5b4c090ef19694f49611d",
+    "config_files": [
+      "src\\rules.py",
+      "src\\models.py",
+      "src\\topic_ontology.py",
+      "src\\topic_resolver.py",
+      "src\\intent_resolver.py",
+      "src\\router_context.py"
+    ],
+    "generated_at_utc": "2026-07-17T18:11:48.703216+00:00",
+    "phase": "phase_4"
+  },
+  "items": [
+    {
+      "id": "q219",
+      "baseline": {
+        "id": "q219",
+        "question": "Một phản ứng tỏa nhiệt làm cốc thủy tinh nóng lên. Em muốn hiểu nhiệt truyền từ dung dịch ra tay mình như thế nào.",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "physics",
+          "intent": "explain_concept",
+          "target_slm": "physics_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "chemistry"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "physics",
+          "secondary_subjects": [
+            "chemistry"
+          ],
+          "intent": "unknown",
+          "target_slm": "ask_clarification",
+          "confidence": 0.35,
+          "need_clarification": true,
+          "reason": "The subject or conversational reference is not sufficiently clear.",
+          "topic": "physics.thermodynamics.heat_transfer",
+          "trace": {
+            "topic": "physics.thermodynamics.heat_transfer",
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term.07_toa_nhiet",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "tỏa nhiệt",
+                "start": 13,
+                "end": 22,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term.08_phan_ung_toa_nhiet",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "phản ứng tỏa nhiệt",
+                "start": 4,
+                "end": 22,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.support_term.03_toa_nhiet",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "support_term",
+                "matched_text": "tỏa nhiệt",
+                "start": 13,
+                "end": 22,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.support_term.01_phan_ung",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "support_term",
+                "matched_text": "phản ứng",
+                "start": 4,
+                "end": 12,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.strong_term.09_dung_dich",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "strong_term",
+                "matched_text": "dung dịch",
+                "start": 80,
+                "end": 89,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.support_term.03_dung_dich",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "support_term",
+                "matched_text": "dung dịch",
+                "start": 80,
+                "end": 89,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.acids_bases.acids_bases.support_term.03_dung_dich",
+                "label": "chemistry",
+                "topic": "chemistry.acids_bases",
+                "source": "support_term",
+                "matched_text": "dung dịch",
+                "start": 80,
+                "end": 89,
+                "score": 1,
+                "is_entity": false
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 7,
+              "chemistry": 6
+            },
+            "primary_subject": "physics",
+            "secondary_subjects": [
+              "chemistry"
+            ],
+            "inherited_from_history": false,
+            "ownership_override": null,
+            "router_context": {
+              "last_explicit_subject": null,
+              "last_topic": null,
+              "last_intent": null,
+              "active_entities": [],
+              "turns_since_explicit_subject": null,
+              "pending_clarification": false,
+              "context_confidence": 0.0,
+              "history_weight": 0.0,
+              "source_turn": null,
+              "inherited_fields": [],
+              "reset_reason": "missing_history",
+              "missing_history": true
+            },
+            "intent": {
+              "rule_matches": [],
+              "vetoes": [],
+              "scores": {
+                "diagnose_error": 0,
+                "check_answer": 0,
+                "give_hint": 0,
+                "explain_concept": 0,
+                "solve_problem": 0,
+                "ask_follow_up": 0
+              },
+              "selected_intent": "unknown",
+              "top_score": 0,
+              "second_score": 0,
+              "decision_margin": 0,
+              "history_context": {
+                "source_turn": null,
+                "history_weight": 0.0,
+                "inherited_fields": [],
+                "missing_history": true
+              }
+            }
+          }
+        }
+      },
+      "current": {
+        "id": "q219",
+        "question": "Một phản ứng tỏa nhiệt làm cốc thủy tinh nóng lên. Em muốn hiểu nhiệt truyền từ dung dịch ra tay mình như thế nào.",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "physics",
+          "intent": "explain_concept",
+          "target_slm": "physics_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "chemistry"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "chemistry",
+          "secondary_subjects": [
+            "physics"
+          ],
+          "intent": "unknown",
+          "target_slm": "ask_clarification",
+          "confidence": 0.35,
+          "need_clarification": true,
+          "reason": "The subject or conversational reference is not sufficiently clear.",
+          "topic": "chemistry.stoichiometry",
+          "trace": {
+            "topic": "chemistry.stoichiometry",
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term.07_toa_nhiet",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "tỏa nhiệt",
+                "start": 13,
+                "end": 22,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term.08_phan_ung_toa_nhiet",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "phản ứng tỏa nhiệt",
+                "start": 4,
+                "end": 22,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.support_term.03_toa_nhiet",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "support_term",
+                "matched_text": "tỏa nhiệt",
+                "start": 13,
+                "end": 22,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.support_term.01_phan_ung",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "support_term",
+                "matched_text": "phản ứng",
+                "start": 4,
+                "end": 12,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.strong_term.09_dung_dich",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "strong_term",
+                "matched_text": "dung dịch",
+                "start": 80,
+                "end": 89,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.support_term.03_dung_dich",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "support_term",
+                "matched_text": "dung dịch",
+                "start": 80,
+                "end": 89,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.acids_bases.acids_bases.support_term.03_dung_dich",
+                "label": "chemistry",
+                "topic": "chemistry.acids_bases",
+                "source": "support_term",
+                "matched_text": "dung dịch",
+                "start": 80,
+                "end": 89,
+                "score": 1,
+                "is_entity": false
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 7,
+              "chemistry": 6
+            },
+            "primary_subject": "chemistry",
+            "secondary_subjects": [
+              "physics"
+            ],
+            "inherited_from_history": false,
+            "ownership_override": {
+              "rule_id": "subject.chemistry.override.reaction_thermal_focus",
+              "reason": "Reaction context is the requested subject; thermal or pressure language is a supporting condition.",
+              "score_winner": "physics",
+              "score_winner_score": 7,
+              "final_winner": "chemistry",
+              "final_winner_score": 6,
+              "decision_margin": 1,
+              "override_score_delta": 1
+            },
+            "secondary_reasons": {
+              "physics": "supporting_subject.physics_context"
+            },
+            "router_context": {
+              "last_explicit_subject": null,
+              "last_topic": null,
+              "last_intent": null,
+              "active_entities": [],
+              "turns_since_explicit_subject": null,
+              "pending_clarification": false,
+              "context_confidence": 0.0,
+              "history_weight": 0.0,
+              "source_turn": null,
+              "inherited_fields": [],
+              "reset_reason": "missing_history",
+              "missing_history": true
+            },
+            "intent": {
+              "rule_matches": [],
+              "vetoes": [],
+              "scores": {
+                "diagnose_error": 0,
+                "check_answer": 0,
+                "give_hint": 0,
+                "explain_concept": 0,
+                "solve_problem": 0,
+                "ask_follow_up": 0
+              },
+              "selected_intent": "unknown",
+              "top_score": 0,
+              "second_score": 0,
+              "decision_margin": 0,
+              "history_context": {
+                "source_turn": null,
+                "history_weight": 0.0,
+                "inherited_fields": [],
+                "missing_history": true
+              }
+            },
+            "scope": {
+              "is_out_of_scope": false,
+              "scope_state": "CONFIRMED_STEM",
+              "score": 0,
+              "matched_terms": [],
+              "context_rule_ids": []
+            },
+            "clarification_reason_code": "UNKNOWN_INTENT"
+          },
+          "clarification_reason_code": "UNKNOWN_INTENT"
+        }
+      }
+    },
+    {
+      "id": "q230",
+      "baseline": {
+        "id": "q230",
+        "question": "Trong động cơ nhiệt, nhiên liệu cháy tạo khí nóng giãn nở. Giải thích liên hệ giữa phản ứng cháy và công cơ học.",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "physics",
+          "intent": "explain_concept",
+          "target_slm": "physics_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "chemistry"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "physics",
+          "secondary_subjects": [
+            "chemistry"
+          ],
+          "intent": "explain_concept",
+          "target_slm": "ask_clarification",
+          "confidence": 0.35,
+          "need_clarification": true,
+          "reason": "The subject or conversational reference is not sufficiently clear.",
+          "topic": "physics.thermodynamics.ideal_gas",
+          "trace": {
+            "topic": "physics.thermodynamics.ideal_gas",
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.mechanics.work.strong_term.01_cong_co_hoc",
+                "label": "physics",
+                "topic": "physics.energy.work",
+                "source": "strong_term",
+                "matched_text": "công cơ học",
+                "start": 100,
+                "end": 111,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.strong_term.08_ong_co_nhiet",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "strong_term",
+                "matched_text": "động cơ nhiệt",
+                "start": 6,
+                "end": 19,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.support_term.01_phan_ung",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "support_term",
+                "matched_text": "phản ứng",
+                "start": 83,
+                "end": 91,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.organic_chemistry.organic.strong_term.03_nhien_lieu",
+                "label": "chemistry",
+                "topic": "chemistry.organic",
+                "source": "strong_term",
+                "matched_text": "nhiên liệu",
+                "start": 21,
+                "end": 31,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.organic_chemistry.organic.support_term.04_phan_ung_chay",
+                "label": "chemistry",
+                "topic": "chemistry.organic",
+                "source": "support_term",
+                "matched_text": "phản ứng cháy",
+                "start": 83,
+                "end": 96,
+                "score": 1,
+                "is_entity": false
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 6,
+              "chemistry": 5
+            },
+            "primary_subject": "physics",
+            "secondary_subjects": [
+              "chemistry"
+            ],
+            "inherited_from_history": false,
+            "ownership_override": null,
+            "router_context": {
+              "last_explicit_subject": null,
+              "last_topic": null,
+              "last_intent": null,
+              "active_entities": [],
+              "turns_since_explicit_subject": null,
+              "pending_clarification": false,
+              "context_confidence": 0.0,
+              "history_weight": 0.0,
+              "source_turn": null,
+              "inherited_fields": [],
+              "reset_reason": "missing_history",
+              "missing_history": true
+            },
+            "intent": {
+              "rule_matches": [
+                {
+                  "rule_id": "intent.base.explain_concept.giai_thich",
+                  "intent": "explain_concept",
+                  "source": "base_rule",
+                  "matched_text": "giải thích",
+                  "start": 59,
+                  "end": 69,
+                  "score": 4,
+                  "strength": "general"
+                },
+                {
+                  "rule_id": "intent.phase2.explain.strong.difference",
+                  "intent": "explain_concept",
+                  "source": "context_rule",
+                  "matched_text": "giải thích",
+                  "start": 59,
+                  "end": 69,
+                  "score": 8,
+                  "strength": "strong"
+                }
+              ],
+              "vetoes": [],
+              "scores": {
+                "diagnose_error": 0,
+                "check_answer": 0,
+                "give_hint": 0,
+                "explain_concept": 12,
+                "solve_problem": 0,
+                "ask_follow_up": 0
+              },
+              "selected_intent": "explain_concept",
+              "top_score": 12,
+              "second_score": 0,
+              "decision_margin": 12,
+              "history_context": {
+                "source_turn": null,
+                "history_weight": 0.0,
+                "inherited_fields": [],
+                "missing_history": true
+              }
+            }
+          }
+        }
+      },
+      "current": {
+        "id": "q230",
+        "question": "Trong động cơ nhiệt, nhiên liệu cháy tạo khí nóng giãn nở. Giải thích liên hệ giữa phản ứng cháy và công cơ học.",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "physics",
+          "intent": "explain_concept",
+          "target_slm": "physics_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "chemistry"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "chemistry",
+          "secondary_subjects": [
+            "physics"
+          ],
+          "intent": "explain_concept",
+          "target_slm": "ask_clarification",
+          "confidence": 0.35,
+          "need_clarification": true,
+          "reason": "The subject or conversational reference is not sufficiently clear.",
+          "topic": "chemistry.organic",
+          "trace": {
+            "topic": "chemistry.organic",
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.mechanics.work.strong_term.01_cong_co_hoc",
+                "label": "physics",
+                "topic": "physics.energy.work",
+                "source": "strong_term",
+                "matched_text": "công cơ học",
+                "start": 100,
+                "end": 111,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.strong_term.08_ong_co_nhiet",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "strong_term",
+                "matched_text": "động cơ nhiệt",
+                "start": 6,
+                "end": 19,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.support_term.01_phan_ung",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "support_term",
+                "matched_text": "phản ứng",
+                "start": 83,
+                "end": 91,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.organic_chemistry.organic.strong_term.03_nhien_lieu",
+                "label": "chemistry",
+                "topic": "chemistry.organic",
+                "source": "strong_term",
+                "matched_text": "nhiên liệu",
+                "start": 21,
+                "end": 31,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.organic_chemistry.organic.support_term.04_phan_ung_chay",
+                "label": "chemistry",
+                "topic": "chemistry.organic",
+                "source": "support_term",
+                "matched_text": "phản ứng cháy",
+                "start": 83,
+                "end": 96,
+                "score": 1,
+                "is_entity": false
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 6,
+              "chemistry": 5
+            },
+            "primary_subject": "chemistry",
+            "secondary_subjects": [
+              "physics"
+            ],
+            "inherited_from_history": false,
+            "ownership_override": {
+              "rule_id": "subject.chemistry.override.reaction_thermal_focus",
+              "reason": "Reaction context is the requested subject; thermal or pressure language is a supporting condition.",
+              "score_winner": "physics",
+              "score_winner_score": 6,
+              "final_winner": "chemistry",
+              "final_winner_score": 5,
+              "decision_margin": 1,
+              "override_score_delta": 1
+            },
+            "secondary_reasons": {
+              "physics": "supporting_subject.physics_context"
+            },
+            "router_context": {
+              "last_explicit_subject": null,
+              "last_topic": null,
+              "last_intent": null,
+              "active_entities": [],
+              "turns_since_explicit_subject": null,
+              "pending_clarification": false,
+              "context_confidence": 0.0,
+              "history_weight": 0.0,
+              "source_turn": null,
+              "inherited_fields": [],
+              "reset_reason": "missing_history",
+              "missing_history": true
+            },
+            "intent": {
+              "rule_matches": [
+                {
+                  "rule_id": "intent.base.explain_concept.giai_thich",
+                  "intent": "explain_concept",
+                  "source": "base_rule",
+                  "matched_text": "giải thích",
+                  "start": 59,
+                  "end": 69,
+                  "score": 4,
+                  "strength": "general"
+                },
+                {
+                  "rule_id": "intent.phase2.explain.strong.difference",
+                  "intent": "explain_concept",
+                  "source": "context_rule",
+                  "matched_text": "giải thích",
+                  "start": 59,
+                  "end": 69,
+                  "score": 8,
+                  "strength": "strong"
+                }
+              ],
+              "vetoes": [],
+              "scores": {
+                "diagnose_error": 0,
+                "check_answer": 0,
+                "give_hint": 0,
+                "explain_concept": 12,
+                "solve_problem": 0,
+                "ask_follow_up": 0
+              },
+              "selected_intent": "explain_concept",
+              "top_score": 12,
+              "second_score": 0,
+              "decision_margin": 12,
+              "history_context": {
+                "source_turn": null,
+                "history_weight": 0.0,
+                "inherited_fields": [],
+                "missing_history": true
+              }
+            },
+            "scope": {
+              "is_out_of_scope": false,
+              "scope_state": "CONFIRMED_STEM",
+              "score": 0,
+              "matched_terms": [],
+              "context_rule_ids": []
+            },
+            "clarification_reason_code": "CROSS_DOMAIN_CONFLICT"
+          },
+          "clarification_reason_code": "CROSS_DOMAIN_CONFLICT"
+        }
+      }
+    }
+  ]
+}

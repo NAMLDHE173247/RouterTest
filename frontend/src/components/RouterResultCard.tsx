@@ -89,8 +89,9 @@ export default function RouterResultCard({ title = "Result", decision, runtime, 
       {runtime?.hybrid && (
         <div className="text-xs bg-blue-50 border border-blue-100 rounded p-3 space-y-1">
           <p><span className="font-semibold">Hybrid source:</span> {runtime.hybrid.selected_source}</p>
+          <p><span className="font-semibold">Fallback Router:</span> {runtime.hybrid.fallback_router_id}{runtime.hybrid.fallback_family ? ` (${runtime.hybrid.fallback_family})` : ''}</p>
           <p><span className="font-semibold">Fallback triggers:</span> {runtime.hybrid.fallback_triggers.length ? runtime.hybrid.fallback_triggers.join(', ') : 'none'}</p>
-          <p><span className="font-semibold">LLM called:</span> {runtime.hybrid.llm_called ? 'yes' : 'no'}</p>
+          <p><span className="font-semibold">Fallback called:</span> {runtime.hybrid.fallback_called ? 'yes' : 'no'}</p>
           {runtime.hybrid.degraded_mode && <p className="text-amber-700 font-semibold">Degraded mode: Rule fallback after LLM failure</p>}
         </div>
       )}

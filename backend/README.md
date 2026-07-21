@@ -4,6 +4,8 @@
 
 `hybrid` là Router Rule-first, LLM-fallback. Request có thể truyền `hybrid_config` để chọn một Rule Router và một OpenRouter LLM Router. Rule được chạy trước; LLM chỉ được gọi khi policy kích hoạt fallback. Nếu LLM lỗi nhưng Rule đã có decision hợp lệ, Hybrid trả lại Rule decision ở degraded mode. Hybrid config được snapshot trong evaluation run và không chứa API key.
 
+Contract mới dùng `fallback_router_id`, hỗ trợ `qwen_v0` qua GPU service và ba OpenRouter Router. `llm_router_id` là alias deprecated. Backend resolve family/model từ registry, kiểm tra `can_be_hybrid_fallback` và availability lúc execute. Qwen health được cache ngắn hạn để router listing không gọi mạng mỗi lần.
+
 ## OpenRouter LLM Router V0
 
 Ba router độc lập được cung cấp qua OpenRouter: `llm_deepseek_v0`, `llm_gemini_v0` và `llm_openai_v0`, tương ứng với DeepSeek, Gemini và OpenAI. API key được nhập tại tab OpenRouter Config hoặc cấu hình qua `OPENROUTER_API_KEY`; runtime key chỉ nằm trong memory backend và không được lưu vào file, browser storage hay evaluation artifact.

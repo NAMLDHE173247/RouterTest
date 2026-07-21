@@ -53,15 +53,29 @@ class QwenV0Service(AdapterBackedRouterService):
     def __init__(self):
         super().__init__(QwenV0Adapter(), "slm", "v0")
         self.capabilities["requires_external_service"] = True
+        self.capabilities["can_be_hybrid_fallback"] = True
 
     def is_available(self) -> bool:
         """Use cached health state; listing routers must not make network calls."""
         return SettingsStore.get_qwen_health() is True
 
+    def get_metadata(self):
+        metadata = super().get_metadata()
+        health = SettingsStore.get_qwen_health_details()
+        metadata.update({
+            "model": health.get("model_name") or "Qwen/Qwen2.5-7B-Instruct",
+            "available": self.is_available(),
+            "unavailable_reason": None if self.is_available() else SettingsStore.get_qwen_unavailable_reason(),
+            "qwen_model_loaded": health.get("model_loaded"),
+            "qwen_status_checked_at": health.get("checked_at"),
+            "qwen_gpu_service_version": health.get("service_version"),
+        })
+        return metadata
+
 
 class HybridV0Service(RouterVersionService):
-    def __init__(self, rule_service, llm_service):
-        self.adapter = HybridV0Adapter(rule_service, llm_service)
+    def __init__(self, rule_service, fallback_executor):
+        self.adapter = HybridV0Adapter(rule_service, fallback_executor)
         self.router_id = self.adapter.ID
         self.router_name = self.adapter.NAME
         self.family = "hybrid"
@@ -70,7 +84,7 @@ class HybridV0Service(RouterVersionService):
             **self.capabilities,
             "requires_configuration": True,
             "supports_rule_first": True,
-            "supports_llm_fallback": True,
+            "supports_fallback_router": True,
         }
 
     def route(

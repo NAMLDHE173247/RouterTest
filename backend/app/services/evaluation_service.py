@@ -9,6 +9,7 @@ from app.schemas.evaluation import EvaluationResponse, RouterMetrics, ErrorItem
 from app.services.routing_service import routing_service
 from app.schemas.routing import HybridConfig, RouteRequest
 from app.llm_router_prompt import MAX_OUTPUT_TOKENS, PROMPT_VERSION, TEMPERATURE
+from app.settings_store import SettingsStore
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../"))
 DATASET_PATH = os.path.join(PROJECT_ROOT, "Rule_based_Router/rule_based_router_v2/router_experiment/data/test_router.jsonl")
@@ -32,6 +33,8 @@ class EvaluationService:
             raise ValueError(
                 "Unknown router IDs: " + ", ".join(unknown_router_ids)
             )
+        if "hybrid" in router_ids and (hybrid_config is None or not hybrid_config.resolved_fallback_router_id()):
+            raise ValueError("Hybrid evaluation requires an explicit fallback_router_id")
 
         run_id = f"eval_{datetime.now().strftime('%Y%md_%H%M%S')}_{uuid4().hex[:6]}"
         
@@ -86,6 +89,10 @@ class EvaluationService:
             model = getattr(service, "model", None) or getattr(adapter, "model", None)
             is_llm_router = bool(model)
             client = getattr(adapter, "client", None)
+            fallback_id = hybrid_config.resolved_fallback_router_id() if rid == "hybrid" and hybrid_config else None
+            fallback_service = routing_service.get_service(fallback_id) if fallback_id else None
+            fallback_metadata = fallback_service.get_metadata() if fallback_service else None
+            fallback_details = SettingsStore.get_qwen_health_details() if fallback_id == "qwen_v0" else {}
             run_configs[rid] = {
                 "router_id": rid,
                 "display_name": getattr(service, "router_name", rid),
@@ -102,6 +109,17 @@ class EvaluationService:
                 "concurrency": 1,
                 "started_at": datetime.now().isoformat(),
                 "hybrid_config": hybrid_config.model_dump() if rid == "hybrid" and hybrid_config else None,
+                "fallback_router_id": fallback_id,
+                "fallback_family": fallback_metadata.get("family") if fallback_metadata else None,
+                "fallback_config": {
+                    "router_version": fallback_metadata.get("version"),
+                    "service_type": "qwen_gpu_service" if fallback_id == "qwen_v0" else "openrouter",
+                    "model_name": fallback_metadata.get("model"),
+                    "prompt_version": getattr(getattr(fallback_service, "adapter", None), "PROMPT_VERSION", None),
+                    "model_loaded": fallback_details.get("model_loaded"),
+                    "status_checked_at": fallback_details.get("checked_at"),
+                    "gpu_service_version": fallback_details.get("service_version"),
+                } if fallback_id else None,
             }
             
             correct_ps = 0
@@ -137,6 +155,13 @@ class EvaluationService:
             hybrid_rule_latency_total = 0.0
             hybrid_llm_latency_total = 0.0
             hybrid_trigger_distribution = {}
+            fallback_invocation_count = 0
+            fallback_success_count = 0
+            fallback_failure_count = 0
+            rule_after_fallback_failure_count = 0
+            fallback_usage_by_router = {}
+            consecutive_fallback_failures = 0
+            circuit_open = False
             case_stats = {}
             
             for row in records:
@@ -148,7 +173,15 @@ class EvaluationService:
                 # Evaluate
                 try:
                     if rid == "hybrid":
-                        res = service.route(question=question, history=history, config=hybrid_config)
+                        effective_config = hybrid_config
+                        if circuit_open:
+                            effective_config = hybrid_config.model_copy(update={
+                                "fallback_on_low_confidence": False,
+                                "fallback_on_unknown_subject": False,
+                                "fallback_on_need_clarification": False,
+                                "fallback_on_rule_error": False,
+                            })
+                        res = service.route(question=question, history=history, config=effective_config)
                     else:
                         res = service.route(question=question, history=history)
                     decision = res.decision.model_dump()
@@ -167,12 +200,23 @@ class EvaluationService:
                     if hybrid_runtime:
                         if hybrid_runtime.selected_source == "rule":
                             hybrid_rule_only_count += 1
-                        if hybrid_runtime.llm_called:
+                        if hybrid_runtime.fallback_called:
+                            fallback_invocation_count += 1
+                            fallback_usage_by_router[hybrid_runtime.fallback_router_id] = fallback_usage_by_router.get(hybrid_runtime.fallback_router_id, 0) + 1
                             hybrid_llm_called_count += 1
-                        if hybrid_runtime.selected_source == "llm":
+                        if hybrid_runtime.selected_source == "fallback":
+                            fallback_success_count += 1
+                            consecutive_fallback_failures = 0
                             hybrid_llm_success_count += 1
-                        if hybrid_runtime.selected_source == "rule_after_llm_failure":
+                        if hybrid_runtime.selected_source == "rule_after_fallback_failure":
+                            fallback_failure_count += 1
+                            rule_after_fallback_failure_count += 1
+                            consecutive_fallback_failures += 1
+                            if consecutive_fallback_failures >= 3:
+                                circuit_open = True
                             hybrid_llm_failure_count += 1
+                        elif hybrid_runtime.selected_source != "fallback":
+                            consecutive_fallback_failures = 0
                         if hybrid_runtime.degraded_mode:
                             hybrid_degraded_count += 1
                         hybrid_rule_latency_total += hybrid_runtime.rule_latency_ms
@@ -274,7 +318,7 @@ class EvaluationService:
                     if selected_source == "rule":
                         hybrid_rule_selected_total += 1
                         hybrid_rule_selected_correct += 1 if not wrong_fields else 0
-                    elif selected_source == "llm":
+                    elif selected_source == "fallback":
                         hybrid_llm_selected_total += 1
                         hybrid_llm_selected_correct += 1 if not wrong_fields else 0
 
@@ -332,15 +376,24 @@ class EvaluationService:
                 failed_prediction_rate=failed_prediction_count / total if is_llm_router and total else 0.0,
                 retry_count=retry_count_total,
                 rule_only_usage_rate=hybrid_rule_only_count / total if is_hybrid_router and total else 0.0,
-                llm_fallback_rate=hybrid_llm_called_count / total if is_hybrid_router and total else 0.0,
-                llm_success_rate=(hybrid_llm_success_count / hybrid_llm_called_count) if is_hybrid_router and hybrid_llm_called_count else 0.0,
-                llm_failure_rate=(hybrid_llm_failure_count / hybrid_llm_called_count) if is_hybrid_router and hybrid_llm_called_count else 0.0,
+                fallback_invocation_count=fallback_invocation_count,
+                fallback_invocation_rate=fallback_invocation_count / total if is_hybrid_router and total else 0.0,
+                fallback_success_count=fallback_success_count,
+                fallback_failure_count=fallback_failure_count,
+                fallback_selected_accuracy=(hybrid_llm_selected_correct / hybrid_llm_selected_total) if is_hybrid_router and hybrid_llm_selected_total else None,
+                rule_after_fallback_failure_count=rule_after_fallback_failure_count,
+                fallback_usage_by_router=fallback_usage_by_router,
+                llm_fallback_rate=fallback_invocation_count / total if is_hybrid_router and total else 0.0,
+                llm_success_rate=(fallback_success_count / fallback_invocation_count) if is_hybrid_router and fallback_invocation_count else 0.0,
+                llm_failure_rate=(fallback_failure_count / fallback_invocation_count) if is_hybrid_router and fallback_invocation_count else 0.0,
                 degraded_mode_rate=hybrid_degraded_count / total if is_hybrid_router and total else 0.0,
                 rule_selected_accuracy=(hybrid_rule_selected_correct / hybrid_rule_selected_total) if is_hybrid_router and hybrid_rule_selected_total else None,
                 llm_selected_accuracy=(hybrid_llm_selected_correct / hybrid_llm_selected_total) if is_hybrid_router and hybrid_llm_selected_total else None,
                 accuracy_by_selected_source={
                     "rule": hybrid_rule_selected_correct / hybrid_rule_selected_total
                     if hybrid_rule_selected_total else 0.0,
+                    "fallback": hybrid_llm_selected_correct / hybrid_llm_selected_total
+                    if hybrid_llm_selected_total else 0.0,
                     "llm": hybrid_llm_selected_correct / hybrid_llm_selected_total
                     if hybrid_llm_selected_total else 0.0,
                 } if is_hybrid_router else {},

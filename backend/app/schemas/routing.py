@@ -19,32 +19,43 @@ class RouterDecision(BaseModel):
 
 class HybridConfig(BaseModel):
     rule_router_id: str = "rule_v3"
-    llm_router_id: str = "llm_gemini_v0"
+    fallback_router_id: Optional[str] = None
+    llm_router_id: Optional[str] = None
     rule_confidence_threshold: float = Field(default=0.8, ge=0, le=1)
     fallback_on_low_confidence: bool = True
     fallback_on_unknown_subject: bool = True
     fallback_on_need_clarification: bool = True
     fallback_on_rule_error: bool = True
-    llm_failure_policy: Literal["use_rule"] = "use_rule"
+    fallback_failure_policy: Literal["use_rule"] = "use_rule"
+
+    def resolved_fallback_router_id(self) -> str:
+        return self.fallback_router_id or self.llm_router_id or ""
 
 
 class HybridRuntime(BaseModel):
     hybrid_version: str = "v0"
     rule_router_id: str
-    llm_router_id: str
+    fallback_router_id: str
+    fallback_family: Optional[str] = None
     rule_called: bool = True
-    llm_called: bool = False
-    selected_source: Literal["rule", "llm", "rule_after_llm_failure"]
+    fallback_called: bool = False
+    selected_source: Literal["rule", "fallback", "rule_after_fallback_failure"]
     fallback_triggers: List[str] = Field(default_factory=list)
     primary_fallback_trigger: Optional[str] = None
     rule_confidence: Optional[float] = None
     rule_latency_ms: float = 0.0
-    llm_latency_ms: float = 0.0
+    fallback_latency_ms: float = 0.0
     total_latency_ms: float = 0.0
     degraded_mode: bool = False
-    llm_error_code: Optional[str] = None
+    fallback_error_code: Optional[str] = None
     config_snapshot: HybridConfig
     rule_decision: Optional[RouterDecision] = None
+    fallback_decision: Optional[RouterDecision] = None
+    # Deprecated aliases retained during the contract migration.
+    llm_router_id: Optional[str] = None
+    llm_called: bool = False
+    llm_latency_ms: float = 0.0
+    llm_error_code: Optional[str] = None
     llm_decision: Optional[RouterDecision] = None
 
 class RouterRuntime(BaseModel):

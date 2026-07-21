@@ -1,0 +1,1421 @@
+{
+  "metadata": {
+    "git_commit": "fa07312cc53e2d2fd20dfb46edc557e2c567b211",
+    "dataset_sha256": "5d25fb93a173733033a632fec3ca7bfc5b29fffb0db2a8b3676ee919301ec5cf",
+    "config_sha256": "87a20a22a084b7cc83112e64bf055f0edc5b8e4c9cb08751938fd63e46f1b944",
+    "config_files": [
+      "src\\rules.py",
+      "src\\threshold_config.py",
+      "src\\models.py",
+      "src\\topic_ontology.py",
+      "src\\topic_resolver.py",
+      "src\\intent_resolver.py",
+      "src\\router_context.py"
+    ],
+    "generated_at_utc": "2026-07-17T18:33:06.034045+00:00",
+    "phase": "phase_5_development"
+  },
+  "items": [
+    {
+      "id": "q041",
+      "baseline": {
+        "id": "q041",
+        "question": "Em chưa hiểu vì sao kim loại kiềm phản ứng mạnh với nước.",
+        "case_type": "single_turn",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": []
+        },
+        "prediction": {
+          "primary_subject": "chemistry",
+          "secondary_subjects": [],
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "confidence": 0.73,
+          "need_clarification": false,
+          "reason": "Weighted FlashText signals indicate subject=chemistry, intent=explain_concept."
+        }
+      },
+      "current": {
+        "id": "q041",
+        "question": "Em chưa hiểu vì sao kim loại kiềm phản ứng mạnh với nước.",
+        "case_type": "single_turn",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": []
+        },
+        "prediction": {
+          "primary_subject": "unknown",
+          "secondary_subjects": [],
+          "intent": "explain_concept",
+          "target_slm": "ask_clarification",
+          "confidence": 0.35,
+          "need_clarification": true,
+          "reason": "The subject or conversational reference is not sufficiently clear.",
+          "topic": null,
+          "trace": {
+            "topic": null,
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.support_term.05_kim_loai",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "support_term",
+                "matched_text": "kim loại",
+                "start": 20,
+                "end": 28,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.support_term.01_phan_ung",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "support_term",
+                "matched_text": "phản ứng",
+                "start": 34,
+                "end": 42,
+                "score": 1,
+                "is_entity": false
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 1,
+              "chemistry": 1
+            },
+            "primary_subject": "unknown",
+            "secondary_subjects": [],
+            "inherited_from_history": false,
+            "ownership_override": null,
+            "secondary_reasons": {},
+            "router_context": {
+              "last_explicit_subject": null,
+              "last_topic": null,
+              "last_intent": null,
+              "active_entities": [],
+              "turns_since_explicit_subject": null,
+              "pending_clarification": false,
+              "context_confidence": 0.0,
+              "history_weight": 0.0,
+              "source_turn": null,
+              "inherited_fields": [],
+              "reset_reason": "missing_history",
+              "missing_history": true
+            },
+            "intent": {
+              "rule_matches": [
+                {
+                  "rule_id": "intent.base.explain_concept.vi_sao",
+                  "intent": "explain_concept",
+                  "source": "base_rule",
+                  "matched_text": "vì sao",
+                  "start": 13,
+                  "end": 19,
+                  "score": 4,
+                  "strength": "general"
+                },
+                {
+                  "rule_id": "intent.phase2.explain.strong.difference",
+                  "intent": "explain_concept",
+                  "source": "context_rule",
+                  "matched_text": "chưa hiểu",
+                  "start": 3,
+                  "end": 12,
+                  "score": 8,
+                  "strength": "strong"
+                },
+                {
+                  "rule_id": "intent.phase2.explain.strong.difference",
+                  "intent": "explain_concept",
+                  "source": "context_rule",
+                  "matched_text": "vì sao",
+                  "start": 13,
+                  "end": 19,
+                  "score": 8,
+                  "strength": "strong"
+                }
+              ],
+              "vetoes": [],
+              "scores": {
+                "diagnose_error": 0,
+                "check_answer": 0,
+                "give_hint": 0,
+                "explain_concept": 20,
+                "solve_problem": 0,
+                "ask_follow_up": 0
+              },
+              "selected_intent": "explain_concept",
+              "top_score": 20,
+              "second_score": 0,
+              "decision_margin": 20,
+              "history_context": {
+                "source_turn": null,
+                "history_weight": 0.0,
+                "inherited_fields": [],
+                "missing_history": true
+              }
+            },
+            "scope": {
+              "is_out_of_scope": false,
+              "scope_state": "UNKNOWN_SCOPE",
+              "score": 0,
+              "matched_terms": [],
+              "context_rule_ids": []
+            },
+            "clarification_reason_code": "SUBJECT_SCORE_TIE"
+          },
+          "clarification_reason_code": "SUBJECT_SCORE_TIE"
+        }
+      }
+    },
+    {
+      "id": "q204",
+      "baseline": {
+        "id": "q204",
+        "question": "Khi hòa tan NH4NO3 vào nước, nhiệt độ dung dịch giảm. Giải thích hiện tượng này theo cả hóa học và nhiệt học giúp em.",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "physics"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "chemistry",
+          "secondary_subjects": [
+            "math"
+          ],
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "confidence": 0.66,
+          "need_clarification": false,
+          "reason": "Interdisciplinary question: primary=chemistry, secondary=math, intent=explain_concept."
+        }
+      },
+      "current": {
+        "id": "q204",
+        "question": "Khi hòa tan NH4NO3 vào nước, nhiệt độ dung dịch giảm. Giải thích hiện tượng này theo cả hóa học và nhiệt học giúp em.",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "physics"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "physics",
+          "secondary_subjects": [
+            "chemistry",
+            "math"
+          ],
+          "intent": "explain_concept",
+          "target_slm": "physics_slm",
+          "confidence": 0.85,
+          "need_clarification": false,
+          "reason": "Interdisciplinary question: primary=physics, secondary=chemistry,math, intent=explain_concept.",
+          "topic": "physics.thermodynamics.heat_transfer",
+          "trace": {
+            "topic": "physics.thermodynamics.heat_transfer",
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.support_term.04_nhiet_o",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "support_term",
+                "matched_text": "nhiệt độ",
+                "start": 29,
+                "end": 37,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term.04_nhiet_o",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "nhiệt độ",
+                "start": 29,
+                "end": 37,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term.06_nhiet_hoc",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "nhiệt học",
+                "start": 99,
+                "end": 108,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.strong_term.09_dung_dich",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "strong_term",
+                "matched_text": "dung dịch",
+                "start": 38,
+                "end": 47,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.support_term.03_dung_dich",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "support_term",
+                "matched_text": "dung dịch",
+                "start": 38,
+                "end": 47,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.acids_bases.acids_bases.support_term.03_dung_dich",
+                "label": "chemistry",
+                "topic": "chemistry.acids_bases",
+                "source": "support_term",
+                "matched_text": "dung dịch",
+                "start": 38,
+                "end": 47,
+                "score": 1,
+                "is_entity": false
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 7,
+              "chemistry": 5
+            },
+            "primary_subject": "physics",
+            "secondary_subjects": [
+              "chemistry",
+              "math"
+            ],
+            "inherited_from_history": false,
+            "ownership_override": null,
+            "secondary_reasons": {
+              "chemistry": "supporting_subject.chemistry_context",
+              "math": "tool_subject.formula_or_calculation"
+            },
+            "router_context": {
+              "last_explicit_subject": null,
+              "last_topic": null,
+              "last_intent": null,
+              "active_entities": [],
+              "turns_since_explicit_subject": null,
+              "pending_clarification": false,
+              "context_confidence": 0.0,
+              "history_weight": 0.0,
+              "source_turn": null,
+              "inherited_fields": [],
+              "reset_reason": "missing_history",
+              "missing_history": true
+            },
+            "intent": {
+              "rule_matches": [
+                {
+                  "rule_id": "intent.base.explain_concept.giai_thich",
+                  "intent": "explain_concept",
+                  "source": "base_rule",
+                  "matched_text": "giải thích",
+                  "start": 54,
+                  "end": 64,
+                  "score": 4,
+                  "strength": "general"
+                },
+                {
+                  "rule_id": "intent.phase2.explain.strong.difference",
+                  "intent": "explain_concept",
+                  "source": "context_rule",
+                  "matched_text": "giải thích",
+                  "start": 54,
+                  "end": 64,
+                  "score": 8,
+                  "strength": "strong"
+                }
+              ],
+              "vetoes": [],
+              "scores": {
+                "diagnose_error": 0,
+                "check_answer": 0,
+                "give_hint": 0,
+                "explain_concept": 12,
+                "solve_problem": 0,
+                "ask_follow_up": 0
+              },
+              "selected_intent": "explain_concept",
+              "top_score": 12,
+              "second_score": 0,
+              "decision_margin": 12,
+              "history_context": {
+                "source_turn": null,
+                "history_weight": 0.0,
+                "inherited_fields": [],
+                "missing_history": true
+              }
+            },
+            "scope": {
+              "is_out_of_scope": false,
+              "scope_state": "CONFIRMED_STEM",
+              "score": 0,
+              "matched_terms": [],
+              "context_rule_ids": []
+            },
+            "clarification_reason_code": null
+          },
+          "clarification_reason_code": null
+        }
+      }
+    },
+    {
+      "id": "q212",
+      "baseline": {
+        "id": "q212",
+        "question": "Một viên than cháy tạo CO2 và tỏa nhiệt. Làm sao liên hệ phương trình hóa học với nhiệt lượng tỏa ra?",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "physics",
+            "math"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "chemistry",
+          "secondary_subjects": [],
+          "intent": "unknown",
+          "target_slm": "chemistry_slm",
+          "confidence": 0.74,
+          "need_clarification": false,
+          "reason": "Weighted FlashText signals indicate subject=chemistry, intent=unknown."
+        }
+      },
+      "current": {
+        "id": "q212",
+        "question": "Một viên than cháy tạo CO2 và tỏa nhiệt. Làm sao liên hệ phương trình hóa học với nhiệt lượng tỏa ra?",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "physics",
+            "math"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "physics",
+          "secondary_subjects": [
+            "math",
+            "chemistry"
+          ],
+          "intent": "unknown",
+          "target_slm": "physics_slm",
+          "confidence": 0.64,
+          "need_clarification": false,
+          "reason": "Interdisciplinary question: primary=physics, secondary=math,chemistry, intent=unknown.",
+          "topic": "physics.thermodynamics.heat_transfer",
+          "trace": {
+            "topic": "physics.thermodynamics.heat_transfer",
+            "rule_matches": [
+              {
+                "rule_id": "subject.math.algebra.linear_equation.strong_term.01_he_phuong_trinh",
+                "label": "math",
+                "topic": "math.algebra.linear_equation",
+                "source": "strong_term",
+                "matched_text": "hệ phương trình",
+                "start": 54,
+                "end": 69,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.math.algebra.linear_equation.support_term.01_phuong_trinh",
+                "label": "math",
+                "topic": "math.algebra.linear_equation",
+                "source": "support_term",
+                "matched_text": "phương trình",
+                "start": 57,
+                "end": 69,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.entity.01_co2",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "entity",
+                "matched_text": "co2",
+                "start": 23,
+                "end": 26,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term.01_nhiet_luong",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "nhiệt lượng",
+                "start": 82,
+                "end": 93,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term.07_toa_nhiet",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "tỏa nhiệt",
+                "start": 30,
+                "end": 39,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.support_term.03_toa_nhiet",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "support_term",
+                "matched_text": "tỏa nhiệt",
+                "start": 30,
+                "end": 39,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.atomic_structure.atomic_structure.entity.01_co2",
+                "label": "chemistry",
+                "topic": "chemistry.atomic_structure",
+                "source": "entity",
+                "matched_text": "co2",
+                "start": 23,
+                "end": 26,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.chemical_reactions.reactions.support_term.02_phuong_trinh_hoa_hoc",
+                "label": "chemistry",
+                "topic": "chemistry.reactions",
+                "source": "support_term",
+                "matched_text": "phương trình hóa học",
+                "start": 57,
+                "end": 77,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.entity.01_co2",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "entity",
+                "matched_text": "co2",
+                "start": 23,
+                "end": 26,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.organic_chemistry.organic.entity.03_co2",
+                "label": "chemistry",
+                "topic": "chemistry.organic",
+                "source": "entity",
+                "matched_text": "co2",
+                "start": 23,
+                "end": 26,
+                "score": 0,
+                "is_entity": true
+              }
+            ],
+            "subject_scores": {
+              "math": 4,
+              "physics": 7,
+              "chemistry": 1
+            },
+            "primary_subject": "physics",
+            "secondary_subjects": [
+              "math",
+              "chemistry"
+            ],
+            "inherited_from_history": false,
+            "ownership_override": null,
+            "secondary_reasons": {
+              "math": "tool_subject.formula_or_calculation",
+              "chemistry": "supporting_subject.chemistry_context"
+            },
+            "router_context": {
+              "last_explicit_subject": null,
+              "last_topic": null,
+              "last_intent": null,
+              "active_entities": [],
+              "turns_since_explicit_subject": null,
+              "pending_clarification": false,
+              "context_confidence": 0.0,
+              "history_weight": 0.0,
+              "source_turn": null,
+              "inherited_fields": [],
+              "reset_reason": "missing_history",
+              "missing_history": true
+            },
+            "intent": {
+              "rule_matches": [],
+              "vetoes": [],
+              "scores": {
+                "diagnose_error": 0,
+                "check_answer": 0,
+                "give_hint": 0,
+                "explain_concept": 0,
+                "solve_problem": 0,
+                "ask_follow_up": 0
+              },
+              "selected_intent": "unknown",
+              "top_score": 0,
+              "second_score": 0,
+              "decision_margin": 0,
+              "history_context": {
+                "source_turn": null,
+                "history_weight": 0.0,
+                "inherited_fields": [],
+                "missing_history": true
+              }
+            },
+            "scope": {
+              "is_out_of_scope": false,
+              "scope_state": "CONFIRMED_STEM",
+              "score": 0,
+              "matched_terms": [],
+              "context_rule_ids": []
+            },
+            "clarification_reason_code": null
+          },
+          "clarification_reason_code": null
+        }
+      }
+    },
+    {
+      "id": "q223",
+      "baseline": {
+        "id": "q223",
+        "question": "Vì sao khi pha loãng axit đặc lại tỏa nhiệt mạnh, và nhiệt này có thể làm nước bắn lên nguy hiểm?",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "physics"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "chemistry",
+          "secondary_subjects": [],
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "confidence": 0.84,
+          "need_clarification": false,
+          "reason": "Weighted FlashText signals indicate subject=chemistry, intent=explain_concept."
+        }
+      },
+      "current": {
+        "id": "q223",
+        "question": "Vì sao khi pha loãng axit đặc lại tỏa nhiệt mạnh, và nhiệt này có thể làm nước bắn lên nguy hiểm?",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "physics"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "physics",
+          "secondary_subjects": [
+            "chemistry"
+          ],
+          "intent": "explain_concept",
+          "target_slm": "physics_slm",
+          "confidence": 0.71,
+          "need_clarification": false,
+          "reason": "Interdisciplinary question: primary=physics, secondary=chemistry, intent=explain_concept.",
+          "topic": "physics.thermodynamics.heat_transfer",
+          "trace": {
+            "topic": "physics.thermodynamics.heat_transfer",
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.strong_term.07_toa_nhiet",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "strong_term",
+                "matched_text": "tỏa nhiệt",
+                "start": 34,
+                "end": 43,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.heat_transfer.support_term.03_toa_nhiet",
+                "label": "physics",
+                "topic": "physics.thermodynamics.heat_transfer",
+                "source": "support_term",
+                "matched_text": "tỏa nhiệt",
+                "start": 34,
+                "end": 43,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.acids_bases.acids_bases.strong_term.01_axit",
+                "label": "chemistry",
+                "topic": "chemistry.acids_bases",
+                "source": "strong_term",
+                "matched_text": "axit",
+                "start": 21,
+                "end": 25,
+                "score": 3,
+                "is_entity": false
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 4,
+              "chemistry": 3
+            },
+            "primary_subject": "physics",
+            "secondary_subjects": [
+              "chemistry"
+            ],
+            "inherited_from_history": false,
+            "ownership_override": null,
+            "secondary_reasons": {
+              "chemistry": "independent_evidence_score_ratio"
+            },
+            "router_context": {
+              "last_explicit_subject": null,
+              "last_topic": null,
+              "last_intent": null,
+              "active_entities": [],
+              "turns_since_explicit_subject": null,
+              "pending_clarification": false,
+              "context_confidence": 0.0,
+              "history_weight": 0.0,
+              "source_turn": null,
+              "inherited_fields": [],
+              "reset_reason": "missing_history",
+              "missing_history": true
+            },
+            "intent": {
+              "rule_matches": [
+                {
+                  "rule_id": "intent.base.explain_concept.vi_sao",
+                  "intent": "explain_concept",
+                  "source": "base_rule",
+                  "matched_text": "vì sao",
+                  "start": 0,
+                  "end": 6,
+                  "score": 4,
+                  "strength": "general"
+                },
+                {
+                  "rule_id": "intent.phase2.explain.strong.difference",
+                  "intent": "explain_concept",
+                  "source": "context_rule",
+                  "matched_text": "vì sao",
+                  "start": 0,
+                  "end": 6,
+                  "score": 8,
+                  "strength": "strong"
+                }
+              ],
+              "vetoes": [],
+              "scores": {
+                "diagnose_error": 0,
+                "check_answer": 0,
+                "give_hint": 0,
+                "explain_concept": 12,
+                "solve_problem": 0,
+                "ask_follow_up": 0
+              },
+              "selected_intent": "explain_concept",
+              "top_score": 12,
+              "second_score": 0,
+              "decision_margin": 12,
+              "history_context": {
+                "source_turn": null,
+                "history_weight": 0.0,
+                "inherited_fields": [],
+                "missing_history": true
+              }
+            },
+            "scope": {
+              "is_out_of_scope": false,
+              "scope_state": "CONFIRMED_STEM",
+              "score": 0,
+              "matched_terms": [],
+              "context_rule_ids": []
+            },
+            "clarification_reason_code": null
+          },
+          "clarification_reason_code": null
+        }
+      }
+    },
+    {
+      "id": "q233",
+      "baseline": {
+        "id": "q233",
+        "question": "Khi nung CaCO3 tạo CaO và CO2, vì sao cần cung cấp nhiệt và khí CO2 thoát ra làm khối lượng chất rắn giảm?",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "physics",
+            "math"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "chemistry",
+          "secondary_subjects": [],
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "confidence": 0.92,
+          "need_clarification": false,
+          "reason": "Weighted FlashText signals indicate subject=chemistry, intent=explain_concept."
+        }
+      },
+      "current": {
+        "id": "q233",
+        "question": "Khi nung CaCO3 tạo CaO và CO2, vì sao cần cung cấp nhiệt và khí CO2 thoát ra làm khối lượng chất rắn giảm?",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "physics",
+            "math"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "unknown",
+          "secondary_subjects": [],
+          "intent": "explain_concept",
+          "target_slm": "ask_clarification",
+          "confidence": 0.35,
+          "need_clarification": true,
+          "reason": "The subject or conversational reference is not sufficiently clear.",
+          "topic": null,
+          "trace": {
+            "topic": null,
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.mechanics.force.support_term.02_khoi_luong",
+                "label": "physics",
+                "topic": "physics.mechanics.force",
+                "source": "support_term",
+                "matched_text": "khối lượng",
+                "start": 81,
+                "end": 91,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.entity.01_co2",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "entity",
+                "matched_text": "co2",
+                "start": 26,
+                "end": 29,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.entity.01_co2",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "entity",
+                "matched_text": "co2",
+                "start": 64,
+                "end": 67,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.atomic_structure.atomic_structure.entity.01_co2",
+                "label": "chemistry",
+                "topic": "chemistry.atomic_structure",
+                "source": "entity",
+                "matched_text": "co2",
+                "start": 26,
+                "end": 29,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.atomic_structure.atomic_structure.entity.01_co2",
+                "label": "chemistry",
+                "topic": "chemistry.atomic_structure",
+                "source": "entity",
+                "matched_text": "co2",
+                "start": 64,
+                "end": 67,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.entity.01_co2",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "entity",
+                "matched_text": "co2",
+                "start": 26,
+                "end": 29,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.entity.01_co2",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "entity",
+                "matched_text": "co2",
+                "start": 64,
+                "end": 67,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.entity.06_caco3",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "entity",
+                "matched_text": "caco3",
+                "start": 9,
+                "end": 14,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.organic_chemistry.organic.entity.03_co2",
+                "label": "chemistry",
+                "topic": "chemistry.organic",
+                "source": "entity",
+                "matched_text": "co2",
+                "start": 26,
+                "end": 29,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.organic_chemistry.organic.entity.03_co2",
+                "label": "chemistry",
+                "topic": "chemistry.organic",
+                "source": "entity",
+                "matched_text": "co2",
+                "start": 64,
+                "end": 67,
+                "score": 0,
+                "is_entity": true
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 1,
+              "chemistry": 0
+            },
+            "primary_subject": "unknown",
+            "secondary_subjects": [],
+            "inherited_from_history": false,
+            "ownership_override": null,
+            "secondary_reasons": {},
+            "router_context": {
+              "last_explicit_subject": null,
+              "last_topic": null,
+              "last_intent": null,
+              "active_entities": [],
+              "turns_since_explicit_subject": null,
+              "pending_clarification": false,
+              "context_confidence": 0.0,
+              "history_weight": 0.0,
+              "source_turn": null,
+              "inherited_fields": [],
+              "reset_reason": "missing_history",
+              "missing_history": true
+            },
+            "intent": {
+              "rule_matches": [
+                {
+                  "rule_id": "intent.base.explain_concept.vi_sao",
+                  "intent": "explain_concept",
+                  "source": "base_rule",
+                  "matched_text": "vì sao",
+                  "start": 31,
+                  "end": 37,
+                  "score": 4,
+                  "strength": "general"
+                },
+                {
+                  "rule_id": "intent.phase2.explain.strong.difference",
+                  "intent": "explain_concept",
+                  "source": "context_rule",
+                  "matched_text": "vì sao",
+                  "start": 31,
+                  "end": 37,
+                  "score": 8,
+                  "strength": "strong"
+                }
+              ],
+              "vetoes": [],
+              "scores": {
+                "diagnose_error": 0,
+                "check_answer": 0,
+                "give_hint": 0,
+                "explain_concept": 12,
+                "solve_problem": 0,
+                "ask_follow_up": 0
+              },
+              "selected_intent": "explain_concept",
+              "top_score": 12,
+              "second_score": 0,
+              "decision_margin": 12,
+              "history_context": {
+                "source_turn": null,
+                "history_weight": 0.0,
+                "inherited_fields": [],
+                "missing_history": true
+              }
+            },
+            "scope": {
+              "is_out_of_scope": false,
+              "scope_state": "UNKNOWN_SCOPE",
+              "score": 0,
+              "matched_terms": [],
+              "context_rule_ids": []
+            },
+            "clarification_reason_code": "NO_SUBJECT_EVIDENCE"
+          },
+          "clarification_reason_code": "NO_SUBJECT_EVIDENCE"
+        }
+      }
+    },
+    {
+      "id": "q245",
+      "baseline": {
+        "id": "q245",
+        "question": "Một khối khí methane CH4 trong bình có thể tích cố định. Nếu đốt cháy nó thì vì sao không thể chỉ dùng công thức PV = nRT đơn giản?",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "diagnose_error",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "physics"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "chemistry",
+          "secondary_subjects": [],
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "confidence": 0.66,
+          "need_clarification": false,
+          "reason": "Weighted FlashText signals indicate subject=chemistry, intent=explain_concept."
+        }
+      },
+      "current": {
+        "id": "q245",
+        "question": "Một khối khí methane CH4 trong bình có thể tích cố định. Nếu đốt cháy nó thì vì sao không thể chỉ dùng công thức PV = nRT đơn giản?",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "diagnose_error",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "physics"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "physics",
+          "secondary_subjects": [
+            "math",
+            "chemistry"
+          ],
+          "intent": "explain_concept",
+          "target_slm": "physics_slm",
+          "confidence": 0.9,
+          "need_clarification": false,
+          "reason": "Interdisciplinary question: primary=physics, secondary=math,chemistry, intent=explain_concept.",
+          "topic": "physics.thermodynamics.ideal_gas",
+          "trace": {
+            "topic": "physics.thermodynamics.ideal_gas",
+            "rule_matches": [
+              {
+                "rule_id": "subject.math.geometry.solid.support_term.01_the_tich",
+                "label": "math",
+                "topic": "math.geometry.solid",
+                "source": "support_term",
+                "matched_text": "thể tích",
+                "start": 39,
+                "end": 47,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.strong_term.06_pv_nrt",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "strong_term",
+                "matched_text": "pv = nrt",
+                "start": 113,
+                "end": 121,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.support_term.02_the_tich",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "support_term",
+                "matched_text": "thể tích",
+                "start": 39,
+                "end": 47,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.formula.01_bp_s_v_s_s_n_s_r_s_t_b",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "formula",
+                "matched_text": "pv = nrt",
+                "start": 113,
+                "end": 121,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.organic_chemistry.organic.entity.01_ch4",
+                "label": "chemistry",
+                "topic": "chemistry.organic",
+                "source": "entity",
+                "matched_text": "ch4",
+                "start": 21,
+                "end": 24,
+                "score": 0,
+                "is_entity": true
+              }
+            ],
+            "subject_scores": {
+              "math": 1,
+              "physics": 7,
+              "chemistry": 0
+            },
+            "primary_subject": "physics",
+            "secondary_subjects": [
+              "math",
+              "chemistry"
+            ],
+            "inherited_from_history": false,
+            "ownership_override": null,
+            "secondary_reasons": {
+              "math": "tool_subject.formula_or_calculation",
+              "chemistry": "supporting_subject.chemistry_context"
+            },
+            "router_context": {
+              "last_explicit_subject": null,
+              "last_topic": null,
+              "last_intent": null,
+              "active_entities": [],
+              "turns_since_explicit_subject": null,
+              "pending_clarification": false,
+              "context_confidence": 0.0,
+              "history_weight": 0.0,
+              "source_turn": null,
+              "inherited_fields": [],
+              "reset_reason": "missing_history",
+              "missing_history": true
+            },
+            "intent": {
+              "rule_matches": [
+                {
+                  "rule_id": "intent.base.explain_concept.vi_sao",
+                  "intent": "explain_concept",
+                  "source": "base_rule",
+                  "matched_text": "vì sao",
+                  "start": 77,
+                  "end": 83,
+                  "score": 4,
+                  "strength": "general"
+                },
+                {
+                  "rule_id": "intent.phase2.explain.strong.difference",
+                  "intent": "explain_concept",
+                  "source": "context_rule",
+                  "matched_text": "vì sao",
+                  "start": 77,
+                  "end": 83,
+                  "score": 8,
+                  "strength": "strong"
+                }
+              ],
+              "vetoes": [],
+              "scores": {
+                "diagnose_error": 0,
+                "check_answer": 0,
+                "give_hint": 0,
+                "explain_concept": 12,
+                "solve_problem": 0,
+                "ask_follow_up": 0
+              },
+              "selected_intent": "explain_concept",
+              "top_score": 12,
+              "second_score": 0,
+              "decision_margin": 12,
+              "history_context": {
+                "source_turn": null,
+                "history_weight": 0.0,
+                "inherited_fields": [],
+                "missing_history": true
+              }
+            },
+            "scope": {
+              "is_out_of_scope": false,
+              "scope_state": "CONFIRMED_STEM",
+              "score": 0,
+              "matched_terms": [],
+              "context_rule_ids": []
+            },
+            "clarification_reason_code": null
+          },
+          "clarification_reason_code": null
+        }
+      }
+    },
+    {
+      "id": "q250",
+      "baseline": {
+        "id": "q250",
+        "question": "Em muốn giải thích vì sao bình chữa cháy CO2 vừa tạo khí lạnh vừa dập tắt lửa. Cần dùng kiến thức Hóa và Lý như thế nào?",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "physics"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "chemistry",
+          "secondary_subjects": [],
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "confidence": 0.95,
+          "need_clarification": false,
+          "reason": "Weighted FlashText signals indicate subject=chemistry, intent=explain_concept."
+        }
+      },
+      "current": {
+        "id": "q250",
+        "question": "Em muốn giải thích vì sao bình chữa cháy CO2 vừa tạo khí lạnh vừa dập tắt lửa. Cần dùng kiến thức Hóa và Lý như thế nào?",
+        "case_type": "interdisciplinary",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "explain_concept",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "physics"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "unknown",
+          "secondary_subjects": [],
+          "intent": "explain_concept",
+          "target_slm": "ask_clarification",
+          "confidence": 0.35,
+          "need_clarification": true,
+          "reason": "The subject or conversational reference is not sufficiently clear.",
+          "topic": null,
+          "trace": {
+            "topic": null,
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.thermodynamics.ideal_gas.entity.01_co2",
+                "label": "physics",
+                "topic": "physics.thermodynamics.ideal_gas",
+                "source": "entity",
+                "matched_text": "co2",
+                "start": 41,
+                "end": 44,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.atomic_structure.atomic_structure.entity.01_co2",
+                "label": "chemistry",
+                "topic": "chemistry.atomic_structure",
+                "source": "entity",
+                "matched_text": "co2",
+                "start": 41,
+                "end": 44,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.entity.01_co2",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "entity",
+                "matched_text": "co2",
+                "start": 41,
+                "end": 44,
+                "score": 0,
+                "is_entity": true
+              },
+              {
+                "rule_id": "subject.chemistry.organic_chemistry.organic.entity.03_co2",
+                "label": "chemistry",
+                "topic": "chemistry.organic",
+                "source": "entity",
+                "matched_text": "co2",
+                "start": 41,
+                "end": 44,
+                "score": 0,
+                "is_entity": true
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 0,
+              "chemistry": 0
+            },
+            "primary_subject": "unknown",
+            "secondary_subjects": [],
+            "inherited_from_history": false,
+            "ownership_override": null,
+            "secondary_reasons": {},
+            "router_context": {
+              "last_explicit_subject": null,
+              "last_topic": null,
+              "last_intent": null,
+              "active_entities": [],
+              "turns_since_explicit_subject": null,
+              "pending_clarification": false,
+              "context_confidence": 0.0,
+              "history_weight": 0.0,
+              "source_turn": null,
+              "inherited_fields": [],
+              "reset_reason": "missing_history",
+              "missing_history": true
+            },
+            "intent": {
+              "rule_matches": [
+                {
+                  "rule_id": "intent.base.explain_concept.giai_thich",
+                  "intent": "explain_concept",
+                  "source": "base_rule",
+                  "matched_text": "giải thích",
+                  "start": 8,
+                  "end": 18,
+                  "score": 4,
+                  "strength": "general"
+                },
+                {
+                  "rule_id": "intent.base.explain_concept.vi_sao",
+                  "intent": "explain_concept",
+                  "source": "base_rule",
+                  "matched_text": "vì sao",
+                  "start": 19,
+                  "end": 25,
+                  "score": 4,
+                  "strength": "general"
+                },
+                {
+                  "rule_id": "intent.phase2.explain.strong.difference",
+                  "intent": "explain_concept",
+                  "source": "context_rule",
+                  "matched_text": "giải thích",
+                  "start": 8,
+                  "end": 18,
+                  "score": 8,
+                  "strength": "strong"
+                },
+                {
+                  "rule_id": "intent.phase2.explain.strong.difference",
+                  "intent": "explain_concept",
+                  "source": "context_rule",
+                  "matched_text": "vì sao",
+                  "start": 19,
+                  "end": 25,
+                  "score": 8,
+                  "strength": "strong"
+                }
+              ],
+              "vetoes": [],
+              "scores": {
+                "diagnose_error": 0,
+                "check_answer": 0,
+                "give_hint": 0,
+                "explain_concept": 24,
+                "solve_problem": 0,
+                "ask_follow_up": 0
+              },
+              "selected_intent": "explain_concept",
+              "top_score": 24,
+              "second_score": 0,
+              "decision_margin": 24,
+              "history_context": {
+                "source_turn": null,
+                "history_weight": 0.0,
+                "inherited_fields": [],
+                "missing_history": true
+              }
+            },
+            "scope": {
+              "is_out_of_scope": false,
+              "scope_state": "UNKNOWN_SCOPE",
+              "score": 0,
+              "matched_terms": [],
+              "context_rule_ids": []
+            },
+            "clarification_reason_code": "NO_SUBJECT_EVIDENCE"
+          },
+          "clarification_reason_code": "NO_SUBJECT_EVIDENCE"
+        }
+      }
+    }
+  ]
+}

@@ -10,32 +10,39 @@ export interface RouterDecision {
 
 export interface HybridConfig {
   rule_router_id: string;
-  llm_router_id: string;
+  fallback_router_id?: string;
+  llm_router_id?: string;
   rule_confidence_threshold: number;
   fallback_on_low_confidence: boolean;
   fallback_on_unknown_subject: boolean;
   fallback_on_need_clarification: boolean;
   fallback_on_rule_error: boolean;
-  llm_failure_policy: 'use_rule';
+  fallback_failure_policy: 'use_rule';
 }
 
 export interface HybridRuntime {
   hybrid_version: string;
   rule_router_id: string;
-  llm_router_id: string;
+  fallback_router_id: string;
+  fallback_family?: string | null;
   rule_called: boolean;
-  llm_called: boolean;
-  selected_source: 'rule' | 'llm' | 'rule_after_llm_failure';
+  fallback_called: boolean;
+  selected_source: 'rule' | 'fallback' | 'rule_after_fallback_failure';
   fallback_triggers: string[];
   primary_fallback_trigger?: string | null;
   rule_confidence?: number | null;
   rule_latency_ms: number;
-  llm_latency_ms: number;
+  fallback_latency_ms: number;
   total_latency_ms: number;
   degraded_mode: boolean;
-  llm_error_code?: string | null;
+  fallback_error_code?: string | null;
   config_snapshot: HybridConfig;
   rule_decision?: RouterDecision | null;
+  fallback_decision?: RouterDecision | null;
+  llm_router_id?: string | null;
+  llm_called?: boolean;
+  llm_latency_ms?: number;
+  llm_error_code?: string | null;
   llm_decision?: RouterDecision | null;
 }
 
@@ -93,6 +100,7 @@ export interface RouterInfo {
   id: string;
   name: string;
   status: string;
+  enabled?: boolean;
   family?: string;
   version?: string;
   capabilities?: Record<string, boolean>;
@@ -147,6 +155,13 @@ export interface RouterMetrics {
   failed_prediction_rate?: number;
   retry_count?: number;
   rule_only_usage_rate?: number;
+  fallback_invocation_count?: number;
+  fallback_invocation_rate?: number;
+  fallback_success_count?: number;
+  fallback_failure_count?: number;
+  fallback_selected_accuracy?: number | null;
+  rule_after_fallback_failure_count?: number;
+  fallback_usage_by_router?: Record<string, number>;
   llm_fallback_rate?: number;
   llm_success_rate?: number;
   llm_failure_rate?: number;

@@ -38,6 +38,14 @@ class RouterMetrics(BaseModel):
     failed_prediction_rate: float = 0.0
     retry_count: int = 0
     rule_only_usage_rate: float = 0.0
+    fallback_invocation_count: int = 0
+    fallback_invocation_rate: float = 0.0
+    fallback_success_count: int = 0
+    fallback_failure_count: int = 0
+    fallback_selected_accuracy: Optional[float] = None
+    rule_after_fallback_failure_count: int = 0
+    fallback_usage_by_router: Dict[str, int] = Field(default_factory=dict)
+    # Deprecated aliases retained for existing dashboards/artifacts.
     llm_fallback_rate: float = 0.0
     llm_success_rate: float = 0.0
     llm_failure_rate: float = 0.0

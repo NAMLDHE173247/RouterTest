@@ -17,13 +17,13 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<'qwen' | 'openrouter' | 'hybrid' | 'playground' | 'compare' | 'evaluation'>('qwen');
   const [hybridConfig, setHybridConfig] = useState<HybridConfig>({
     rule_router_id: 'rule_v3',
-    llm_router_id: 'llm_gemini_v0',
+    fallback_router_id: 'llm_gemini_v0',
     rule_confidence_threshold: 0.8,
     fallback_on_low_confidence: true,
     fallback_on_unknown_subject: true,
     fallback_on_need_clarification: true,
     fallback_on_rule_error: true,
-    llm_failure_policy: 'use_rule',
+    fallback_failure_policy: 'use_rule',
   });
 
   useEffect(() => {
@@ -109,7 +109,7 @@ export default function Home() {
           {activeTab === 'qwen' && (
             <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
                <h2 className="text-2xl font-bold mb-6 text-gray-800">Environment Setup</h2>
-               <QwenServiceConfigCard />
+               <QwenServiceConfigCard onRoutersRefresh={() => getRouters().then(setRouters).catch(console.error)} />
             </div>
           )}
           
@@ -127,7 +127,7 @@ export default function Home() {
 
           {activeTab === 'openrouter' && (
             <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
-              <OpenRouterConfigCard />
+              <OpenRouterConfigCard onRoutersRefresh={() => getRouters().then(setRouters).catch(console.error)} />
             </div>
           )}
           

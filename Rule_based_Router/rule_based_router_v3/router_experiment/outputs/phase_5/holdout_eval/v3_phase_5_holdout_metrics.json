@@ -1,0 +1,122 @@
+{
+  "metadata": {
+    "git_commit": "7e938b3d7c8cad01f163add5e712024742c8cc17",
+    "dataset_sha256": "1c786b2594013c4205c9c2425e6786919471c288158af09c480a3abad173614e",
+    "config_sha256": "87a20a22a084b7cc83112e64bf055f0edc5b8e4c9cb08751938fd63e46f1b944",
+    "config_files": [
+      "src\\rules.py",
+      "src\\threshold_config.py",
+      "src\\models.py",
+      "src\\topic_ontology.py",
+      "src\\topic_resolver.py",
+      "src\\intent_resolver.py",
+      "src\\router_context.py"
+    ],
+    "generated_at_utc": "2026-07-17T18:33:33.822913+00:00",
+    "phase": "phase_5_holdout"
+  },
+  "phase": "phase_5_holdout",
+  "total_samples": 20,
+  "primary_subject_accuracy": 0.9,
+  "intent_accuracy": 0.7,
+  "target_slm_accuracy": 0.9,
+  "need_clarification_accuracy": 0.9,
+  "exact_match_accuracy": 0.6,
+  "full_exact_match_accuracy": 0.5,
+  "secondary_subject_exact_set_accuracy": 0.7,
+  "secondary_subject_micro_precision": 0.7778,
+  "secondary_subject_micro_recall": 0.6364,
+  "secondary_subject_micro_f1": 0.7,
+  "total_errors": 8,
+  "full_total_errors": 10,
+  "average_latency_ms": 5.8466,
+  "median_latency_ms": 4.1049,
+  "p95_latency_ms": 10.89,
+  "metrics_by_gold_subject": {
+    "chemistry": {
+      "total_samples": 6,
+      "primary_subject_accuracy": 0.8333
+    },
+    "math": {
+      "total_samples": 2,
+      "primary_subject_accuracy": 1.0
+    },
+    "physics": {
+      "total_samples": 7,
+      "primary_subject_accuracy": 0.8571
+    },
+    "unknown": {
+      "total_samples": 5,
+      "primary_subject_accuracy": 1.0
+    }
+  },
+  "metrics_by_gold_intent": {
+    "ask_follow_up": {
+      "total_samples": 1,
+      "intent_accuracy": 1.0
+    },
+    "check_answer": {
+      "total_samples": 1,
+      "intent_accuracy": 0.0
+    },
+    "explain_concept": {
+      "total_samples": 6,
+      "intent_accuracy": 0.3333
+    },
+    "solve_problem": {
+      "total_samples": 8,
+      "intent_accuracy": 0.875
+    },
+    "unknown": {
+      "total_samples": 4,
+      "intent_accuracy": 1.0
+    }
+  },
+  "metrics_by_case_type": {
+    "single_turn": {
+      "total_samples": 9,
+      "primary_subject_accuracy": 0.8889,
+      "intent_accuracy": 0.8889,
+      "target_slm_accuracy": 0.8889,
+      "need_clarification_accuracy": 0.8889,
+      "exact_match_accuracy": 0.7778,
+      "full_exact_match_accuracy": 0.6667
+    },
+    "interdisciplinary": {
+      "total_samples": 4,
+      "primary_subject_accuracy": 1.0,
+      "intent_accuracy": 0.25,
+      "target_slm_accuracy": 1.0,
+      "need_clarification_accuracy": 1.0,
+      "exact_match_accuracy": 0.25,
+      "full_exact_match_accuracy": 0.0
+    },
+    "ambiguous": {
+      "total_samples": 3,
+      "primary_subject_accuracy": 1.0,
+      "intent_accuracy": 0.6667,
+      "target_slm_accuracy": 1.0,
+      "need_clarification_accuracy": 1.0,
+      "exact_match_accuracy": 0.6667,
+      "full_exact_match_accuracy": 0.6667
+    },
+    "out_of_scope": {
+      "total_samples": 2,
+      "primary_subject_accuracy": 1.0,
+      "intent_accuracy": 1.0,
+      "target_slm_accuracy": 1.0,
+      "need_clarification_accuracy": 1.0,
+      "exact_match_accuracy": 1.0,
+      "full_exact_match_accuracy": 1.0
+    },
+    "multi_turn": {
+      "total_samples": 2,
+      "primary_subject_accuracy": 0.5,
+      "intent_accuracy": 0.5,
+      "target_slm_accuracy": 0.5,
+      "need_clarification_accuracy": 0.5,
+      "exact_match_accuracy": 0.0,
+      "full_exact_match_accuracy": 0.0
+    }
+  }
+}

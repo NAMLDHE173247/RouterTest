@@ -2,6 +2,8 @@
 
 Hybrid Router V0 dùng ID tương thích `hybrid`, kết hợp một Rule Router với một OpenRouter LLM Router theo policy Rule-first/LLM-fallback. Cấu hình threshold và fallback được truyền theo request; không chạy Rule/LLM song song mặc định.
 
+Hybrid dùng contract generic `fallback_router_id` và hỗ trợ `qwen_v0` hoặc ba OpenRouter LLM Router. `llm_router_id` chỉ được giữ như alias deprecated trong giai đoạn migration. Qwen availability dựa trên health cache ngắn hạn; backend luôn kiểm tra capability và availability trước khi execute.
+
 LLM Router V0 chỉ thực hiện routing classification. Ba router `llm_deepseek_v0`, `llm_gemini_v0` và `llm_openai_v0` dùng chung prompt/schema nhưng chỉ gọi model tương ứng khi được chọn. API key không được đưa vào source, browser storage hoặc evaluation artifacts.
 
 Dự án này là môi trường kiểm thử và phân tích cho các thuật toán Router (Routing Service). Mục tiêu là chuyển đổi kiến trúc Router Test thành một hệ thống Client-Server gọn nhẹ, dễ dàng kiểm tra, so sánh và đánh giá các phiên bản Router khác nhau.

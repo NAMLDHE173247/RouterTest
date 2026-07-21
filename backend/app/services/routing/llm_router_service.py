@@ -26,6 +26,7 @@ class LLMRouterV0Service(RouterVersionService):
             **self.capabilities,
             "requires_external_service": True,
             "supports_structured_output": True,
+            "can_be_hybrid_fallback": True,
         }
 
     def route(self, question: str, history: list[str] | None = None):

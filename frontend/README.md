@@ -49,3 +49,4 @@ Mở trình duyệt: `http://localhost:3000`
 - Bảng tổng hợp Metrics hiển thị % chính xác, tô màu xanh (`highlight`) những thông số cao nhất.
 - Bảng Analysis bóc tách kỹ lỗi False Positive/Negative và Confusion Matrix.
 - Bảng lọc lỗi chi tiết theo từng Router và Case Type. 
+Hybrid Config dùng selector `Fallback Router`, lấy các Router có capability `can_be_hybrid_fallback`. Qwen hiển thị trạng thái GPU service/model; OpenRouter hiển thị trạng thái key/model. Frontend gửi `fallback_router_id`; `llm_router_id` chỉ được đọc như alias tương thích.

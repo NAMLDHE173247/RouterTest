@@ -45,7 +45,8 @@ class QwenServiceClient:
                                 "model_name": data.get("model_name"),
                                 "startup_error": data.get("startup_error"),
                                 "device": data.get("device"),
-                                "status": data.get("status", "healthy")
+                                "status": data.get("status", "healthy"),
+                                "service_version": data.get("version") or data.get("service_version"),
                             }
                 except Exception:
                     pass # Chuyển sang fallback nếu request gặp sự cố (ví dụ connection error)
@@ -66,7 +67,8 @@ class QwenServiceClient:
                                 data["model_loaded"] = ms_data.get("model_loaded") in (True, "true", "True", 1)
                                 data["model_name"] = ms_data.get("model_name")
                                 data["startup_error"] = ms_data.get("startup_error")
-                                data["device"] = ms_data.get("device")
+                        data["device"] = ms_data.get("device")
+                        data["service_version"] = ms_data.get("version") or ms_data.get("service_version")
                     except Exception:
                         pass
                 

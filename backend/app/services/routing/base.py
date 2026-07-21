@@ -17,6 +17,7 @@ class RouterVersionService(ABC):
         "supports_history": True,
         "supports_debug_trace": False,
         "requires_external_service": False,
+        "can_be_hybrid_fallback": False,
     }
     description: str = ""
 
@@ -40,6 +41,8 @@ class RouterVersionService(ABC):
             "status": "ready" if available else "unavailable",
             "capabilities": dict(self.capabilities),
             "description": self.description,
+            "available": available,
+            "unavailable_reason": None if available else "router_unavailable",
         }
 
     def is_available(self) -> bool:

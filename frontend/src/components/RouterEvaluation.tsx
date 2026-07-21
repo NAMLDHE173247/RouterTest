@@ -125,10 +125,10 @@ export default function RouterEvaluation({ routers, hybridConfig, onHybridConfig
     { id: 'rule_v1', name: 'Rule-based Router V1', status: 'ready' },
     { id: 'rule_v2', name: 'Rule-based Router V2', status: 'ready' },
     { id: 'rule_v3', name: 'Rule-based Router V3 (Phase 0)', status: 'ready' },
-    { id: 'qwen_v0', name: 'Qwen Router V0 (GPU Service)', status: 'ready' },
-    { id: 'llm_deepseek_v0', name: 'LLM Router DeepSeek V0', status: 'unavailable' },
-    { id: 'llm_gemini_v0', name: 'LLM Router Gemini V0', status: 'unavailable' },
-    { id: 'llm_openai_v0', name: 'LLM Router OpenAI V0', status: 'unavailable' },
+    { id: 'qwen_v0', name: 'Qwen Router V0 (GPU Service)', status: 'ready', family: 'slm', capabilities: { can_be_hybrid_fallback: true } },
+    { id: 'llm_deepseek_v0', name: 'LLM Router DeepSeek V0', status: 'unavailable', family: 'openrouter_llm', capabilities: { can_be_hybrid_fallback: true } },
+    { id: 'llm_gemini_v0', name: 'LLM Router Gemini V0', status: 'unavailable', family: 'openrouter_llm', capabilities: { can_be_hybrid_fallback: true } },
+    { id: 'llm_openai_v0', name: 'LLM Router OpenAI V0', status: 'unavailable', family: 'openrouter_llm', capabilities: { can_be_hybrid_fallback: true } },
     { id: 'hybrid', name: 'Hybrid Router V0', status: 'ready' }
   ];
 
@@ -367,12 +367,16 @@ export default function RouterEvaluation({ routers, hybridConfig, onHybridConfig
                 {rids.map(rid => <td key={rid} className="px-4 py-2">{m[rid].total_cost ?? 'N/A'}</td>)}
               </tr>
               <tr>
-                <td className="px-4 py-2 text-gray-700">Hybrid LLM Fallback Rate</td>
-                {rids.map(rid => <td key={rid} className="px-4 py-2">{((m[rid].llm_fallback_rate ?? 0) * 100).toFixed(1)}%</td>)}
+                <td className="px-4 py-2 text-gray-700">Hybrid Fallback Invocation Rate</td>
+                {rids.map(rid => <td key={rid} className="px-4 py-2">{((m[rid].fallback_invocation_rate ?? m[rid].llm_fallback_rate ?? 0) * 100).toFixed(1)}%</td>)}
               </tr>
               <tr>
                 <td className="px-4 py-2 text-gray-700">Hybrid Degraded Count</td>
                 {rids.map(rid => <td key={rid} className="px-4 py-2">{m[rid].degraded_mode_count ?? 0}</td>)}
+              </tr>
+              <tr>
+                <td className="px-4 py-2 text-gray-700">Rule After Fallback Failure</td>
+                {rids.map(rid => <td key={rid} className="px-4 py-2">{m[rid].rule_after_fallback_failure_count ?? 0}</td>)}
               </tr>
             </tbody>
           </table>
@@ -520,8 +524,8 @@ export default function RouterEvaluation({ routers, hybridConfig, onHybridConfig
               <p className="text-sm text-gray-600 mb-2 font-medium">Select Routers:</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                 {availableRouters.map(r => {
-                  const isLLM = r.id.startsWith('llm_');
-                  const isDisabled = (!isLLM && r.status && r.status !== 'ready') || (r as any).enabled === false;
+                  const isUnavailable = r.available === false || r.status === 'unavailable';
+                  const isDisabled = isUnavailable || (r as any).enabled === false;
                   return (
                     <label 
                       key={r.id} 
@@ -535,8 +539,8 @@ export default function RouterEvaluation({ routers, hybridConfig, onHybridConfig
                         disabled={isDisabled}
                       />
                       <div className="flex flex-col">
-                        <span className="text-sm font-medium text-gray-800">{r.name}</span>
-                        {r.id === 'hybrid' && <span className="text-xs text-blue-600 font-semibold">Rule-first with LLM fallback</span>}
+                        <span className="text-sm font-medium text-gray-800">{r.name}{isUnavailable ? ` (${r.unavailable_reason ?? 'unavailable'})` : ''}</span>
+                        {r.id === 'hybrid' && <span className="text-xs text-blue-600 font-semibold">Rule-first with configurable fallback</span>}
                       </div>
                     </label>
                   );

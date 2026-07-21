@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "git_commit": "ec1d1f292e27ebdfd447d6f7b08428b1f06b61f2",
+    "dataset_sha256": "5d25fb93a173733033a632fec3ca7bfc5b29fffb0db2a8b3676ee919301ec5cf",
+    "config_sha256": "b09f469ecdb6e71999c65732e3b949a50616d905610ec8328182965ffb623f38",
+    "config_files": [
+      "src\\rules.py",
+      "src\\models.py",
+      "src\\topic_ontology.py",
+      "src\\topic_resolver.py",
+      "src\\intent_resolver.py"
+    ],
+    "generated_at_utc": "2026-07-17T17:37:44.536924+00:00",
+    "phase": "phase_2"
+  },
+  "baseline_dir": "C:\\Users\\MSI\\Desktop\\Router\\Rule_based_Router\\rule_based_router_v3\\router_experiment\\outputs\\phase_1_2",
+  "baseline_phase": "phase_1_2",
+  "baseline_available": true,
+  "fixed_intent_errors": 43,
+  "new_intent_regressions": 1,
+  "comparison_field": "intent"
+}

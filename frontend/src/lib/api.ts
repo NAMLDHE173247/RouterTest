@@ -110,6 +110,23 @@ export async function getQwenServiceUrl(): Promise<{ url: string }> {
   return res.json();
 }
 
+export interface QwenServiceStatus {
+  configured: boolean;
+  connection_status: 'not_configured' | 'not_tested' | 'connected' | 'stale' | 'model_not_loaded' | 'unreachable';
+  model_loaded?: boolean | null;
+  model_name?: string | null;
+  device?: string | null;
+  startup_error?: string | null;
+  checked_at?: string | null;
+  service_version?: string | null;
+}
+
+export async function getQwenServiceStatus(): Promise<QwenServiceStatus> {
+  const res = await fetch(`${API_BASE_URL}/api/v1/settings/qwen-service/status`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch Qwen Service status');
+  return res.json();
+}
+
 export async function setQwenServiceUrl(url: string): Promise<{ status: string, url: string }> {
   const res = await fetch(`${API_BASE_URL}/api/v1/settings/qwen-service`, {
     method: 'POST',
@@ -135,6 +152,9 @@ export interface OpenRouterStatus {
   configured: boolean;
   source: 'runtime' | 'environment' | null;
   connection_status: string;
+  error_code: string | null;
+  error_message: string | null;
+  last_checked_at: string | null;
 }
 
 export async function getOpenRouterStatus(): Promise<OpenRouterStatus> {

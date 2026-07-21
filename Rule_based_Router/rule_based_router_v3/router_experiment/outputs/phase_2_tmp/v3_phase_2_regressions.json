@@ -1,0 +1,298 @@
+{
+  "metadata": {
+    "git_commit": "ec1d1f292e27ebdfd447d6f7b08428b1f06b61f2",
+    "dataset_sha256": "5d25fb93a173733033a632fec3ca7bfc5b29fffb0db2a8b3676ee919301ec5cf",
+    "config_sha256": "b09f469ecdb6e71999c65732e3b949a50616d905610ec8328182965ffb623f38",
+    "config_files": [
+      "src\\rules.py",
+      "src\\models.py",
+      "src\\topic_ontology.py",
+      "src\\topic_resolver.py",
+      "src\\intent_resolver.py"
+    ],
+    "generated_at_utc": "2026-07-17T17:37:44.536924+00:00",
+    "phase": "phase_2"
+  },
+  "items": [
+    {
+      "id": "q189",
+      "baseline": {
+        "id": "q189",
+        "question": "Em tính số mol bằng khối lượng nhân khối lượng mol, sai công thức ở đâu vậy?",
+        "case_type": "single_turn",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "diagnose_error",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "math"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "chemistry",
+          "secondary_subjects": [],
+          "intent": "diagnose_error",
+          "target_slm": "chemistry_slm",
+          "confidence": 0.89,
+          "need_clarification": false,
+          "reason": "Weighted FlashText signals indicate subject=chemistry, intent=diagnose_error.",
+          "topic": "chemistry.stoichiometry",
+          "trace": {
+            "topic": "chemistry.stoichiometry",
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.mechanics.force.support_term.02_khoi_luong",
+                "label": "physics",
+                "topic": "physics.mechanics.force",
+                "source": "support_term",
+                "matched_text": "khối lượng",
+                "start": 20,
+                "end": 30,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.mechanics.force.support_term.02_khoi_luong",
+                "label": "physics",
+                "topic": "physics.mechanics.force",
+                "source": "support_term",
+                "matched_text": "khối lượng",
+                "start": 36,
+                "end": 46,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.atomic_structure.atomic_structure.support_term.03_khoi_luong_mol",
+                "label": "chemistry",
+                "topic": "chemistry.atomic_structure",
+                "source": "support_term",
+                "matched_text": "khối lượng mol",
+                "start": 36,
+                "end": 50,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.strong_term.01_so_mol",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "strong_term",
+                "matched_text": "số mol",
+                "start": 8,
+                "end": 14,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.strong_term.02_mol",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "strong_term",
+                "matched_text": "mol",
+                "start": 11,
+                "end": 14,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.strong_term.02_mol",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "strong_term",
+                "matched_text": "mol",
+                "start": 47,
+                "end": 50,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.strong_term.04_khoi_luong_mol",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "strong_term",
+                "matched_text": "khối lượng mol",
+                "start": 36,
+                "end": 50,
+                "score": 3,
+                "is_entity": false
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 2,
+              "chemistry": 13
+            },
+            "primary_subject": "chemistry",
+            "secondary_subjects": [],
+            "inherited_from_history": false,
+            "ownership_override": null
+          }
+        }
+      },
+      "current": {
+        "id": "q189",
+        "question": "Em tính số mol bằng khối lượng nhân khối lượng mol, sai công thức ở đâu vậy?",
+        "case_type": "single_turn",
+        "gold": {
+          "primary_subject": "chemistry",
+          "intent": "diagnose_error",
+          "target_slm": "chemistry_slm",
+          "need_clarification": false,
+          "secondary_subjects": [
+            "math"
+          ]
+        },
+        "prediction": {
+          "primary_subject": "chemistry",
+          "secondary_subjects": [],
+          "intent": "solve_problem",
+          "target_slm": "chemistry_slm",
+          "confidence": 0.95,
+          "need_clarification": false,
+          "reason": "Weighted FlashText signals indicate subject=chemistry, intent=solve_problem.",
+          "topic": "chemistry.stoichiometry",
+          "trace": {
+            "topic": "chemistry.stoichiometry",
+            "rule_matches": [
+              {
+                "rule_id": "subject.physics.mechanics.force.support_term.02_khoi_luong",
+                "label": "physics",
+                "topic": "physics.mechanics.force",
+                "source": "support_term",
+                "matched_text": "khối lượng",
+                "start": 20,
+                "end": 30,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.physics.mechanics.force.support_term.02_khoi_luong",
+                "label": "physics",
+                "topic": "physics.mechanics.force",
+                "source": "support_term",
+                "matched_text": "khối lượng",
+                "start": 36,
+                "end": 46,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.atomic_structure.atomic_structure.support_term.03_khoi_luong_mol",
+                "label": "chemistry",
+                "topic": "chemistry.atomic_structure",
+                "source": "support_term",
+                "matched_text": "khối lượng mol",
+                "start": 36,
+                "end": 50,
+                "score": 1,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.strong_term.01_so_mol",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "strong_term",
+                "matched_text": "số mol",
+                "start": 8,
+                "end": 14,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.strong_term.02_mol",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "strong_term",
+                "matched_text": "mol",
+                "start": 11,
+                "end": 14,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.strong_term.02_mol",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "strong_term",
+                "matched_text": "mol",
+                "start": 47,
+                "end": 50,
+                "score": 3,
+                "is_entity": false
+              },
+              {
+                "rule_id": "subject.chemistry.stoichiometry.stoichiometry.strong_term.04_khoi_luong_mol",
+                "label": "chemistry",
+                "topic": "chemistry.stoichiometry",
+                "source": "strong_term",
+                "matched_text": "khối lượng mol",
+                "start": 36,
+                "end": 50,
+                "score": 3,
+                "is_entity": false
+              }
+            ],
+            "subject_scores": {
+              "math": 0,
+              "physics": 2,
+              "chemistry": 13
+            },
+            "primary_subject": "chemistry",
+            "secondary_subjects": [],
+            "inherited_from_history": false,
+            "ownership_override": null,
+            "intent": {
+              "rule_matches": [
+                {
+                  "rule_id": "intent.base.diagnose_error.sai",
+                  "intent": "diagnose_error",
+                  "source": "base_rule",
+                  "matched_text": "sai",
+                  "start": 52,
+                  "end": 55,
+                  "score": 3,
+                  "strength": "general"
+                },
+                {
+                  "rule_id": "intent.base.solve_problem.tinh",
+                  "intent": "solve_problem",
+                  "source": "base_rule",
+                  "matched_text": "tính",
+                  "start": 3,
+                  "end": 7,
+                  "score": 4,
+                  "strength": "general"
+                },
+                {
+                  "rule_id": "intent.phase2.solve.strong.calculation",
+                  "intent": "solve_problem",
+                  "source": "context_rule",
+                  "matched_text": "tính",
+                  "start": 3,
+                  "end": 7,
+                  "score": 8,
+                  "strength": "strong"
+                }
+              ],
+              "vetoes": [],
+              "scores": {
+                "diagnose_error": 3,
+                "check_answer": 0,
+                "give_hint": 0,
+                "explain_concept": 0,
+                "solve_problem": 12,
+                "ask_follow_up": 0
+              },
+              "selected_intent": "solve_problem",
+              "top_score": 12,
+              "second_score": 3,
+              "decision_margin": 9
+            }
+          }
+        }
+      }
+    }
+  ]
+}

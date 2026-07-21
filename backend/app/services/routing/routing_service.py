@@ -7,6 +7,7 @@ from app.services.routing.version_services import HybridV0Service
 from app.services.routing.llm_router_service import OpenRouterLLMRouterService
 from app.openrouter_service_client import OpenRouterServiceError
 from app.adapters.hybrid_v0_adapter import HybridRouterError
+from app.fallback_router_executor import FallbackRouterExecutor
 
 
 class RoutingService:
@@ -16,13 +17,14 @@ class RoutingService:
         self.rule_based = RuleBasedRouterService()
         self.slm = SLMRouterService()
         self.llm = OpenRouterLLMRouterService()
-        self.hybrid = HybridV0Service(self.rule_based, self.llm)
         self.services = {
             **self.rule_based.services,
             **self.slm.services,
             **self.llm.services,
-            self.hybrid.router_id: self.hybrid,
         }
+        self.fallback_executor = FallbackRouterExecutor(self.services)
+        self.hybrid = HybridV0Service(self.rule_based, self.fallback_executor)
+        self.services[self.hybrid.router_id] = self.hybrid
 
     @property
     def adapters(self):

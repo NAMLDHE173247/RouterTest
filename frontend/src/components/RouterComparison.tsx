@@ -106,15 +106,15 @@ export default function RouterComparison({ routers, hybridConfig, onHybridConfig
   const diffFields = computeDiffs(results);
 
   // Use a fallback for routers if the API failed to fetch them
-  const availableRouters = routers.length > 0 ? routers : [
+  const availableRouters: RouterInfo[] = routers.length > 0 ? routers : [
     { id: 'rule_v0', name: 'Rule-based Router V0', status: 'ready', enabled: true },
     { id: 'rule_v1', name: 'Rule-based Router V1', status: 'ready', enabled: true },
     { id: 'rule_v2', name: 'Rule-based Router V2', status: 'ready', enabled: true },
     { id: 'rule_v3', name: 'Rule-based Router V3 (Phase 0)', status: 'ready', enabled: true },
-    { id: 'qwen_v0', name: 'Qwen Router V0 (GPU Service)', status: 'ready', enabled: true },
-    { id: 'llm_deepseek_v0', name: 'LLM Router DeepSeek V0', status: 'unavailable', enabled: true },
-    { id: 'llm_gemini_v0', name: 'LLM Router Gemini V0', status: 'unavailable', enabled: true },
-    { id: 'llm_openai_v0', name: 'LLM Router OpenAI V0', status: 'unavailable', enabled: true },
+    { id: 'qwen_v0', name: 'Qwen Router V0 (GPU Service)', status: 'ready', enabled: true, family: 'slm', capabilities: { can_be_hybrid_fallback: true } },
+    { id: 'llm_deepseek_v0', name: 'LLM Router DeepSeek V0', status: 'unavailable', enabled: true, family: 'openrouter_llm', capabilities: { can_be_hybrid_fallback: true } },
+    { id: 'llm_gemini_v0', name: 'LLM Router Gemini V0', status: 'unavailable', enabled: true, family: 'openrouter_llm', capabilities: { can_be_hybrid_fallback: true } },
+    { id: 'llm_openai_v0', name: 'LLM Router OpenAI V0', status: 'unavailable', enabled: true, family: 'openrouter_llm', capabilities: { can_be_hybrid_fallback: true } },
     { id: 'hybrid', name: 'Hybrid Router V0', status: 'ready', enabled: true }
   ];
 
@@ -128,8 +128,8 @@ export default function RouterComparison({ routers, hybridConfig, onHybridConfig
             <label className="block text-sm font-semibold mb-2 text-gray-700">Select Routers to Compare</label>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
               {availableRouters.map(r => {
-                const isLLM = r.id.startsWith('llm_');
-                const isDisabled = (!isLLM && r.status && r.status !== 'ready') || (r as any).enabled === false;
+                  const isUnavailable = r.available === false || r.status === 'unavailable';
+                  const isDisabled = isUnavailable || (r as any).enabled === false;
                 return (
                   <label 
                     key={r.id} 
@@ -144,9 +144,9 @@ export default function RouterComparison({ routers, hybridConfig, onHybridConfig
                     />
                     <div className="flex flex-col">
                       <span className="text-sm font-medium text-gray-800">
-                        {r.name}
+                        {r.name}{isUnavailable ? ` (${r.unavailable_reason ?? 'unavailable'})` : ''}
                       </span>
-                      {r.id === 'hybrid' && <span className="text-xs text-amber-600 font-semibold">Coming soon</span>}
+                      {r.id === 'hybrid' && <span className="text-xs text-blue-600 font-semibold">Rule-first with configurable fallback</span>}
                     </div>
                   </label>
                 );
