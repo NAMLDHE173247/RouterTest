@@ -2,9 +2,10 @@
 
 import React, { useState } from 'react';
 import { routeQuestion, getQwenServiceUrl } from '@/lib/api';
-import { HybridConfig, RouterInfo, RouteResponse } from '@/types/router';
+import { HybridConfig, QuickTestScenario, RouterInfo, RouteResponse } from '@/types/router';
 import RouterResultCard from './RouterResultCard';
 import HybridConfigPanel from './HybridConfigPanel';
+import QuickTestScenarios from './QuickTestScenarios';
 
 interface Props {
   routers: RouterInfo[];
@@ -59,6 +60,13 @@ export default function RouterPlayground({ routers, hybridConfig, onHybridConfig
     }
   };
 
+  const handleScenarioSelect = (scenario: QuickTestScenario) => {
+    setQuestion(scenario.question);
+    setHistory(scenario.history.join('\n'));
+    setResult(null);
+    setError(null);
+  };
+
   const currentRouterName = routers.find(r => r.id === selectedRouter)?.name || selectedRouter;
 
   return (
@@ -97,6 +105,8 @@ export default function RouterPlayground({ routers, hybridConfig, onHybridConfig
         {selectedRouter === 'hybrid' && (
           <HybridConfigPanel routers={routers} config={hybridConfig} onChange={onHybridConfigChange} />
         )}
+
+        <QuickTestScenarios onSelect={handleScenarioSelect} />
 
         <div>
           <label className="block text-sm font-semibold mb-2 text-gray-700">Question</label>

@@ -2,9 +2,10 @@
 
 import React, { useState } from 'react';
 import { compareRouters, getQwenServiceUrl } from '@/lib/api';
-import { CompareResult, HybridConfig, RouterInfo, RouterDecision } from '@/types/router';
+import { CompareResult, HybridConfig, QuickTestScenario, RouterInfo, RouterDecision } from '@/types/router';
 import RouterResultCard from './RouterResultCard';
 import HybridConfigPanel from './HybridConfigPanel';
+import QuickTestScenarios from './QuickTestScenarios';
 
 interface Props {
   routers: RouterInfo[];
@@ -69,6 +70,13 @@ export default function RouterComparison({ routers, hybridConfig, onHybridConfig
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleScenarioSelect = (scenario: QuickTestScenario) => {
+    setQuestion(scenario.question);
+    setHistory(scenario.history.join('\n'));
+    setResults([]);
+    setError(null);
   };
 
   // Compute diffs dynamically across ALL selected results
@@ -171,6 +179,8 @@ export default function RouterComparison({ routers, hybridConfig, onHybridConfig
           {selectedRouterIds.includes('hybrid') && (
             <HybridConfigPanel routers={routers} config={hybridConfig} onChange={onHybridConfigChange} />
           )}
+
+          <QuickTestScenarios onSelect={handleScenarioSelect} />
 
           <div>
             <label className="block text-sm font-semibold mb-1 text-gray-700">History (Optional)</label>

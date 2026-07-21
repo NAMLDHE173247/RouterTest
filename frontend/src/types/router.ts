@@ -110,6 +110,27 @@ export interface RouterInfo {
   unavailable_reason?: string;
 }
 
+export type QuickTestScenarioGroup = 'basic' | 'hybrid_challenge';
+
+export interface QuickTestExpectedRoute {
+  primarySubject: string;
+  secondarySubjects: string[];
+  intent: string;
+  targetSlm: string;
+  needClarification: boolean;
+}
+
+export interface QuickTestScenario {
+  id: string;
+  title: string;
+  group: QuickTestScenarioGroup;
+  question: string;
+  history: string[];
+  expectedRoute: QuickTestExpectedRoute;
+  expectedHybridBehavior: string;
+  note: string;
+}
+
 export interface HealthResponse {
   status: string;
   available_routers: string[];
